@@ -1,9 +1,19 @@
-export interface CardProps {
-  icon: string;
-  title: string;
-}
+export const programPelatihanCards = [
+  {
+    icon: "/landing/programPelatihan/in-house-training.png",
+    title: "In-House Training",
+  },
+  {
+    icon: "/landing/programPelatihan/hybrid-training.png",
+    title: "Hybrid Training & Bootcamp",
+  },
+  {
+    icon: "/landing/programPelatihan/hybrid-training.png",
+    title: "Public Offline-Training",
+  },
+];
 
-export const fiturCards: CardProps[] = [
+export const fiturCards = [
   {
     icon: "/landing/fitur/bootcamp.png",
     title: "Bootcamp",
@@ -85,3 +95,9 @@ export const fiturCards: CardProps[] = [
     title: "MT & MDP",
   },
 ];
+
+export const inHouseCards = [
+  {
+    
+  }
+]
