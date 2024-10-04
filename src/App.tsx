@@ -1,8 +1,6 @@
-
 import { fiturCards, CardProps } from "./assets/landingData";
 import React from "react";
 import Navbar from "./components/Navbar";
-
 
 export default function App() {
   const Card: React.FC<CardProps> = ({ icon, title }) => (
@@ -17,7 +15,7 @@ export default function App() {
   return (
     <>
       {/* Hero */}
-    <Navbar />
+      <Navbar />
 
       <section
         className="h-screen bg-cover bg-no-repeat bg-center max-w-screen flex items-center justify-center"
@@ -25,10 +23,8 @@ export default function App() {
           backgroundImage: "url('/landing/hero-bg.png')",
         }}
       >
-
         <div className="flex w-5/6 h-full">
           <div className="w-11/12 h-full flex flex-col justify-center text-left">
-
             <h1 className="text-3xl font-light text-gray-600 pb-5">
               Pelatihan
             </h1>
@@ -59,7 +55,7 @@ export default function App() {
       </section>
       {/* Fitur LMS */}
       <section className="min-h-screen">
-        <div className="w-11/12 mx-auto py-14 bg-slate-300">
+        <div className="w-11/12 mx-auto py-14 ">
           <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-14">
             Fitur <span className="text-[#FAB317]">LMS M-Knows</span>
           </h1>
