@@ -1,4 +1,4 @@
-import { fiturCards, programPelatihanCards } from "./assets/landingData";
+import { fiturCards, programPelatihanCards, inHouseCards } from "./assets/landingData";
 import Navbar from "./components/Navbar";
 
 export default function App() {
@@ -102,16 +102,17 @@ export default function App() {
         </h1>
         <div className="container mx-auto">
           <div className="flex flex-wrap mx-auto justify-center gap-5">
-            {programPelatihanCards.map((card) => (
+            {inHouseCards.map((card) => (
               <div className="w-96 bg-white border border-gray-200 rounded-lg shadow ">
                 <a href="#">
-                  <img className="rounded-t-lg w-full" src={card.icon} alt="" />
+                  <img className="rounded-t-lg w-full h-60" src={card.image} alt="" />
                 </a>
-                <div className="px-5 py-10">
+                <div className="px-5 py-5 flex items-end ">
                   <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
+                    <h5 className="mb-2 text-2xl font-bold  tracking-tight text-gray-900 ">
                       {card.title}
                     </h5>
+                    <p className="text-lg">{card.pt}</p>
                   </a>
                 </div>
               </div>

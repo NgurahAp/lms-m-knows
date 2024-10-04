@@ -98,6 +98,23 @@ export const fiturCards = [
 
 export const inHouseCards = [
   {
-    
-  }
-]
+    image: "landing/programPelatihan/persiapan-pensiun.png",
+    title: "Persiapan Pra Pensiun",
+    pt: "PT AIA Financial",
+  },
+  {
+    image: "landing/programPelatihan/beautifull-life.png",
+    title: "Beautiful Life in Retirement",
+    pt: "PT Bank Central Asia, TBK",
+  },
+  {
+    image: "landing/programPelatihan/financial-planning.png",
+    title: "Financial Planning & Psychological First Aid",
+    pt: "Bank Indonesia DLK",
+  },
+  {
+    image: "landing/programPelatihan/personal-branding.png",
+    title: "Personal Branding & Grooming",
+    pt: "BI Jakarta",
+  },
+];
