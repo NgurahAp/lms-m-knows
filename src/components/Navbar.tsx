@@ -14,7 +14,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex space-x-3">
-        <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded-lg font-medium flex items-center">
+        <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center">
           Semua Fitur
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,10 +30,10 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        <button className="border border-[#106fa4] text-[#106fa4] px-4 py-1 rounded-lg font-medium hover:bg-blue-50">
+        <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
           Masuk
         </button>
-        <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-4 py-1 rounded-lg font-medium">
+        <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium">
           Daftar
         </button>
       </div>
