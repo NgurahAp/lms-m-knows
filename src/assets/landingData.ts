@@ -118,3 +118,26 @@ export const inHouseCards = [
     pt: "BI Jakarta",
   },
 ];
+
+export const pelatihanPubliCards = [
+  {
+    image: "landing/programPelatihan/negotiation.png",
+    title: "The Art of Negotiation",
+    pt: "PT Mitra Global Holiday",
+  },
+  {
+    image: "landing/programPelatihan/team-building.png",
+    title: "Team Building: Saving Private Egg",
+    pt: "PT Chandra Sakti Utama Leasing",
+  },
+  {
+    image: "landing/programPelatihan/collection-leadership.png",
+    title: "Collection Leadership for Team Leader",
+    pt: "PT Orico Balimore Finance",
+  },
+  {
+    image: "landing/programPelatihan/stress-testing.png",
+    title: "Stress Testing for Market Risk",
+    pt: "PT MITSUBISHI HC CAPITAL AND FINANCE INDONESIA",
+  },
+];
