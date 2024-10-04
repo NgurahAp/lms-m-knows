@@ -1,18 +1,7 @@
+
 const Navbar = () => {
   return (
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * A component that renders the navigation bar at the top of the page.
- *
- * Consists of a logo on the left and three buttons on the right: "Semua Fitur",
- * "Masuk", and "Daftar". The "Semua Fitur" button has a yellow background and
- * an arrow pointing to the right. The "Masuk" and "Daftar" buttons have a
- * blue background and white text. The "Masuk" button has a border around it.
- *
- * The navigation bar is fixed to the top of the page and has a white
- * background with a shadow.
- */
-/******  fade0c52-438c-43b6-8d50-979d2be16f99  *******/    <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center py-2 px-4 bg-white shadow-md">
+  <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center py-2 px-4 bg-white shadow-md">
       <div className="flex items-center space-x-2">
         <div className="flex items-center">
           <img
@@ -24,7 +13,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex space-x-3">
-        <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded-lg font-medium flex items-center">
+        <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center">
           Semua Fitur
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,10 +29,10 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        <button className="border border-[#106fa4] text-[#106fa4] px-4 py-1 rounded-lg font-medium hover:bg-blue-50">
+        <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
           Masuk
         </button>
-        <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-4 py-1 rounded-lg font-medium">
+        <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium">
           Daftar
         </button>
       </div>
