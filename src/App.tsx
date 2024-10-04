@@ -67,7 +67,23 @@ export default function App() {
           </div>
         </div>
       </section>
-      <section className="h-screen "></section>
+      <section className="min-h-screen">
+        <div className="w-11/12 mx-auto py-14 ">
+          <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-4">
+            Bootcamp <span className="text-[#FAB317]">LMS M-Knows</span>
+          </h1>
+          <h1 className="text-2xl font-light text-center text-gray-600 pb-14">
+            Temukan bootcamp yang sesuai dengan minat dan kebutuhan Anda.
+          </h1>
+          <div className="container mx-auto">
+            <div className="flex flex-wrap mx-auto justify-center gap-9">
+              {fiturCards.map((card, index) => (
+                <Card key={index} icon={card.icon} title={card.title} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
