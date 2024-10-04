@@ -1,12 +1,17 @@
+import React from "react";
+import Navbar from "./components/Navbar";
+
 export default function App() {
   return (
     <>
+    <Navbar />
       <section
         className="h-screen bg-cover bg-no-repeat bg-center max-w-screen flex items-center justify-center"
         style={{
           backgroundImage: "url('/landing/hero-bg.png')",
         }}
       >
+        
         <div className="flex w-5/6  h-full">
           <div className="w-11/12  h-full flex flex-col justify-center text-left  ">
             <h1 className="text-3xl font-light text-gray-600 pb-5">
@@ -37,6 +42,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      <section className="h-screen "></section>
     </>
   );
 }
