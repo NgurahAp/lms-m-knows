@@ -1,5 +1,12 @@
-import { fiturCards, programPelatihanCards, inHouseCards, pelatihanPubliCards } from "./assets/landingData";
+import {
+  fiturCards,
+  programPelatihanCards,
+  inHouseCards,
+  pelatihanPubliCards,
+  sekilasIlmuCards,
+} from "./assets/landingData";
 import Navbar from "./components/Navbar";
+import OurClients from "./components/ourClients";
 
 export default function App() {
   return (
@@ -153,6 +160,115 @@ export default function App() {
           </div>
         </div>
       </section>
+      <OurClients />
+      {/* InHouse Training */}
+      <section className="w-11/12  mx-auto py-14 ">
+        <h1 className="text-5xl  px-8 font-bold pb-14 text-center">
+          Sekilas Ilmu
+        </h1>
+        <div className="container mx-auto">
+          <div className="flex flex-wrap mx-auto justify-center gap-5">
+            {sekilasIlmuCards.map((card) => (
+              <div className="w-96 bg-white border border-gray-200 rounded-lg shadow ">
+                <a href="#">
+                  <img
+                    className="rounded-t-lg w-full h-60"
+                    src={card.image}
+                    alt=""
+                  />
+                </a>
+                <div className="px-5 py-5  flex items-end">
+                  <a href="#" className="w-full">
+                    <div className="flex justify-between pb-3 items-center">
+                      <h1 className="text-left font-bold bg-[#E3FBDA] p-1">
+                        {card.category}
+                      </h1>
+                      <h2 className="text-right text-[#737373]">{card.date}</h2>
+                    </div>
+                    <h5 className="mb-2 text-2xl min-h-14 font-bold tracking-tight ">
+                      {card.title}
+                    </h5>
+                    <p className="text-base text-[#737373]">
+                      {card.description}
+                    </p>
+                    <div className="flex justify-between pb-3 items-center pt-10">
+                      <p className="text-base text-[#737373]">{card.views}</p>
+                      <img src="/landing/sekilasIlmu/save.png" alt="" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+            ))}
+            <button className="bg-[#106FA4] text-white font-bold py-4 px-16 mt-10 rounded-lg">
+              Lihat semua
+            </button>
+          </div>
+        </div>
+      </section>
+      <footer className="h-full px-16 py-16 relative bg-[#F5F5F5]">
+        <div className="flex md:flex-row flex-col justify-between">
+          <div className="flex-1 p-4">
+            <img
+              src="/landing/footer/logo.png"
+              alt="M-Knows Logo"
+              className="rounded-3xl w-auto h-16"
+            />
+            <div className="flex pt-6 pb-4 gap-x-7">
+              <img
+                src="/landing/footer/fb.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+              <img
+                src="/landing/footer/ig.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+              <img
+                src="/landing/footer/twitter.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+              <img
+                src="/landing/footer/linkedin.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+            </div>
+            <img
+              src="/landing/footer/playStore.png"
+              alt="M-Knows Logo"
+              className="rounded-3xl w-auto h-20"
+            />
+          </div>
+          <div className="flex-1 p-4">
+            <h2 className="text-lg font-bold pb-4">Halaman</h2>
+            <p className=" py-3 text-lg">Pelatihanku</p>
+            <p className=" py-3 text-lg">Penugasan</p>
+            <p className=" py-3 text-lg">Asesmen</p>
+          </div>
+          <div className="flex-1 p-4">
+            <h2 className="text-lg font-bold pb-4">Kontak</h2>
+            <p className=" py-3 text-lg">+6285183004001</p>
+            <p className=" py-3 text-lg">info@kampusgratis.com</p>
+          </div>
+          <div className="flex-1 p-4">
+            <h2 className="text-lg font-bold pb-4">Alamat</h2>
+            <p className="text-lg">
+              <span className="font-semibold">Utama</span> : Jl. Radio IV No.8B
+              Barito Kebayoran Baru, Jakarta Selatan 12130
+            </p>
+            <p className="text-lg">
+              <span className="font-semibold">Produksi</span> : Jl. Raya
+              Cirendeu No.61, Tangerang Selatan 15419
+            </p>
+            <p className="text-lg">
+              <span className="font-semibold">Cabang</span> : Jl. Raya Darmo
+              Permai III Surabaya. 60119
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
