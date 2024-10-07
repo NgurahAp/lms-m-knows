@@ -4,17 +4,85 @@ import Navbar from "./components/Navbar";
 
 const trainingCategories = [
   {
-    title: "Online Learning",
-    imageSrc: "/assets/whatWeDo/training/onlineLearning.png",
+    title: "Backend, Database & API Development: Node.js Ecosystem",
+    imageSrc: "/landing/bootcamp/bootcamp (1).png",
     link: "/whatWeDo/training/onlineTraining",
   },
   {
-    title: "Public Learning",
+    title: "UI/UX Essentials, Maximizing Web & App Polential",
     imageSrc: "/assets/whatWeDo/training/publicLearning.png",
     link: "/whatWeDo/training/publicLearning",
   },
   {
-    title: "In-House Training",
+    title: "Video Editing dan Animation",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title: "Unreal Engine 5 Game And Virtual Reality Programming",
+    imageSrc: "/assets/whatWeDo/training/onlineLearning.png",
+    link: "/whatWeDo/training/onlineTraining",
+  },
+  {
+    title: "Event Management & Sponsorship",
+    imageSrc: "/assets/whatWeDo/training/publicLearning.png",
+    link: "/whatWeDo/training/publicLearning",
+  },
+  {
+    title: "Project Management Officer",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title: "Data Analyst",
+    imageSrc: "/assets/whatWeDo/training/onlineLearning.png",
+    link: "/whatWeDo/training/onlineTraining",
+  },
+  {
+    title: "Artificial Intelligence",
+    imageSrc: "/assets/whatWeDo/training/publicLearning.png",
+    link: "/whatWeDo/training/publicLearning",
+  },
+  {
+    title:
+      "Data Science Essentials for Banking, Finance, and Fintech Transformation",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title: "Digital Marketing, E-Commerce & Social Media Selling",
+    imageSrc: "/assets/whatWeDo/training/onlineLearning.png",
+    link: "/whatWeDo/training/onlineTraining",
+  },
+  {
+    title: "Scriptwriting and Storyboarding 101 - Video Learning Made Easy",
+    imageSrc: "/assets/whatWeDo/training/publicLearning.png",
+    link: "/whatWeDo/training/publicLearning",
+  },
+  {
+    title:
+      "Web Design Fundamentals - Transforming Lines of Code into Digital Excellence",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title: "Complex Game Design & Development (3D & 2D) with Unity",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title: "Visual Storytelling Proficiency - Crucial Video Directing Basics",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title: "BlenderVerse Explorers Easy 3D Creation Guide",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+  {
+    title:
+      "Beyond Basics & Advanced Techniques In Mobile Apps Development With Flutter",
     imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
     link: "/whatWeDo/training/inHouseTraining",
   },
@@ -93,25 +161,29 @@ export default function App() {
           <h1 className="text-2xl font-light text-center text-gray-600 pb-14">
             Temukan bootcamp yang sesuai dengan minat dan kebutuhan Anda.
           </h1>
-          <section className="pb-16 pt-7 min-h-[40vh]">
-            <div className="container mx-auto">
+          <section className="pb-16 pt-7">
+            <div className="container">
               <div className="flex flex-wrap justify-center -mx-10">
-                {/* Looping melalui data trainingCategories */}
                 {trainingCategories.map((category, index) => (
                   <a href={category.link} key={index}>
-                    <div className="md:w-96 w-80 m-10 cursor-pointer">
-                      <div className="relative h-56 rounded-3xl overflow-hidden">
+                    <div className="md:w-80 w-80 m-10 cursor-pointer">
+                      <div className="relative h-28 rounded-2xl overflow-hidden">
                         <img
                           src={category.imageSrc}
                           alt={category.title}
                           style={{ objectFit: "cover" }}
-                          className="rounded-[15px]"
                         />
-                        <div className="mt-28 absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 p-4">
-                          <h3 className="text-white md:text-2xl text-base">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] to-transparent"></div>
+                        <div className="flex absolute bottom-0 left-0 p-4">
+                          <h3 className="font-semibold underline text-white text-base w-56">
                             {category.title}
                           </h3>
+                          <a
+                            href={category.link}
+                            className="mt-7 h-8 items-center px-3 pt-1 text- font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          >
+                            Basic
+                          </a>
                         </div>
                       </div>
                     </div>
