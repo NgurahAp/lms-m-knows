@@ -6,8 +6,6 @@ const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    // Di sini Anda akan mengambil data dari API
-    // Untuk contoh ini, kita akan menggunakan data dummy
     const dummyProducts: Product[] = [
       {
         id: 1,
@@ -44,6 +42,7 @@ const ProductList: React.FC = () => {
             <h2>{product.name}</h2>
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
+            {/* Link ke halaman detail produk */}
             <Link to={`/products/${product.id}`}>View Details</Link>
           </div>
         ))}
