@@ -141,3 +141,40 @@ export const pelatihanPubliCards = [
     pt: "PT MITSUBISHI HC CAPITAL AND FINANCE INDONESIA",
   },
 ];
+
+export const sekilasIlmuCards = [
+  {
+    image: "landing/sekilasIlmu/idulAdha.png",
+    category: "Islam",
+    date: "Jumat, 14 Juni 2024",
+    title: "Idul Adha: Hari Raya Pengorbanan dan Ketakwaan",
+    description:
+      "Idul Adha, yang juga dikenal sebagai Har Raya Kurban, merupakan...",
+    views: "60 Views",
+  },
+  {
+    image: "landing/sekilasIlmu/uiux.png",
+    category: "Ui/ux",
+    date: "Rabu, 03 April 2024",
+    title: "Pengenalan UI/UX Design",
+    description:
+      "Pengertian UI (User Interface) UI, atau User Interface, adalah...",
+    views: "442 Views",
+  },
+  {
+    image: "landing/sekilasIlmu/junkFood.png",
+    category: "Edukasi",
+    date: "Jumat 27 Oktober 2023",
+    title: "Dampak Buruk Junk Food untuk Kesehatan Tubuh",
+    description: "Junk food adalah makanan yang mengandung bahan berbahaya,...",
+    views: "517 Views",
+  },
+  {
+    image: "landing/sekilasIlmu/visualDesign.png",
+    category: "Desain",
+    date: "Senin, 09 Oktober 2023",
+    title: "Dampak Buruk Junk Food untuk Kesehatan Tubuh",
+    description: "Kesenangan Desain Visual Merupakan sebuah ilmu yang...",
+    views: "698 Views",
+  },
+];
