@@ -2,6 +2,24 @@ import { fiturCards, CardProps } from "./assets/landingData";
 import React from "react";
 import Navbar from "./components/Navbar";
 
+const trainingCategories = [
+  {
+    title: "Online Learning",
+    imageSrc: "/assets/whatWeDo/training/onlineLearning.png",
+    link: "/whatWeDo/training/onlineTraining",
+  },
+  {
+    title: "Public Learning",
+    imageSrc: "/assets/whatWeDo/training/publicLearning.png",
+    link: "/whatWeDo/training/publicLearning",
+  },
+  {
+    title: "In-House Training",
+    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
+    link: "/whatWeDo/training/inHouseTraining",
+  },
+];
+
 export default function App() {
   const Card: React.FC<CardProps> = ({ icon, title }) => (
     <div className="bg-white flex-col justify-center w-72 h-32 p-4 rounded-lg shadow-md flex items-center">
@@ -75,13 +93,33 @@ export default function App() {
           <h1 className="text-2xl font-light text-center text-gray-600 pb-14">
             Temukan bootcamp yang sesuai dengan minat dan kebutuhan Anda.
           </h1>
-          <div className="container mx-auto">
-            <div className="flex flex-wrap mx-auto justify-center gap-9">
-              {fiturCards.map((card, index) => (
-                <Card key={index} icon={card.icon} title={card.title} />
-              ))}
+          <section className="pb-16 pt-7 min-h-[40vh]">
+            <div className="container mx-auto">
+              <div className="flex flex-wrap justify-center -mx-10">
+                {/* Looping melalui data trainingCategories */}
+                {trainingCategories.map((category, index) => (
+                  <a href={category.link} key={index}>
+                    <div className="md:w-96 w-80 m-10 cursor-pointer">
+                      <div className="relative h-56 rounded-3xl overflow-hidden">
+                        <img
+                          src={category.imageSrc}
+                          alt={category.title}
+                          style={{ objectFit: "cover" }}
+                          className="rounded-[15px]"
+                        />
+                        <div className="mt-28 absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 p-4">
+                          <h3 className="text-white md:text-2xl text-base">
+                            {category.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          </section>
         </div>
       </section>
     </>
