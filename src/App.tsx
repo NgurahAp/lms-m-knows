@@ -8,24 +8,6 @@ import {
 import Navbar from "./components/Navbar";
 import OurClients from "./components/ourClients";
 
-const trainingCategories = [
-  {
-    title: "Online Learning",
-    imageSrc: "/assets/whatWeDo/training/onlineLearning.png",
-    link: "/whatWeDo/training/onlineTraining",
-  },
-  {
-    title: "Public Learning",
-    imageSrc: "/assets/whatWeDo/training/publicLearning.png",
-    link: "/whatWeDo/training/publicLearning",
-  },
-  {
-    title: "In-House Training",
-    imageSrc: "/assets/whatWeDo/training/inHouseTraining.png",
-    link: "/whatWeDo/training/inHouseTraining",
-  },
-];
-
 export default function App() {
   return (
     <>
@@ -93,8 +75,6 @@ export default function App() {
           </div>
         </div>
       </section>
-
-     
 
       {/* Program pelatihan & LMS M-Knows */}
       <section className="w-11/12  mx-auto py-14 ">
@@ -179,43 +159,6 @@ export default function App() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-       <section className="min-h-screen">
-        <div className="w-11/12 mx-auto py-14 ">
-          <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-4">
-            Bootcamp <span className="text-[#FAB317]">LMS M-Knows</span>
-          </h1>
-          <h1 className="text-2xl font-light text-center text-gray-600 pb-14">
-            Temukan bootcamp yang sesuai dengan minat dan kebutuhan Anda.
-          </h1>
-          <section className="pb-16 pt-7 min-h-[40vh]">
-            <div className="container mx-auto">
-              <div className="flex flex-wrap justify-center -mx-10">
-                {/* Looping melalui data trainingCategories */}
-                {trainingCategories.map((category, index) => (
-                  <a href={category.link} key={index}>
-                    <div className="md:w-96 w-80 m-10 cursor-pointer">
-                      <div className="relative h-56 rounded-3xl overflow-hidden">
-                        <img
-                          src={category.imageSrc}
-                          alt={category.title}
-                          style={{ objectFit: "cover" }}
-                          className="rounded-[15px]"
-                        />
-                        <div className="mt-28 absolute inset-0 bg-gradient-to-t from-[#141414] to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 p-4">
-                          <h3 className="text-white md:text-2xl text-base">
-                            {category.title}
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
         </div>
       </section>
       <OurClients />
@@ -327,7 +270,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
     </>
   );
 }
