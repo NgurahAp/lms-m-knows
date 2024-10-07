@@ -11,7 +11,6 @@ import OurClients from "./components/ourClients";
 export default function App() {
   return (
     <>
-      {/* Hero */}
       <Navbar />
 
       <section
