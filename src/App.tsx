@@ -1,5 +1,11 @@
-import { fiturCards, programPelatihanCards, inHouseCards, pelatihanPubliCards } from "./assets/landingData";
+import {
+  fiturCards,
+  programPelatihanCards,
+  inHouseCards,
+  pelatihanPubliCards,
+} from "./assets/landingData";
 import Navbar from "./components/Navbar";
+import OurClients from "./components/ourClients";
 
 export default function App() {
   return (
@@ -154,6 +160,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      <OurClients />
     </>
   );
 }
