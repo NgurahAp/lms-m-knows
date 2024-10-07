@@ -206,90 +206,68 @@ export default function App() {
           </div>
         </div>
       </section>
-      <footer className="h-[65vh] px-16 md:pt-32 pt-14 relative">
-        <img
-          src="/assets/home/navbar-logo.png"
-          alt="M-Knows Logo"
-          width={126}
-          height={32}
-          className="rounded-3xl"
-        />
+      <footer className="h-full px-16 py-16 relative bg-[#F5F5F5]">
         <div className="flex md:flex-row flex-col justify-between">
           <div className="flex-1 p-4">
-            <h2 className="text-lg">Contact Us</h2>
-            <div className="w-20 h-1 bg-[#626262] mt-1 mb-2"></div>
-            <p className="text-[#868A92] text-lg">
-              Inhouse Training: 021-720 9729
-            </p>
-            <p className="text-[#868A92] text-lg">
-              Public Training: 021-726 5274
-            </p>
-            <p className="text-[#868A92] text-lg">WhatsApp: 0812-1046-8281</p>
-            <p className="text-[#868A92] text-lg">
-              Email: learning@m-knowsconsulting.com
-            </p>
+            <img
+              src="/landing/footer/logo.png"
+              alt="M-Knows Logo"
+              className="rounded-3xl w-auto h-16"
+            />
+            <div className="flex pt-6 pb-4 gap-x-7">
+              <img
+                src="/landing/footer/fb.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+              <img
+                src="/landing/footer/ig.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+              <img
+                src="/landing/footer/twitter.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+              <img
+                src="/landing/footer/linkedin.png"
+                alt="M-Knows Logo"
+                className="rounded-3xl w-auto h-6"
+              />
+            </div>
+            <img
+              src="/landing/footer/playStore.png"
+              alt="M-Knows Logo"
+              className="rounded-3xl w-auto h-20"
+            />
           </div>
           <div className="flex-1 p-4">
-            <h2 className="text-lg">Surabaya Branch Office</h2>
-            <div className="w-20 h-1 bg-[#626262] mt-1 mb-2"></div>
-            <p className="text-[#868A92] text-lg">
-              Jl. Raya Darmo Permai III Surabaya
-            </p>
-            <p className="text-[#868A92] text-lg">Telp: 031-8570-5277</p>
-            <p className="text-[#868A92] text-lg">
-              Email: surabaya@m-knowsconsulting.com
-            </p>
+            <h2 className="text-lg font-bold pb-4">Halaman</h2>
+            <p className=" py-3 text-lg">Pelatihanku</p>
+            <p className=" py-3 text-lg">Penugasan</p>
+            <p className=" py-3 text-lg">Asesmen</p>
           </div>
           <div className="flex-1 p-4">
-            <h2 className="text-lg">Alamat Utama</h2>
-            <div className="w-20 h-1 bg-[#626262] mt-1 mb-2"></div>
-            <p className="text-[#868A92] text-lg">
-              Jl. Radio IV No.8B Barito Kebayoran Baru, Jakarta Selatan
-            </p>
+            <h2 className="text-lg font-bold pb-4">Kontak</h2>
+            <p className=" py-3 text-lg">+6285183004001</p>
+            <p className=" py-3 text-lg">info@kampusgratis.com</p>
           </div>
           <div className="flex-1 p-4">
-            <h2 className="text-lg">Alamat Produksi</h2>
-            <div className="w-20 h-1 bg-[#626262] mt-1 mb-2"></div>
-            <p className="text-[#868A92] text-lg">
-              Jl. Cirendeu Raya No. 61 Ciputat, Tangerang Sealatan 15419
+            <h2 className="text-lg font-bold pb-4">Alamat</h2>
+            <p className="text-lg">
+              <span className="font-semibold">Utama</span> : Jl. Radio IV No.8B
+              Barito Kebayoran Baru, Jakarta Selatan 12130
+            </p>
+            <p className="text-lg">
+              <span className="font-semibold">Produksi</span> : Jl. Raya
+              Cirendeu No.61, Tangerang Selatan 15419
+            </p>
+            <p className="text-lg">
+              <span className="font-semibold">Cabang</span> : Jl. Raya Darmo
+              Permai III Surabaya. 60119
             </p>
           </div>
-        </div>
-        <div className="w-full h-1 bg-[#BCBEC3] mt-12 mb-2"></div>
-        <div className="flex md:flex-row flex-col items-center ">
-          <div className="flex pt-5">
-            <img
-              src="/assets/home/linkedin-icon.png"
-              alt="Linked In"
-              width={50}
-              height={50}
-              className="rounded-2xl mr-6"
-            />
-            <img
-              src="/assets/home/fb-icon.png"
-              alt="Facebook"
-              width={50}
-              height={50}
-              className="rounded-2xl mr-6"
-            />
-            <img
-              src="/assets/home/ig-icon.png"
-              alt="Instagram"
-              width={50}
-              height={50}
-              className="rounded-2xl mr-6"
-            />
-            <img
-              src="/assets/home/yt-icon.png"
-              alt="YouTube"
-              width={50}
-              height={50}
-              className="rounded-2xl mr-6"
-            />
-          </div>
-          <h1 className="absolute left-1/2 transform -translate-x-1/2 md:pt-4 pt-28 md:text-lg text-md text-center text-[#868A92]">
-            2024 - www.Mknowsconsulting - Hak Cipta Dilindungi.
-          </h1>
         </div>
       </footer>
     </>
