@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormInput from "../../components/reusable/FormInput";
+import { AuthCarousel } from "../../components/AuthCarousel";
 
 export const ForgetPw: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,18 +18,7 @@ export const ForgetPw: React.FC = () => {
   return (
     <section className="h-[100vh] flex items-center justify-center">
       <div className="w-3/5 h-full">
-        <div
-          className="w-full h-full bg-[#3498DB] bg-cover flex flex-col items-center justify-center relative overflow-hidden"
-          style={{ backgroundImage: "url('/auth/bg.png')" }}
-        >
-          <div className="flex flex-col items-center justify-center h-full">
-            <img
-              src="/auth/ilustration2.png"
-              alt="Illustration"
-              className="w-auto h-1/2 pb-10"
-            />
-          </div>
-        </div>
+        <AuthCarousel />
       </div>
 
       <div className="w-2/5 h-full flex items-center justify-center">
@@ -42,7 +32,7 @@ export const ForgetPw: React.FC = () => {
           <form className="w-full">
             <div className="relative">
               <FormInput
-                type={showPassword ? "text" : "password"} 
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
                 placeholder="Masukan Kata Sandi"
@@ -108,7 +98,7 @@ export const ForgetPw: React.FC = () => {
                 label="Konfirmasi Kata Sandi"
                 required
               />
-             
+
               <span
                 className="absolute right-3 top-10 cursor-pointer"
                 onClick={toggleConfirmPasswordVisibility}
