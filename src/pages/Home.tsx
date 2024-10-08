@@ -6,7 +6,7 @@ import {
   sekilasIlmuCards,
   trainingCategories,
 } from "../assets/landingData";
-import OurClients from "../components/OurClients";
+import Clients from "../components/Clients";
 
 export default function Home() {
   return (
@@ -248,7 +248,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <OurClients />
+      <Clients />
       <section className="w-11/12  mx-auto py-14 ">
         <h1 className="text-5xl  px-8 font-bold pb-14 text-center">
           Sekilas Ilmu

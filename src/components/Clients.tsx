@@ -2,9 +2,9 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 
 // Define types for the props (if needed)
-type OurClientsProps = object;
+type ClientsProps = object;
 
-const OurClients: React.FC<OurClientsProps> = () => {
+const Clients: React.FC<ClientsProps> = () => {
   // Define arrays of image sources
   const imagesRow1 = Array.from(
     { length: 9 },
@@ -69,4 +69,4 @@ const OurClients: React.FC<OurClientsProps> = () => {
   );
 };
 
-export default OurClients;
+export default Clients;
