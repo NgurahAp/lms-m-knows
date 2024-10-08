@@ -6,7 +6,7 @@ import {
   sekilasIlmuCards,
   trainingCategories,
 } from "../assets/landingData";
-import OurClients from "../components/ourClients";
+import OurClients from "../components/OurClients";
 
 export default function Home() {
   return (
@@ -250,7 +250,7 @@ export default function Home() {
         <h1 className="text-5xl  px-8 font-bold pb-14 text-center">
           Sekilas Ilmu
         </h1>
-        <div className="container mx-auto">
+        <div className="container mx-auto flex flex-col items-center justify-center">
           <div className="flex flex-wrap mx-auto justify-center gap-5">
             {sekilasIlmuCards.map((card) => (
               <div className="w-96 bg-white border border-gray-200 rounded-lg shadow ">
@@ -283,10 +283,10 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <button className="bg-[#106FA4] text-white font-bold py-4 px-16 mt-10 rounded-lg">
-              Lihat semua
-            </button>
           </div>
+          <button className="bg-[#106FA4] w-1/6 text-white font-bold py-4 px-16 mt-10 rounded-lg">
+            Lihat semua
+          </button>
         </div>
       </section>
     </>
