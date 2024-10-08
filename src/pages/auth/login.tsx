@@ -10,7 +10,9 @@ export const Login: React.FC = () => {
       </div>
 
       {/* Right Side */}
-      <div className="w-2/5"></div>
+      <div className="w-2/5 h-full flex items-center justify-center">
+        <img src="/landing/logo.png" alt="" />
+      </div>
     </section>
   );
 };
