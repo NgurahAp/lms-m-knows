@@ -6,8 +6,7 @@ import {
   sekilasIlmuCards,
   trainingCategories,
 } from "../assets/landingData";
-
-import OurClients from "../components/OurClients";
+import OurClients from "../components/ourClients";
 
 export default function Home() {
   return (
@@ -181,13 +180,13 @@ export default function Home() {
                           style={{ objectFit: "cover" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-[#141414] to-transparent"></div>
-                        <div className="flex absolute bottom-0 left-0 p-4">
-                          <h3 className="font-semibold underline text-white text-base w-56">
+                        <div className="flex absolute bottom-0 left-0 px-4 py-6">
+                          <h3 className="font-semibold underline text-white text-base w-56 -mt-10">
                             {category.title}
                           </h3>
                           <a
                             href="#"
-                            className="mt-7 h-8 items-center px-3 pt-1 text- font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            className="-mt-10 h-8 items-center px-3 pt-1 text- font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                           >
                             Basic
                           </a>
