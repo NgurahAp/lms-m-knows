@@ -18,8 +18,8 @@ export const Verification: React.FC = () => {
         <div className="w-2/3 flex flex-col items-center">
           {/* H1 berada di kiri */}
           <h1 className="font-bold text-4xl pb-3">Verifikasi Email</h1>
-          <h1 className="pb-5 text-gray-500">Masukan kode yang dikirim ke</h1>
-          <h1 className="pb-5 text-gray-500">mknows@gmail.com</h1>
+          <h1 className=" text-gray-500 text-xl">Masukan kode yang dikirim ke</h1>
+          <h1 className="pb-5 font-bold text-xl">mknows@gmail.com</h1>
           <form className="w-full">
             <OTPInput length={6} onComplete={handleComplete} />
             <p className="text-md text-center pt-3">
