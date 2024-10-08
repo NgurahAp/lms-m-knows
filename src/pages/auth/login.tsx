@@ -1,10 +1,15 @@
-import React from "react";
 import { AuthCarousel } from "../../components/AuthCarousel";
 import FormInput from "../../components/reusable/FormInput";
 import { Link } from "react-router-dom";
-
+import React, { useState } from "react";
 
 export const Login: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <section className="h-[100vh] flex items-center justify-center">
       {/* Left Side - Carousel */}
@@ -21,7 +26,8 @@ export const Login: React.FC = () => {
           {/* H1 berada di kiri */}
           <h1 className="self-start font-bold text-4xl pb-3">Masuk</h1>
           <h1 className="self-start pb-5 text-gray-500">Masukan Akun Anda</h1>
-          <form className="w-full">
+
+          <form className="w-full relative">
             <FormInput
               type="email"
               id="email"
@@ -30,14 +36,65 @@ export const Login: React.FC = () => {
               label="Nama Lengkap"
               required
             />
-            <FormInput
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Masukan Kata Sandi"
-              label="Kata Sandi"
-              required
-            />
+            <div className="relative">
+              <FormInput
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                placeholder="Masukan Kata Sandi"
+                label="Kata Sandi"
+                required
+              />
+              <span
+                className="absolute right-3 top-[45%] cursor-pointer"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.966 9.966 0 014.7-5.385M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3l18 18"
+                    />
+                  </svg>
+                )}
+              </span>
+            </div>
+
             <div className="mb-4 flex items-center justify-between">
               <div className="flex">
                 <input
@@ -45,7 +102,6 @@ export const Login: React.FC = () => {
                   id="rememberMe"
                   name="rememberMe"
                   className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  required
                 />
                 <label
                   htmlFor="rememberMe"
@@ -54,7 +110,7 @@ export const Login: React.FC = () => {
                   Ingat saya
                 </label>
               </div>
-              <a href="" className="text-blue-500 text-sm">
+              <a href="/forgetpw" className="text-blue-500 text-sm">
                 Lupa kata sandi?
               </a>
             </div>
@@ -66,7 +122,7 @@ export const Login: React.FC = () => {
               Masuk
             </button>
           </form>
-          {/* Divider and Google Sign In */}
+
           <div className="flex items-center w-full mt-5">
             <hr className="flex-grow border-gray-300" />
             <span className="mx-2 text-gray-500">Atau</span>
@@ -83,7 +139,7 @@ export const Login: React.FC = () => {
           </button>
 
           <p className="mt-4 text-sm text-gray-600">
-            Belum punya akun? {" "}
+            Belum punya akun?{" "}
             <Link to="/register" className="text-blue-500 hover:underline">
               Daftar
             </Link>
