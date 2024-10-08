@@ -1,6 +1,8 @@
 import React from "react";
 import { AuthCarousel } from "../../components/AuthCarousel";
 import FormInput from "../../components/reusable/FormInput";
+import { Link } from "react-router-dom";
+
 
 export const Login: React.FC = () => {
   return (
@@ -81,10 +83,10 @@ export const Login: React.FC = () => {
           </button>
 
           <p className="mt-4 text-sm text-gray-600">
-            Sudah punya akun?{" "}
-            <a href="/login" className="text-blue-500 hover:underline">
-              Masuk
-            </a>
+            Belum punya akun? {" "}
+            <Link to="/register" className="text-blue-500 hover:underline">
+              Daftar
+            </Link>
           </p>
         </div>
       </div>

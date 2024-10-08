@@ -1,10 +1,11 @@
 import React from "react";
 import { AuthCarousel } from "../../components/AuthCarousel";
 import FormInput from "../../components/reusable/FormInput";
+import { Link } from "react-router-dom";
 
 export const Register: React.FC = () => {
   return (
-    <section className="h-[120vh] flex items-center justify-center">
+    <section className="h-[100vh] flex items-center justify-center">
       {/* Left Side - Carousel */}
       <div className="w-3/5 h-full">
         <AuthCarousel />
@@ -14,7 +15,7 @@ export const Register: React.FC = () => {
       <div className="w-2/5 h-full flex items-center justify-center">
         <div className="w-2/3 flex flex-col items-center">
           {/* Logo berada di tengah */}
-          <img src="/landing/logo.png" className="mx-auto mb-4" alt="Logo" />
+          <img src="/landing/logo.png" className="mx-auto mb-2" alt="Logo" />
 
           {/* H1 berada di kiri */}
           <h1 className="self-start font-bold text-4xl pb-3">Daftar</h1>
@@ -61,7 +62,7 @@ export const Register: React.FC = () => {
               required
             />
 
-            <div className="mb-4 flex items-center">
+            <div className="mb-2 flex items-center">
               <input
                 type="checkbox"
                 id="agreeToTerms"
@@ -103,9 +104,9 @@ export const Register: React.FC = () => {
 
           <p className="mt-4 text-sm text-gray-600">
             Sudah punya akun?{" "}
-            <a href="/login" className="text-blue-500 hover:underline">
+            <Link to="/login" className="text-blue-500 hover:underline">
               Masuk
-            </a>
+            </Link>
           </p>
         </div>
       </div>
