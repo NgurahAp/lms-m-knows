@@ -198,7 +198,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex justify-center mt-8">
-              <button className="rounded-lg bg-[#106fa4] hover:bg-blue-700 text-white font-semibold p-4 rounded">
+              <button className="rounded-lg bg-[#106fa4] hover:bg-blue-700 text-white font-semibold p-4">
                 Lihat Bootcamp Lainnya
               </button>
             </div>
@@ -243,7 +243,7 @@ export default function Home() {
             <img
               src="/landing/bootcamp/aboutUs.png"
               alt="Person holding a laptop"
-              className="w-full h-auto w-[80vh] mx-auto"
+              className=" h-auto w-[80vh] mx-auto"
             />
           </div>
         </div>
