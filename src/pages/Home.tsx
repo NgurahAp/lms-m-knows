@@ -6,6 +6,7 @@ import {
   sekilasIlmuCards,
   trainingCategories,
 } from "../assets/landingData";
+
 import OurClients from "../components/OurClients";
 
 export default function Home() {
