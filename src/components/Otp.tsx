@@ -19,9 +19,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ length, onComplete }) => {
       inputRefs.current[index + 1]?.focus();
     }
 
-    if (newOtp.every((v) => v !== "")) {
-      onComplete(newOtp.join(""));
-    }
+    onComplete(newOtp.join(""));
   };
 
   const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
