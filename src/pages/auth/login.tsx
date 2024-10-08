@@ -4,7 +4,7 @@ import FormInput from "../../components/reusable/FormInput";
 
 export const Login: React.FC = () => {
   return (
-    <section className="h-[120vh] flex items-center justify-center">
+    <section className="h-[100vh] flex items-center justify-center">
       {/* Left Side - Carousel */}
       <div className="w-3/5 h-full">
         <AuthCarousel />
@@ -19,29 +19,13 @@ export const Login: React.FC = () => {
           {/* H1 berada di kiri */}
           <h1 className="self-start font-bold text-4xl pb-3">Masuk</h1>
           <h1 className="self-start pb-5 text-gray-500">Masukan Akun Anda</h1>
-          <form>
-            <FormInput
-              type="text"
-              id="fullName"
-              name="fullName"
-              placeholder="Masukan Nama Lengkap"
-              label="Nama Lengkap"
-              required
-            />
+          <form className="w-full">
             <FormInput
               type="email"
               id="email"
               name="email"
-              placeholder="Masukan Email"
-              label="Email"
-              required
-            />
-            <FormInput
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              placeholder="Masukan Nomor Telepon"
-              label="Nomor Telepon"
+              placeholder="Masukan Email atau No Telpon"
+              label="Nama Lengkap"
               required
             />
             <FormInput
@@ -52,37 +36,32 @@ export const Login: React.FC = () => {
               label="Kata Sandi"
               required
             />
-            <FormInput
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Masukan Konfirmasi Kata Sandi"
-              label="Konfirmasi Kata Sandi"
-              required
-            />
-
-            <div className="mb-4 flex items-center">
-              <input
-                type="checkbox"
-                id="agreeToTerms"
-                name="agreeToTerms"
-                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                required
-              />
-              <label
-                htmlFor="agreeToTerms"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Saya menyetujui Syarat dan Ketentuan serta Kebijakan Privasi
-                Kampus Gratis
-              </label>
+            <div className="mb-4 flex items-center justify-between">
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  name="rememberMe"
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  required
+                />
+                <label
+                  htmlFor="rememberMe"
+                  className="ml-2 block text-sm text-gray-900"
+                >
+                  Ingat saya
+                </label>
+              </div>
+              <a href="" className="text-blue-500 text-sm">
+                Lupa kata sandi?
+              </a>
             </div>
 
             <button
               type="submit"
               className="w-full py-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
             >
-              Daftar
+              Masuk
             </button>
           </form>
           {/* Divider and Google Sign In */}
