@@ -4,6 +4,7 @@ import {
   inHouseCards,
   pelatihanPubliCards,
   sekilasIlmuCards,
+  trainingCategories,
 } from "../assets/landingData";
 import OurClients from "../components/OurClients";
 
@@ -155,6 +156,91 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+      <section className="min-h-screen">
+        <div className="w-11/12 mx-auto py-14 ">
+          <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-4">
+            Bootcamp <span className="text-[#FAB317]">LMS M-Knows</span>
+          </h1>
+          <h1 className="text-2xl font-light text-center text-gray-600 pb-14">
+            Temukan bootcamp yang sesuai dengan minat dan kebutuhan Anda.
+          </h1>
+          <section className="pb-16 pt-7">
+            <div className="container">
+              <div className="flex flex-wrap justify-center -mx-10">
+                {trainingCategories.map((category, index) => (
+                  <a href="#" key={index}>
+                    <div className="md:w-80 w-80 m-10 cursor-pointer">
+                      <div className="relative h-28 rounded-2xl overflow-hidden">
+                        <img
+                          src={category.imageSrc}
+                          alt={category.title}
+                          style={{ objectFit: "cover" }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] to-transparent"></div>
+                        <div className="flex absolute bottom-0 left-0 p-4">
+                          <h3 className="font-semibold underline text-white text-base w-56">
+                            {category.title}
+                          </h3>
+                          <a
+                            href="#"
+                            className="mt-7 h-8 items-center px-3 pt-1 text- font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          >
+                            Basic
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section className="bg-blue-700 text-white py-12 px-6 md:px-12">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Text Content */}
+          <div className="flex flex-col justify-center">
+            <h2 className="text-yellow-400 text-3xl font-bold mb-4">
+              Tentang LMS M-Knows
+            </h2>
+            <p className="mb-4">
+              LMS M-Knows adalah sebuah platform LMS (Learning Management
+              System) yang dirancang khusus untuk memenuhi kebutuhan perusahaan
+              dalam mengelola pembelajaran dan pengembangan karyawan. Platform
+              ini menyediakan berbagai fitur yang dapat membantu perusahaan
+              dalam menyusun, mengelola, dan menyampaikan materi pembelajaran
+              secara efektif.
+            </p>
+            <p className="mb-4">
+              Salah satu fitur utama dari LMS M-Knows adalah kemampuannya untuk
+              membuat kursus-kursus yang disesuaikan dengan kebutuhan
+              perusahaan. Perusahaan dapat membuat kursus-kursus yang bertujuan
+              untuk pengembangan dan pelatihan karyawan, atau pembelajaran
+              tertentu untuk meningkatkan keterampilan dan pengetahuan karyawan.
+            </p>
+            <p className="mb-4">
+              Selain itu, LMS M-Knows juga dilengkapi dengan fitur pelacakan
+              kemajuan belajar yang memungkinkan perusahaan untuk melihat sejauh
+              mana karyawan menyelesaikan materi pembelajaran. Fitur ini
+              memungkinkan perusahaan untuk mengidentifikasi karyawan yang
+              mungkin memerlukan bantuan tambahan, serta memberikan laporan atas
+              pencapaian mereka dalam pembelajaran. Platform ini memberikan
+              solusi lengkap untuk mengelola pembelajaran dan pengembangan
+              karyawan, sehingga membantu perusahaan tetap kompetitif di pasar
+              yang terus berubah.
+            </p>
+          </div>
+
+          <div className="relative flex items-center justify-center">
+            <img
+              src="/landing/bootcamp/aboutUs.png"
+              alt="Person holding a laptop"
+              className="w-full h-auto max-w-xs mx-auto"
+            />
           </div>
         </div>
       </section>
