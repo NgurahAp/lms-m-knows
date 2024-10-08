@@ -178,3 +178,73 @@ export const sekilasIlmuCards = [
     views: "698 Views",
   },
 ];
+
+export const trainingCategories = [
+  {
+    title: "Backend, Database & API Development: Node.js Ecosystem",
+    imageSrc: "/landing/bootcamp/backend.png",
+  },
+  {
+    title: "UI/UX Essentials, Maximizing Web & App Polential",
+    imageSrc: "/landing/bootcamp/uiux.png",
+  },
+  {
+    title: "Video Editing dan Animation",
+    imageSrc: "/landing/bootcamp/video.png",
+  },
+  {
+    title: "Unreal Engine 5 Game And Virtual Reality Programming",
+    imageSrc: "/landing/bootcamp/unrealEngine.png",
+  },
+  {
+    title: "Event Management & Sponsorship",
+    imageSrc: "/landing/bootcamp/sponsorship.jfif",
+  },
+  {
+    title: "Project Management Officer",
+    imageSrc: "/landing/bootcamp/pmo.jfif",
+  },
+  {
+    title: "Data Analyst",
+    imageSrc: "/landing/bootcamp/dataAnalyst.png",
+  },
+  {
+    title: "Artificial Intelligence",
+    imageSrc: "/landing/bootcamp/ai.png",
+  },
+  {
+    title:
+      "Data Science Essentials for Banking, Finance, and Fintech Transformation",
+    imageSrc: "/landing/bootcamp/dataScience.png",
+  },
+  {
+    title: "Digital Marketing, E-Commerce & Social Media Selling",
+    imageSrc: "/landing/bootcamp/digitalMarketing.jfif",
+  },
+  {
+    title: "Scriptwriting and Storyboarding 101 - Video Learning Made Easy",
+    imageSrc: "/landing/bootcamp/scripting.jfif",
+  },
+  {
+    title:
+      "Web Design Fundamentals - Transforming Lines of Code into Digital Excellence",
+    imageSrc: "/landing/bootcamp/webDesign.png",
+  },
+  {
+    title: "Complex Game Design & Development (3D & 2D) with Unity",
+    imageSrc: "/landing/bootcamp/complexDesign.png",
+  },
+  {
+    title: "Visual Storytelling Proficiency - Crucial Video Directing Basics",
+    imageSrc: "/landing/bootcamp/storyTelling.png",
+  },
+  {
+    title: "BlenderVerse Explorers Easy 3D Creation Guide",
+    imageSrc: "/landing/bootcamp/blender.png",
+  },
+  {
+    title:
+      "Beyond Basics & Advanced Techniques In Mobile Apps Development With Flutter",
+    imageSrc: "/landing/bootcamp/mobileApps.png",
+  },
+];
