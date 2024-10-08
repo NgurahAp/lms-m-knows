@@ -15,6 +15,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     location.pathname === "/login" ||
     location.pathname === "/register" ||
     location.pathname === "/forgetpw";
+    location.pathname === "/verification";
+
 
   return (
     <div className="layout">

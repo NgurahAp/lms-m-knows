@@ -1,9 +1,17 @@
 import React from "react";
 import { AuthCarousel } from "../../components/AuthCarousel";
 import FormInput from "../../components/reusable/FormInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Register: React.FC = () => {
+  const navigate = useNavigate(); // Untuk navigasi
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    navigate("/verification");
+  };
+
   return (
     <section className="h-[100vh] flex items-center justify-center">
       {/* Left Side - Carousel */}
@@ -20,7 +28,7 @@ export const Register: React.FC = () => {
           {/* H1 berada di kiri */}
           <h1 className="self-start font-bold text-4xl pb-3">Daftar</h1>
           <h1 className="self-start pb-5 text-gray-500">Daftar Akun Anda</h1>
-          <form>
+          <form onSubmit={handleSubmit}>
             <FormInput
               type="text"
               id="fullName"
@@ -75,7 +83,6 @@ export const Register: React.FC = () => {
                 className="ml-2 block text-sm text-gray-900"
               >
                 Saya menyetujui Syarat dan Ketentuan serta Kebijakan Privasi
-                Kampus Gratis
               </label>
             </div>
 

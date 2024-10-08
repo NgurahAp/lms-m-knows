@@ -8,6 +8,8 @@ import ProductDetail from "../pages/products/ProductDetail";
 import { Login } from "../pages/auth/login";
 import { Register } from "../pages/auth/register";
 import { ForgetPw } from "../pages/auth/forgetpw";
+import { Verification } from "../pages/auth/verification";
+
 
 const AppRoutes: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpw" element={<ForgetPw />} />
+          <Route path="/verification" element={<Verification />} />
+
           <Route path="/pelatihanku" element={<Pelatihanku />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:productId" element={<ProductDetail />} />

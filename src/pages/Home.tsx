@@ -6,8 +6,8 @@ import {
   sekilasIlmuCards,
   trainingCategories,
 } from "../assets/landingData";
+import Clients from "../components/Clients";
 
-import OurClients from "../components/ourClients";
 
 export default function Home() {
   return (
@@ -48,7 +48,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Fitur LMS */}
+
       <section className="min-h-screen">
         <div className="w-11/12 mx-auto py-14 ">
           <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-14">
@@ -130,7 +130,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Pelatihan Public */}
+
       <section className="w-11/12  mx-auto py-14 ">
         <h1 className="text-5xl text-[#106FA4] px-8 font-bold pb-14">
           Pelatihan
@@ -173,7 +173,7 @@ export default function Home() {
               <div className="flex flex-wrap justify-center -mx-10">
                 {trainingCategories.map((category, index) => (
                   <a href="#" key={index}>
-                    <div className="md:w-80 w-80 m-10 cursor-pointer">
+                    <div className="md:w-80 w-80 m-5 cursor-pointer">
                       <div className="relative h-28 rounded-2xl overflow-hidden">
                         <img
                           src={category.imageSrc}
@@ -198,17 +198,21 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            <div className="flex justify-center mt-8">
+              <button className="rounded-lg bg-[#106fa4] hover:bg-blue-700 text-white font-semibold p-4">
+                Lihat Bootcamp Lainnya
+              </button>
+            </div>
           </section>
         </div>
       </section>
       <section className="bg-blue-700 text-white py-12 px-6 md:px-12">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Text Content */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-yellow-400 text-3xl font-bold mb-4">
-              Tentang LMS M-Knows
-            </h2>
-            <p className="mb-4">
+          <div className="flex flex-col justify-center m-10">
+            <h1 className="text-5xl font-bold pb-10">
+              Tentang <span className="text-[#FAB317]">LMS M-Knows</span>
+            </h1>
+            <p className="text-lg font-light pb-10">
               LMS M-Knows adalah sebuah platform LMS (Learning Management
               System) yang dirancang khusus untuk memenuhi kebutuhan perusahaan
               dalam mengelola pembelajaran dan pengembangan karyawan. Platform
@@ -216,14 +220,14 @@ export default function Home() {
               dalam menyusun, mengelola, dan menyampaikan materi pembelajaran
               secara efektif.
             </p>
-            <p className="mb-4">
+            <p className="text-lg font-light pb-10">
               Salah satu fitur utama dari LMS M-Knows adalah kemampuannya untuk
               membuat kursus-kursus yang disesuaikan dengan kebutuhan
               perusahaan. Perusahaan dapat membuat kursus-kursus yang bertujuan
               untuk pengembangan dan pelatihan karyawan, atau pembelajaran
               tertentu untuk meningkatkan keterampilan dan pengetahuan karyawan.
             </p>
-            <p className="mb-4">
+            <p className="text-lg font-light pb-10">
               Selain itu, LMS M-Knows juga dilengkapi dengan fitur pelacakan
               kemajuan belajar yang memungkinkan perusahaan untuk melihat sejauh
               mana karyawan menyelesaikan materi pembelajaran. Fitur ini
@@ -240,18 +244,17 @@ export default function Home() {
             <img
               src="/landing/bootcamp/aboutUs.png"
               alt="Person holding a laptop"
-              className="w-full h-auto max-w-xs mx-auto"
+              className=" h-auto w-[80vh] mx-auto"
             />
           </div>
         </div>
       </section>
-      <OurClients />
-      {/* Sekilas Ilmu */}
+      <Clients />
       <section className="w-11/12  mx-auto py-14 ">
         <h1 className="text-5xl  px-8 font-bold pb-14 text-center">
           Sekilas Ilmu
         </h1>
-        <div className="container mx-auto">
+        <div className="container mx-auto flex flex-col items-center justify-center">
           <div className="flex flex-wrap mx-auto justify-center gap-5">
             {sekilasIlmuCards.map((card) => (
               <div className="w-96 bg-white border border-gray-200 rounded-lg shadow ">
@@ -284,10 +287,10 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <button className="bg-[#106FA4] text-white font-bold py-4 px-16 mt-10 rounded-lg">
-              Lihat semua
-            </button>
           </div>
+          <button className="bg-[#106FA4] w-1/6 text-white font-bold py-4 px-16 mt-10 rounded-lg">
+            Lihat semua
+          </button>
         </div>
       </section>
     </>
