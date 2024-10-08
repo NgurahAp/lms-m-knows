@@ -5,6 +5,8 @@ import Home from "../pages/Home";
 import Pelatihanku from "../pages/Pelatihanku";
 import ProductList from "../pages/products";
 import ProductDetail from "../pages/products/ProductDetail";
+import { Login } from "../pages/auth/login";
+import { Register } from "../pages/auth/register";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -12,6 +14,8 @@ const AppRoutes: React.FC = () => {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/pelatihanku" element={<Pelatihanku />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:productId" element={<ProductDetail />} />

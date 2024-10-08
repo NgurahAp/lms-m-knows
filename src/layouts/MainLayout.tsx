@@ -11,12 +11,14 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/register";
 
   return (
     <div className="layout">
-      {isHomePage ? <HomeNavbar /> : <Navbar />}
+      {!isAuthPage && (isHomePage ? <HomeNavbar /> : <Navbar />)}
       <main>{children}</main>
-      <Footer />
+      {!isAuthPage && <Footer />}
     </div>
   );
 };

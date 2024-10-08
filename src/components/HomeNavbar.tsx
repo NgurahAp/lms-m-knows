@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const HomeNavbar = () => {
   return (
@@ -29,12 +30,16 @@ const HomeNavbar = () => {
             />
           </svg>
         </button>
-        <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
-          Masuk
-        </button>
-        <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium">
-          Daftar
-        </button>
+        <Link to="/login">
+          <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
+            Masuk
+          </button>
+        </Link>
+        <Link to="/register">
+          <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium">
+            Daftar
+          </button>
+        </Link>
       </div>
     </nav>
   );
