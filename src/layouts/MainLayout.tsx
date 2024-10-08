@@ -14,7 +14,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/register" ||
-    location.pathname === "/forgetpw";
+    location.pathname === "/forgetpw" ||
     location.pathname === "/verification";
 
 
