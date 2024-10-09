@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "./types";
+import { useAuth } from "../../hooks/useAuth";
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { handleLogout } = useAuth();
 
   useEffect(() => {
     const dummyProducts: Product[] = [
@@ -47,6 +49,7 @@ const ProductList: React.FC = () => {
           </div>
         ))}
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
