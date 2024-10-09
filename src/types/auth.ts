@@ -11,4 +11,5 @@ export interface LoginResponse {
 export interface AuthState {
   isAuthenticated: boolean;
   accessToken: string | null;
+  refreshToken: string | null;
 }
