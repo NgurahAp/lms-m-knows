@@ -1,13 +1,30 @@
 import { AuthCarousel } from "../../components/AuthCarousel";
 import FormInput from "../../components/reusable/FormInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import React, { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { handleLogin } = useAuth();
+
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const success = await handleLogin(username, password);
+    if (success) {
+      alert("Login berhasil!");
+      navigate("/products");
+    } else {
+      alert("Login gagal. Silakan coba lagi.");
+    }
   };
 
   return (
@@ -27,14 +44,17 @@ export const Login: React.FC = () => {
           <h1 className="self-start font-bold text-4xl pb-3">Masuk</h1>
           <h1 className="self-start pb-5 text-gray-500">Masukan Akun Anda</h1>
 
-          <form className="w-full relative">
+          {/* Form Login */}
+          <form className="w-full relative" onSubmit={onSubmit}>
             <FormInput
-              type="email"
-              id="email"
-              name="email"
+              type="text" // Mengubah type menjadi text
+              id="username" // Mengubah id menjadi username
+              name="username" // Mengubah name menjadi username
               placeholder="Masukan Email atau No Telpon"
               label="Nama Lengkap"
               required
+              value={username} // Mengikat nilai ke state
+              onChange={(e) => setUsername(e.target.value)} // Mengatur perubahan
             />
             <div className="relative">
               <FormInput
@@ -44,10 +64,14 @@ export const Login: React.FC = () => {
                 placeholder="Masukan Kata Sandi"
                 label="Kata Sandi"
                 required
+                value={password} // Mengikat nilai ke state
+                onChange={(e) => setPassword(e.target.value)} // Mengatur perubahan
               />
               <span
                 className="absolute right-3 top-[45%] cursor-pointer"
                 onClick={togglePasswordVisibility}
+                role="button"
+                aria-label={showPassword ? "Hide password" : "Show password"} // Menambahkan aksesibilitas
               >
                 {showPassword ? (
                   <svg
@@ -94,7 +118,6 @@ export const Login: React.FC = () => {
                 )}
               </span>
             </div>
-
             <div className="mb-4 flex items-center justify-between">
               <div className="flex">
                 <input
@@ -110,11 +133,10 @@ export const Login: React.FC = () => {
                   Ingat saya
                 </label>
               </div>
-              <a href="/forgetpw" className="text-blue-500 text-sm">
+              <Link to="/forgetpw" className="text-blue-500 text-sm">
                 Lupa kata sandi?
-              </a>
+              </Link>
             </div>
-
             <button
               type="submit"
               className="w-full py-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
@@ -122,28 +144,6 @@ export const Login: React.FC = () => {
               Masuk
             </button>
           </form>
-
-          <div className="flex items-center w-full mt-5">
-            <hr className="flex-grow border-gray-300" />
-            <span className="mx-2 text-gray-500">Atau</span>
-            <hr className="flex-grow border-gray-300" />
-          </div>
-
-          <button className="w-full py-2 font-semibold mt-4 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-100 transition duration-200">
-            <img
-              src="/auth/Google.png"
-              alt="Google Icon"
-              className="h-5 w-5 mr-2"
-            />
-            Masuk dengan Google
-          </button>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Belum punya akun?{" "}
-            <Link to="/register" className="text-blue-500 hover:underline">
-              Daftar
-            </Link>
-          </p>
         </div>
       </div>
     </section>
