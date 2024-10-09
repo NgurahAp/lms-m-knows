@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import FormInput from "../../components/reusable/FormInput";
+// import React, { useState } from "react";
+// import FormInput from "../../components/reusable/FormInput";
 import { AuthCarousel } from "../../components/AuthCarousel";
 
 export const ForgetPw: React.FC = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+  // const toggleConfirmPasswordVisibility = () => {
+  //   setShowConfirmPassword(!showConfirmPassword);
+  // };
 
   return (
     <section className="h-[100vh] flex items-center justify-center">
@@ -20,7 +20,7 @@ export const ForgetPw: React.FC = () => {
         <AuthCarousel />
       </div>
 
-      <div className="w-2/5 h-full flex items-center justify-center">
+      {/* <div className="w-2/5 h-full flex items-center justify-center">
         <div className="w-2/3 flex flex-col items-center">
           <h1 className="self-start font-bold text-4xl pb-3">
             Lupa Kata Sandi
@@ -36,8 +36,9 @@ export const ForgetPw: React.FC = () => {
                 name="password"
                 placeholder="Masukan Kata Sandi"
                 label="Kata Sandi"
-                required
-              />
+                required value={""} onChange={function (e: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error("Function not implemented.");
+                } }              />
               <span
                 className="absolute right-3 top-10 cursor-pointer"
                 onClick={togglePasswordVisibility}
@@ -95,8 +96,9 @@ export const ForgetPw: React.FC = () => {
                 name="confirm-password"
                 placeholder="Masukan Konfirmasi Kata Sandi"
                 label="Konfirmasi Kata Sandi"
-                required
-              />
+                required value={""} onChange={function (e: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error("{e}");
+                } }              />
 
               <span
                 className="absolute right-3 top-10 cursor-pointer"
@@ -156,7 +158,7 @@ export const ForgetPw: React.FC = () => {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
