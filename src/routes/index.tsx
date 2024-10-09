@@ -22,18 +22,30 @@ const AppRoutes: React.FC = () => {
           <Route path="/forgetpw" element={<ForgetPw />} />
           <Route path="/verification" element={<Verification />} />
 
-          {/* Protected Routes */}
+          {/* Halaman yang dilindungi */}
           <Route
             path="/pelatihanku"
-            element={<ProtectedRoute element={<Pelatihanku />} />}
+            element={
+              <ProtectedRoute>
+                <Pelatihanku />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/products"
-            element={<ProtectedRoute element={<ProductList />} />}
+            element={
+              <ProtectedRoute>
+                <ProductList />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/products/:productId"
-            element={<ProtectedRoute element={<ProductDetail />} />}
+            element={
+              <ProtectedRoute>
+                <ProductDetail />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </MainLayout>

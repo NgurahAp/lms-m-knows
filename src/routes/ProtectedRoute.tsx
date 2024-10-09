@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth"; // Hook useAuth yang Anda buat untuk login/logout
+import { useAuth } from "../hooks/useAuth";
 
 interface ProtectedRouteProps {
-  element: JSX.Element;
+  children: JSX.Element;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { authState } = useAuth(); // Mengambil authState dari useAuth
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const { authState } = useAuth();
+
+  useEffect(() => {
+    console.log("ProtectedRoute - Current authState:", authState);
+  }, [authState]);
 
   if (!authState.isAuthenticated) {
-    // Jika pengguna belum login, arahkan ke halaman login
+    console.log("ProtectedRoute - Not authenticated, redirecting to login");
     return <Navigate to="/login" />;
   }
 
-  // Jika sudah login, tampilkan halaman yang diminta
-  return element;
+  return children;
 };
 
 export default ProtectedRoute;

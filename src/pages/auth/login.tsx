@@ -20,8 +20,7 @@ export const Login: React.FC = () => {
     e.preventDefault();
     const success = await handleLogin(username, password);
     if (success) {
-      alert("Login berhasil!");
-      navigate("/products");
+      navigate("/pelatihanku");
     } else {
       alert("Login gagal. Silakan coba lagi.");
     }
