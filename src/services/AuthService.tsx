@@ -1,7 +1,6 @@
 import axios from "axios";
 import { LoginResponse } from "../types/auth";
-
-const API_URL = "/api/v1/auth"; 
+import { API_URL } from "../config/api";
 
 export const login = async (
   username: string,
