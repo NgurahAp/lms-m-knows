@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthCarousel } from "../../components/AuthCarousel";
-import FormInput from "../../components/reusable/FormInput";
+// import FormInput from "../../components/reusable/FormInput";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Register: React.FC = () => {
@@ -29,7 +29,7 @@ export const Register: React.FC = () => {
           <h1 className="self-start font-bold text-4xl pb-3">Daftar</h1>
           <h1 className="self-start pb-5 text-gray-500">Daftar Akun Anda</h1>
           <form onSubmit={handleSubmit}>
-            <FormInput
+            {/* <FormInput
               type="text"
               id="fullName"
               name="fullName"
@@ -68,7 +68,7 @@ export const Register: React.FC = () => {
               placeholder="Masukan Konfirmasi Kata Sandi"
               label="Konfirmasi Kata Sandi"
               required
-            />
+            /> */}
 
             <div className="mb-2 flex items-center">
               <input
