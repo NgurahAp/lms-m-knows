@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import { AuthState } from "../types/auth";
 import { login, refreshToken } from "../services/AuthService";
-import Cookies from "js-cookie"; 
-
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
   const [authState, setAuthState] = useState<AuthState>({
@@ -10,6 +10,8 @@ export const useAuth = () => {
     accessToken: null,
     refreshToken: null,
   });
+
+  const navigate = useNavigate(); 
 
   const handleLogin = useCallback(
     async (username: string, password: string) => {
@@ -36,6 +38,25 @@ export const useAuth = () => {
     },
     []
   );
+  const handleLogout = useCallback(() => {
+    try {
+      // Hapus token dari Cookies
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+
+      // Reset authState
+      setAuthState({
+        isAuthenticated: false,
+        accessToken: null,
+        refreshToken: null,
+      });
+
+      // Arahkan ke route '/'
+      navigate("/"); // Mengarahkan ke route '/' setelah logout
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }, [navigate]);
 
   const handleRefreshToken = useCallback(async () => {
     try {
@@ -59,6 +80,7 @@ export const useAuth = () => {
   return {
     authState,
     handleLogin,
+    handleLogout,
     handleRefreshToken,
   };
 };
