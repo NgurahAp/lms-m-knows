@@ -1,1 +1,1 @@
-export const API_URL = import.meta.env.VITE_API_URL || "/api/v1/auth";
+export const API_BASE_URL = "https://api.m-knows.com/api/v1";
