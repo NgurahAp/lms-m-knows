@@ -1,35 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-xl font-bold">
-          <Link to="/">MyApp</Link>
+    <nav className="fixed top-0 left-0 w-full h-40 z-10 items-center   bg-white shadow-md">
+      <div className="flex justify-between h-1/2 px-28">
+        <div className="flex items-center space-x-2">
+          <div className="flex items-center">
+            <img
+              src="/navbar/logo.png"
+              className="w-48 bg-white bg-opacity-20 rounded"
+              alt="Logo"
+            />
+          </div>
         </div>
-        <ul className="flex space-x-4">
-          <li>
-            <Link to="/" className="text-white hover:text-gray-300">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/products" className="text-white hover:text-gray-300">
-              Products
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="text-white hover:text-gray-300">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className="text-white hover:text-gray-300">
-              Contact
-            </Link>
-          </li>
-        </ul>
+
+        <div className="flex items-center space-x-8">
+          <img src="/navbar/square.png" className="w-6" alt="" />
+          <img src="/navbar/moon.png" className="w-7" alt="" />
+          <img src="/navbar/bell.png" className="w-8" alt="" />
+          <img src="/navbar/separator.png" className="h-9" alt="" />
+          <img src="/navbar/Avatar.png" className="w-9" alt="" />
+        </div>
+      </div>
+      <div className="h-1/2 bg-[#3498DB]">
+        <div className="flex h-full items-center space-x-14  px-28">
+          <h1 className="text-white font-semibold text-lg">Dashboard</h1>
+          <h1 className="text-white font-semibold text-lg">Rencana Pelatihan</h1>
+          <h1 className="text-white font-semibold text-lg">Pelatihan-ku</h1>
+          <h1 className="text-white font-semibold text-lg">Penugasan</h1>
+          <h1 className="text-white font-semibold text-lg">Nilai & Sertifikat</h1>
+        </div>
       </div>
     </nav>
   );
