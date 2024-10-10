@@ -10,7 +10,7 @@ import { Register } from "../pages/auth/register";
 import { ForgetPw } from "../pages/auth/forgetpw";
 import { Verification } from "../pages/auth/verification";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
-import { Dashboard } from "../pages/dashboard";
+import Dashboard from "../pages/dashboard";
 
 const AppRoutes: React.FC = () => {
   return (
