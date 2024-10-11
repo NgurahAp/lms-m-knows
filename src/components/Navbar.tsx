@@ -3,7 +3,7 @@ import React from "react";
 const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 left-0 w-full h-40 z-10 items-center   bg-white shadow-md">
-      <div className="flex justify-between h-1/2 px-28">
+      <div className="flex justify-between h-1/2 px-36">
         <div className="flex items-center space-x-2">
           <div className="flex items-center">
             <img
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       <div className="h-1/2 bg-[#3498DB]">
-        <div className="flex h-full items-center space-x-14  px-28">
+        <div className="flex h-full items-center space-x-14  px-36">
           <h1 className="text-white font-semibold text-lg">Dashboard</h1>
           <h1 className="text-white font-semibold text-lg">Rencana Pelatihan</h1>
           <h1 className="text-white font-semibold text-lg">Pelatihan-ku</h1>
