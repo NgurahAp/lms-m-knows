@@ -1,7 +1,10 @@
+import { useAuth } from "../../hooks/useAuth";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
+  const { handleLogout } = useAuth();
+
   return (
     <div className="h-screen flex flex-col pt-44 px-36 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
@@ -12,6 +15,7 @@ const Dashboard = () => {
         <Sidebar />
         <DashboardContent />
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
