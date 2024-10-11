@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
-import Pelatihanku from "../pages/pelatihanku";
 import ProductList from "../pages/products";
 import ProductDetail from "../pages/products/ProductDetail";
 import { Login } from "../pages/auth/login";
@@ -11,6 +10,7 @@ import { ForgetPw } from "../pages/auth/forgetpw";
 import { Verification } from "../pages/auth/verification";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
+import Pelatihanku from "../pages/pelatihanku";
 
 const AppRoutes: React.FC = () => {
   return (
