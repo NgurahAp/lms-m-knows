@@ -19,24 +19,21 @@ export const Login: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); // Aktifkan loading saat login dimulai
-    setErrorMessage(""); // Reset error message sebelum submit
+    setIsLoading(true); 
+    setErrorMessage(""); 
 
     try {
       const success = await handleLogin(username, password);
-      setIsLoading(false); // Matikan loading setelah login selesai
+      setIsLoading(false); 
       if (success) {
-        navigate("/pelatihanku");
+        navigate("/dashboard");
       } else {
-        // Tangkap error dari response API
         throw new Error("Username atau password salah.");
       }
     } catch (error: unknown) {
       setIsLoading(false);
 
-      // Lakukan pengecekan tipe pada `error`
       if (error instanceof Error) {
-        // Set error message dari response API
         setErrorMessage(error.message || "Login gagal. Silakan coba lagi.");
       } else {
         setErrorMessage("Terjadi kesalahan yang tidak diketahui.");
