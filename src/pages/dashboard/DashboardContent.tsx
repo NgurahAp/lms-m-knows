@@ -1,3 +1,4 @@
+import { TerakhirPengerjaan } from "./components/TerakhirPengerjaan";
 
 const DashboardContent = () => {
   return (
@@ -13,15 +14,7 @@ const DashboardContent = () => {
         </div>
       </div>
 
-      <div className="mt-6 bg-white shadow-lg p-4">
-        <h2 className="text-lg font-semibold">Terakhir Pengujian</h2>
-        <div className="flex justify-between items-center">
-          <p>Pengenalan Budaya Jepang</p>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Lanjutkan
-          </button>
-        </div>
-      </div>
+      <TerakhirPengerjaan/>
 
       <div className="mt-6 bg-white shadow-lg p-4">
         <h2 className="text-lg font-semibold">Kalender Saya</h2>
