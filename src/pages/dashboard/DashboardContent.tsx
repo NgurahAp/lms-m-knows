@@ -1,3 +1,4 @@
+import { Kalender } from "./components/Kalender";
 import { TerakhirPengerjaan } from "./components/TerakhirPengerjaan";
 
 const DashboardContent = () => {
@@ -14,12 +15,8 @@ const DashboardContent = () => {
         </div>
       </div>
 
-      <TerakhirPengerjaan/>
-
-      <div className="mt-6 bg-white shadow-lg p-4">
-        <h2 className="text-lg font-semibold">Kalender Saya</h2>
-        {/* Calendar content */}
-      </div>
+      <TerakhirPengerjaan />
+      <Kalender />
     </div>
   );
 };

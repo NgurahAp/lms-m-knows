@@ -55,7 +55,7 @@ const Sidebar = () => {
       </div>
 
       {/* Kotak tambahan di bawah Sidebar */}
-      <div className="relative z-10 mt-6 p-6 w-full h-[30vh] bg-white shadow-md rounded-lg">
+      <div className="relative z-2 mt-6 p-6 w-full h-[30vh] bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Kotak Tambahan</h2>
         <p className="text-lg">
           Ini adalah konten dari kotak tambahan yang bisa diisi dengan informasi
