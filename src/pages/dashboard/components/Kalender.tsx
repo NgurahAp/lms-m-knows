@@ -16,6 +16,12 @@ const dummyEvents: Event[] = [
   },
   {
     date: "1",
+    title: "Dasar Desain Grafis",
+    time: "14:30 - 15:30 WIB",
+    pertemuan: "Pertemuan 1",
+  },
+  {
+    date: "1",
     title: "Webinar Cyber Security",
     time: "16:00 - 17:00 WIB",
     pertemuan: "Pertemuan 1",
@@ -70,17 +76,20 @@ export const Kalender: React.FC = () => {
   );
 
   return (
-    <div className="mt-6 bg-white shadow-lg p-4">
+    <div className="mt-6 bg-white shadow-lg p-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Kalender Saya</h2>
-        <a href="#lihat-semua" className="text-blue-500 hover:underline">
+        <h2 className="text-2xl font-semibold">Kalender Saya</h2>
+        <a
+          href="#lihat-semua text-2xl"
+          className="text-blue-500 hover:underline"
+        >
           Lihat Semua
         </a>
       </div>
 
-      <div className="bg-gray-100 p-4 rounded-lg">
+      <div className=" p-4 rounded-lg">
         {/* Header Kalender */}
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex justify-between items-center mb-8">
           <button onClick={handlePrevWeek} className="text-gray-500">
             &lt;
           </button>
@@ -96,13 +105,13 @@ export const Kalender: React.FC = () => {
         </div>
 
         {/* Grid Kalender */}
-        <div className="grid grid-cols-7 text-center text-sm mb-2">
+        <div className="grid grid-cols-7 text-center text-lg mb-2">
           {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
             <span key={day}>{day}</span>
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-2 text-center text-gray-600">
+        <div className="grid grid-cols-7 gap-2 text-center text-lg text-gray-600">
           {weekDates.map((date) => {
             const day = date.getDate();
             const isSelected = day.toString() === selectedDate;
@@ -112,19 +121,22 @@ export const Kalender: React.FC = () => {
             const isCurrentMonth = date.getMonth() === currentDate.getMonth();
 
             return (
-              <button
+              <div
                 key={date.toISOString()}
-                onClick={() => handleDateClick(date)}
-                className={`rounded-full p-1 ${
-                  isSelected
-                    ? "bg-blue-500 text-white"
-                    : hasEvents
-                    ? "bg-gray-200"
-                    : ""
-                } ${!isCurrentMonth ? "text-gray-400" : ""}`}
+                className="flex flex-col items-center"
               >
-                {day}
-              </button>
+                <button
+                  onClick={() => handleDateClick(date)}
+                  className={`w-8 h-10 flex items-center justify-center rounded-xl ${
+                    isSelected ? "bg-blue-500 text-white" : "hover:bg-gray-200"
+                  } ${!isCurrentMonth ? "text-gray-400" : ""}`}
+                >
+                  {day}
+                </button>
+                {hasEvents && (
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-1"></div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -135,12 +147,17 @@ export const Kalender: React.FC = () => {
             key={index}
             className="bg-white p-4 mt-4 rounded-lg shadow flex justify-between items-center"
           >
-            <div>
-              <p className="text-sm text-blue-500">{event.time}</p>
-              <h4 className="font-semibold">{event.title}</h4>
-              <p className="text-sm text-gray-500">{event.pertemuan}</p>
+            <div className="flex items-center ">
+              <div>
+                <img src="/dashboard/calender-info.png" className="pr-3" alt="" />
+              </div>
+              <div>
+                <p className=" text-blue-500">{event.time}</p>
+                <h4 className="font-semibold py-3">{event.title}</h4>
+                <p className=" text-gray-500">{event.pertemuan}</p>
+              </div>
             </div>
-            <button className="text-blue-500 hover:underline">Lihat</button>
+            <button className="text-white px-5 rounded-lg  py-2 hover:underline bg-blue-500">Lihat</button>
           </div>
         ))}
       </div>
