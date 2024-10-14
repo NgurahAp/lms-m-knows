@@ -26,37 +26,43 @@ const dummyEvents: Event[] = [
     time: "10:00 - 12:00 WIB",
     pertemuan: "Pertemuan 1",
   },
+  {
+    date: "5",
+    title: "Diskusi Kelompok Matematika",
+    time: "15:00 - 16:00 WIB",
+    pertemuan: "Pertemuan 2",
+  },
 ];
 
 export const Kalender: React.FC = () => {
+  const [currentDate, setCurrentDate] = useState<Date>(new Date(2025, 11, 1)); // December 1, 2025
   const [selectedDate, setSelectedDate] = useState<string>("1");
-  const [currentMonth, setCurrentMonth] = useState<Date>(new Date(2025, 11, 1)); // December 2025
 
-  const daysInMonth = new Date(
-    currentMonth.getFullYear(),
-    currentMonth.getMonth() + 1,
-    0
-  ).getDate();
-  const firstDayOfMonth = new Date(
-    currentMonth.getFullYear(),
-    currentMonth.getMonth(),
-    1
-  ).getDay();
-
-  const handleDateClick = (day: number) => {
-    setSelectedDate(day.toString());
+  const getWeekDates = (date: Date): Date[] => {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is sunday
+    const monday = new Date(date.setDate(diff));
+    const week = [];
+    for (let i = 0; i < 7; i++) {
+      week.push(
+        new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + i)
+      );
+    }
+    return week;
   };
 
-  const handlePrevMonth = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
-    );
+  const weekDates = getWeekDates(currentDate);
+
+  const handleDateClick = (date: Date) => {
+    setSelectedDate(date.getDate().toString());
   };
 
-  const handleNextMonth = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1)
-    );
+  const handlePrevWeek = () => {
+    setCurrentDate(new Date(currentDate.setDate(currentDate.getDate() - 7)));
+  };
+
+  const handleNextWeek = () => {
+    setCurrentDate(new Date(currentDate.setDate(currentDate.getDate() + 7)));
   };
 
   const filteredEvents = dummyEvents.filter(
@@ -75,16 +81,16 @@ export const Kalender: React.FC = () => {
       <div className="bg-gray-100 p-4 rounded-lg">
         {/* Header Kalender */}
         <div className="flex justify-between items-center mb-2">
-          <button onClick={handlePrevMonth} className="text-gray-500">
+          <button onClick={handlePrevWeek} className="text-gray-500">
             &lt;
           </button>
           <h3 className="text-lg font-medium">
-            {currentMonth.toLocaleString("id-ID", {
+            {weekDates[0].toLocaleDateString("id-ID", {
               month: "long",
               year: "numeric",
             })}
           </h3>
-          <button onClick={handleNextMonth} className="text-gray-500">
+          <button onClick={handleNextWeek} className="text-gray-500">
             &gt;
           </button>
         </div>
@@ -97,27 +103,25 @@ export const Kalender: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-7 gap-2 text-center text-gray-600">
-          {[...Array(firstDayOfMonth)].map((_, index) => (
-            <span key={`empty-${index}`} className="text-gray-300"></span>
-          ))}
-          {[...Array(daysInMonth)].map((_, index) => {
-            const day = index + 1;
+          {weekDates.map((date) => {
+            const day = date.getDate();
             const isSelected = day.toString() === selectedDate;
             const hasEvents = dummyEvents.some(
               (event) => event.date === day.toString()
             );
+            const isCurrentMonth = date.getMonth() === currentDate.getMonth();
 
             return (
               <button
-                key={day}
-                onClick={() => handleDateClick(day)}
+                key={date.toISOString()}
+                onClick={() => handleDateClick(date)}
                 className={`rounded-full p-1 ${
                   isSelected
                     ? "bg-blue-500 text-white"
                     : hasEvents
                     ? "bg-gray-200"
                     : ""
-                }`}
+                } ${!isCurrentMonth ? "text-gray-400" : ""}`}
               >
                 {day}
               </button>
