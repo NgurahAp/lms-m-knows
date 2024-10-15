@@ -41,7 +41,7 @@ const dummyEvents: Event[] = [
 ];
 
 export const Kalender: React.FC = () => {
-  const [currentDate, setCurrentDate] = useState<Date>(new Date(2025, 11, 1)); // December 1, 2025
+  const [currentDate, setCurrentDate] = useState<Date>(new Date(2024, 10, 1)); // Oktober 1, 2025
   const [selectedDate, setSelectedDate] = useState<string>("1");
 
   const getWeekDates = (date: Date): Date[] => {
