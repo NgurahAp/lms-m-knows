@@ -1,3 +1,5 @@
+import { Leaderboard } from "./components/Leaderboard";
+
 const Sidebar = () => {
   return (
     <div className="relative w-[30%] mt-6 mr-5">
@@ -55,6 +57,8 @@ const Sidebar = () => {
       </div>
 
       {/* Kotak tambahan di bawah Sidebar */}
+      <Leaderboard />
+
       <div className="relative z-2 mt-6 p-6 w-full h-[30vh] bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Kotak Tambahan</h2>
         <p className="text-lg">
