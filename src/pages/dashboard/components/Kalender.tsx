@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { KalenderProps } from "../../../types/dashboard";
 
 interface Event {
   date: string;
@@ -40,7 +41,7 @@ const dummyEvents: Event[] = [
   },
 ];
 
-export const Kalender: React.FC = () => {
+export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date(2024, 10, 1)); // Oktober 1, 2025
   const [selectedDate, setSelectedDate] = useState<string>("1");
 
@@ -74,6 +75,8 @@ export const Kalender: React.FC = () => {
   const filteredEvents = dummyEvents.filter(
     (event) => event.date === selectedDate
   );
+
+  console.log("Calendar data: ", calendarData);
 
   return (
     <div className="mt-6 bg-white shadow-lg p-8">
@@ -149,7 +152,11 @@ export const Kalender: React.FC = () => {
           >
             <div className="flex items-center ">
               <div>
-                <img src="/dashboard/calender-info.png" className="pr-3" alt="" />
+                <img
+                  src="/dashboard/calender-info.png"
+                  className="pr-3"
+                  alt=""
+                />
               </div>
               <div>
                 <p className=" text-blue-500">{event.time}</p>
@@ -157,7 +164,9 @@ export const Kalender: React.FC = () => {
                 <p className=" text-gray-500">{event.pertemuan}</p>
               </div>
             </div>
-            <button className="text-white px-5 rounded-lg  py-2 hover:underline bg-blue-500">Lihat</button>
+            <button className="text-white px-5 rounded-lg  py-2 hover:underline bg-blue-500">
+              Lihat
+            </button>
           </div>
         ))}
       </div>

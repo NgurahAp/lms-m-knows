@@ -72,3 +72,19 @@ export interface DashboardData {
     }>;
   };
 }
+
+interface CalendarEvent {
+  ref_id: string;
+  subject_id: string;
+  type: string;
+  startAt: string;
+  endAt: string;
+  summary: string;
+  place: string;
+  speaker: string | null;
+  allDay: boolean;
+}
+
+export interface KalenderProps {
+  calendarData: CalendarEvent[];
+}

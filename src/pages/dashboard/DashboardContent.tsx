@@ -8,7 +8,7 @@ interface DashboardContentProps {
 const DashboardContent: React.FC<DashboardContentProps> = ({
   dashboardData,
 }) => {
-  console.log("Dashboard data: ", dashboardData);
+  // console.log("Dashboard data: ", dashboardData);
 
   return (
     <div className="w-[70%] bg-gray-100 pl-6 py-6">
@@ -24,7 +24,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
       </div>
 
       <TerakhirPengerjaan />
-      <Kalender />
+      <Kalender calendarData={dashboardData.calendar} />
     </div>
   );
 };
