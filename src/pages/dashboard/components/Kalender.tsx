@@ -2,52 +2,26 @@ import React, { useState } from "react";
 import { KalenderProps } from "../../../types/dashboard";
 
 interface Event {
-  date: string;
-  title: string;
-  time: string;
-  pertemuan: string;
+  ref_id: string;
+  subject_id: string;
+  type: string;
+  startAt: string;
+  endAt: string;
+  summary: string;
+  place: string;
+  speaker: string | null;
+  allDay: boolean;
 }
 
-const dummyEvents: Event[] = [
-  {
-    date: "1",
-    title: "Perkenalan Budaya Jepang",
-    time: "14:30 - 15:30 WIB",
-    pertemuan: "Pertemuan 1",
-  },
-  {
-    date: "1",
-    title: "Dasar Desain Grafis",
-    time: "14:30 - 15:30 WIB",
-    pertemuan: "Pertemuan 1",
-  },
-  {
-    date: "1",
-    title: "Webinar Cyber Security",
-    time: "16:00 - 17:00 WIB",
-    pertemuan: "Pertemuan 1",
-  },
-  {
-    date: "2",
-    title: "Workshop UI/UX Design",
-    time: "10:00 - 12:00 WIB",
-    pertemuan: "Pertemuan 1",
-  },
-  {
-    date: "5",
-    title: "Diskusi Kelompok Matematika",
-    time: "15:00 - 16:00 WIB",
-    pertemuan: "Pertemuan 2",
-  },
-];
-
 export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
-  const [currentDate, setCurrentDate] = useState<Date>(new Date(2024, 10, 1)); // Oktober 1, 2025
-  const [selectedDate, setSelectedDate] = useState<string>("1");
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<string>(
+    currentDate.getDate().toString()
+  );
 
   const getWeekDates = (date: Date): Date[] => {
     const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is sunday
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
     const monday = new Date(date.setDate(diff));
     const week = [];
     for (let i = 0; i < 7; i++) {
@@ -72,25 +46,25 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
     setCurrentDate(new Date(currentDate.setDate(currentDate.getDate() + 7)));
   };
 
-  const filteredEvents = dummyEvents.filter(
-    (event) => event.date === selectedDate
-  );
-
-  console.log("Calendar data: ", calendarData);
+  const filteredEvents = calendarData.filter((event: Event) => {
+    const eventDate = new Date(event.startAt);
+    return (
+      eventDate.getDate().toString() === selectedDate &&
+      eventDate.getMonth() === currentDate.getMonth() &&
+      eventDate.getFullYear() === currentDate.getFullYear()
+    );
+  });
 
   return (
     <div className="mt-6 bg-white shadow-lg p-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Kalender Saya</h2>
-        <a
-          href="#lihat-semua text-2xl"
-          className="text-blue-500 hover:underline"
-        >
+        <a href="#lihat-semua" className="text-blue-500 hover:underline">
           Lihat Semua
         </a>
       </div>
 
-      <div className=" p-4 rounded-lg">
+      <div className="p-4 rounded-lg">
         {/* Header Kalender */}
         <div className="flex justify-between items-center mb-8">
           <button onClick={handlePrevWeek} className="text-gray-500">
@@ -118,9 +92,14 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
           {weekDates.map((date) => {
             const day = date.getDate();
             const isSelected = day.toString() === selectedDate;
-            const hasEvents = dummyEvents.some(
-              (event) => event.date === day.toString()
-            );
+            const hasEvents = calendarData.some((event: Event) => {
+              const eventDate = new Date(event.startAt);
+              return (
+                eventDate.getDate() === day &&
+                eventDate.getMonth() === date.getMonth() &&
+                eventDate.getFullYear() === date.getFullYear()
+              );
+            });
             const isCurrentMonth = date.getMonth() === currentDate.getMonth();
 
             return (
@@ -145,7 +124,7 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
         </div>
 
         {/* Event Cards */}
-        {filteredEvents.map((event, index) => (
+        {filteredEvents.map((event: Event, index: number) => (
           <div
             key={index}
             className="bg-white p-4 mt-4 rounded-lg shadow flex justify-between items-center"
@@ -159,12 +138,23 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
                 />
               </div>
               <div>
-                <p className=" text-blue-500">{event.time}</p>
-                <h4 className="font-semibold py-3">{event.title}</h4>
-                <p className=" text-gray-500">{event.pertemuan}</p>
+                <p className="text-blue-500">
+                  {new Date(event.startAt).toLocaleTimeString("id-ID", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}{" "}
+                  -
+                  {new Date(event.endAt).toLocaleTimeString("id-ID", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}{" "}
+                  WIB
+                </p>
+                <h4 className="font-semibold py-3">{event.summary}</h4>
+                <p className="text-gray-500">{event.place}</p>
               </div>
             </div>
-            <button className="text-white px-5 rounded-lg  py-2 hover:underline bg-blue-500">
+            <button className="text-white px-5 rounded-lg py-2 hover:underline bg-blue-500">
               Lihat
             </button>
           </div>
