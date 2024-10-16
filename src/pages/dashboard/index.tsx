@@ -1,9 +1,21 @@
 import { useAuth } from "../../hooks/useAuth";
+import { useDashboardData } from "../../services/DashboardService";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
   const { handleLogout } = useAuth();
+  const { data, isLoading, isError } = useDashboardData();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching dashboard data</div>;
+  }
+
+  console.log("Dashboard Data:", data);
 
   return (
     <div className="h-full flex flex-col pt-44 px-36 bg-gray-100">
