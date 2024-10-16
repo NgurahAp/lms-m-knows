@@ -49,7 +49,7 @@ export const TerakhirPengerjaan = () => {
 
         {/* Tombol Aksi */}
         <div className="w-1/4 flex justify-end">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+          <button className="bg-blue-500 text-white px-4 py-2 mr-5 rounded-lg">
             Lanjut Belajar
           </button>
         </div>
@@ -93,7 +93,7 @@ export const TerakhirPengerjaan = () => {
 
         {/* Tombol Aksi */}
         <div className="w-1/4 flex justify-end">
-          <button className="bg-gray-200  px-4 py-2 rounded-lg">Selesai</button>
+          <button className="bg-gray-200  px-4 py-2 mr-5 rounded-lg">Selesai</button>
         </div>
       </div>
       <div className="bg-white rounded-lg shadow-md  flex items-center justify-between mb-8">
@@ -135,7 +135,7 @@ export const TerakhirPengerjaan = () => {
 
         {/* Tombol Aksi */}
         <div className="w-1/4 flex justify-end">
-          <button className="bg-gray-200  px-4 py-2 rounded-lg">Selesai</button>
+          <button className="bg-gray-200  px-4 py-2 mr-5 rounded-lg">Selesai</button>
         </div>
       </div>
     </div>

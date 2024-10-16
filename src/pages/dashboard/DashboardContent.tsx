@@ -1,7 +1,15 @@
+import { DashboardData } from "../../types/dashboard";
 import { Kalender } from "./components/Kalender";
 import { TerakhirPengerjaan } from "./components/TerakhirPengerjaan";
 
-const DashboardContent = () => {
+interface DashboardContentProps {
+  dashboardData: DashboardData;
+}
+const DashboardContent: React.FC<DashboardContentProps> = ({
+  dashboardData,
+}) => {
+  // console.log("Dashboard data: ", dashboardData);
+
   return (
     <div className="w-[70%] bg-gray-100 pl-6 py-6">
       <div className="grid grid-cols-2 gap-4">
@@ -16,7 +24,7 @@ const DashboardContent = () => {
       </div>
 
       <TerakhirPengerjaan />
-      <Kalender />
+      <Kalender calendarData={dashboardData.calendar} />
     </div>
   );
 };
