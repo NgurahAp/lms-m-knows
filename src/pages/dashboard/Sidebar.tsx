@@ -5,16 +5,16 @@ const Sidebar = () => {
   return (
     <div className="relative w-[30%] mt-6 mr-5">
       {/* Sidebar */}
-      <div className="relative w-full h-[70vh] rounded-lg overflow-hidden">
+      <div className="relative w-full rounded-lg overflow-hidden flex flex-col">
         {/* Background divs */}
-        <div className="absolute inset-0 z-0 rounded-lg">
-          <div className="h-2/5 bg-[#3498DB] rounded-t-2xl"></div>
-          <div className="h-3/5 bg-white rounded-b-2xl"></div>
+        <div className="absolute inset-0 z-0 rounded-lg flex flex-col">
+          <div className="flex-grow-0 flex-shrink-0 h-2/5 bg-[#3498DB] rounded-t-2xl"></div>
+          <div className="flex-grow bg-white rounded-b-2xl"></div>
         </div>
 
         {/* Content */}
-        <div className="relative z-2 h-full shadow-lg px-7 py-9">
-          <div className="">
+        <div className="relative z-2 shadow-lg px-7 py-9 flex flex-col">
+          <div>
             <h2 className="font-semibold text-3xl text-white pb-2">
               Hello, Bandi
             </h2>
@@ -22,42 +22,47 @@ const Sidebar = () => {
               Kamu mengambil 4 pelatihan
             </p>
           </div>
-          <div className="mt-6">
+          <div className="mt-6 flex-grow">
             <ul className="grid grid-cols-2 gap-5">
-              <li className="p-5 h-48 bg-white shadow-md rounded-md mb-2 flex flex-col justify-between">
-                <img src="/dashboard/pelatihan.png" className="w-9" alt="" />
-                <div className="">
-                  <h1 className="text-3xl font-bold pb-2">37</h1>
-                  <h1 className="text-xl text-gray-500">Pelatihan</h1>
-                </div>
-              </li>
-              <li className="p-5 h-48 bg-white shadow-md rounded-md mb-2 flex flex-col justify-between">
-                <img src="/dashboard/sertifikat.png" className="w-9" alt="" />
-                <div className="">
-                  <h1 className="text-3xl font-bold pb-2">6</h1>
-                  <h1 className="text-xl text-gray-500">Sertifikat</h1>
-                </div>
-              </li>
-              <li className="p-5 h-48 bg-white shadow-md rounded-md mb-2 flex flex-col justify-between">
-                <img src="/dashboard/poin-avg.png" className="w-9" alt="" />
-                <div className="">
-                  <h1 className="text-3xl font-bold pb-2">3,7</h1>
-                  <h1 className="text-xl text-gray-500">Poin rata-rata</h1>
-                </div>
-              </li>
-              <li className="p-5 h-48 bg-white shadow-md rounded-md mb-2 flex flex-col justify-between">
-                <img src="/dashboard/poin-total.png" className="w-9" alt="" />
-                <div className="">
-                  <h1 className="text-3xl font-bold pb-2">600</h1>
-                  <h1 className="text-xl text-gray-500">Total Poin</h1>
-                </div>
-              </li>
+              {[
+                {
+                  icon: "/dashboard/pelatihan.png",
+                  value: "37",
+                  label: "Pelatihan",
+                },
+                {
+                  icon: "/dashboard/sertifikat.png",
+                  value: "6",
+                  label: "Sertifikat",
+                },
+                {
+                  icon: "/dashboard/poin-avg.png",
+                  value: "3,7",
+                  label: "Poin rata-rata",
+                },
+                {
+                  icon: "/dashboard/poin-total.png",
+                  value: "600",
+                  label: "Total Poin",
+                },
+              ].map((item, index) => (
+                <li
+                  key={index}
+                  className="p-5 bg-white shadow-md rounded-md flex flex-col justify-between"
+                >
+                  <img src={item.icon} className="w-9 pb-8" alt="" />
+                  <div>
+                    <h1 className="text-3xl font-bold pb-2">{item.value}</h1>
+                    <h1 className="text-xl text-gray-500">{item.label}</h1>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </div>
       <Leaderboard />
-      <Articles/>
+      <Articles />
     </div>
   );
 };
