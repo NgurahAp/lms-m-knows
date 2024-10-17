@@ -26,7 +26,7 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
     return () => clearInterval(interval);
   }, [dashboardBanner.length]);
 
-  console.log(dashboardBanner);
+  // console.log(dashboardBanner);
 
   return (
     <div className="w-[70%] bg-gray-100 pl-6 py-6">

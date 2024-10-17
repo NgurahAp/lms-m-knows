@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
         <h1 className="pl-5 text-[#9CA3AF] font-semibold">Beranda</h1>
       </div>
       <div className="flex flex-1">
-        <Sidebar />
+        <Sidebar dashboardData={dashboardDataTyped} />
         <DashboardContent
           dashboardData={dashboardDataTyped}
           dashboardBanner={dashboardBannerTyped}

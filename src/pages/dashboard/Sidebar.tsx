@@ -1,7 +1,12 @@
+import { DashboardData } from "../../types/dashboard";
 import { Articles } from "./components/Articles";
 import { Leaderboard } from "./components/Leaderboard";
 
-const Sidebar = () => {
+interface SidebarContentProps {
+  dashboardData: DashboardData;
+}
+const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
+  // console.log(dashboardData);
   return (
     <div className="relative w-[30%] mt-6 mr-5">
       {/* Sidebar */}
@@ -16,10 +21,10 @@ const Sidebar = () => {
         <div className="relative z-2 shadow-lg px-7 py-9 flex flex-col">
           <div>
             <h2 className="font-semibold text-3xl text-white pb-2">
-              Hello, Bandi
+              Hello, {dashboardData.profile.full_name}
             </h2>
             <p className="text-lg font-light text-white">
-              Kamu mengambil 4 pelatihan
+              Kamu mengambil {dashboardData.profile.current_subjects} pelatihan
             </p>
           </div>
           <div className="mt-6 flex-grow">
@@ -27,22 +32,22 @@ const Sidebar = () => {
               {[
                 {
                   icon: "/dashboard/pelatihan.png",
-                  value: "37",
+                  value: dashboardData.profile.current_subjects,
                   label: "Pelatihan",
                 },
                 {
                   icon: "/dashboard/sertifikat.png",
-                  value: "6",
+                  value: dashboardData.profile.total_certificates,
                   label: "Sertifikat",
                 },
                 {
                   icon: "/dashboard/poin-avg.png",
-                  value: "3,7",
+                  value: dashboardData.profile.ipk,
                   label: "Poin rata-rata",
                 },
                 {
                   icon: "/dashboard/poin-total.png",
-                  value: "600",
+                  value: dashboardData.profile.poin,
                   label: "Total Poin",
                 },
               ].map((item, index) => (
@@ -61,7 +66,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <Leaderboard />
+      <Leaderboard dashboardData={dashboardData} />
       <Articles />
     </div>
   );
