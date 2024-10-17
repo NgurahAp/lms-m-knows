@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DashboardContentProps } from "../../types/dashboard";
-import { Kalender } from "./components/Kalender";
-import { TerakhirPengerjaan } from "./components/TerakhirPengerjaan";
+import { Calendar } from "./components/Calendar";
+import { SubjectProgress } from "./components/SubjectProgress";
 
 
 const DashboardContent: React.FC<DashboardContentProps> = ({
@@ -40,8 +40,8 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
           />
         ))}
       </div>
-      <TerakhirPengerjaan />
-      <Kalender calendarData={dashboardData.calendar} />
+      <SubjectProgress subjectProgressData={dashboardData.subject_progress}/>
+      <Calendar calendarData={dashboardData.calendar} />
     </div>
   );
 };

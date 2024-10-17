@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CalendarProps, CalendarData } from "../../../types/dashboard";
 
-export const Kalender: React.FC<CalendarProps> = ({ calendarData }) => {
+export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<string>(
     currentDate.getDate().toString()
