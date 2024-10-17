@@ -1,13 +1,14 @@
+import React from "react";
 import { useAuth } from "../../hooks/useAuth";
 import {
   useDashboardData,
   useDashboardBanner,
-} from "../../services/DashboardService"; // Import kedua hook
+} from "../../services/DashboardService";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
 import { DashboardData, DashboardBanner } from "../../types/dashboard";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const { handleLogout } = useAuth();
 
   const {
@@ -21,7 +22,6 @@ const Dashboard = () => {
     isError: isBannerError,
   } = useDashboardBanner();
 
-  // Menggabungkan status loading dari keduanya
   const isLoading = isDashboardLoading || isBannerLoading;
   const isError = isDashboardError || isBannerError;
 
@@ -37,9 +37,15 @@ const Dashboard = () => {
     return <div>Error fetching dashboard data or banner</div>;
   }
 
-  // Pastikan data tersedia
+  // Ensure dashboardData is of type DashboardData
   const dashboardDataTyped = dashboardData as DashboardData;
-  const dashboardBannerTyped = dashboardBanner as DashboardBanner;
+
+  // Ensure dashboardBanner is an array of DashboardBanner
+  const dashboardBannerTyped = Array.isArray(dashboardBanner)
+    ? (dashboardBanner as DashboardBanner[])
+    : dashboardBanner
+    ? [dashboardBanner as DashboardBanner]
+    : [];
 
   return (
     <div className="h-full w-screen flex flex-col pt-44 px-36 bg-gray-100">
@@ -49,7 +55,6 @@ const Dashboard = () => {
       </div>
       <div className="flex flex-1">
         <Sidebar />
-        {/* Pass dashboardData and dashboardBanner to DashboardContent */}
         <DashboardContent
           dashboardData={dashboardDataTyped}
           dashboardBanner={dashboardBannerTyped}
