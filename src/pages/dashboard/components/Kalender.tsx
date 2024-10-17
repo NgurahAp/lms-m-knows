@@ -1,17 +1,6 @@
 import React, { useState } from "react";
-import { KalenderProps } from "../../../types/dashboard";
+import { KalenderProps, CalendarEvent } from "../../../types/dashboard";
 
-interface Event {
-  ref_id: string;
-  subject_id: string;
-  type: string;
-  startAt: string;
-  endAt: string;
-  summary: string;
-  place: string;
-  speaker: string | null;
-  allDay: boolean;
-}
 
 export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
@@ -46,7 +35,7 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
     setCurrentDate(new Date(currentDate.setDate(currentDate.getDate() + 7)));
   };
 
-  const filteredEvents = calendarData.filter((event: Event) => {
+  const filteredEvents = calendarData.filter((event: CalendarEvent) => {
     const eventDate = new Date(event.startAt);
     return (
       eventDate.getDate().toString() === selectedDate &&
@@ -92,7 +81,7 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
           {weekDates.map((date) => {
             const day = date.getDate();
             const isSelected = day.toString() === selectedDate;
-            const hasEvents = calendarData.some((event: Event) => {
+            const hasEvents = calendarData.some((event: CalendarEvent) => {
               const eventDate = new Date(event.startAt);
               return (
                 eventDate.getDate() === day &&
@@ -124,7 +113,7 @@ export const Kalender: React.FC<KalenderProps> = ({ calendarData }) => {
         </div>
 
         {/* Event Cards */}
-        {filteredEvents.map((event: Event, index: number) => (
+        {filteredEvents.map((event: CalendarEvent, index: number) => (
           <div
             key={index}
             className="bg-white p-4 mt-4 rounded-lg shadow flex justify-between items-center"

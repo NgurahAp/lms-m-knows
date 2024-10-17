@@ -73,7 +73,7 @@ export interface DashboardData {
   };
 }
 
-interface CalendarEvent {
+export interface CalendarEvent {
   ref_id: string;
   subject_id: string;
   type: string;
