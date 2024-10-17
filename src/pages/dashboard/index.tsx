@@ -6,7 +6,7 @@ import {
 } from "../../services/DashboardService";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
-import { DashboardData, DashboardBanner } from "../../types/dashboard";
+import { DashboardData, DashboardBannerData } from "../../types/dashboard";
 
 const Dashboard: React.FC = () => {
   const { handleLogout } = useAuth();
@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
     isError: isDashboardError,
   } = useDashboardData();
   const {
-    data: dashboardBanner,
+    data: dashboardBannerData,
     isLoading: isBannerLoading,
     isError: isBannerError,
   } = useDashboardBanner();
@@ -41,10 +41,10 @@ const Dashboard: React.FC = () => {
   const dashboardDataTyped = dashboardData as DashboardData;
 
   // Ensure dashboardBanner is an array of DashboardBanner
-  const dashboardBannerTyped = Array.isArray(dashboardBanner)
-    ? (dashboardBanner as DashboardBanner[])
-    : dashboardBanner
-    ? [dashboardBanner as DashboardBanner]
+  const dashboardBannerDataTyped = Array.isArray(dashboardBannerData)
+    ? (dashboardBannerData as DashboardBannerData[])
+    : dashboardBannerData
+    ? [dashboardBannerData as DashboardBannerData]
     : [];
 
   return (
@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
         <Sidebar dashboardData={dashboardDataTyped} />
         <DashboardContent
           dashboardData={dashboardDataTyped}
-          dashboardBanner={dashboardBannerTyped}
+          dashboardBannerdata={dashboardBannerDataTyped}
         />
       </div>
       <button onClick={handleLogout}>Logout</button>

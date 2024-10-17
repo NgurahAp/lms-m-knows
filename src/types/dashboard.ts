@@ -73,12 +73,17 @@ export interface DashboardData {
   };
 }
 
-export interface DashboardBanner {
+export interface DashboardBannerData {
   id: string,
   url: string, 
 }
 
-export interface CalendarEvent {
+export interface DashboardContentProps {
+  dashboardData: DashboardData;
+  dashboardBannerdata: DashboardBannerData[];
+}
+
+export interface CalendarData {
   ref_id: string;
   subject_id: string;
   type: string;
@@ -90,8 +95,8 @@ export interface CalendarEvent {
   allDay: boolean;
 }
 
-export interface KalenderProps {
-  calendarData: CalendarEvent[];
+export interface CalendarProps {
+  calendarData: CalendarData[];
 }
 
 interface Articles {

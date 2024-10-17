@@ -1,37 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { DashboardBanner, DashboardData } from "../../types/dashboard";
+import { DashboardContentProps } from "../../types/dashboard";
 import { Kalender } from "./components/Kalender";
 import { TerakhirPengerjaan } from "./components/TerakhirPengerjaan";
 
-interface DashboardContentProps {
-  dashboardData: DashboardData;
-  dashboardBanner: DashboardBanner[];
-}
 
 const DashboardContent: React.FC<DashboardContentProps> = ({
   dashboardData,
-  dashboardBanner,
+  dashboardBannerdata,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    if (dashboardBanner.length === 0) return;
+    if (dashboardBannerdata.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % dashboardBanner.length
+        (prevIndex) => (prevIndex + 1) % dashboardBannerdata.length
       );
     }, 3000); // Change image every 3 seconds
 
     return () => clearInterval(interval);
-  }, [dashboardBanner.length]);
+  }, [dashboardBannerdata.length]);
 
-  // console.log(dashboardBanner);
+  // console.log(dashboardBannerdata);
 
   return (
     <div className="w-[70%] bg-gray-100 pl-6 py-6">
       <div className="relative overflow-hidden h-96 rounded-3xl">
-        {dashboardBanner.map((banner, index) => (
+        {dashboardBannerdata.map((banner, index) => (
           <img
             key={banner.id}
             src={banner.url}
