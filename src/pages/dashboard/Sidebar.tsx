@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
       <div className="relative w-full rounded-lg overflow-hidden flex flex-col">
         {/* Background divs */}
         <div className="absolute inset-0 z-0 rounded-lg flex flex-col">
-          <div className="flex-grow-0 flex-shrink-0 h-2/5 bg-[#3498DB] rounded-t-2xl"></div>
+          <div className="flex-grow-0 flex-shrink-0 h-2/5 bg-sky-700 rounded-t-2xl"></div>
           <div className="flex-grow bg-white rounded-b-2xl"></div>
         </div>
 

@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
           <img src="/navbar/Avatar.png" className="w-9" alt="" />
         </div>
       </div>
-      <div className="h-1/2 bg-[#3498DB]">
+      <div className="h-1/2 bg-sky-700">
         <div className="flex h-full items-center space-x-14  px-36">
           <h1 className="text-white font-semibold text-lg">Dashboard</h1>
           <h1 className="text-white font-semibold text-lg">Rencana Pelatihan</h1>
