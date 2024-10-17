@@ -4,7 +4,7 @@ interface LeaderboardContentProps {
   dashboardData: DashboardData;
 }
 export const Leaderboard: React.FC<LeaderboardContentProps> = ({ dashboardData }) => {
-  console.log(dashboardData);
+  // console.log(dashboardData);
   return (
     <div className="relative z-2 mt-6 p-6 w-full h-auto bg-white shadow-md rounded-2xl">
       {/* User Teratas */}

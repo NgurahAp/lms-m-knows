@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
         </div>
       </div>
       <Leaderboard dashboardData={dashboardData} />
-      <Articles />
+      <Articles articlesData={dashboardData.articles} />
     </div>
   );
 };

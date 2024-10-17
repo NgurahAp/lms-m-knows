@@ -93,3 +93,23 @@ export interface CalendarEvent {
 export interface KalenderProps {
   calendarData: CalendarEvent[];
 }
+
+interface Articles {
+  id: string;
+  title: string;
+  content: string;
+  thumbnail: string;
+  slug: string;
+  views: number;
+  created_at: string;
+  author: {
+    full_name: string;
+  }
+  category: string;
+  is_favorite: boolean;
+  tags: string[];
+}
+
+export interface ArticlesProps {
+  articlesData: Articles[];
+}
