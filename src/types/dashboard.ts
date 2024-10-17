@@ -73,7 +73,17 @@ export interface DashboardData {
   };
 }
 
-interface CalendarEvent {
+export interface DashboardBannerData {
+  id: string,
+  url: string, 
+}
+
+export interface DashboardContentProps {
+  dashboardData: DashboardData;
+  dashboardBannerdata: DashboardBannerData[];
+}
+
+export interface CalendarData {
   ref_id: string;
   subject_id: string;
   type: string;
@@ -85,6 +95,26 @@ interface CalendarEvent {
   allDay: boolean;
 }
 
-export interface KalenderProps {
-  calendarData: CalendarEvent[];
+export interface CalendarProps {
+  calendarData: CalendarData[];
+}
+
+interface Articles {
+  id: string;
+  title: string;
+  content: string;
+  thumbnail: string;
+  slug: string;
+  views: number;
+  created_at: string;
+  author: {
+    full_name: string;
+  }
+  category: string;
+  is_favorite: boolean;
+  tags: string[];
+}
+
+export interface ArticlesProps {
+  articlesData: Articles[];
 }
