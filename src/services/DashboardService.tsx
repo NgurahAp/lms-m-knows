@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../config/api";
-import { DashboardBanner, DashboardData } from "../types/dashboard";
+import { DashboardBannerData, DashboardData } from "../types/dashboard";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 
@@ -15,7 +15,7 @@ const fetchDashboardData = async (): Promise<DashboardData> => {
   return response.data.data;
 };
 
-const fetchDashboardBanner = async (): Promise<DashboardBanner> => {
+const fetchDashboardBanner = async (): Promise<DashboardBannerData> => {
   const token = Cookies.get("accessToken"); // Ambil token dari cookies
   const response = await axios.get(`${API_BASE_URL}/banner`, {
     headers: {
@@ -33,10 +33,10 @@ export const useDashboardData = (): UseQueryResult<DashboardData, Error> => {
 };
 
 export const useDashboardBanner = (): UseQueryResult<
-  DashboardBanner,
+  DashboardBannerData,
   Error
 > => {
-  return useQuery<DashboardBanner, Error>({
+  return useQuery<DashboardBannerData, Error>({
     queryKey: ["dashboardBanner"],
     queryFn: fetchDashboardBanner,
   });
