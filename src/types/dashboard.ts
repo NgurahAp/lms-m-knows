@@ -74,13 +74,36 @@ export interface DashboardData {
 }
 
 export interface DashboardBannerData {
-  id: string,
-  url: string, 
+  id: string;
+  url: string;
 }
 
 export interface DashboardContentProps {
   dashboardData: DashboardData;
   dashboardBannerdata: DashboardBannerData[];
+}
+
+export interface SubjectProgressData {
+  dataMajor: Record<string, unknown>;
+  dataSubjects: Array<{
+    id: string;
+    name: string;
+    slug: string;
+    type: string;
+    subject_code: string;
+    thumbnail: string;
+    teacher_name: string;
+    start_at: string | null;
+    credit: number;
+    subject_semester: number;
+    current_session: number;
+    session_count: number;
+    progress_percentage: number;
+  }>;
+}
+
+export interface SubjectProgressProps {
+  subjectProgressData: SubjectProgressData;
 }
 
 export interface CalendarData {
@@ -109,7 +132,7 @@ interface Articles {
   created_at: string;
   author: {
     full_name: string;
-  }
+  };
   category: string;
   is_favorite: boolean;
   tags: string[];
