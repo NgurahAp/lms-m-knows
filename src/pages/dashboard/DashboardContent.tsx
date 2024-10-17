@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { DashboardData } from "../../types/dashboard";
+import { DashboardBanner, DashboardData } from "../../types/dashboard";
 import { Kalender } from "./components/Kalender";
 import { TerakhirPengerjaan } from "./components/TerakhirPengerjaan";
 
 interface DashboardContentProps {
   dashboardData: DashboardData;
+  dashboardBanner: DashboardBanner;
 }
 
 const DashboardContent: React.FC<DashboardContentProps> = ({
   dashboardData,
+  dashboardBanner,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [
-    "/dashboard/banner.png",
-    "/dashboard/banner1.webp",
-  ];
+  const images = ["/dashboard/banner.png", "/dashboard/banner1.webp"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,6 +22,8 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
 
     return () => clearInterval(interval);
   }, [images.length]);
+
+  console.log("Banner: ", dashboardBanner);
 
   return (
     <div className="w-[70%] bg-gray-100 pl-6 py-6">

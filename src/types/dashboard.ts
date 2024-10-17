@@ -73,6 +73,11 @@ export interface DashboardData {
   };
 }
 
+export interface DashboardBanner {
+  id: string,
+  url: string, 
+}
+
 export interface CalendarEvent {
   ref_id: string;
   subject_id: string;
