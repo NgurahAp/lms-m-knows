@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
     : [];
 
   return (
-    <div className="h-full w-screen flex flex-col pt-44 md:px-36 px-8 bg-gray-100 ">
+    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 ">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <img src="/dashboard/home.png" className="md:w-6 w-5 -mt-1" alt="" />
         <h1 className="md:pl-5 pl-3 text-[#9CA3AF] md:text-base text-sm font-semibold">Beranda</h1>
