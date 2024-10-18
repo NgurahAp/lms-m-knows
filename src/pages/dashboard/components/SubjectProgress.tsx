@@ -5,10 +5,10 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
 }) => {
   return (
     <div className="mt-6 bg-white shadow-lg p-8 rounded-xl">
-      <h2 className="text-xl font-semibold pb-3">Terakhir Pengerjaan</h2>
-      <div className="flex justify-between items-center pb-5">
-        <p className="text-lg">Semester 1</p>
-        <a href="" className="text-blue-500 font-medium text-lg">
+      <h2 className="text-xl font-semibold md:pb-3">Terakhir Pengerjaan</h2>
+      <div className="md:flex justify-between items-center pb-5">
+        <p className="text-lg">Semester {subjectProgressData.dataSubjects[0].subject_semester}</p>
+        <a href="" className="text-blue-500 font-medium md:text-lg">
           Lihat Semua
         </a>
       </div>
@@ -17,9 +17,9 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
       {subjectProgressData.dataSubjects.slice(0, 3).map((subject) => (
         <div
           key={subject.id}
-          className="bg-white rounded-lg shadow-md flex items-center justify-between mb-8"
+          className="bg-white rounded-lg shadow-md md:flex items-center justify-between mb-8"
         >
-          <div className="w-48">
+          <div className="md:w-48 w-full">
             <img
               src={subject.thumbnail}
               alt={`${subject.name} Thumbnail`}
@@ -28,11 +28,11 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
           </div>
 
           {/* Konten Kursus */}
-          <div className="w-2/4 px-5">
-            <h2 className="font-semibold text-xl mb-1">{subject.name}</h2>
+          <div className="md:w-2/4 w-full px-5 py-3 md:py-0">
+            <h2 className="font-semibold md:text-xl mb-1">{subject.name}</h2>
             <p className="text-gray-500 text mb-3">{subject.teacher_name}</p>
 
-            <p className="text-gray-500 text-end">
+            <p className="text-gray-500 text-end md:text-base text-sm">
               {subject.current_session}/{subject.session_count} Pertemuan
             </p>
 
@@ -46,13 +46,13 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
           </div>
 
           {/* Tombol Aksi */}
-          <div className="w-1/4 flex justify-end">
+          <div className="md:w-1/4 flex md:justify-end justify-center pb-5 md:pb-0">
             <button
               className={`${
                 subject.current_session / subject.session_count === 1
                   ? "bg-gray-200"
                   : "bg-blue-500 text-white"
-              } px-4 py-2 mr-5 rounded-lg`}
+              } px-4 py-2 mr-5 rounded-lg md:text-base text-sm`}
             >
               {subject.current_session / subject.session_count === 1
                 ? "Selesai"
