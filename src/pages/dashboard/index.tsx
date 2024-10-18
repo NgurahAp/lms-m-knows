@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
           dashboardBannerdata={dashboardBannerDataTyped}
         />
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="py-5" onClick={handleLogout}>Logout</button>
     </div>
   );
 };
