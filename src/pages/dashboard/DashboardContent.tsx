@@ -26,8 +26,8 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
   // console.log(dashboardBannerdata);
 
   return (
-    <div className="md:w-[70%] w-full bg-gray-100 md:pl-6 pl-0 py-6">
-      <div className="relative overflow-hidden h-96 rounded-3xl">
+    <div className="md:w-[70%] w-full bg-gray-100 md:pl-6 pl-0 md:py-6">
+      <div className="relative overflow-hidden h-96 rounded-3xl hidden md:block">
         {filteredBannerData.map((banner, index) => (
           <img
             key={banner.id}
