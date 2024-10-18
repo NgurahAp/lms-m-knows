@@ -17,12 +17,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     location.pathname === "/forgetpw" ||
     location.pathname === "/verification";
 
-
   return (
     <div className="layout">
       {!isAuthPage && (isHomePage ? <HomeNavbar /> : <Navbar />)}
+
       <main>{children}</main>
-      {!isAuthPage && <Footer />}
+
+      {(isAuthPage || isHomePage) && <Footer />}
     </div>
   );
 };

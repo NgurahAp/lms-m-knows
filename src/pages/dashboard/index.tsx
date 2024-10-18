@@ -34,7 +34,11 @@ const Dashboard: React.FC = () => {
   }
 
   if (isError) {
-    return <div>Error fetching dashboard data or banner</div>;
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Error fetching dashboard data or banner
+      </div>
+    );
   }
 
   // Ensure dashboardData is of type DashboardData
@@ -48,19 +52,19 @@ const Dashboard: React.FC = () => {
     : [];
 
   return (
-    <div className="h-full w-screen flex flex-col pt-44 px-36 bg-gray-100 ">
+    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 ">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <img src="/dashboard/home.png" className="w-6 -mt-1" alt="" />
-        <h1 className="pl-5 text-[#9CA3AF] font-semibold">Beranda</h1>
+        <img src="/dashboard/home.png" className="md:w-6 w-5 -mt-1" alt="" />
+        <h1 className="md:pl-5 pl-3 text-[#9CA3AF] md:text-base text-sm font-semibold">Beranda</h1>
       </div>
-      <div className="flex flex-1">
+      <div className="md:flex flex-1">
         <Sidebar dashboardData={dashboardDataTyped} />
         <DashboardContent
           dashboardData={dashboardDataTyped}
           dashboardBannerdata={dashboardBannerDataTyped}
         />
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="py-5" onClick={handleLogout}>Logout</button>
     </div>
   );
 };
