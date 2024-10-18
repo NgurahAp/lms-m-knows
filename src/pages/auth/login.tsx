@@ -44,12 +44,12 @@ export const Login: React.FC = () => {
   return (
     <section className="h-[100vh] flex items-center justify-center">
       {/* Left Side - Carousel */}
-      <div className="w-3/5 h-full">
+      <div className="w-3/5 h-full md:block hidden">
         <AuthCarousel />
       </div>
 
       {/* Right Side */}
-      <div className="w-2/5 h-full flex items-center justify-center">
+      <div className="md:w-2/5 w-full h-full flex items-center justify-center">
         <div className="w-2/3 flex flex-col items-center">
           {/* Logo */}
           <img src="/landing/logo.png" className="mx-auto mb-4" alt="Logo" />
