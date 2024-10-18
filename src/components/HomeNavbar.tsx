@@ -35,11 +35,6 @@ const HomeNavbar = () => {
             Masuk
           </button>
         </Link>
-        <Link to="/register">
-          <button className="bg-[#106fa4] hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium">
-            Daftar
-          </button>
-        </Link>
       </div>
     </nav>
   );
