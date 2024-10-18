@@ -8,7 +8,7 @@ interface SidebarContentProps {
 const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
   // console.log(dashboardData);
   return (
-    <div className="relative w-[30%] mt-6 mr-5">
+    <div className="relative md:w-[30%] w-ful mt-6 md:mr-5 mr-0">
       {/* Sidebar */}
       <div className="relative w-full rounded-lg overflow-hidden flex flex-col">
         {/* Background divs */}
@@ -18,17 +18,17 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
         </div>
 
         {/* Content */}
-        <div className="relative z-2 shadow-lg px-7 py-9 flex flex-col">
+        <div className="relative z-2 shadow-lg md:px-7 px-4 md:py-9 py-5 flex flex-col">
           <div>
-            <h2 className="font-semibold text-3xl text-white pb-2">
+            <h2 className="font-semibold md:text-3xl text-2xl text-white md:pb-2">
               Hello, {dashboardData.profile.full_name}
             </h2>
-            <p className="text-lg font-light text-white">
+            <p className="md:text-lg text-base font-light text-white">
               Kamu mengambil {dashboardData.profile.current_subjects} pelatihan
             </p>
           </div>
           <div className="mt-6 flex-grow">
-            <ul className="grid grid-cols-2 gap-5">
+            <ul className="grid grid-cols-2 md:gap-5 gap-3">
               {[
                 {
                   icon: "/dashboard/pelatihan.png",
@@ -57,8 +57,8 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
                 >
                   <img src={item.icon} className="w-9 pb-8" alt="" />
                   <div>
-                    <h1 className="text-3xl font-bold pb-2">{item.value}</h1>
-                    <h1 className="text-xl text-gray-500">{item.label}</h1>
+                    <h1 className="md:text-3xl text-2xl font-bold pb-2">{item.value}</h1>
+                    <h1 className="md:text-xl text-lgtext-gray-500">{item.label}</h1>
                   </div>
                 </li>
               ))}
@@ -67,7 +67,9 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
         </div>
       </div>
       <Leaderboard dashboardData={dashboardData} />
-      <Articles articlesData={dashboardData.articles} />
+      <div className="hidden md:block">
+        <Articles articlesData={dashboardData.articles} />
+      </div>
     </div>
   );
 };
