@@ -10,6 +10,7 @@ import { ForgetPw } from "../pages/auth/forgetpw";
 import { Verification } from "../pages/auth/verification";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
+import { Pelatihanku } from "../pages/pelatihanku";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -26,6 +27,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pelatihanku"
+            element={
+              <ProtectedRoute>
+                <Pelatihanku />
               </ProtectedRoute>
             }
           />
