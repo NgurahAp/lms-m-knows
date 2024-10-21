@@ -10,6 +10,7 @@ import { ForgetPw } from "../pages/auth/forgetpw";
 import { Verification } from "../pages/auth/verification";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
+import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import { Pelatihanku } from "../pages/pelatihanku";
 
 const AppRoutes: React.FC = () => {
@@ -22,6 +23,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpw" element={<ForgetPw />} />
           <Route path="/verification" element={<Verification />} />
+          <Route path="/pelatihankuDetail" element={<PelatihankuDetail />} />
           <Route
             path="/dashboard"
             element={
