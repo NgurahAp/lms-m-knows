@@ -61,9 +61,9 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => (
               <Link
                 key={item.path}
-                to={item.path} // Navigasi menggunakan Link
+                to={item.path}
                 className={`font-semibold text-sm md:text-lg ${
-                  location.pathname === item.path
+                  location.pathname.startsWith(item.path)
                     ? "text-green-300"
                     : "text-white"
                 }`}
@@ -89,13 +89,13 @@ const Navbar: React.FC = () => {
           {navItems.map((item) => (
             <Link
               key={item.path}
-              to={item.path} // Navigasi menggunakan Link
+              to={item.path}
               className={`font-semibold text-lg p-4 ${
-                location.pathname === item.path
+                location.pathname.startsWith(item.path)
                   ? "text-green-300"
                   : "text-white"
               }`}
-              onClick={() => setIsOpen(false)} // Tutup navbar setelah klik
+              onClick={() => setIsOpen(false)}
             >
               {item.name}
             </Link>
