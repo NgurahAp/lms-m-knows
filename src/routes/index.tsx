@@ -23,7 +23,6 @@ const AppRoutes: React.FC = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpw" element={<ForgetPw />} />
           <Route path="/verification" element={<Verification />} />
-          <Route path="/pelatihankuDetail" element={<PelatihankuDetail />} />
           <Route
             path="/dashboard"
             element={
@@ -37,6 +36,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Pelatihanku />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pelatihanku/:pelatihankuId"
+            element={
+              <ProtectedRoute>
+                <PelatihankuDetail />
               </ProtectedRoute>
             }
           />

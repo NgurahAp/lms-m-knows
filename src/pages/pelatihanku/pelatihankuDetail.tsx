@@ -1,11 +1,14 @@
 import { useState } from "react";
 import DownloadButton from "./components/downloadButton";
 import Dropdown from "./components/dropdown";
+import { useParams } from "react-router-dom";
 
 export const PelatihankuDetail = () => {
-  const [activeTab, setActiveTab] = useState("beranda");
-  const [isPlaying, setIsPlaying] = useState(false); // State to track video play status
+  const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
 
+  const [activeTab, setActiveTab] = useState("beranda");
+  // const [isPlaying, setIsPlaying] = useState(false); // State to track video play status
+  console.log(pelatihankuId);
   return (
     <div className="bg-gray-50 min-h-screen p-48">
       {/* Header */}
@@ -20,7 +23,7 @@ export const PelatihankuDetail = () => {
           >
             <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
               <img
-                src="/dashboard/home.png"
+                src="/pelatihanku/home.png"
                 className="md:w-6 w-5 -mt-1"
                 alt="Home icon"
               />
