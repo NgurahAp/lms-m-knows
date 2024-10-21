@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom"; // Import Link
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
   const navItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Rencana Pelatihan", path: "/rencana-pelatihan" },
-    { name: "Pelatihan-ku", path: "/pelatihan-ku" },
+    { name: "Pelatihan-ku", path: "/pelatihanku" },
     { name: "Penugasan", path: "/penugasan" },
     { name: "Nilai & Sertifikat", path: "/nilai-sertifikat" },
   ];
@@ -54,25 +54,28 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
+      {/* Navbar items for desktop */}
       {!isMobile && (
         <div className="bg-sky-700">
           <div className="flex h-20 items-center space-x-8 md:space-x-14 px-4 md:px-36">
             {navItems.map((item) => (
-              <h1
+              <Link
                 key={item.path}
+                to={item.path}
                 className={`font-semibold text-sm md:text-lg ${
-                  location.pathname === item.path
+                  location.pathname.startsWith(item.path)
                     ? "text-green-300"
                     : "text-white"
                 }`}
               >
                 {item.name}
-              </h1>
+              </Link>
             ))}
           </div>
         </div>
       )}
 
+      {/* Navbar for mobile */}
       {isMobile && isOpen && (
         <div className="bg-sky-700">
           <div className="p-4 border-b border-sky-600">
@@ -84,17 +87,18 @@ const Navbar: React.FC = () => {
             <p className="text-white text-center mt-2">Nama Pengguna</p>
           </div>
           {navItems.map((item) => (
-            <h1
+            <Link
               key={item.path}
+              to={item.path}
               className={`font-semibold text-lg p-4 ${
-                location.pathname === item.path
+                location.pathname.startsWith(item.path)
                   ? "text-green-300"
                   : "text-white"
               }`}
               onClick={() => setIsOpen(false)}
             >
               {item.name}
-            </h1>
+            </Link>
           ))}
         </div>
       )}
