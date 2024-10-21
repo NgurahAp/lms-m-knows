@@ -25,16 +25,16 @@ export const trainingOngoing: Training[] = [
     credits: 3,
     videos: 14,
     participants: 80,
-    completion: 25,
+    completion: 80,
   },
   {
     id: 3,
     title: "Pelatihan Keterampilan Presentasi",
     instructor: "Neneng Rohaye S.Kom",
     credits: 3,
-    videos: 14,
-    participants: 80,
-    completion: 25,
+    videos: 15,
+    participants: 82,
+    completion: 50,
   },
 ];
 
