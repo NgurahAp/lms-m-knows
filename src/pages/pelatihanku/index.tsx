@@ -1,13 +1,41 @@
 import { FaChevronRight } from "react-icons/fa"; // Import icon chevron
 import { Link } from "react-router-dom"; // Untuk navigasi
 import { TrainingCard } from "./components/PelatihankuCard";
-import { trainingCompleted, trainingOngoing } from "./components/pelatihanData";
+import {
+  trainingCompleted,
+  trainingOngoing,
+  Training,
+} from "./components/pelatihanData";
 import { useState } from "react";
+import { SearchBar } from "./components/SearchBar";
 
 export const Pelatihanku = () => {
   const [activeTab, setActiveTab] = useState<"ongoing" | "completed">(
     "ongoing"
   );
+
+  // Fungsi yang menerima array bertipe Training[]
+  const renderTraining = (trainings: Training[]) => {
+    if (trainings.length === 0) {
+      return (
+        <div className="flex flex-col items-center justify-center py-10 ">
+          <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
+          <h1 className="text-gray-500 text-lg py-3">Anda belum mengamil pelatihan </h1>
+          <button className="bg-blue-500  text-white py-2 px-7 rounded-lg ">
+            Ikuti Pelatihan
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {trainings.map((training) => (
+          <TrainingCard key={training.id} training={training} />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -29,33 +57,7 @@ export const Pelatihanku = () => {
       </div>
 
       <section className="bg-white mt-5 rounded-xl">
-        <div className="flex items-center w-full px-8 pt-8">
-          {/* Input search */}
-          <div className="relative flex-grow">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full h-12 pl-10 pr-12 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-            {/* Icon search di sebelah kiri */}
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-              <img
-                src="/pelatihanku/search.png"
-                alt="Search Icon"
-                className="h-5 w-5"
-              />
-            </div>
-          </div>
-
-          {/* Button search di sebelah kanan */}
-          <button className="ml-2 h-12 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-            <img
-              src="/pelatihanku/search-right.png"
-              alt="Search Icon"
-              className="h-5 w-5"
-            />
-          </button>
-        </div>
+        <SearchBar />
         <div className="p-6">
           <div className="flex space-x-8">
             <button
@@ -81,19 +83,9 @@ export const Pelatihanku = () => {
           </div>
 
           <div className="mt-6">
-            {activeTab === "ongoing" ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {trainingOngoing.map((training) => (
-                  <TrainingCard key={training.id} training={training} />
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {trainingCompleted.map((training) => (
-                  <TrainingCard key={training.id} training={training} />
-                ))}
-              </div>
-            )}
+            {activeTab === "ongoing"
+              ? renderTraining(trainingOngoing)
+              : renderTraining(trainingCompleted)}
           </div>
         </div>
       </section>

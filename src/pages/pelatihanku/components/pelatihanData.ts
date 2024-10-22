@@ -9,33 +9,33 @@ export interface Training {
 }
 
 export const trainingOngoing: Training[] = [
-  {
-    id: 1,
-    title: "Pelatihan Keterampilan Komunikasi",
-    instructor: "Indah Sartien, S.Ak, M.Ak",
-    credits: 3,
-    videos: 14,
-    participants: 80,
-    completion: 25,
-  },
-  {
-    id: 2,
-    title: "Pelatihan Keterampilan Presentasi",
-    instructor: "Neneng Rohaye S.Kom",
-    credits: 3,
-    videos: 14,
-    participants: 80,
-    completion: 80,
-  },
-  {
-    id: 3,
-    title: "Pelatihan Keterampilan Presentasi",
-    instructor: "Neneng Rohaye S.Kom",
-    credits: 3,
-    videos: 15,
-    participants: 82,
-    completion: 50,
-  },
+  // {
+  //   id: 1,
+  //   title: "Pelatihan Keterampilan Komunikasi",
+  //   instructor: "Indah Sartien, S.Ak, M.Ak",
+  //   credits: 3,
+  //   videos: 14,
+  //   participants: 80,
+  //   completion: 25,
+  // },
+  // {
+  //   id: 2,
+  //   title: "Pelatihan Keterampilan Presentasi",
+  //   instructor: "Neneng Rohaye S.Kom",
+  //   credits: 3,
+  //   videos: 14,
+  //   participants: 80,
+  //   completion: 80,
+  // },
+  // {
+  //   id: 3,
+  //   title: "Pelatihan Keterampilan Presentasi",
+  //   instructor: "Neneng Rohaye S.Kom",
+  //   credits: 3,
+  //   videos: 15,
+  //   participants: 82,
+  //   completion: 50,
+  // },
 ];
 
 export const trainingCompleted: Training[] = [
