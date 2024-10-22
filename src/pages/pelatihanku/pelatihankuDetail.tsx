@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DownloadButton from "./components/downloadButton";
 import Dropdown from "./components/dropdown";
 import { useParams } from "react-router-dom";
