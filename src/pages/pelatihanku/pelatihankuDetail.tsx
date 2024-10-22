@@ -1,61 +1,33 @@
-import { useState } from "react";
 import DownloadButton from "./components/downloadButton";
 import Dropdown from "./components/dropdown";
 import { useParams } from "react-router-dom";
+import { FaChevronRight } from "react-icons/fa"; // Import icon chevron
+import { Link } from "react-router-dom"; // Untuk navigasi
 
 export const PelatihankuDetail = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
 
-  const [activeTab, setActiveTab] = useState("beranda");
   // const [isPlaying, setIsPlaying] = useState(false); // State to track video play status
   console.log(pelatihankuId);
   return (
-    <div className="bg-gray-50 min-h-screen p-48">
+    <div className="bg-gray-50 md:p-48 px-8 py-28">
       {/* Header */}
-      <header className="mb-6">
-        <div className="flex items-center space-x-2 text-sm text-gray-500">
-          <a
-            href="/dashboard"
-            className={`flex items-center ${
-              activeTab === "beranda" ? "text-blue-500" : "text-gray-500"
-            } hover:underline`}
-            onClick={() => setActiveTab("beranda")}
-          >
-            <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-              <img
-                src="/pelatihanku/home.png"
-                className="md:w-6 w-5 -mt-1"
-                alt="Home icon"
-              />
-              <h1
-                className={`md:pl-5 pl-3 md:text-base text-sm font-semibold ${
-                  activeTab === "beranda" ? "text-blue-500" : "text-[#9CA3AF]"
-                }`}
-              >
-                Beranda
-              </h1>
-            </div>
-          </a>
-
-          <span className="text-gray-400 pl-5">›</span>
-
-          <a
-            href="#"
-            className={`flex items-center ${
-              activeTab === "pelatihanku" ? "text-blue-500" : "text-gray-500"
-            } hover:underline`}
-            onClick={() => setActiveTab("pelatihanku")}
-          >
-            <h1
-              className={`md:pl-5 pl-3 md:text-base text-sm font-semibold ${
-                activeTab === "pelatihanku" ? "text-blue-500" : "text-[#9CA3AF]"
-              }`}
-            >
-              Pelatihanku
-            </h1>
-          </a>
-        </div>
-      </header>
+      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
+        <Link to="/dashboard" className="flex items-center">
+          <img
+            src="/pelatihanku/home.png"
+            className="md:w-6 w-5 -mt-1 "
+            alt="Home"
+          />
+          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
+            Beranda
+          </span>
+        </Link>
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
+          Pelatihan-ku
+        </span>
+      </div>
 
       {/* Main Content */}
       <div className="bg-white p-6 shadow-lg rounded-lg">
