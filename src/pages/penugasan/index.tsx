@@ -58,7 +58,7 @@ export const Penugasan = () => {
   };
 
   const tabs = [
-    { id: "semua", label: "Semua Penugasan" },
+    { id: "semua", label: "Semua" },
     { id: "ditugaskan", label: "Ditugaskan" },
     { id: "sedang-dinilai", label: "Sedang Dinilai" },
     { id: "terlambat", label: "Terlambat" },
@@ -68,12 +68,12 @@ export const Penugasan = () => {
   return (
     <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       <section className="bg-white mt-5 rounded-xl">
-        <div className="p-6">
-          <div className="flex flex-wrap gap-4 border-b border-gray-200">
+        <div className="p-14">
+          <div className="flex flex-wrap gap-10 border-b  border-white">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                className={`py-2 px-4 text-base font-semibold whitespace-nowrap ${
+                className={`py-4 px-4 text-xl font-semibold border-1 whitespace-nowrap ${
                   activeTab === tab.id
                     ? "text-blue-500 border-b-2 border-blue-500"
                     : "text-gray-500"
@@ -85,45 +85,39 @@ export const Penugasan = () => {
             ))}
           </div>
 
-          <div className="mt-6 grid gap-4">
+          <div className="mt-6 grid gap-8">
             {filterPenugasan().map((task) => (
               <div
                 key={task.id}
-                className="relative bg-white shadow-md rounded-lg p-6 w-full border border-gray-100 hover:border-blue-100 transition-colors"
+                className="relative bg-white shadow-md flex justify-between items-center rounded-lg p-6 w-full border border-gray-100 hover:border-blue-100 transition-colors"
               >
-                <span
-                  className={`absolute top-0 left-0 h-full w-1 bg-${getStatusColor(
-                    task.status
-                  )} rounded-l-lg`}
-                ></span>
-
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex justify-between pl-4 items-start mb-4">
+                  <span
+                    className={`absolute top-0 left-0 h-full w-2 bg-${getStatusColor(
+                      task.status
+                    )} rounded-l-lg`}
+                  ></span>
                   <div>
-                    <h3 className="text-lg font-semibold">{task.modul}</h3>
-                    <p className="text-sm text-gray-600">{task.title}</p>
-                  </div>
-                  <div className="flex flex-col items-center gap-2">
-                    <img
-                      src={getStatusImage(task.status)}
-                      alt={`Status ${task.status}`}
-                      className="w-8 h-8 object-contain"
-                    />
-                    <span
-                      className={`text-${getStatusColor(
-                        task.status
-                      )} font-medium text-sm`}
-                    >
-                      {task.status}
-                    </span>
+                    <h3 className="text-2xl font-semibold">{task.modul}</h3>
+                    <p className="text-xl py-5 text-gray-600">{task.title}</p>
+                    <p className="text-gray-700 text-xl">
+                      Tenggat: {formatDateTime(task.endAt)}
+                    </p>
                   </div>
                 </div>
-                <div className="space-y-2 text-sm">
-                  <p className="text-gray-700">
-                    Mulai: {formatDateTime(task.startAt)}
-                  </p>
-                  <p className="text-gray-700">
-                    Selesai: {formatDateTime(task.endAt)}
-                  </p>
+                <div className="flex flex-col items-center gap-2 w-44 justify-center ">
+                  <img
+                    src={getStatusImage(task.status)}
+                    alt={`Status ${task.status}`}
+                    className="w-14 h-14 object-contain"
+                  />
+                  <span
+                    className={`text-${getStatusColor(
+                      task.status
+                    )} font-medium text-xl`}
+                  >
+                    {task.status}
+                  </span>
                 </div>
               </div>
             ))}
