@@ -20,7 +20,9 @@ export const Pelatihanku = () => {
       return (
         <div className="flex flex-col items-center justify-center py-10 ">
           <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-          <h1 className="text-gray-500 text-lg py-3">Anda belum mengamil pelatihan </h1>
+          <h1 className="text-gray-500 text-lg py-3">
+            Anda belum mengamil pelatihan{" "}
+          </h1>
           <button className="bg-blue-500  text-white py-2 px-7 rounded-lg ">
             Ikuti Pelatihan
           </button>
@@ -61,7 +63,7 @@ export const Pelatihanku = () => {
         <div className="p-6">
           <div className="flex space-x-8">
             <button
-              className={`py-2 px-4 text-lg font-semibold ${
+              className={`py-2 md:px-4 px-2 md:text-lg text-base font-semibold ${
                 activeTab === "ongoing"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -71,7 +73,7 @@ export const Pelatihanku = () => {
               Sedang Berjalan
             </button>
             <button
-              className={`py-2 px-4 text-lg font-semibold ${
+              className={`py-2 px-4 md:text-lg text-base font-semibold ${
                 activeTab === "completed"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
