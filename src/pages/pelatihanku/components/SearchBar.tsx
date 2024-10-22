@@ -22,7 +22,7 @@ export const SearchBar: React.FC = () => {
         <img
           src="/pelatihanku/search-right.png"
           alt="Search Icon"
-          className="h-5 w-5"
+          className="md:h-5 h-3 w-5"
         />
       </button>
     </div>
