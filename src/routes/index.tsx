@@ -11,6 +11,7 @@ import { Verification } from "../pages/auth/verification";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
+import { Nilai } from "../pages/nilai-sertifikat/nilai";
 import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
 
@@ -69,6 +70,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <ProductDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nilai-sertifikat"
+            element={
+              <ProtectedRoute>
+                <Nilai />
               </ProtectedRoute>
             }
           />
