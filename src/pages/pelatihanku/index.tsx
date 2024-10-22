@@ -1,5 +1,5 @@
-import { FaChevronRight } from "react-icons/fa"; // Import icon chevron
-import { Link } from "react-router-dom"; // Untuk navigasi
+import { FaChevronRight } from "react-icons/fa"; 
+import { Link } from "react-router-dom"; 
 import { TrainingCard } from "./components/PelatihankuCard";
 import {
   trainingCompleted,
