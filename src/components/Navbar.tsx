@@ -86,20 +86,22 @@ const Navbar: React.FC = () => {
             />
             <p className="text-white text-center mt-2">Nama Pengguna</p>
           </div>
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path} // Navigasi menggunakan Link
-              className={`font-semibold text-lg p-4 ${
-                location.pathname === item.path
-                  ? "text-green-300"
-                  : "text-white"
-              }`}
-              onClick={() => setIsOpen(false)} // Tutup navbar setelah klik
-            >
-              {item.name}
-            </Link>
-          ))}
+          <div className="flex flex-col ">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path} // Navigasi menggunakan Link
+                className={`font-semibold text-lg p-4 ${
+                  location.pathname === item.path
+                    ? "text-green-300"
+                    : "text-white"
+                }`}
+                onClick={() => setIsOpen(false)} // Tutup navbar setelah klik
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </nav>
