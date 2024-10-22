@@ -30,15 +30,30 @@ export const Penugasan = () => {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "ditugaskan":
-        return "text-blue-500";
+        return "blue-500";
       case "sedang dinilai":
-        return "text-yellow-500";
+        return "gray-500";
       case "terlambat":
-        return "text-red-500";
+        return "yellow-500";
       case "selesai":
-        return "text-green-500";
+        return "green-500";
       default:
-        return "text-gray-500";
+        return "gray-500";
+    }
+  };
+
+  const getStatusImage = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "ditugaskan":
+        return "/penugasan/ditugaskan.png";
+      case "sedang dinilai":
+        return "/penugasan/sedang-dinilai.png";
+      case "terlambat":
+        return "/penugasan/terlambat.png";
+      case "selesai":
+        return "/penugasan/selesai.png";
+      default:
+        return "/penugasan/ditugaskan.png";
     }
   };
 
@@ -74,18 +89,33 @@ export const Penugasan = () => {
             {filterPenugasan().map((task) => (
               <div
                 key={task.id}
-                className="bg-white shadow-md rounded-lg p-6 w-full border border-gray-100 hover:border-blue-100 transition-colors"
+                className="relative bg-white shadow-md rounded-lg p-6 w-full border border-gray-100 hover:border-blue-100 transition-colors"
               >
+                <span
+                  className={`absolute top-0 left-0 h-full w-1 bg-${getStatusColor(
+                    task.status
+                  )} rounded-l-lg`}
+                ></span>
+
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="text-lg font-semibold">{task.modul}</h3>
                     <p className="text-sm text-gray-600">{task.title}</p>
                   </div>
-                  <span
-                    className={`${getStatusColor(task.status)} font-medium`}
-                  >
-                    {task.status}
-                  </span>
+                  <div className="flex flex-col items-center gap-2">
+                    <img
+                      src={getStatusImage(task.status)}
+                      alt={`Status ${task.status}`}
+                      className="w-8 h-8 object-contain"
+                    />
+                    <span
+                      className={`text-${getStatusColor(
+                        task.status
+                      )} font-medium text-sm`}
+                    >
+                      {task.status}
+                    </span>
+                  </div>
                 </div>
                 <div className="space-y-2 text-sm">
                   <p className="text-gray-700">
