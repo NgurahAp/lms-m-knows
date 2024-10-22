@@ -12,6 +12,7 @@ import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import { Pelatihanku } from "../pages/pelatihanku";
+import { Penugasan } from "../pages/penugasan";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -44,6 +45,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <PelatihankuDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/penugasan"
+            element={
+              <ProtectedRoute>
+                <Penugasan /> 
               </ProtectedRoute>
             }
           />
