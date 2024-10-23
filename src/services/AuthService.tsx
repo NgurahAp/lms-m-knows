@@ -10,7 +10,7 @@ export const login = async (
 ): Promise<LoginResponse> => {
   try {
     const response = await axios.post<LoginResponse>(
-      `${API_BASE_URL}/auth/login-username`,
+      `${API_BASE_URL}/api/v1/auth/login-username`,
       { username, password }
     );
     return response.data;
@@ -22,7 +22,7 @@ export const login = async (
 
 export const refreshToken = async (): Promise<string> => {
   const response = await axios.post<LoginResponse>(
-    `${API_BASE_URL}/refresh-token`,
+    `${API_BASE_URL}/api/v1/refresh-token`,
     {}
   );
   return response.data.data.access_token;

@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 const fetchDashboardData = async (): Promise<DashboardData> => {
   const token = Cookies.get("accessToken"); // Ambil token dari cookies
-  const response = await axios.get(`${API_BASE_URL}/dashboard`, {
+  const response = await axios.get(`${API_BASE_URL}/api/v1/dashboard`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -17,7 +17,7 @@ const fetchDashboardData = async (): Promise<DashboardData> => {
 
 const fetchDashboardBanner = async (): Promise<DashboardBannerData> => {
   const token = Cookies.get("accessToken"); // Ambil token dari cookies
-  const response = await axios.get(`${API_BASE_URL}/banner`, {
+  const response = await axios.get(`${API_BASE_URL}/api/v1/banner`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
