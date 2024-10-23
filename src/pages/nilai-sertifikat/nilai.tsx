@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export const Nilai = () => {
-  const [activeTab, setActiveTab] = useState<
-    "nilai" | "sertifikat"
-  >("nilai");
+  const [activeTab, setActiveTab] = useState<"nilai" | "sertifikat">("nilai");
 
   const tabs = [
     { id: "nilai", label: "Nilai" },
@@ -14,27 +12,27 @@ export const Nilai = () => {
 
   const courses = [
     {
-      title: 'Pelatihan Keterampilan Komunikasi',
-      instructor: 'Indah Saritem, S.Ak, M.Ak',
-      status: 'Selesai'
+      title: "Pelatihan Keterampilan Komunikasi",
+      instructor: "Indah Saritem, S.Ak, M.Ak",
+      status: "Selesai",
     },
     {
-      title: 'Pelatihan Keterampilan Komunikasi',
-      instructor: 'Indah Saritem, S.Ak, M.Ak',
-      status: 'Selesai'
+      title: "Pelatihan Keterampilan Komunikasi",
+      instructor: "Indah Saritem, S.Ak, M.Ak",
+      status: "Selesai",
     },
     {
-      title: 'Pelatihan Keterampilan Komunikasi',
-      instructor: 'Indah Saritem, S.Ak, M.Ak',
-      status: 'Selesai'
+      title: "Pelatihan Keterampilan Komunikasi",
+      instructor: "Indah Saritem, S.Ak, M.Ak",
+      status: "Selesai",
     },
     {
-      title: 'Pelatihan Keterampilan Komunikasi',
-      instructor: 'Indah Saritem, S.Ak, M.Ak',
-      status: 'Selesai'
-    }
+      title: "Pelatihan Keterampilan Komunikasi",
+      instructor: "Indah Saritem, S.Ak, M.Ak",
+      status: "Selesai",
+    },
   ];
-  
+
   return (
     <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
