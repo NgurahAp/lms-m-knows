@@ -6,65 +6,86 @@ import {
 } from "../../services/DashboardService";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
-import { DashboardData, DashboardBannerData } from "../../types/dashboard";
 
 const Dashboard: React.FC = () => {
   const { handleLogout } = useAuth();
-
   const {
     data: dashboardData,
     isLoading: isDashboardLoading,
     isError: isDashboardError,
+    refetch: refetchDashboard,
   } = useDashboardData();
+
   const {
     data: dashboardBannerData,
     isLoading: isBannerLoading,
     isError: isBannerError,
+    refetch: refetchBanner,
   } = useDashboardBanner();
 
   const isLoading = isDashboardLoading || isBannerLoading;
   const isError = isDashboardError || isBannerError;
 
+  // Retry logic
+  React.useEffect(() => {
+    if (isError || !dashboardData?.profile) {
+      const timer = setTimeout(() => {
+        void refetchDashboard();
+        void refetchBanner();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isError, dashboardData, refetchDashboard, refetchBanner]);
+
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        Loading...
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">Loading...</p>
       </div>
     );
   }
 
-  if (isError) {
+  if (isError || !dashboardData?.profile) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        Error fetching dashboard data or banner
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">Loading...</p>
       </div>
     );
   }
 
-  // Ensure dashboardData is of type DashboardData
-  const dashboardDataTyped = dashboardData as DashboardData;
-
-  // Ensure dashboardBanner is an array of DashboardBanner
-  const dashboardBannerDataTyped = Array.isArray(dashboardBannerData)
-    ? (dashboardBannerData as DashboardBannerData[])
+  const bannerData = Array.isArray(dashboardBannerData)
+    ? dashboardBannerData
     : dashboardBannerData
-    ? [dashboardBannerData as DashboardBannerData]
+    ? [dashboardBannerData]
     : [];
 
   return (
-    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 ">
+    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <img src="/dashboard/home.png" className="md:w-6 w-5 -mt-1" alt="" />
-        <h1 className="md:pl-5 pl-3 text-[#9CA3AF] md:text-base text-sm font-semibold">Beranda</h1>
+        <img
+          src="/dashboard/home.png"
+          className="md:w-6 w-5 -mt-1"
+          alt="home icon"
+        />
+        <h1 className="md:pl-5 pl-3 text-[#9CA3AF] md:text-base text-sm font-semibold">
+          Beranda
+        </h1>
       </div>
+
       <div className="md:flex flex-1">
-        <Sidebar dashboardData={dashboardDataTyped} />
+        <Sidebar dashboardData={dashboardData} />
         <DashboardContent
-          dashboardData={dashboardDataTyped}
-          dashboardBannerdata={dashboardBannerDataTyped}
+          dashboardData={dashboardData}
+          dashboardBannerdata={bannerData}
         />
       </div>
-      <button className="py-5" onClick={handleLogout}>Logout</button>
+
+      <button
+        className="py-5 text-red-600 hover:text-red-800"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
     </div>
   );
 };
