@@ -1,14 +1,46 @@
-import DownloadButton from "./components/downloadButton";
-import Dropdown from "./components/dropdown";
+// import DownloadButton from "./components/downloadButton";
 import { useParams } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa"; // Import icon chevron
+import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa"; // Import icon chevron
 import { Link } from "react-router-dom"; // Untuk navigasi
+import { useSubjectData } from "../../services/MyStudyService";
+import { useState } from "react";
 
 export const PelatihankuDetail = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
 
+  const { data, isLoading, error } = useSubjectData(pelatihankuId || ""); // Berikan default empty string
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  if (!pelatihankuId) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        ID Pelatihan tidak ditemukan
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Error fetching dashboard data or banner
+      </div>
+    );
+  }
+
   // const [isPlaying, setIsPlaying] = useState(false); // State to track video play status
-  console.log(pelatihankuId);
+  console.log(data);
   return (
     <div className="bg-gray-50 md:p-48 px-8 py-28">
       {/* Header */}
@@ -37,37 +69,19 @@ export const PelatihankuDetail = () => {
           <div className="lg:w-1/3 mb-6 lg:mb-0">
             <div className="relative">
               {/* Video Element */}
-              <video
-                className="w-full h-auto rounded-lg"
-                poster="/path-to-thumbnail.jpg"
-                controls
-              >
-                <source src="/pelatihanku/live-testing.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-
-              {/* Video Duration */}
-              <p className="text-sm text-gray-600 mt-2">6 Menit</p>
+              <img src={data?.subject.thumbnail} alt="" />
             </div>
           </div>
 
           {/* Description Section */}
-          <div className="lg:w-2/3 lg:pl-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Pelatihan Keterampilan Komunikasi
-            </h2>
+          <div className="lg:w-2/3 lg:pl-14">
+            <h2 className="text-xl font-semibold mb-4">{data?.subject.name}</h2>
             <h3 className="text-base font-semibold mb-4">Deskripsi</h3>
             <p className="text-base text-gray-500 mb-6 text-justify">
-              Pengantar Industri dan Bisnis Keberlanjutan adalah mata kuliah
-              yang akan memperkenalkan tentang prinsip-prinsip dasar industri
-              dan bisnis berkelanjutan, yang berfokus pada pilar-pilar
-              keberlanjutan yaitu ekonomi, lingkungan, dan sosial. Serta, pada
-              mata kuliah ini akan dijelaskan bagaimana pentingnya integrasi
-              aspek keberlanjutan dalam pengambilan keputusan bisnis, dan juga
-              dampaknya terhadap lingkungan dan masyarakat.
+              {data?.subject.description}
             </p>
 
-            {/* Documents Section */}
+            {/* Documents Section
             <h2 className="text-xl font-semibold mb-4">Dokumen</h2>
             <div className="flex items-center justify-between p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-md">
               <div className="flex items-center w-full">
@@ -80,94 +94,127 @@ export const PelatihankuDetail = () => {
                 </div>
               </div>
               <button className="text-green-500 hover:text-green-700"></button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
       {/* Pertemuan Section */}
       <div className="mt-6">
-        <Dropdown />
+        {data?.sessions.map((session, index) => (
+          <div key={session.id} className="mb-4">
+            {index === 0 ? (
+              // Dropdown untuk pertemuan pertama
+              <div className="mx-auto my-4 bg-white rounded-lg shadow">
+                <button
+                  onClick={toggleDropdown}
+                  className="w-full flex justify-between h-14 items-center bg-blue-500 text-white px-4 py-2 rounded-t-lg"
+                >
+                  <span>
+                    Pertemuan {index + 1}: {session.title}
+                  </span>
+                  {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+                </button>
 
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 2
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
-
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 3
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
-
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 4
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
-
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 5
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
+                {isOpen && (
+                  <div className="bg-gray-50">
+                    <ul>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/modul.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Modul
+                      </li>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/quiz.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Quiz
+                      </li>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/tugas.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Tugas
+                      </li>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/diskusi.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Diskusi
+                      </li>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/live.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Live Mentoring
+                      </li>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/eksplorasi.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Refleksi Eksplorasi
+                      </li>
+                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+                        <img
+                          src="/pelatihanku/kualitas.png"
+                          className="mr-2"
+                          alt=""
+                        />
+                        Kualitas Pengajar & Materi Ajar
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              // Pertemuan yang terkunci/tidak terkunci
+              <div
+                className={`bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl ${
+                  session.is_locked
+                    ? "cursor-not-allowed opacity-75"
+                    : "cursor-pointer"
+                }`}
+              >
+                <h1 className="text-gray-700 md:text-base text-sm font-semibold">
+                  Pertemuan {index + 1}: {session.title}
+                </h1>
+                {session.is_locked ? (
+                  // Icon gembok untuk sesi yang terkunci
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
+                    />
+                  </svg>
+                ) : (
+                  // Icon atau elemen lain untuk sesi yang tidak terkunci
+                  <FaChevronRight className="text-gray-400" />
+                )}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
