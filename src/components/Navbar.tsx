@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
-import { useDashboardData } from "../services/DashboardService";
+
+interface ProfileData {
+  avatar: string;
+  full_name: string;
+}
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { data: dashboardData } = useDashboardData();
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
 
   const navItems = [
     { name: "Dashboard", path: "/dashboard" },
@@ -26,8 +30,12 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const avatarSrc = dashboardData?.profile.avatar || "/navbar/Avatar.png";
-  const userName = dashboardData?.profile.full_name || "Nama Pengguna";
+  useEffect(() => {
+    const storedProfile = localStorage.getItem("userProfile");
+    if (storedProfile) {
+      setProfileData(JSON.parse(storedProfile));
+    }
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
@@ -47,7 +55,7 @@ const Navbar: React.FC = () => {
               <img src="/navbar/moon.png" className="w-7" alt="" />
               <img src="/navbar/bell.png" className="w-8" alt="" />
               <img src="/navbar/separator.png" className="h-9" alt="" />
-              <img src={avatarSrc} className="w-9 rounded-full" alt="" />
+              <img src={profileData?.avatar} className="w-9 rounded-full" alt="" />
             </>
           )}
           {isMobile && (
@@ -84,11 +92,11 @@ const Navbar: React.FC = () => {
         <div className="bg-sky-700">
           <div className="p-4 border-b border-sky-600">
             <img
-              src={avatarSrc}
+              src={profileData?.avatar}
               className="w-12 h-12 rounded-full mx-auto"
               alt="Profile"
             />
-            <p className="text-white text-center mt-2">{userName}</p>
+            <p className="text-white text-center mt-2">{profileData?.full_name}</p>
           </div>
           <div className="flex flex-col ">
             {navItems.map((item) => (

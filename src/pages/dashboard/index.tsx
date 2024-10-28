@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import {
   useDashboardData,
@@ -6,6 +6,12 @@ import {
 } from "../../services/DashboardService";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
+
+// Interface untuk profile data
+interface ProfileData {
+  avatar: string;
+  full_name: string;
+}
 
 const Dashboard: React.FC = () => {
   const { handleLogout } = useAuth();
@@ -26,8 +32,19 @@ const Dashboard: React.FC = () => {
   const isLoading = isDashboardLoading || isBannerLoading;
   const isError = isDashboardError || isBannerError;
 
+  // Menyimpan data profil ke localStorage saat data berhasil dimuat
+  useEffect(() => {
+    if (dashboardData?.profile) {
+      const profileData: ProfileData = {
+        avatar: dashboardData.profile.avatar,
+        full_name: dashboardData.profile.full_name,
+      };
+      localStorage.setItem("userProfile", JSON.stringify(profileData));
+    }
+  }, [dashboardData]);
+
   // Retry logic
-  React.useEffect(() => {
+  useEffect(() => {
     if (isError || !dashboardData?.profile) {
       const timer = setTimeout(() => {
         void refetchDashboard();
