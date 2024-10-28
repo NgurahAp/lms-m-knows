@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
+import FeatureBox from "./FeatureBox";
 
 interface ProfileData {
   avatar: string;
@@ -11,6 +12,11 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [showFeatures, setShowFeatures] = useState(false);
+
+  const toggleFeatures = () => {
+    setShowFeatures((prev) => !prev);
+  };
 
   const navItems = [
     { name: "Dashboard", path: "/dashboard" },
@@ -51,11 +57,23 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4 md:space-x-8">
           {!isMobile && (
             <>
-              <img src="/navbar/square.png" className="w-6" alt="" />
-              <img src="/navbar/moon.png" className="w-7" alt="" />
-              <img src="/navbar/bell.png" className="w-8" alt="" />
-              <img src="/navbar/separator.png" className="h-9" alt="" />
-              <img src={profileData?.avatar} className="w-9 rounded-full" alt="" />
+              <button
+                onClick={toggleFeatures}
+                className="bg-sky-700 hover:bg-sky-600 text-white px-6 py-3 rounded-lg font-medium flex items-center"
+              >
+                Semua Fitur
+                <img
+                  src="/landing/semua-fitur.png"
+                  className="pl-2   w-7 h-auto"
+                  alt=""
+                />
+              </button>
+              {showFeatures && <FeatureBox offset="right-[14rem]" />}
+              <img
+                src={profileData?.avatar}
+                className="w-12 rounded-full"
+                alt=""
+              />
             </>
           )}
           {isMobile && (
@@ -96,7 +114,9 @@ const Navbar: React.FC = () => {
               className="w-12 h-12 rounded-full mx-auto"
               alt="Profile"
             />
-            <p className="text-white text-center mt-2">{profileData?.full_name}</p>
+            <p className="text-white text-center mt-2">
+              {profileData?.full_name}
+            </p>
           </div>
           <div className="flex flex-col ">
             {navItems.map((item) => (

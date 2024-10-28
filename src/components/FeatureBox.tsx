@@ -6,13 +6,13 @@ import { PiCertificate } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
 interface FeatureBoxProps {
-  rightOffset: number;
+  offset: string;
 }
 
-const FeatureBox: React.FC<FeatureBoxProps> = ({ rightOffset }) => {
+const FeatureBox: React.FC<FeatureBoxProps> = ({ offset }) => {
   return (
     <div
-      className={`absolute top-20 w-96 rounded-lg shadow-lg right-${rightOffset}`}
+      className={`absolute top-20 w-96 rounded-lg shadow-lg ${offset}`}
     >
       <div className="w-full h-28 bg-blue-300 rounded-t-lg flex items-center justify-center">
         <h1 className="font-bold text-2xl">Fitur</h1>
