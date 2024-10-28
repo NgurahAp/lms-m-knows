@@ -8,10 +8,18 @@ import { Hero } from "../components/Landing/Hero";
 import { TrainingProgram } from "../components/Landing/TrainingProgram";
 import { useAuth } from "../hooks/useAuth";
 import { useDashboardData } from "../services/DashboardService";
+import { useState } from "react";
+import FeatureBox from "../components/FeatureBox";
 
 export default function Home() {
   const { authState } = useAuth();
   const { data: dashboardData, isLoading } = useDashboardData();
+
+  const [showFeatures, setShowFeatures] = useState(false);
+
+  const toggleFeatures = () => {
+    setShowFeatures((prev) => !prev);
+  };
 
   if (authState.isAuthenticated && isLoading) {
     return (
@@ -38,33 +46,50 @@ export default function Home() {
         </div>
 
         <div className="flex items-center space-x-3">
-          <Link to="/dashboard">
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center">
-              Semua Fitur
-              <img
-                src="/landing/semua-fitur.png"
-                className="pl-2 w-7 h-auto"
-                alt=""
-              />
-            </button>
-          </Link>
-
           {authState.isAuthenticated && dashboardData ? (
-            <Link to="/profile">
-              <div className="flex items-center">
+            <div className="flex gap-4">
+              <button
+                onClick={toggleFeatures}
+                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center"
+              >
+                Semua Fitur
                 <img
-                  src={dashboardData.profile.avatar || "/default-avatar.png"}
-                  alt="Profile"
-                  className="w-14 h-1w-14 rounded-full object-cover border-2 border-gray-200 transition-opacity duration-300"
+                  src="/landing/semua-fitur.png"
+                  className="pl-2 w-7 h-auto"
+                  alt=""
                 />
-              </div>
-            </Link>
-          ) : (
-            <Link to="/login">
-              <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
-                Masuk
               </button>
-            </Link>
+              {showFeatures && <FeatureBox rightOffset={20} />}
+              <Link to="/profile">
+                <div className="flex items-center">
+                  <img
+                    src={dashboardData.profile.avatar || "/default-avatar.png"}
+                    alt="Profile"
+                    className="w-12 rounded-full object-cover border-2 border-gray-200 transition-opacity duration-300"
+                  />
+                </div>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex gap-4">
+              <button
+                onClick={toggleFeatures}
+                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center"
+              >
+                Semua Fitur
+                <img
+                  src="/landing/semua-fitur.png"
+                  className="pl-2 w-7 h-auto"
+                  alt=""
+                />
+              </button>
+              {showFeatures && <FeatureBox rightOffset={32} />}
+              <Link to="/login">
+                <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
+                  Masuk
+                </button>
+              </Link>
+            </div>
           )}
         </div>
       </nav>
