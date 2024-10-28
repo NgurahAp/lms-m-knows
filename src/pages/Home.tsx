@@ -10,19 +10,29 @@ import { useAuth } from "../hooks/useAuth";
 import { useDashboardData } from "../services/DashboardService";
 import { useState } from "react";
 import FeatureBox from "../components/FeatureBox";
+import ProfileBox from "../components/ProfileBox";
 
 export default function Home() {
   const { authState } = useAuth();
   const { data: dashboardData, isLoading } = useDashboardData();
 
   const [showFeatures, setShowFeatures] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const toggleFeatures = () => {
     setShowFeatures((prev) => !prev);
   };
 
+  const toggleProfileMenu = () => {
+    setShowProfileMenu((prev) => !prev);
+  };
+
   const handleCloseFeatures = () => {
     setShowFeatures(false);
+  };
+
+  const handleCloseProfileMenu = () => {
+    setShowProfileMenu(false);
   };
 
   if (authState.isAuthenticated && isLoading) {
@@ -66,15 +76,19 @@ export default function Home() {
               {showFeatures && (
                 <FeatureBox offset="right-20" onClose={handleCloseFeatures} />
               )}
-              <Link to="/profile">
-                <div className="flex items-center">
-                  <img
-                    src={dashboardData.profile.avatar || "/default-avatar.png"}
-                    alt="Profile"
-                    className="w-12 rounded-full object-cover border-2 border-gray-200 transition-opacity duration-300"
-                  />
-                </div>
-              </Link>
+              <button onClick={toggleProfileMenu}>
+                <img
+                  src={dashboardData.profile.avatar}
+                  className="w-12 rounded-full"
+                  alt=""
+                />
+              </button>
+              {showProfileMenu && (
+                <ProfileBox
+                  offset="right-[9rem]"
+                  onClose={handleCloseProfileMenu}
+                />
+              )}
             </div>
           ) : (
             <div className="flex gap-4">

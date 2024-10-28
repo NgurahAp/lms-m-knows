@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
 import FeatureBox from "./FeatureBox";
+import ProfileBox from "./ProfileBox";
 
 interface ProfileData {
   avatar: string;
@@ -13,13 +14,22 @@ const Navbar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [showFeatures, setShowFeatures] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const toggleFeatures = () => {
     setShowFeatures((prev) => !prev);
   };
 
+  const toggleProfileMenu = () => {
+    setShowProfileMenu((prev) => !prev);
+  };
+
   const handleCloseFeatures = () => {
     setShowFeatures(false);
+  };
+
+  const handleCloseProfileMenu = () => {
+    setShowProfileMenu(false);
   };
 
   const navItems = [
@@ -78,11 +88,19 @@ const Navbar: React.FC = () => {
                   onClose={handleCloseFeatures}
                 />
               )}
-              <img
-                src={profileData?.avatar}
-                className="w-12 rounded-full"
-                alt=""
-              />
+              <button onClick={toggleProfileMenu}>
+                <img
+                  src={profileData?.avatar}
+                  className="w-12 rounded-full"
+                  alt=""
+                />
+              </button>
+              {showProfileMenu && (
+                <ProfileBox
+                  offset="right-[9rem]"
+                  onClose={handleCloseProfileMenu}
+                />
+              )}
             </>
           )}
           {isMobile && (
