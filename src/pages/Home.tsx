@@ -21,6 +21,10 @@ export default function Home() {
     setShowFeatures((prev) => !prev);
   };
 
+  const handleCloseFeatures = () => {
+    setShowFeatures(false);
+  };
+
   if (authState.isAuthenticated && isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -59,7 +63,9 @@ export default function Home() {
                   alt=""
                 />
               </button>
-              {showFeatures && <FeatureBox offset="right-20" />}
+              {showFeatures && (
+                <FeatureBox offset="right-20" onClose={handleCloseFeatures} />
+              )}
               <Link to="/profile">
                 <div className="flex items-center">
                   <img
@@ -83,7 +89,9 @@ export default function Home() {
                   alt=""
                 />
               </button>
-              {showFeatures && <FeatureBox offset="right-32" />}
+              {showFeatures && (
+                <FeatureBox offset="right-32" onClose={handleCloseFeatures} />
+              )}
               <Link to="/login">
                 <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
                   Masuk

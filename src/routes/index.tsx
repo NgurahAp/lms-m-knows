@@ -13,6 +13,7 @@ import Dashboard from "../pages/dashboard";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
+import { Bootcamp } from "../pages/bootcamp";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -29,6 +30,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bootcamp"
+            element={
+              <ProtectedRoute>
+                <Bootcamp />
               </ProtectedRoute>
             }
           />
@@ -52,7 +61,7 @@ const AppRoutes: React.FC = () => {
             path="/penugasan"
             element={
               <ProtectedRoute>
-                <Penugasan /> 
+                <Penugasan />
               </ProtectedRoute>
             }
           />

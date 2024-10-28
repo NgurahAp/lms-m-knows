@@ -18,6 +18,10 @@ const Navbar: React.FC = () => {
     setShowFeatures((prev) => !prev);
   };
 
+  const handleCloseFeatures = () => {
+    setShowFeatures(false);
+  };
+
   const navItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Pelatihan-ku", path: "/pelatihanku" },
@@ -68,7 +72,12 @@ const Navbar: React.FC = () => {
                   alt=""
                 />
               </button>
-              {showFeatures && <FeatureBox offset="right-[14rem]" />}
+              {showFeatures && (
+                <FeatureBox
+                  offset="right-[14rem]"
+                  onClose={handleCloseFeatures}
+                />
+              )}
               <img
                 src={profileData?.avatar}
                 className="w-12 rounded-full"
