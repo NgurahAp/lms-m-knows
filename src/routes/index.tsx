@@ -12,6 +12,7 @@ import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import { Nilai } from "../pages/nilai-sertifikat/nilai";
+import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihan-keterampilan";
 import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
 
@@ -25,6 +26,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpw" element={<ForgetPw />} />
           <Route path="/verification" element={<Verification />} />
+          <Route path="/pelatihan-keterampilan" element={<PelatihanKet />} />
           <Route
             path="/dashboard"
             element={
@@ -53,7 +55,7 @@ const AppRoutes: React.FC = () => {
             path="/penugasan"
             element={
               <ProtectedRoute>
-                <Penugasan /> 
+                <Penugasan />
               </ProtectedRoute>
             }
           />

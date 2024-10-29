@@ -1,9 +1,20 @@
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Sertifikat } from "./popup";
+import { useStudentScores } from "../../services/NilaiService";
 
-export const Nilai = () => {
+export const Nilai: React.FC = () => {
+  const { data, isLoading, isError, error } = useStudentScores();
+  console.log(data);
+
   const [activeTab, setActiveTab] = useState<"nilai" | "sertifikat">("nilai");
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleDownload = () => {
+    alert("Certificate Downloaded!");
+  };
 
   const tabs = [
     { id: "nilai", label: "Nilai" },
@@ -96,9 +107,11 @@ export const Nilai = () => {
                   </div>
 
                   <div className="flex">
-                    <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg w-2x1 ml-auto">
-                      Lihat Detail
-                    </button>
+                    <Link to="/pelatihan-keterampilan">
+                      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg w-2x1 ml-auto">
+                        Lihat Detail
+                      </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -118,9 +131,17 @@ export const Nilai = () => {
                   </p>
 
                   <div className="flex">
-                    <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg w-2x1 ml-auto">
+                    <button
+                      className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg w-2x1 ml-auto"
+                      onClick={() => setIsModalOpen(true)}
+                    >
                       Lihat Sertifikat
                     </button>
+                    <Sertifikat
+                      isOpen={isModalOpen}
+                      onClose={() => setIsModalOpen(false)}
+                      onDownload={handleDownload}
+                    />
                   </div>
                 </div>
               ))}
