@@ -1,6 +1,7 @@
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Header } from "./components/Header";
+import { fiturCards } from "../../assets/landingData";
 
 export const AllFeatures = () => {
   return (
@@ -22,7 +23,17 @@ export const AllFeatures = () => {
         </span>
       </div>
       <Header />
-      <div className="bg-white"></div>
+      <div className="flex flex-wrap gap-5 py-8">
+        {fiturCards.map((card) => (
+          <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-start space-y-4 w-[24%]">
+            <img src={card.icon} alt="" />
+            <h2 className="text-lg font-semibold text-gray-800">
+              {card.title}
+            </h2>
+            <p className="text-sm text-gray-600">{card.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
