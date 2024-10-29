@@ -71,12 +71,13 @@ const FeatureBox: React.FC<FeatureBoxProps> = ({ offset, onClose }) => {
           </Link>
         </div>
       </div>
-      <button
-        className="py-4 w-full bg-blue-300 rounded-b-lg"
+      <Link
+        to="/allFeatures"
+        className="py-4 w-full flex justify-center  items-center bg-blue-300 rounded-b-lg"
         onClick={onClose}
       >
         Lihat Semua
-      </button>
+      </Link>
     </div>
   );
 };

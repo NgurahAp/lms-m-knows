@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import {
   useDashboardData,
   useDashboardBanner,
@@ -14,7 +13,6 @@ interface ProfileData {
 }
 
 const Dashboard: React.FC = () => {
-  const { handleLogout } = useAuth();
   const {
     data: dashboardData,
     isLoading: isDashboardLoading,
@@ -96,13 +94,6 @@ const Dashboard: React.FC = () => {
           dashboardBannerdata={bannerData}
         />
       </div>
-
-      <button
-        className="py-5 text-red-600 hover:text-red-800"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
     </div>
   );
 };

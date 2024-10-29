@@ -85,7 +85,7 @@ export default function Home() {
               </button>
               {showProfileMenu && (
                 <ProfileBox
-                  offset="right-[9rem]"
+                  offset="right-1"
                   onClose={handleCloseProfileMenu}
                 />
               )}
