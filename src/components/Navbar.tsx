@@ -1,10 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
+import FeatureBox from "./FeatureBox";
+import ProfileBox from "./ProfileBox";
+
+interface ProfileData {
+  avatar: string;
+  full_name: string;
+}
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [showFeatures, setShowFeatures] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  const toggleFeatures = () => {
+    setShowFeatures((prev) => !prev);
+  };
+
+  const toggleProfileMenu = () => {
+    setShowProfileMenu((prev) => !prev);
+  };
+
+  const handleCloseFeatures = () => {
+    setShowFeatures(false);
+  };
+
+  const handleCloseProfileMenu = () => {
+    setShowProfileMenu(false);
+  };
 
   const navItems = [
     { name: "Dashboard", path: "/dashboard" },
@@ -24,6 +50,13 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const storedProfile = localStorage.getItem("userProfile");
+    if (storedProfile) {
+      setProfileData(JSON.parse(storedProfile));
+    }
+  }, []);
+
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
       <div className="flex justify-between px-4 md:px-36 h-20 items-center">
@@ -38,11 +71,36 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4 md:space-x-8">
           {!isMobile && (
             <>
-              <img src="/navbar/square.png" className="w-6" alt="" />
-              <img src="/navbar/moon.png" className="w-7" alt="" />
-              <img src="/navbar/bell.png" className="w-8" alt="" />
-              <img src="/navbar/separator.png" className="h-9" alt="" />
-              <img src="/navbar/Avatar.png" className="w-9" alt="" />
+              <button
+                onClick={toggleFeatures}
+                className="bg-sky-700 hover:bg-sky-600 text-white px-6 py-3 rounded-lg font-medium flex items-center"
+              >
+                Semua Fitur
+                <img
+                  src="/landing/semua-fitur.png"
+                  className="pl-2   w-7 h-auto"
+                  alt=""
+                />
+              </button>
+              {showFeatures && (
+                <FeatureBox
+                  offset="right-[14rem]"
+                  onClose={handleCloseFeatures}
+                />
+              )}
+              <button onClick={toggleProfileMenu}>
+                <img
+                  src={profileData?.avatar}
+                  className="w-12 rounded-full"
+                  alt=""
+                />
+              </button>
+              {showProfileMenu && (
+                <ProfileBox
+                  offset="right-[9rem]"
+                  onClose={handleCloseProfileMenu}
+                />
+              )}
             </>
           )}
           {isMobile && (
@@ -79,11 +137,13 @@ const Navbar: React.FC = () => {
         <div className="bg-sky-700">
           <div className="p-4 border-b border-sky-600">
             <img
-              src="/navbar/Avatar.png"
+              src={profileData?.avatar}
               className="w-12 h-12 rounded-full mx-auto"
               alt="Profile"
             />
-            <p className="text-white text-center mt-2">Nama Pengguna</p>
+            <p className="text-white text-center mt-2">
+              {profileData?.full_name}
+            </p>
           </div>
           <div className="flex flex-col ">
             {navItems.map((item) => (

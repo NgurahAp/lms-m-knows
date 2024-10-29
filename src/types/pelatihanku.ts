@@ -23,7 +23,7 @@ interface StudySubject {
   thumbnail: string;
 }
 
-interface ProgressModule {
+export interface ProgressModule {
   id: string;
   title: string;
   description: string;
@@ -35,7 +35,7 @@ interface ProgressModule {
   total_journals: number;
 }
 
-interface ProgressQuiz {
+export interface ProgressQuiz {
   id: string;
   title: string;
   duration: number; // in minutes
@@ -51,7 +51,7 @@ interface ProgressAssignment {
   status: "FINISHED" | "PENDING" | "LOCKED";
 }
 
-interface SessionProgress {
+export interface SessionProgress {
   type: "MODULE" | "QUIZ" | "ASSIGNMENT" | "REFLECTION" | "ASSESSMENT";
   status: "FINISHED" | "PENDING" | "LOCKED" | "ONGOING";
   modules?: ProgressModule[];
