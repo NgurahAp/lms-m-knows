@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
 import FeatureBox from "./FeatureBox";
 import ProfileBox from "./ProfileBox";
+import { CgProfile } from "react-icons/cg";
 
 interface ProfileData {
   avatar: string;
@@ -51,10 +52,29 @@ const Navbar: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const storedProfile = localStorage.getItem("userProfile");
-    if (storedProfile) {
-      setProfileData(JSON.parse(storedProfile));
-    }
+    let attempts = 0;
+    const maxAttempts = 5000;
+    const getProfileData = () => {
+      const storedProfile = localStorage.getItem("userProfile");
+
+      if (!storedProfile && attempts < maxAttempts) {
+        attempts++;
+
+        // Coba lagi setelah 100ms
+        setTimeout(getProfileData, 100);
+      } else if (storedProfile) {
+        setProfileData(JSON.parse(storedProfile));
+      } else {
+        console.log("Gagal mendapatkan data setelah maksimal percobaan");
+      }
+    };
+
+    getProfileData();
+
+    // Cleanup function untuk handle unmount
+    return () => {
+      attempts = maxAttempts; // Ini akan menghentikan loop jika component unmount
+    };
   }, []);
 
   return (
@@ -89,11 +109,15 @@ const Navbar: React.FC = () => {
                 />
               )}
               <button onClick={toggleProfileMenu}>
-                <img
-                  src={profileData?.avatar}
-                  className="w-12 rounded-full"
-                  alt=""
-                />
+                {profileData?.avatar ? (
+                  <img
+                    src={profileData.avatar}
+                    className="w-12 h-12 rounded-full object-cover"
+                    alt="Profile"
+                  />
+                ) : (
+                  <CgProfile className="text-5xl text-gray-600" />
+                )}
               </button>
               {showProfileMenu && (
                 <ProfileBox

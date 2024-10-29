@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect } from "react";
 import { AuthState } from "../types/auth";
 import { login, refreshToken } from "../services/AuthService";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
   const [authState, setAuthState] = useState<AuthState>(() => {
@@ -14,8 +13,6 @@ export const useAuth = () => {
       refreshToken: refreshToken || null,
     };
   });
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Check tokens on mount and set auth state
@@ -64,6 +61,7 @@ export const useAuth = () => {
   const handleLogout = useCallback(() => {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
+    localStorage.clear();
 
     setAuthState({
       isAuthenticated: false,
@@ -71,8 +69,8 @@ export const useAuth = () => {
       refreshToken: null,
     });
 
-    navigate("/");
-  }, [navigate]);
+    window.location.href = "/";
+  }, []);
 
   const handleRefreshToken = useCallback(async () => {
     try {
