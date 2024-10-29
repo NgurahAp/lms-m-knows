@@ -8,50 +8,7 @@ import {
 import { CiLock } from "react-icons/ci";
 import { useState } from "react";
 import { useSubjectData } from "../../services/MyStudyService";
-
-// Interfaces
-
-
-
-
-interface ProgressModule {
-  id: string;
-  title: string;
-  description: string;
-  submitted: boolean;
-  is_all_video_seen: boolean;
-  total_videos: number;
-  total_documents: number;
-  total_articles: number;
-  total_journals: number;
-}
-
-interface ProgressQuiz {
-  id: string;
-  title: string;
-  duration: number;
-  status: "FINISHED" | "PENDING" | "LOCKED";
-}
-
-interface ProgressAssignment {
-  id: string;
-  title: string;
-  description: string;
-  duration_days: number;
-  deadline?: string;
-  status: "FINISHED" | "PENDING" | "LOCKED";
-}
-
-interface SessionProgress {
-  type: "MODULE" | "QUIZ" | "ASSIGNMENT" | "REFLECTION" | "ASSESSMENT";
-  status: "FINISHED" | "PENDING" | "LOCKED" | "ONGOING";
-  modules?: ProgressModule[];
-  quizzes?: ProgressQuiz[];
-  assignments?: ProgressAssignment[];
-}
-
-
-
+import { SessionProgress } from "../../types/pelatihanku";
 
 
 type PelatihankuDetailHeaderProps = object
