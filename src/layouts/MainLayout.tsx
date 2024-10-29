@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import HomeNavbar from "../components/HomeNavbar";
 import Footer from "../components/Footer";
 
 interface MainLayoutProps {
@@ -19,11 +18,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
   return (
     <div className="layout">
-      {!isAuthPage && (isHomePage ? <HomeNavbar /> : <Navbar />)}
-
+      {!isHomePage && !isAuthPage && <Navbar />}
       <main>{children}</main>
-
-      {(isAuthPage || isHomePage) && <Footer />}
+      {!isHomePage && !isAuthPage && <Footer />}
     </div>
   );
 };

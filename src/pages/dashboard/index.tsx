@@ -1,5 +1,4 @@
-import React from "react";
-import { useAuth } from "../../hooks/useAuth";
+import React, { useEffect } from "react";
 import {
   useDashboardData,
   useDashboardBanner,
@@ -7,8 +6,13 @@ import {
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
 
+// Interface untuk profile data
+interface ProfileData {
+  avatar: string;
+  full_name: string;
+}
+
 const Dashboard: React.FC = () => {
-  const { handleLogout } = useAuth();
   const {
     data: dashboardData,
     isLoading: isDashboardLoading,
@@ -26,8 +30,19 @@ const Dashboard: React.FC = () => {
   const isLoading = isDashboardLoading || isBannerLoading;
   const isError = isDashboardError || isBannerError;
 
+  // Menyimpan data profil ke localStorage saat data berhasil dimuat
+  useEffect(() => {
+    if (dashboardData?.profile) {
+      const profileData: ProfileData = {
+        avatar: dashboardData.profile.avatar,
+        full_name: dashboardData.profile.full_name,
+      };
+      localStorage.setItem("userProfile", JSON.stringify(profileData));
+    }
+  }, [dashboardData]);
+
   // Retry logic
-  React.useEffect(() => {
+  useEffect(() => {
     if (isError || !dashboardData?.profile) {
       const timer = setTimeout(() => {
         void refetchDashboard();
@@ -79,13 +94,6 @@ const Dashboard: React.FC = () => {
           dashboardBannerdata={bannerData}
         />
       </div>
-
-      <button
-        className="py-5 text-red-600 hover:text-red-800"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
     </div>
   );
 };

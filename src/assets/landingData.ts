@@ -17,82 +17,102 @@ export const fiturCards = [
   {
     icon: "/landing/fitur/bootcamp.png",
     title: "Bootcamp",
+    desc: "Fitur Bootcamp dirancang untuk mengembangkan keterampilan dan pengetahuan teknis sesuai dengan tuntutan dunia kerja.",
   },
   {
-    icon: "/landing/fitur/rencana-studi.png",
-    title: "Rencana Studi",
-  },
-  {
-    icon: "/landing/fitur/bootcamp.png",
-    title: "Studi-Ku",
+    icon: "/landing/fitur/pelatihanku.png",
+    title: "Pelatihan Ku",
+    desc: "Fitur Pelatihan Ku pada website LMS M-Knows memungkinkan kamu untuk mengetahui informasi dan riwayat pembelajaran yang telah kamu ikuti.",
   },
   {
     icon: "/landing/fitur/penugasan.png",
     title: "Penugasan",
+    desc: "Fitur Penugasan berisikan informasi dan instruksi, mengenai tugas atau aktivitas yang harus dan belum kamu kerjakan.",
   },
   {
     icon: "/landing/fitur/ruang-diskusi.png",
     title: "Ruang Diskusi",
+    desc: "Fitur Ruang Diskusi adalah tempat kamu berinteraksi dan berdiskusi diluar topik pelatihan.",
   },
   {
     icon: "/landing/fitur/roleplay.png",
     title: "Roleplay & Asesmen",
+    desc: "Fitur Assessment & Uji Kompetensi memungkinkan evaluasi kemampuan siswa melalui berbagai metode tes, memberikan analisis mendetail atas standar kompetensi, menilai pemahaman dan keterampilan secara komprehensif. Assessment menggunakan standar kompetensi M-Knows Consulting, sementara Uji Kompetensi menggunakan standar kompetensi profesi BNSP.",
   },
   {
-    icon: "/landing/fitur/roleplay.png",
+    icon: "/landing/fitur/drill.png",
     title: "Drill, Simulasi & Uji Kompetensi",
+    desc: "Fitur Role-Play, Drill, dan Simulasi adalah ruang pembelajaran interaktif khusus dimana role-play mensimulasikan latihan peran antara 2 atau 3 peserta, drill merupakan latihan repetitif bersama mentor berbayar hingga mencapai penguasaan kompetensi yang ditargetkan, dan simulasi memberikan ruang virtual untuk praktik sekelompok orang dalam situasi yang kompleks.",
   },
   {
     icon: "/landing/fitur/nilai.png",
     title: "Nilai & Sertifikat",
+    desc: "Fitur Nilai & sertifikat berisi informasi mengenai nilai dan sertifikat yang kamu peroleh setelah menyelesaikan pembelajaran di fitur StudiKu.",
   },
   {
     icon: "/landing/fitur/analitik.png",
     title: "Analitik",
+    desc: "Fitur analitik berfungsi menganalisis dan menyajikan data terkait aktivitas dan kinerja pengguna, pengajar dan program studi dalam platform pembelajaran.",
   },
   {
     icon: "/landing/fitur/papan-skor.png",
     title: "Gamifikasi (Skor)",
+    desc: "Fitur Papan Skor menampilkan peringkat dan pencapaian siswa secara real-time, memotivasi mereka melalui gamifikasi, dan mendorong persaingan sehat, membantu siswa mengetahui progres mereka dibandingkan yang lain, meningkatkan keterlibatan dan semangat belajar.",
   },
   {
     icon: "/landing/fitur/perencanaan-karir.png",
     title: "Perencanaan Karir",
+    desc: "Fitur Perencanaan Karir dirancang khusus untuk membantu kamu mengembangkan keterampilan yang penting untuk kesuksesan dalam karir",
   },
   {
-    icon: "/landing/fitur/rencana-studi.png",
+    icon: "/landing/fitur/konsultasi.png",
     title: "Konsultasi & Bimbingan",
+    desc: "Fitur Konsultasi & Bimbingan memungkinkan siswa mengakses bimbingan akademik dan dukungan teknis, menjadwalkan sesi konsultasi dengan instruktur atau administrasi, serta mengajukan pertanyaan dan mendapatkan bantuan dengan cepat, mendukung optimalisasi proses belajar dan administrasi pembelajar.",
   },
   {
     icon: "/landing/fitur/kredit-kompetensi.png",
     title: "Kredit Kompetensi",
+    desc: "Fitur Kredit kompetensi membuat pembelajaran LMS M-Knows bisa kamu konversi menjadi SKS di Kampus asal, atau di tabung menjadi SKS siap konversi pada program RPL (maksimal 105 SKS). Guna memuluskan konversi SKS mu, segera daftarkan kampus pilihanmu menjadi Mitra KG.",
   },
   {
-    icon: "/landing/fitur/roleplay.png",
+    icon: "/landing/fitur/kalendar.png",
     title: "Kalender Saya",
+    desc: "Fitur Kalender Saya membantu siswa dan instruktur mengelola jadwal belajar, tugas, dan kegiatan akademik secara terorganisir, menampilkan tenggat waktu dan acara penting, serta memberikan pengingat otomatis untuk memastikan semua aktivitas terpantau dengan baik dan selesai tepat waktu.",
   },
   {
     icon: "/landing/fitur/acara.png",
     title: "Acara",
+    desc: "Fitur Acara menginformasikan dan mengelola kegiatan perusahaan seperti seminar, workshop, pertemuan, lomba, pameran, perekrutan kerja, seleksi beasiswa dan acara sosial lainnya, memudahkan semua untuk mendaftar, menerima pengingat, dan berpartisipasi aktif, meningkatkan keterlibatan komunitas perusahaan.",
   },
   {
     icon: "/landing/fitur/panduan.png",
     title: "Panduan",
+    desc: "Fitur Panduan memberikan akses mudah dan cepat untuk informasi yang dibutuhkan, seperti aturan pelatihan, petunjuk teknis, dan cara mengakses fitur-fitur pada website LMS M-Knows.",
   },
   {
     icon: "/landing/fitur/rencana-studi.png",
     title: "Layanan",
+    desc: "Fitur Konsultasi & Layanan memungkinkan siswa mengakses bimbingan akademik dan dukungan teknis, menjadwalkan sesi konsultasi dengan instruktur atau administrasi, serta mengajukan pertanyaan dan mendapatkan bantuan dengan cepat, mendukung optimalisasi proses belajar dan administrasi siswa.",
   },
   {
     icon: "/landing/fitur/sekilas-ilmu.png",
     title: "Sekilas Ilmu",
+    desc: "Fitur Sekilas Ilmu menyediakan informasi singkat dan ringkas tentang informasi bermanfaat, membantu siswa mengakses pengetahuan tambahan atau konsep penting dengan cepat, selain info beasiswa, lowongan, peraturan dan isu yang sedang viral. Berguna untuk pemahaman cepat, revisi, atau pengenalan singkat sebelum mendalami materi lebih lanjut.",
   },
   {
-    icon: "/landing/fitur/sekilas-ilmu.png",
+    icon: "/landing/fitur/proyek-improvement.png",
     title: "Proyek Improvement",
+    desc: "Fitur Proyek Improvement adalah alat di dalam sistem yang memungkinkan pengguna LMS untuk mengusulkan, merencanakan, dan melacak proyek-proyek perbaikan atau inovasi. Mendukung pengguna dalam meningkatkan proses, produk, atau layanan mereka dengan cara yang terstruktur dan terukur.",
   },
   {
-    icon: "/landing/fitur/sekilas-ilmu.png",
+    icon: "/landing/fitur/mt-mdp.png",
     title: "MT & MDP",
+    desc: "LMS M-Knows menyediakan layanan penyaluran kerja yang membantumu terhubung dengan peluang kerja yang relevan sesuai dengan keterampilan yang telah diperoleh melalui pembelajaran di LMS M-Knows.",
+  },
+  {
+    icon: "/landing/fitur/inbox.png",
+    title: "Inbox dan Notification",
+    desc: "Tempat kamu berinteraksi dengan pengguna lain, mengirim pesan, dan menerima notifikasi terkait aktifitas di LMS M-Knows.",
   },
 ];
 
