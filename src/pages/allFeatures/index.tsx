@@ -1,5 +1,6 @@
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Header } from "./components/Header";
 
 export const AllFeatures = () => {
   return (
@@ -17,13 +18,11 @@ export const AllFeatures = () => {
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Bootcamp
+          Semua Fitur
         </span>
       </div>
-
-      <div className="bg-white py-10 mt-6">
-        <h1>All Features</h1>
-      </div>
+      <Header />
+      <div className="bg-white"></div>
     </div>
   );
 };
