@@ -11,10 +11,10 @@ import { Verification } from "../pages/auth/verification";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
-import { Nilai } from "../pages/nilai-sertifikat/nilai";
 import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihan-keterampilan";
 import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
+import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -79,7 +79,7 @@ const AppRoutes: React.FC = () => {
             path="/nilai-sertifikat"
             element={
               <ProtectedRoute>
-                <Nilai />
+                <NilaiSertifikat />
               </ProtectedRoute>
             }
           />

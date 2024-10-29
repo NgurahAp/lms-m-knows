@@ -31,7 +31,7 @@ export interface NilaiResponse {
   message: string;
   data: {
     student: Student;
-    subjects: Subject[];
+    subjects: Subject[]; 
   };
   meta: Meta;
 }
