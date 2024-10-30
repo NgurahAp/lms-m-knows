@@ -59,7 +59,7 @@ export interface SessionProgress {
   assignments?: ProgressAssignment[];
 }
 
-interface Session {
+export interface Session {
   id: string;
   title: string;
   no: number; // session number
