@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom"; // Import Link
 import FeatureBox from "./FeatureBox";
 import ProfileBox from "./ProfileBox";
 import { CgProfile } from "react-icons/cg";
+import { User } from "../types/auth";
 
 interface ProfileData {
   avatar: string;
@@ -51,31 +52,27 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    let attempts = 0;
-    const maxAttempts = 5000;
-    const getProfileData = () => {
-      const storedProfile = localStorage.getItem("userProfile");
+    useEffect(() => {
+      const getUserProfile = () => {
+        try {
+          const storedUser = localStorage.getItem("user_profile");
 
-      if (!storedProfile && attempts < maxAttempts) {
-        attempts++;
+          if (storedUser) {
+            const userData: User = JSON.parse(storedUser);
+            setProfileData({
+              avatar: userData.avatar,
+              full_name: userData.full_name,
+            });
+          } else {
+            console.log("Data profil tidak ditemukan di localStorage");
+          }
+        } catch (error) {
+          console.error("Error parsing user profile:", error);
+        }
+      };
 
-        // Coba lagi setelah 100ms
-        setTimeout(getProfileData, 100);
-      } else if (storedProfile) {
-        setProfileData(JSON.parse(storedProfile));
-      } else {
-        console.log("Gagal mendapatkan data setelah maksimal percobaan");
-      }
-    };
-
-    getProfileData();
-
-    // Cleanup function untuk handle unmount
-    return () => {
-      attempts = maxAttempts; // Ini akan menghentikan loop jika component unmount
-    };
-  }, []);
+      getUserProfile();
+    }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
