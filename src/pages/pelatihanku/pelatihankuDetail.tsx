@@ -1,19 +1,12 @@
 import { useParams } from "react-router-dom";
-import {
-  FaCheckCircle,
-  FaChevronDown,
-  FaChevronRight,
-  FaChevronUp,
-} from "react-icons/fa";
+import { FaCheckCircle, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import { useState } from "react";
 import { useSubjectData } from "../../services/MyStudyService";
-import { SessionProgress } from "../../types/pelatihanku";
+import { Session, SessionProgress } from "../../types/pelatihanku";
 
+type PelatihankuDetailHeaderProps = object;
 
-type PelatihankuDetailHeaderProps = object
-
-// Components
 export const PelatihankuDetailHeader: React.FC<
   PelatihankuDetailHeaderProps
 > = () => {
@@ -23,10 +16,13 @@ export const PelatihankuDetailHeader: React.FC<
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
   const { data, isLoading, error } = useSubjectData(pelatihankuId || "");
-  const [isOpen, setIsOpen] = useState(false);
+  const [openSessions, setOpenSessions] = useState<Record<string, boolean>>({});
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const toggleDropdown = (sessionId: string) => {
+    setOpenSessions((prev) => ({
+      ...prev,
+      [sessionId]: !prev[sessionId],
+    }));
   };
 
   const getStatusIcon = (
@@ -37,7 +33,28 @@ export const PelatihankuDetail: React.FC = () => {
     if (itemProgress?.status === "FINISHED") {
       return <FaCheckCircle className="text-green-500 ml-2" />;
     }
+    if (itemProgress?.status === "LOCKED") {
+      return <CiLock className="text-gray-500 ml-2" />;
+    }
     return null;
+  };
+
+  const isItemLocked = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[]
+  ): boolean => {
+    const itemProgress = progress.find((p) => p.type === type);
+    return itemProgress?.status === "LOCKED";
+  };
+
+  const handleItemClick = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[],
+    onClick: () => void
+  ) => {
+    if (!isItemLocked(type, progress)) {
+      onClick();
+    }
   };
 
   if (!pelatihankuId) {
@@ -63,6 +80,107 @@ export const PelatihankuDetail: React.FC = () => {
       </div>
     );
   }
+
+  const renderSessionContent = (session: Session) => (
+    <div className="bg-gray-50">
+      <ul>
+        <li
+          onClick={() =>
+            handleItemClick("MODULE", session.progress, () => {
+              // Add your navigation logic here for module
+              console.log("Navigate to module");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("MODULE", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/modul.png" className="mr-2" alt="" />
+          <span className="flex-1">Modul</span>
+          {getStatusIcon("MODULE", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("QUIZ", session.progress, () => {
+              // Add your navigation logic here for quiz
+              console.log("Navigate to quiz");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("QUIZ", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/quiz.png" className="mr-2" alt="" />
+          <span className="flex-1">Quiz</span>
+          {getStatusIcon("QUIZ", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("ASSIGNMENT", session.progress, () => {
+              // Add your navigation logic here for assignment
+              console.log("Navigate to assignment");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("ASSIGNMENT", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/tugas.png" className="mr-2" alt="" />
+          <span className="flex-1">Tugas</span>
+          {getStatusIcon("ASSIGNMENT", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("REFLECTION", session.progress, () => {
+              // Add your navigation logic here for reflection
+              console.log("Navigate to reflection");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("REFLECTION", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/eksplorasi.png" className="mr-2" alt="" />
+          <span className="flex-1">Refleksi Eksplorasi</span>
+          {getStatusIcon("REFLECTION", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("ASSESSMENT", session.progress, () => {
+              // Add your navigation logic here for assessment
+              console.log("Navigate to assessment");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("ASSESSMENT", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/kualitas.png" className="mr-2" alt="" />
+          <span className="flex-1">Kualitas Pengajar & Materi Ajar</span>
+          {getStatusIcon("ASSESSMENT", session.progress)}
+        </li>
+        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+          <img src="/pelatihanku/diskusi.png" className="mr-2" alt="" />
+          <span className="flex-1">Diskusi</span>
+        </li>
+      </ul>
+    </div>
+  );
 
   return (
     <div className="bg-gray-50 md:p-48 px-8 py-28">
@@ -91,106 +209,36 @@ export const PelatihankuDetail: React.FC = () => {
       <div className="mt-6">
         {data?.sessions.map((session, index) => (
           <div key={session.id} className="mb-4">
-            {index === 0 ? (
-              <div className="mx-auto my-4 bg-white rounded-lg shadow">
-                <button
-                  onClick={toggleDropdown}
-                  className="w-full flex justify-between h-14 items-center bg-blue-500 text-white px-4 py-2 rounded-t-lg"
-                >
+            <div className="mx-auto my-4 bg-white rounded-lg shadow">
+              {session.is_locked ? (
+                // Locked session
+                <div className="w-full flex justify-between h-14 items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">
                   <span>
                     Pertemuan {index + 1}: {session.title}
                   </span>
-                  {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-                </button>
-
-                {isOpen && (
-                  <div className="bg-gray-50">
-                    <ul>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/modul.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">Modul</span>
-                        {getStatusIcon("MODULE", session.progress)}
-                      </li>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/quiz.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">Quiz</span>
-                        {getStatusIcon("QUIZ", session.progress)}
-                      </li>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/tugas.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">Tugas</span>
-                        {getStatusIcon("ASSIGNMENT", session.progress)}
-                      </li>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/diskusi.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">Diskusi</span>
-                      </li>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/live.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">Live Mentoring</span>
-                      </li>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/eksplorasi.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">Refleksi Eksplorasi</span>
-                        {getStatusIcon("REFLECTION", session.progress)}
-                      </li>
-                      <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-                        <img
-                          src="/pelatihanku/kualitas.png"
-                          className="mr-2"
-                          alt=""
-                        />
-                        <span className="flex-1">
-                          Kualitas Pengajar & Materi Ajar
-                        </span>
-                        {getStatusIcon("ASSESSMENT", session.progress)}
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div
-                className={`bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl ${
-                  session.is_locked
-                    ? "cursor-not-allowed opacity-75"
-                    : "cursor-pointer"
-                }`}
-              >
-                <h1 className="text-gray-700 md:text-base text-sm font-semibold">
-                  Pertemuan {index + 1}: {session.title}
-                </h1>
-                {session.is_locked ? (
                   <CiLock className="text-xl" />
-                ) : (
-                  <FaChevronRight className="text-gray-400" />
-                )}
-              </div>
-            )}
+                </div>
+              ) : (
+                // Unlocked session
+                <>
+                  <button
+                    onClick={() => toggleDropdown(session.id)}
+                    className="w-full flex justify-between h-14 items-center bg-blue-500 text-white px-4 py-2 rounded-t-lg"
+                  >
+                    <span>
+                      Pertemuan {index + 1}: {session.title}
+                    </span>
+                    {openSessions[session.id] ? (
+                      <FaChevronUp />
+                    ) : (
+                      <FaChevronDown />
+                    )}
+                  </button>
+
+                  {openSessions[session.id] && renderSessionContent(session)}
+                </>
+              )}
+            </div>
           </div>
         ))}
       </div>
