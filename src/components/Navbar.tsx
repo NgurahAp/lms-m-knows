@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
 import FeatureBox from "./FeatureBox";
 import ProfileBox from "./ProfileBox";
-
-interface ProfileData {
-  avatar: string;
-  full_name: string;
-}
+import { CgProfile } from "react-icons/cg";
+import { UserData } from "../types/auth";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [profileData, setProfileData] = useState<UserData | null>(null);
   const [showFeatures, setShowFeatures] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
@@ -50,12 +47,24 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const storedProfile = localStorage.getItem("userProfile");
-    if (storedProfile) {
-      setProfileData(JSON.parse(storedProfile));
-    }
-  }, []);
+    useEffect(() => {
+      const getUserProfile = () => {
+        try {
+          const storedUser = localStorage.getItem("user_profile");
+
+          if (storedUser) {
+            const userData: UserData = JSON.parse(storedUser);
+            setProfileData(userData);
+          } else {
+            console.log("Data profil tidak ditemukan di localStorage");
+          }
+        } catch (error) {
+          console.error("Error parsing user profile:", error);
+        }
+      };
+
+      getUserProfile();
+    }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
@@ -89,11 +98,15 @@ const Navbar: React.FC = () => {
                 />
               )}
               <button onClick={toggleProfileMenu}>
-                <img
-                  src={profileData?.avatar}
-                  className="w-12 rounded-full"
-                  alt=""
-                />
+                {profileData?.avatar ? (
+                  <img
+                    src={profileData.avatar}
+                    className="w-12 h-12 rounded-full object-cover"
+                    alt="Profile"
+                  />
+                ) : (
+                  <CgProfile className="text-5xl text-gray-600" />
+                )}
               </button>
               {showProfileMenu && (
                 <ProfileBox
