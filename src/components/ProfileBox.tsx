@@ -4,24 +4,21 @@ import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { MdHome } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { UserData } from "../types/auth";
 
 interface FeatureBoxProps {
   offset: string;
   onClose: () => void;
 }
 
-interface ProfileData {
-  avatar: string;
-  full_name: string;
-}
 
 const ProfileBox: React.FC<FeatureBoxProps> = ({ offset, onClose }) => {
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [profileData, setProfileData] = useState<UserData | null>(null);
 
   const { handleLogout } = useAuth();
 
   useEffect(() => {
-    const storedProfile = localStorage.getItem("userProfile");
+    const storedProfile = localStorage.getItem("user_profile");
     if (storedProfile) {
       setProfileData(JSON.parse(storedProfile));
     }
@@ -32,9 +29,10 @@ const ProfileBox: React.FC<FeatureBoxProps> = ({ offset, onClose }) => {
       className={`absolute top-20 w-96 rounded-lg bg-[#f5f5f5] shadow-lg ${offset}`}
     >
       <div className="flex p-4">
-        <img src={profileData?.avatar} className="w-10 rounded-full" alt="" />
-        <div className="flex pl-3 text-lg font-semibold items-center">
-          <h1>{profileData?.full_name}</h1>
+        <img src={profileData?.avatar} className="w-12 rounded-full" alt="" />
+        <div className="flex flex-col pl-3 ">
+          <h1 className="font-bold">{profileData?.full_name}</h1>
+          <h1 className="font-normal">{profileData?.email}</h1>
         </div>
       </div>
       <div className="w-full border-t border-gray-300 mb-2" />

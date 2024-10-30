@@ -14,7 +14,7 @@ export interface AuthState {
   refreshToken: string | null;
 }
 
-export interface User {
+export interface UserData {
   id: string;
   full_name: string;
   user_name: string;
@@ -37,7 +37,7 @@ export interface ProfileResponse {
   status: string;
   message: string;
   data: {
-    user: User;
+    user: UserData;
     activities: Activities;
   };
 }

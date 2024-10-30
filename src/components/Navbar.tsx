@@ -3,18 +3,13 @@ import { useLocation, Link } from "react-router-dom"; // Import Link
 import FeatureBox from "./FeatureBox";
 import ProfileBox from "./ProfileBox";
 import { CgProfile } from "react-icons/cg";
-import { User } from "../types/auth";
-
-interface ProfileData {
-  avatar: string;
-  full_name: string;
-}
+import { UserData } from "../types/auth";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [profileData, setProfileData] = useState<UserData | null>(null);
   const [showFeatures, setShowFeatures] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
@@ -58,11 +53,8 @@ const Navbar: React.FC = () => {
           const storedUser = localStorage.getItem("user_profile");
 
           if (storedUser) {
-            const userData: User = JSON.parse(storedUser);
-            setProfileData({
-              avatar: userData.avatar,
-              full_name: userData.full_name,
-            });
+            const userData: UserData = JSON.parse(storedUser);
+            setProfileData(userData);
           } else {
             console.log("Data profil tidak ditemukan di localStorage");
           }
