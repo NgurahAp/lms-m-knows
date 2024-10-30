@@ -16,7 +16,6 @@ export const PelatihankuDetailHeader: React.FC<
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
   const { data, isLoading, error } = useSubjectData(pelatihankuId || "");
-  // Track open state for each session separately
   const [openSessions, setOpenSessions] = useState<Record<string, boolean>>({});
 
   const toggleDropdown = (sessionId: string) => {
@@ -34,7 +33,28 @@ export const PelatihankuDetail: React.FC = () => {
     if (itemProgress?.status === "FINISHED") {
       return <FaCheckCircle className="text-green-500 ml-2" />;
     }
+    if (itemProgress?.status === "LOCKED") {
+      return <CiLock className="text-gray-500 ml-2" />;
+    }
     return null;
+  };
+
+  const isItemLocked = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[]
+  ): boolean => {
+    const itemProgress = progress.find((p) => p.type === type);
+    return itemProgress?.status === "LOCKED";
+  };
+
+  const handleItemClick = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[],
+    onClick: () => void
+  ) => {
+    if (!isItemLocked(type, progress)) {
+      onClick();
+    }
   };
 
   if (!pelatihankuId) {
@@ -64,32 +84,96 @@ export const PelatihankuDetail: React.FC = () => {
   const renderSessionContent = (session: Session) => (
     <div className="bg-gray-50">
       <ul>
-        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+        <li
+          onClick={() =>
+            handleItemClick("MODULE", session.progress, () => {
+              // Add your navigation logic here for module
+              console.log("Navigate to module");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("MODULE", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
           <img src="/pelatihanku/modul.png" className="mr-2" alt="" />
           <span className="flex-1">Modul</span>
           {getStatusIcon("MODULE", session.progress)}
         </li>
-        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+        <li
+          onClick={() =>
+            handleItemClick("QUIZ", session.progress, () => {
+              // Add your navigation logic here for quiz
+              console.log("Navigate to quiz");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("QUIZ", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
           <img src="/pelatihanku/quiz.png" className="mr-2" alt="" />
           <span className="flex-1">Quiz</span>
           {getStatusIcon("QUIZ", session.progress)}
         </li>
-        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+        <li
+          onClick={() =>
+            handleItemClick("ASSIGNMENT", session.progress, () => {
+              // Add your navigation logic here for assignment
+              console.log("Navigate to assignment");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("ASSIGNMENT", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
           <img src="/pelatihanku/tugas.png" className="mr-2" alt="" />
           <span className="flex-1">Tugas</span>
           {getStatusIcon("ASSIGNMENT", session.progress)}
         </li>
-        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+        <li
+          onClick={() =>
+            handleItemClick("REFLECTION", session.progress, () => {
+              // Add your navigation logic here for reflection
+              console.log("Navigate to reflection");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("REFLECTION", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
           <img src="/pelatihanku/eksplorasi.png" className="mr-2" alt="" />
           <span className="flex-1">Refleksi Eksplorasi</span>
           {getStatusIcon("REFLECTION", session.progress)}
         </li>
-        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+        <li
+          onClick={() =>
+            handleItemClick("ASSESSMENT", session.progress, () => {
+              // Add your navigation logic here for assessment
+              console.log("Navigate to assessment");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("ASSESSMENT", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
           <img src="/pelatihanku/kualitas.png" className="mr-2" alt="" />
           <span className="flex-1">Kualitas Pengajar & Materi Ajar</span>
           {getStatusIcon("ASSESSMENT", session.progress)}
         </li>
-
         <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
           <img src="/pelatihanku/diskusi.png" className="mr-2" alt="" />
           <span className="flex-1">Diskusi</span>
