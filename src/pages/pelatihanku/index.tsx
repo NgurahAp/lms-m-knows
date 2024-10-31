@@ -1,29 +1,61 @@
-import { FaChevronRight } from "react-icons/fa"; 
-import { Link } from "react-router-dom"; 
-import { TrainingCard } from "./components/PelatihankuCard";
-import {
-  trainingCompleted,
-  trainingOngoing,
-  Training,
-} from "./components/pelatihanData";
+import { FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { MyStudyCard } from "./components/MyStudyCard";
 import { useState } from "react";
 import { SearchBar } from "./components/SearchBar";
+import { useMyStudyData } from "../../services/MyStudyService";
+import { MyStudyData } from "../../types/pelatihanku";
 
 export const Pelatihanku = () => {
   const [activeTab, setActiveTab] = useState<"ongoing" | "completed">(
     "ongoing"
   );
 
-  // Fungsi yang menerima array bertipe Training[]
-  const renderTraining = (trainings: Training[]) => {
+  const {
+    data: myStudyData,
+    isLoading: isMyStudyDataLoading,
+    isError: isMyStudyDataError,
+  } = useMyStudyData();
+
+  const isLoading = isMyStudyDataLoading;
+  const isError = isMyStudyDataError;
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Error fetching dashboard data or banner
+      </div>
+    );
+  }
+
+  // Pastikan myStudyData adalah array dan beri default empty array jika undefined
+  const studyDataArray = Array.isArray(myStudyData) ? myStudyData : [];
+
+  // Filter trainings based on progress
+  const trainingOngoing: MyStudyData[] = studyDataArray.filter(
+    (training) => training.progress_percentage < 100
+  );
+
+  const trainingCompleted: MyStudyData[] = studyDataArray.filter(
+    (training) => training.progress_percentage === 100
+  );
+
+  // Fungsi yang menerima array bertipe MyStudyData[]
+  const renderTraining = (trainings: MyStudyData[]) => {
     if (trainings.length === 0) {
       return (
-        <div className="flex flex-col items-center justify-center py-10 ">
+        <div className="flex flex-col items-center justify-center py-10">
           <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-          <h1 className="text-gray-500 text-lg py-3">
-            Anda belum mengamil pelatihan{" "}
-          </h1>
-          <button className="bg-blue-500  text-white py-2 px-7 rounded-lg ">
+          <h1 className="text-gray-500 text-lg py-3">Tidak ada pelatihan</h1>
+          <button className="bg-blue-500 text-white py-2 px-7 rounded-lg">
             Ikuti Pelatihan
           </button>
         </div>
@@ -33,7 +65,7 @@ export const Pelatihanku = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {trainings.map((training) => (
-          <TrainingCard key={training.id} training={training} />
+          <MyStudyCard key={training.id} training={training} />
         ))}
       </div>
     );
@@ -45,7 +77,7 @@ export const Pelatihanku = () => {
         <Link to="/dashboard" className="flex items-center">
           <img
             src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1 "
+            className="md:w-6 w-5 -mt-1"
             alt="Home"
           />
           <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">

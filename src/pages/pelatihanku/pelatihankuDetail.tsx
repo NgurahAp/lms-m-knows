@@ -1,201 +1,237 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { FaCheckCircle, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { CiLock } from "react-icons/ci";
 import { useState } from "react";
-import DownloadButton from "./components/downloadButton";
-import Dropdown from "./components/dropdown";
-import { useParams } from "react-router-dom";
+import { useSubjectData } from "../../services/MyStudyService";
+import { Session, SessionProgress } from "../../types/pelatihanku";
 
-export const PelatihankuDetail = () => {
+export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
+  const { data, isLoading, error } = useSubjectData(pelatihankuId || "");
+  const [openSessions, setOpenSessions] = useState<Record<string, boolean>>({});
+  const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("beranda");
-  // const [isPlaying, setIsPlaying] = useState(false); // State to track video play status
-  console.log(pelatihankuId);
+  const toggleDropdown = (sessionId: string) => {
+    setOpenSessions((prev) => ({
+      ...prev,
+      [sessionId]: !prev[sessionId],
+    }));
+  };
+
+  const getStatusIcon = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[]
+  ): JSX.Element | null => {
+    const itemProgress = progress.find((p) => p.type === type);
+    if (itemProgress?.status === "FINISHED") {
+      return <FaCheckCircle className="text-green-500 ml-2" />;
+    }
+    if (itemProgress?.status === "LOCKED") {
+      return <CiLock className="text-gray-500 ml-2" />;
+    }
+    return null;
+  };
+
+  const isItemLocked = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[]
+  ): boolean => {
+    const itemProgress = progress.find((p) => p.type === type);
+    return itemProgress?.status === "LOCKED";
+  };
+
+  const handleItemClick = (
+    type: SessionProgress["type"],
+    progress: SessionProgress[],
+    onClick: () => void
+  ) => {
+    if (!isItemLocked(type, progress)) {
+      onClick();
+    }
+  };
+
+  if (!pelatihankuId) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        ID Pelatihan tidak ditemukan
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Error fetching dashboard data or banner
+      </div>
+    );
+  }
+
+  const renderSessionContent = (session: Session) => (
+    <div className="bg-gray-50">
+      <ul>
+        <li
+          onClick={() =>
+            handleItemClick("MODULE", session.progress, () => {
+              navigate(`/modul/${pelatihankuId}/${session.id}`);
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("MODULE", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/modul.png" className="mr-2" alt="" />
+          <span className="flex-1">Modul</span>
+          {getStatusIcon("MODULE", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("QUIZ", session.progress, () => {
+              // Add your navigation logic here for quiz
+              console.log("Navigate to quiz");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("QUIZ", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/quiz.png" className="mr-2" alt="" />
+          <span className="flex-1">Quiz</span>
+          {getStatusIcon("QUIZ", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("ASSIGNMENT", session.progress, () => {
+              // Add your navigation logic here for assignment
+              console.log("Navigate to assignment");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("ASSIGNMENT", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/tugas.png" className="mr-2" alt="" />
+          <span className="flex-1">Tugas</span>
+          {getStatusIcon("ASSIGNMENT", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("REFLECTION", session.progress, () => {
+              // Add your navigation logic here for reflection
+              console.log("Navigate to reflection");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("REFLECTION", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/eksplorasi.png" className="mr-2" alt="" />
+          <span className="flex-1">Refleksi Eksplorasi</span>
+          {getStatusIcon("REFLECTION", session.progress)}
+        </li>
+        <li
+          onClick={() =>
+            handleItemClick("ASSESSMENT", session.progress, () => {
+              // Add your navigation logic here for assessment
+              console.log("Navigate to assessment");
+            })
+          }
+          className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
+            ${
+              isItemLocked("ASSESSMENT", session.progress)
+                ? "bg-gray-100 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+        >
+          <img src="/pelatihanku/kualitas.png" className="mr-2" alt="" />
+          <span className="flex-1">Kualitas Pengajar & Materi Ajar</span>
+          {getStatusIcon("ASSESSMENT", session.progress)}
+        </li>
+        <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
+          <img src="/pelatihanku/diskusi.png" className="mr-2" alt="" />
+          <span className="flex-1">Diskusi</span>
+        </li>
+      </ul>
+    </div>
+  );
+
   return (
-    <div className="bg-gray-50 min-h-screen p-48">
-      {/* Header */}
-      <header className="mb-6">
-        <div className="flex items-center space-x-2 text-sm text-gray-500">
-          <a
-            href="/dashboard"
-            className={`flex items-center ${
-              activeTab === "beranda" ? "text-blue-500" : "text-gray-500"
-            } hover:underline`}
-            onClick={() => setActiveTab("beranda")}
-          >
-            <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-              <img
-                src="/pelatihanku/home.png"
-                className="md:w-6 w-5 -mt-1"
-                alt="Home icon"
-              />
-              <h1
-                className={`md:pl-5 pl-3 md:text-base text-sm font-semibold ${
-                  activeTab === "beranda" ? "text-blue-500" : "text-[#9CA3AF]"
-                }`}
-              >
-                Beranda
-              </h1>
-            </div>
-          </a>
-
-          <span className="text-gray-400 pl-5">›</span>
-
-          <a
-            href="#"
-            className={`flex items-center ${
-              activeTab === "pelatihanku" ? "text-blue-500" : "text-gray-500"
-            } hover:underline`}
-            onClick={() => setActiveTab("pelatihanku")}
-          >
-            <h1
-              className={`md:pl-5 pl-3 md:text-base text-sm font-semibold ${
-                activeTab === "pelatihanku" ? "text-blue-500" : "text-[#9CA3AF]"
-              }`}
-            >
-              Pelatihanku
-            </h1>
-          </a>
-        </div>
-      </header>
-
+    <div className="bg-gray-50 md:p-48 px-8 py-28">
       {/* Main Content */}
-      <div className="bg-white p-6 shadow-lg rounded-lg">
+      <div className="bg-white p-6 mt-8 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold pb-5">Pendahuluan</h1>
         <div className="flex flex-col lg:flex-row">
-          {/* Video Section */}
           <div className="lg:w-1/3 mb-6 lg:mb-0">
             <div className="relative">
-              {/* Video Element */}
-              <video
-                className="w-full h-auto rounded-lg"
-                poster="/path-to-thumbnail.jpg"
-                controls
-              >
-                <source src="/pelatihanku/live-testing.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-
-              {/* Video Duration */}
-              <p className="text-sm text-gray-600 mt-2">6 Menit</p>
+              <img src={data?.subject.thumbnail} alt="" />
             </div>
           </div>
 
-          {/* Description Section */}
-          <div className="lg:w-2/3 lg:pl-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Pelatihan Keterampilan Komunikasi
-            </h2>
+          <div className="lg:w-2/3 lg:pl-14">
+            <h2 className="text-xl font-semibold mb-4">{data?.subject.name}</h2>
             <h3 className="text-base font-semibold mb-4">Deskripsi</h3>
             <p className="text-base text-gray-500 mb-6 text-justify">
-              Pengantar Industri dan Bisnis Keberlanjutan adalah mata kuliah
-              yang akan memperkenalkan tentang prinsip-prinsip dasar industri
-              dan bisnis berkelanjutan, yang berfokus pada pilar-pilar
-              keberlanjutan yaitu ekonomi, lingkungan, dan sosial. Serta, pada
-              mata kuliah ini akan dijelaskan bagaimana pentingnya integrasi
-              aspek keberlanjutan dalam pengambilan keputusan bisnis, dan juga
-              dampaknya terhadap lingkungan dan masyarakat.
+              {data?.subject.description}
             </p>
-
-            {/* Documents Section */}
-            <h2 className="text-xl font-semibold mb-4">Dokumen</h2>
-            <div className="flex items-center justify-between p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-md">
-              <div className="flex items-center w-full">
-                <img src="/pelatihanku/pdf.png" className="mr-2" alt="" />
-                <div className="flex ml-4 justify-between w-full">
-                  <p className="text-gray-700 font-semibold mt-1">
-                    Materi Pendahuluan
-                  </p>
-                  <DownloadButton />
-                </div>
-              </div>
-              <button className="text-green-500 hover:text-green-700"></button>
-            </div>
           </div>
         </div>
       </div>
 
       {/* Pertemuan Section */}
       <div className="mt-6">
-        <Dropdown />
+        {data?.sessions.map((session, index) => (
+          <div key={session.id} className="mb-4">
+            <div className="mx-auto my-4 bg-white rounded-lg shadow">
+              {session.is_locked ? (
+                // Locked session
+                <div className="w-full flex justify-between h-14 items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">
+                  <span>
+                    Pertemuan {index + 1}: {session.title}
+                  </span>
+                  <CiLock className="text-xl" />
+                </div>
+              ) : (
+                // Unlocked session
+                <>
+                  <button
+                    onClick={() => toggleDropdown(session.id)}
+                    className="w-full flex justify-between h-14 items-center bg-blue-500 text-white px-4 py-2 rounded-t-lg"
+                  >
+                    <span>
+                      Pertemuan {index + 1}: {session.title}
+                    </span>
+                    {openSessions[session.id] ? (
+                      <FaChevronUp />
+                    ) : (
+                      <FaChevronDown />
+                    )}
+                  </button>
 
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 2
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
-
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 3
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
-
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 4
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
-
-        <div className="bg-white w-full h-14 flex items-center justify-between px-5 rounded-xl mb-4">
-          <h1 className=" text-[#9CA3AF] md:text-base text-sm font-semibold">
-            Pertemuan 5
-          </h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V7.875A4.875 4.875 0 007.5 7.875V10.5M7.5 10.5h9a2.25 2.25 0 012.25 2.25v6.75A2.25 2.25 0 0116.5 21H7.5a2.25 2.25 0 01-2.25-2.25v-6.75A2.25 2.25 0 017.5 10.5z"
-            />
-          </svg>
-        </div>
+                  {openSessions[session.id] && renderSessionContent(session)}
+                </>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

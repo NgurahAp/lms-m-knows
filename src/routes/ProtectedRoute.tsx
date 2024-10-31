@@ -10,7 +10,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { authState } = useAuth();
 
   useEffect(() => {
-    console.log("ProtectedRoute - Current authState:", authState);
+    // console.log("ProtectedRoute - Current authState:", authState);
   }, [authState]);
 
   if (!authState.isAuthenticated) {

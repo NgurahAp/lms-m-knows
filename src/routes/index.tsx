@@ -2,8 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
-import ProductList from "../pages/products";
-import ProductDetail from "../pages/products/ProductDetail";
 import { Login } from "../pages/auth/login";
 import { Register } from "../pages/auth/register";
 import { ForgetPw } from "../pages/auth/forgetpw";
@@ -15,6 +13,9 @@ import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihan-keterampilan";
 import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
 import { NilaiSertifikat } from "../pages/nilai-sertifikat";
+import { Bootcamp } from "../pages/bootcamp";
+import { AllFeatures } from "../pages/allFeatures";
+import { Modul } from "../pages/pelatihanku/modul";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -36,6 +37,22 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
+            path="/bootcamp"
+            element={
+              <ProtectedRoute>
+                <Bootcamp />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/allFeatures"
+            element={
+              <ProtectedRoute>
+                <AllFeatures />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/pelatihanku"
             element={
               <ProtectedRoute>
@@ -47,7 +64,16 @@ const AppRoutes: React.FC = () => {
             path="/pelatihanku/:pelatihankuId"
             element={
               <ProtectedRoute>
+
                 <PelatihankuDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/modul/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <Modul />
               </ProtectedRoute>
             }
           />
@@ -56,22 +82,6 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Penugasan />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/products"
-            element={
-              <ProtectedRoute>
-                <ProductList />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/products/:productId"
-            element={
-              <ProtectedRoute>
-                <ProductDetail />
               </ProtectedRoute>
             }
           />

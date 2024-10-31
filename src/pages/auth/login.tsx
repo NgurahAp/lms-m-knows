@@ -3,15 +3,19 @@ import { AuthCarousel } from "../../components/AuthCarousel";
 import FormInput from "../../components/reusable/FormInput";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { useUserProfile } from "../../services/AuthService";
 
 export const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // State untuk error message
+  const [errorMessage, setErrorMessage] = useState("");
   const { handleLogin } = useAuth();
   const navigate = useNavigate();
+
+  // Tambahkan useUserProfile hook
+  const { refetch: fetchUserProfile } = useUserProfile();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -19,13 +23,21 @@ export const Login: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); 
-    setErrorMessage(""); 
+    setIsLoading(true);
+    setErrorMessage("");
 
     try {
       const success = await handleLogin(username, password);
-      setIsLoading(false); 
+
       if (success) {
+        // Fetch user profile setelah login berhasil
+        const userProfileResult = await fetchUserProfile();
+
+        if (userProfileResult.error) {
+          throw new Error("Gagal mengambil data profil");
+        }
+
+        setIsLoading(false);
         navigate("/dashboard");
       } else {
         throw new Error("Username atau password salah.");
