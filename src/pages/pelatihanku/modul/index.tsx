@@ -71,7 +71,7 @@ export const Modul = () => {
           {data?.modules.map((module) => (
             <Link
               key={module.id}
-              to={`/module/${module.id}`} 
+              to={`/detailModul/${subjectId}/${sessionId}/${module.id}`} 
               className={`flex p-4 ${
                 module.submitted ? "bg-green-100" : "bg-gray-100"
               } rounded-lg shadow-md w-5/12 mb-4`}
