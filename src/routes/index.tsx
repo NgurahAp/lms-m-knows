@@ -16,6 +16,7 @@ import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { Bootcamp } from "../pages/bootcamp";
 import { AllFeatures } from "../pages/allFeatures";
 import { Modul } from "../pages/pelatihanku/modul";
+import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -74,6 +75,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Modul />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/detailModul/:subjectId/:sessionId/:moduleId"
+            element={
+              <ProtectedRoute>
+                <DetailModule />
               </ProtectedRoute>
             }
           />

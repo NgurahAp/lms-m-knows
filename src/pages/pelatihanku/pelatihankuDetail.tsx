@@ -1,9 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaCheckCircle, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import { useState } from "react";
 import { useSubjectData } from "../../services/MyStudyService";
-import { Session, SessionProgress } from "../../types/pelatihanku";
+import { Session, SessionProgress } from "../../types/pelatihanku/pelatihanku";
+import { FaChevronRight } from "react-icons/fa";
 
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
@@ -176,7 +177,28 @@ export const PelatihankuDetail: React.FC = () => {
 
   return (
     <div className="bg-gray-50 md:p-48 px-8 py-28">
-      {/* Main Content */}
+      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
+        <Link to="/dashboard" className="flex items-center">
+          <img
+            src="/pelatihanku/home.png"
+            className="md:w-6 w-5 -mt-1"
+            alt="Home"
+          />
+          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
+            Beranda
+          </span>
+        </Link> 
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <Link to="/pelatihanku">
+          <span className="text-blue-500 md:text-base text-sm font-semibold">
+            Pelatihan-ku
+          </span>
+        </Link>
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
+          {data?.subject.name}
+        </span>
+      </div>
       <div className="bg-white p-6 mt-8 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold pb-5">Pendahuluan</h1>
         <div className="flex flex-col lg:flex-row">
