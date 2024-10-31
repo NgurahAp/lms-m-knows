@@ -1,85 +1,34 @@
+import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useNilaiData } from "../../services/PelatihanKetService";
 
-export const PelatihanKet = () => {
-  const [activeTab, setActiveTab] = useState<"beranda" | "nilai" | "pelatihan">("nilai");
+export const PelatihanKet: React.FC = () => {
+  const {
+    data: nilaiData,
+    isLoading: isNilaiLoading,
+    isError: isNilaiError,
+  } = useNilaiData();
 
-  const tabs = [
-    { id: "nilai", label: "Nilai" },
-    { id: "sertifikat", label: "Sertifikat" },
-  ];
+  if (isNilaiLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
-   const data = [
-     {
-       title: "Peran dan Kompetensi Anti Fraud",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title: "Pola Komunikasi Antar Budaya dan Meningkatkan Kepercayaan Diri",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title:
-         "Pengelolaan Bahasa Tubuh dan Nada Suara untuk Deteksi Dini Potensi Fraud",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title:
-         "Penggalian Informasi, Meningkatkan Kepercayaan Diri, Membaca Tulisan dan Tanda Tangan",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title:
-         "Teknik Membaur Diterima Seluruh Karyawan, serta Teknik Komunikasi Bawah Sadar Melalui Cerita",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title:
-         "Teknik Komunikasi Situasi Konflik dan Berhadapan Dengan Informan",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title: "Praktek, Role Play dan Games",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-     {
-       title: "Praktek, Role Play dan Games & Post-Test",
-       module: 100,
-       quiz: 100,
-       assignment: 100,
-       average: 100,
-       grade: "A",
-     },
-   ];
+  if (isNilaiError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Error fetching nilai Data.
+      </div>
+    );
+  }
+
+  // Mengakses subjects dari dalam properti data
+  const sessions = nilaiData?.sessions ?? [];
+  console.log(sessions);
 
   return (
     <div className=" flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -124,16 +73,16 @@ export const PelatihanKet = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
-                <tr key={index} className="text-center">
+              {sessions.map((session) => (
+                <tr key={session.id} className="text-center">
                   <td className="flex h-14 px-4 py-4 border-b-2 border-gray-200 text-left">
-                    {item.title}
+                    {session.title}
                   </td>
-                  <td className="py-2 px-4 border">{item.module}</td>
-                  <td className="py-2 px-4 border">{item.quiz}</td>
-                  <td className="py-2 px-4 border">{item.assignment}</td>
-                  <td className="py-2 px-4 border">{item.average}</td>
-                  <td className="py-2 px-4 border">{item.grade}</td>
+                  <td className="py-2 px-4 border">{session.module_score}</td>
+                  <td className="py-2 px-4 border">{session.quiz_score}</td>
+                  <td className="py-2 px-4 border">{session.assignment_score}</td>
+                  <td className="py-2 px-4 border">{session.average_score}</td>
+                  <td className="py-2 px-4 border">{session.average_score_letter}</td>
                 </tr>
               ))}
             </tbody>

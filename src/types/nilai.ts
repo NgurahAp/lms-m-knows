@@ -29,9 +29,7 @@ export interface NilaiResponse {
   code: number;
   status: string;
   message: string;
-  data: {
-    student: Student;
-    subjects: Subject[]; 
-  };
+  student: Student;
+  subjects: Subject[]; 
   meta: Meta;
 }

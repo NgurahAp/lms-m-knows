@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Sertifikat } from "./popup";
 import { useNilaiResponse } from "../../services/NilaiService";
+import { FaChevronRight } from "react-icons/fa";
 
 export const NilaiSertifikat: React.FC = () => {
   const {
@@ -36,36 +37,42 @@ export const NilaiSertifikat: React.FC = () => {
 
   // Mengakses subjects dari dalam properti data
   const subjects = nilaiResponse?.subjects ?? [];
+  console.log(subjects);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      {/* Breadcrumb */}
-      <div className="flex items-center mb-4">
-        <Link
-          to="/dashboard"
-          className="text-blue-500 hover:underline flex items-center"
-        >
-          <img src="/pelatihanku/home.png" className="w-5 h-5" alt="Home" />
-          <span className="ml-2">Beranda</span>
+    <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
+        <Link to="/dashboard" className="flex items-center">
+          <img
+            src="/pelatihanku/home.png"
+            className="md:w-6 w-5 -mt-1 "
+            alt="Home"
+          />
+          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
+            Beranda
+          </span>
         </Link>
-        <span className="mx-2 text-gray-400">/</span>
-        <span className="text-gray-400">Nilai & Sertifikat</span>
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
+          Nilai & Sertifikat
+        </span>
       </div>
 
-      {/* Title Card */}
-      <div className="bg-white rounded-lg p-4 mb-4 shadow-sm">
-        <h1 className="text-lg font-semibold">Nilai dan Sertifikat</h1>
+      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
+        <h1 className=" md:text-lg text-sm font-semibold">
+          Nilai dan Sertifikat
+        </h1>
       </div>
 
       {/* Main Content Card */}
-      <div className="bg-white rounded-lg shadow-sm">
+      <div className="bg-white rounded-lg shadow-lg w-full">
         {/* Tabs */}
-        <div className="border-b">
-          <div className="flex">
+        <div className="p-8">
+          <div className="flex flex-wrap border-b border-white">
             <button
-              className={`px-8 py-4 text-lg font-semibold ${
+              className={`py-4 px-10 text-xl font-semibold border-1 whitespace-nowrap ${
                 activeTab === "nilai"
-                  ? "text-blue-500 border-b-2 border-blue-500"
+                  ? "text-blue-500 border-b-4 border-blue-500"
                   : "text-gray-500"
               }`}
               onClick={() => setActiveTab("nilai")}
@@ -73,9 +80,9 @@ export const NilaiSertifikat: React.FC = () => {
               Nilai
             </button>
             <button
-              className={`px-8 py-4 text-lg font-semibold ${
+              className={`py-4 px-10 text-xl font-semibold border-1 whitespace-nowrap ${
                 activeTab === "sertifikat"
-                  ? "text-blue-500 border-b-2 border-blue-500"
+                  ? "text-blue-500 border-b-4 border-blue-500"
                   : "text-gray-500"
               }`}
               onClick={() => setActiveTab("sertifikat")}
@@ -88,7 +95,7 @@ export const NilaiSertifikat: React.FC = () => {
         {/* Content */}
         <div className="p-6">
           {activeTab === "nilai" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {subjects.map((subject) => (
                 <div
                   key={subject.id}
@@ -165,7 +172,14 @@ export const NilaiSertifikat: React.FC = () => {
                     }
                     disabled={subject.status === "BELUM SELESAI"}
                   >
-                    Lihat Sertifikat
+                    <div className="pt-2">
+                      <Link
+                        to="/pelatihan-keterampilan"
+                        className="inline-block w-full text-center px-4 py-2 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                      >
+                        Lihat Sertifikat
+                      </Link>
+                    </div>
                   </button>
                 </div>
               ))}
