@@ -1,22 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaCheckCircle, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import { useState } from "react";
 import { useSubjectData } from "../../services/MyStudyService";
 import { Session, SessionProgress } from "../../types/pelatihanku";
 
-type PelatihankuDetailHeaderProps = object;
-
-export const PelatihankuDetailHeader: React.FC<
-  PelatihankuDetailHeaderProps
-> = () => {
-  return <div>{/* Header content */}</div>;
-};
-
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
   const { data, isLoading, error } = useSubjectData(pelatihankuId || "");
   const [openSessions, setOpenSessions] = useState<Record<string, boolean>>({});
+  const navigate = useNavigate();
 
   const toggleDropdown = (sessionId: string) => {
     setOpenSessions((prev) => ({
@@ -87,8 +80,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("MODULE", session.progress, () => {
-              // Add your navigation logic here for module
-              console.log("Navigate to module");
+              navigate(`/modul/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -184,7 +176,6 @@ export const PelatihankuDetail: React.FC = () => {
 
   return (
     <div className="bg-gray-50 md:p-48 px-8 py-28">
-      <PelatihankuDetailHeader />
       {/* Main Content */}
       <div className="bg-white p-6 mt-8 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold pb-5">Pendahuluan</h1>
