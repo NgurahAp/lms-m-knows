@@ -1,14 +1,4 @@
-export interface StudySubjectSessionResponse {
-  code: number;
-  status: string;
-  message: string;
-  data: {
-    detail: StudySubjectDetail;
-    modules: Module[];
-  };
-}
-
-interface StudySubjectDetail {
+interface ModuleDetail {
   subject_id: string;
   subject_name: string;
   session_id: string;
@@ -16,7 +6,7 @@ interface StudySubjectDetail {
   session_type: string;
 }
 
-export interface Module {
+interface Module {
   id: string;
   total_videos: string;
   total_documents: string;
@@ -25,5 +15,10 @@ export interface Module {
   is_all_video_seen: boolean;
   title: string;
   description: string;
-  submitted: boolean
+  submitted: boolean;
+}
+
+export interface ModuleResponse {
+  detail: ModuleDetail;
+  modules: Module[];
 }

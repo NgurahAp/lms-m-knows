@@ -1,46 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
-import { Module } from "../../../types/pelatihanku/modul";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { FaBookOpen } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
-
-const modulesData: Module[] = [
-  {
-    id: "72ae4f34-130b-4a40-8460-7487166e5170",
-    total_videos: "0",
-    total_documents: "1",
-    total_journals: "0",
-    total_articles: "0",
-    is_all_video_seen: true,
-    title: "Modul Pertama",
-    description: "-",
-    submitted: true,
-  },
-  {
-    id: "b19e7e34-1458-4a8f-ae87-849a82dc13f1",
-    total_videos: "2",
-    total_documents: "3",
-    total_journals: "1",
-    total_articles: "0",
-    is_all_video_seen: false,
-    title: "Modul Kedua",
-    description: "Deskripsi untuk modul kedua.",
-    submitted: false,
-  },
-  {
-    id: "b19e7e34-1458-4a8f-ae87-849a82dc13f1",
-    total_videos: "2",
-    total_documents: "3",
-    total_journals: "1",
-    total_articles: "0",
-    is_all_video_seen: false,
-    title: "Modul Ketiga",
-    description: "Deskripsi untuk modul kedua.",
-    submitted: false,
-  },
-];
+import { useModuleData } from "../../../services/modul/ModulService";
+import { FaCheck } from "react-icons/fa";
 
 export const Modul = () => {
   const { subjectId, sessionId } = useParams<{
@@ -48,8 +13,25 @@ export const Modul = () => {
     sessionId: string;
   }>();
 
-  console.log("SubjectId: ", subjectId);
-  console.log("SessionId: ", sessionId);
+  const { data, isLoading, error } = useModuleData(subjectId, sessionId);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  // console.log("SubjectId: ", data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -65,16 +47,31 @@ export const Modul = () => {
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-blue-500 md:text-base text-sm font-semibold">
-          Pelatihan-ku
+        <Link to="/pelatihanku">
+          <span className="text-blue-500 md:text-base text-sm font-semibold">
+            Pelatihan-ku
+          </span>
+        </Link>
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <Link to={`/pelatihanku/${data?.detail.subject_id}`}>
+          <span className="text-blue-500 md:text-base text-sm font-semibold">
+            {data?.detail.subject_name}
+          </span>
+        </Link>
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <span className="text-gray-400 md:text-base text-sm font-semibold">
+          Pertemuan {data?.detail.session_no}
         </span>
       </div>
       <div className="bg-white flex flex-col items-center mt-5 p-8 justify-center">
-        <h1 className="font-bold text-4xl mb-5">Modul Pertemuan 1</h1>
+        <h1 className="font-bold text-4xl mb-5">
+          Modul Pertemuan {data?.detail.session_no}
+        </h1>
         <div className="flex flex-wrap w-full justify-center gap-x-20 gap-y-8">
-          {modulesData.map((module) => (
-            <div
+          {data?.modules.map((module) => (
+            <Link
               key={module.id}
+              to={`/module/${module.id}`} 
               className={`flex p-4 ${
                 module.submitted ? "bg-green-100" : "bg-gray-100"
               } rounded-lg shadow-md w-5/12 mb-4`}
@@ -86,9 +83,9 @@ export const Modul = () => {
               >
                 <div className="flex items-center justify-center">
                   {module.submitted && (
-                    <span className="text-green-700 font-semibold text-center">
-                      ✔
-                    </span>
+                    <div className="bg-green-600 rounded-full">
+                      <FaCheck className="text-white p-1 text-xl" />
+                    </div>
                   )}
                 </div>
                 <div className="flex gap-2">
@@ -118,11 +115,11 @@ export const Modul = () => {
                   </div>
                 </div>
               </div>
-              <div className="ml-4">
+              <div className="ml-4 flex flex-col justify-center">
                 <h3 className="text-lg font-semibold">{module.title}</h3>
                 <p className="text-sm text-gray-600">{module.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -88,7 +88,6 @@ export const Pelatihanku = () => {
         <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
           Pelatihan-ku
         </span>
-        <FaChevronRight className="text-gray-300 mx-4" />
       </div>
 
       <section className="bg-white mt-5 rounded-xl">
