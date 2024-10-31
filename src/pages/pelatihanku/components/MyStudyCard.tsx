@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MyStudyData } from "../../../types/pelatihanku";
+import { MyStudyData } from "../../../types/pelatihanku/pelatihanku";
 
 export const MyStudyCard: React.FC<{ training: MyStudyData }> = ({
   training,

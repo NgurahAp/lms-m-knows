@@ -4,7 +4,7 @@ import { MyStudyCard } from "./components/MyStudyCard";
 import { useState } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { useMyStudyData } from "../../services/MyStudyService";
-import { MyStudyData } from "../../types/pelatihanku";
+import { MyStudyData } from "../../types/pelatihanku/pelatihanku";
 
 export const Pelatihanku = () => {
   const [activeTab, setActiveTab] = useState<"ongoing" | "completed">(
