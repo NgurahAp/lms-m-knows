@@ -13,6 +13,7 @@ import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
 import { Bootcamp } from "../pages/bootcamp";
 import { AllFeatures } from "../pages/allFeatures";
+import { Modul } from "../pages/pelatihanku/modul";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -61,6 +62,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <PelatihankuDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/modul/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <Modul />
               </ProtectedRoute>
             }
           />
