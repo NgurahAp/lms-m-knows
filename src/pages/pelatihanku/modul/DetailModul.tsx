@@ -3,7 +3,7 @@ import { FaCheck, FaChevronRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { useDetailModuleData } from "../../../services/modul/ModulService";
-import { RiFileEditLine } from "react-icons/ri";
+import ModuleCompletionDialog from "./components/Summary";
 
 export const DetailModule = () => {
   const { subjectId, sessionId, moduleId } = useParams<{
@@ -103,7 +103,7 @@ export const DetailModule = () => {
               </p>
               <Link
                 to={`/quis/${subjectId}/${sessionId}`}
-                className=" px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className=" px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
                 Lanjutkan Ke Kuis
               </Link>
@@ -144,7 +144,13 @@ export const DetailModule = () => {
             </div>
             <div className="flex justify-center">
               <div className="flex justify-center">
-                {data?.module.status === "finished" ? (
+                <ModuleCompletionDialog
+                  onComplete={() => {
+                    // Tambahkan logika untuk menandai modul sebagai selesai
+                    console.log("Modul selesai");
+                  }}
+                />
+                {/* {data?.module.status === "FINISHED" ? (
                   <button className="mt-4 px-20 py-4 flex rounded-lg items-center bg-green-500 text-xl gap-3 text-white hover:bg-green-600">
                     <div className="bg-white rounded-full">
                       <FaCheck className="text-green-600 p-1 text-xl" />
@@ -152,11 +158,13 @@ export const DetailModule = () => {
                     Modul Selesai
                   </button>
                 ) : (
-                  <button className="mt-4 px-20 py-4 flex rounded-lg items-center bg-blue-500 text-xl gap-2 text-white hover:bg-blue-600">
-                    <RiFileEditLine className="text-white text-2xl" />
-                    Selesaikan Modul
-                  </button>
-                )}
+                  <ModuleCompletionDialog
+                    onComplete={() => {
+                      // Tambahkan logika untuk menandai modul sebagai selesai
+                      console.log("Modul selesai");
+                    }}
+                  />
+                )} */}
               </div>
             </div>
           </div>
