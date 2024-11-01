@@ -3,17 +3,6 @@ import { RiFileEditLine, RiLoader4Line } from "react-icons/ri";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useSubmitModuleAnswer } from "../../../../services/modul/ModulService";
 
-// Define the types for your API request and response
-interface ModuleAnswerRequest {
-  moduleId: string;
-  module_answer: string;
-}
-
-interface SubmitResponseData {
-  success: boolean;
-  message: string;
-}
-
 interface ModuleCompletionDialogProps {
   onComplete?: () => void;
   moduleId: string | undefined;
@@ -27,12 +16,7 @@ const ModuleCompletionDialog: React.FC<ModuleCompletionDialogProps> = ({
   const [summary, setSummary] = useState("");
 
   const { mutate: submitAnswer, isPending } =
-    useSubmitModuleAnswer() as unknown as UseMutationResult<
-      SubmitResponseData,
-      Error,
-      ModuleAnswerRequest,
-      unknown
-    >;
+    useSubmitModuleAnswer() as UseMutationResult;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
