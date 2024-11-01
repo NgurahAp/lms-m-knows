@@ -18,7 +18,31 @@ interface Module {
   submitted: boolean;
 }
 
+interface ModuleItems {
+  id: string;
+  title: string;
+  description: string;
+  is_all_video_seen: boolean;
+  videos: unknown[];
+  documents: {
+    id: string;
+    document_id: string | null;
+    document_file: string;
+    module_id: string;
+    title: string;
+    duration_in_seconds: number;
+  }[];
+  journals: unknown[];
+  articles: unknown[];
+  status: string;
+}
+
 export interface ModuleResponse {
   detail: ModuleDetail;
   modules: Module[];
+}
+
+export interface DetailModuleResponse {
+  detail: ModuleDetail;
+  module: ModuleItems;
 }

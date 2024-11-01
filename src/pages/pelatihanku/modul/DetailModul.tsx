@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { FaCheck, FaChevronRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
+import { useDetailModuleData } from "../../../services/modul/ModulService";
 
 export const DetailModule = () => {
   const { subjectId, sessionId, moduleId } = useParams<{
@@ -10,9 +11,29 @@ export const DetailModule = () => {
     moduleId: string;
   }>();
 
-  console.log("SubjectId: ", subjectId);
-  console.log("SessionId: ", sessionId);
-  console.log("ModuleId: ", moduleId);
+  const { data, isLoading, error } = useDetailModuleData(
+    subjectId,
+    sessionId,
+    moduleId
+  );
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  console.log(data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
