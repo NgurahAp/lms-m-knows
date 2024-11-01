@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { RiFileEditLine } from "react-icons/ri";
+import { RiFileEditLine, RiLoader4Line } from "react-icons/ri";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useSubmitModuleAnswer } from "../../../../services/modul/ModulService";
-
-// Define the types for your API request and response
-interface ModuleAnswerRequest {
-  moduleId: string;
-  module_answer: string;
-}
-
-interface SubmitResponseData {
-  // Add your response data structure here
-  // For example:
-  success: boolean;
-  message: string;
-}
 
 interface ModuleCompletionDialogProps {
   onComplete?: () => void;
@@ -28,13 +15,8 @@ const ModuleCompletionDialog: React.FC<ModuleCompletionDialogProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [summary, setSummary] = useState("");
 
-  const { mutate: submitAnswer } =
-    useSubmitModuleAnswer() as unknown as UseMutationResult<
-      SubmitResponseData,
-      Error,
-      ModuleAnswerRequest,
-      unknown
-    >;
+  const { mutate: submitAnswer, isPending } =
+    useSubmitModuleAnswer() as UseMutationResult;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -88,7 +70,7 @@ const ModuleCompletionDialog: React.FC<ModuleCompletionDialogProps> = ({
     }
   };
 
-  const isSubmitDisabled = summary.length < 52;
+  const isSubmitDisabled = summary.length < 52 || isPending;
 
   return (
     <>
@@ -171,7 +153,14 @@ const ModuleCompletionDialog: React.FC<ModuleCompletionDialogProps> = ({
                       : "bg-blue-600 text-white hover:bg-blue-700"
                   }`}
                 >
-                  Kirim
+                  {isPending ? (
+                    <div className="flex items-center">
+                      <RiLoader4Line className="animate-spin mr-2" />
+                      Mengirim...
+                    </div>
+                  ) : (
+                    "Kirim"
+                  )}
                 </button>
               </div>
             </form>
