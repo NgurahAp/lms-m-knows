@@ -1,10 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { AllFeatures } from "../pages/allFeatures";
-import { ForgetPw } from "../pages/auth/forgetpw";
-import { Login } from "../pages/auth/login";
-import { Register } from "../pages/auth/register";
-import { Verification } from "../pages/auth/verification";
 import { Bootcamp } from "../pages/bootcamp";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
@@ -14,6 +10,8 @@ import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
 import ProtectedRoute from "./ProtectedRoute";
+import LoginRoute from "./LoginRoute";
+import { Login } from "../pages/auth/login";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -21,10 +19,14 @@ const AppRoutes: React.FC = () => {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgetpw" element={<ForgetPw />} />
-          <Route path="/verification" element={<Verification />} />
+          <Route
+            path="/login"
+            element={
+              <LoginRoute>
+                <Login />
+              </LoginRoute>
+            }
+          />
           <Route
             path="/dashboard"
             element={
