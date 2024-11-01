@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
@@ -8,10 +8,6 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { authState } = useAuth();
-
-  useEffect(() => {
-    // console.log("ProtectedRoute - Current authState:", authState);
-  }, [authState]);
 
   if (!authState.isAuthenticated) {
     console.log("ProtectedRoute - Not authenticated, redirecting to login");
