@@ -6,8 +6,10 @@ import { Login } from "../pages/auth/login";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import Dashboard from "../pages/dashboard";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
+import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihan-keterampilan";
 import { Pelatihanku } from "../pages/pelatihanku";
 import { Penugasan } from "../pages/penugasan";
+import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { Bootcamp } from "../pages/bootcamp";
 import { AllFeatures } from "../pages/allFeatures";
 import { Modul } from "../pages/pelatihanku/modul";
@@ -28,6 +30,7 @@ const AppRoutes: React.FC = () => {
               </LoginRoute>
             }
           />
+
           <Route
             path="/dashboard"
             element={
@@ -64,6 +67,7 @@ const AppRoutes: React.FC = () => {
             path="/pelatihanku/:pelatihankuId"
             element={
               <ProtectedRoute>
+
                 <PelatihankuDetail />
               </ProtectedRoute>
             }
@@ -89,6 +93,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Penugasan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nilai-sertifikat"
+            element={
+              <ProtectedRoute>
+                <NilaiSertifikat />
               </ProtectedRoute>
             }
           />
