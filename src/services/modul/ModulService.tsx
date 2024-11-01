@@ -75,7 +75,8 @@ export const useSubmitModuleAnswer = () => {
   return useMutation<
     SubmitResponseData, // Response data type
     Error, // Error type
-    ModuleAnswerRequest // Variables type (input parameters)
+    ModuleAnswerRequest,
+    unknown
   >({
     mutationFn: submitModuleAnswer,
     onSuccess: (data) => {

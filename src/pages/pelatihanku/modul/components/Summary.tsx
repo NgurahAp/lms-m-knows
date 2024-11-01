@@ -1,18 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { RiFileEditLine } from "react-icons/ri";
+import { UseMutationResult } from "@tanstack/react-query";
 import { useSubmitModuleAnswer } from "../../../../services/modul/ModulService";
 
-const ModuleCompletionDialog = ({
-  onComplete,
-  moduleId,
-}: {
+// Define the types for your API request and response
+interface ModuleAnswerRequest {
+  moduleId: string;
+  module_answer: string;
+}
+
+interface SubmitResponseData {
+  // Add your response data structure here
+  // For example:
+  success: boolean;
+  message: string;
+}
+
+interface ModuleCompletionDialogProps {
   onComplete?: () => void;
   moduleId: string | undefined;
+}
+
+const ModuleCompletionDialog: React.FC<ModuleCompletionDialogProps> = ({
+  onComplete,
+  moduleId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [summary, setSummary] = useState("");
 
-  const { mutate: submitAnswer, isLoading } = useSubmitModuleAnswer();
+  const { mutate: submitAnswer } =
+    useSubmitModuleAnswer() as unknown as UseMutationResult<
+      SubmitResponseData,
+      Error,
+      ModuleAnswerRequest,
+      unknown
+    >;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -66,7 +88,7 @@ const ModuleCompletionDialog = ({
     }
   };
 
-  const isSubmitDisabled = summary.length < 52 || isLoading;
+  const isSubmitDisabled = summary.length < 52;
 
   return (
     <>
@@ -149,10 +171,7 @@ const ModuleCompletionDialog = ({
                       : "bg-blue-600 text-white hover:bg-blue-700"
                   }`}
                 >
-                  {isLoading ? (
-                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                  ) : null}
-                  {isLoading ? "Mengirim..." : "Kirim"}
+                  Kirim
                 </button>
               </div>
             </form>

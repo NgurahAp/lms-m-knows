@@ -12,7 +12,7 @@ export const DetailModule = () => {
     moduleId: string;
   }>();
 
-  const { data, isLoading, error } = useDetailModuleData(
+  const { data, isLoading, error, refetch } = useDetailModuleData(
     subjectId,
     sessionId,
     moduleId
@@ -144,14 +144,7 @@ export const DetailModule = () => {
             </div>
             <div className="flex justify-center">
               <div className="flex justify-center">
-                <ModuleCompletionDialog
-                  moduleId={data?.module.id}
-                  onComplete={() => {
-                    // Tambahkan logika untuk menandai modul sebagai selesai
-                    console.log("Modul selesai");
-                  }}
-                />
-                {/* {data?.module.status === "FINISHED" ? (
+                {data?.module.status === "FINISHED" ? (
                   <button className="mt-4 px-20 py-4 flex rounded-lg items-center bg-green-500 text-xl gap-3 text-white hover:bg-green-600">
                     <div className="bg-white rounded-full">
                       <FaCheck className="text-green-600 p-1 text-xl" />
@@ -160,12 +153,12 @@ export const DetailModule = () => {
                   </button>
                 ) : (
                   <ModuleCompletionDialog
+                    moduleId={data?.module.id}
                     onComplete={() => {
-                      // Tambahkan logika untuk menandai modul sebagai selesai
-                      console.log("Modul selesai");
+                      refetch(); 
                     }}
                   />
-                )} */}
+                )}
               </div>
             </div>
           </div>
