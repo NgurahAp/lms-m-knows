@@ -46,3 +46,26 @@ export interface DetailModuleResponse {
   detail: ModuleDetail;
   module: ModuleItems;
 }
+
+
+export interface SubmitResponseData {
+  id: string;
+  student_id: string;
+  module_id: string;
+  quiz_id: string | null;
+  assignment_id: string | null;
+  session_id: string;
+  subject_id: string;
+  status: string;
+  type: string;
+  score: number;
+  is_late: boolean;
+  module_answer: string;
+  timestamp_taken: string;
+  timestamp_scored: string | null;
+  timestamp_submitted: string;
+  deadline: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}

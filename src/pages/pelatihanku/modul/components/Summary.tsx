@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { RiFileEditLine } from "react-icons/ri";
+import { useSubmitModuleAnswer } from "../../../../services/modul/ModulService";
 
 const ModuleCompletionDialog = ({
   onComplete,
+  moduleId,
 }: {
   onComplete?: () => void;
+  moduleId: string | undefined;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [summary, setSummary] = useState("");
+
+  const { mutate: submitAnswer, isLoading } = useSubmitModuleAnswer();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -44,16 +49,24 @@ const ModuleCompletionDialog = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (summary.length >= 52) {
-      onComplete?.();
-      setSummary("");
-      setIsOpen(false);
-
-      console.log(summary);
+    if (summary.length >= 52 && moduleId) {
+      submitAnswer(
+        {
+          moduleId,
+          module_answer: summary,
+        },
+        {
+          onSuccess: () => {
+            onComplete?.();
+            setSummary("");
+            setIsOpen(false);
+          },
+        }
+      );
     }
   };
 
-  const isSubmitDisabled = summary.length < 52;
+  const isSubmitDisabled = summary.length < 52 || isLoading;
 
   return (
     <>
@@ -101,7 +114,7 @@ const ModuleCompletionDialog = ({
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
                 <h3 className="font-medium text-gray-700">
-                  Materi apa yang kamu pelajari dalam   ini?
+                  Materi apa yang kamu pelajari dalam ini?
                 </h3>
 
                 <textarea
@@ -136,7 +149,10 @@ const ModuleCompletionDialog = ({
                       : "bg-blue-600 text-white hover:bg-blue-700"
                   }`}
                 >
-                  Kirim
+                  {isLoading ? (
+                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  ) : null}
+                  {isLoading ? "Mengirim..." : "Kirim"}
                 </button>
               </div>
             </form>

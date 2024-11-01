@@ -2,10 +2,16 @@ import axios from "axios";
 import {
   DetailModuleResponse,
   ModuleResponse,
+  SubmitResponseData,
 } from "../../types/pelatihanku/modul";
 import Cookies from "js-cookie";
 import { API_BASE_URL } from "../../config/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+interface ModuleAnswerRequest {
+  moduleId: string;
+  module_answer: string;
+}
 
 const fetchModulData = async (
   subjectId: string | undefined,
@@ -46,6 +52,39 @@ const fetchDetailModulData = async (
     }
   );
   return response.data.data;
+};
+
+const submitModuleAnswer = async ({
+  moduleId,
+  module_answer,
+}: ModuleAnswerRequest): Promise<SubmitResponseData> => {
+  const token = Cookies.get("accessToken");
+  const response = await axios.post(
+    `${API_BASE_URL}/api/v1/studi-ku/module/${moduleId}/resume`,
+    { module_answer },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const useSubmitModuleAnswer = () => {
+  return useMutation<
+    SubmitResponseData, // Response data type
+    Error, // Error type
+    ModuleAnswerRequest // Variables type (input parameters)
+  >({
+    mutationFn: submitModuleAnswer,
+    onSuccess: (data) => {
+      console.log("Success:", data);
+    },
+    onError: (error) => {
+      console.error("Error:", error);
+    },
+  });
 };
 
 export const useModuleData = (

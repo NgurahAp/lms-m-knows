@@ -145,6 +145,7 @@ export const DetailModule = () => {
             <div className="flex justify-center">
               <div className="flex justify-center">
                 <ModuleCompletionDialog
+                  moduleId={data?.module.id}
                   onComplete={() => {
                     // Tambahkan logika untuk menandai modul sebagai selesai
                     console.log("Modul selesai");
