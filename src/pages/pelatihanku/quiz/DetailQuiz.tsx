@@ -5,7 +5,10 @@ import { MdAccessAlarm } from "react-icons/md";
 import { PiExam } from "react-icons/pi";
 import { FaHistory } from "react-icons/fa";
 import { MdOutlineTaskAlt } from "react-icons/md";
-import { useDetailQuizData, useHistoryQuizData } from "../../../services/pelatihanku/QuizService";
+import {
+  useDetailQuizData,
+  useHistoryQuizData,
+} from "../../../services/pelatihanku/QuizService";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -44,10 +47,10 @@ export const DetailQuiz = () => {
     );
   }
 
-  const durationInSeconds = quizData?.data.quiz.duration ?? 0; // Fallback to 0 if undefined
+  const durationInSeconds = quizData?.data.quiz.duration ?? 0;
   const durationInMinutes = Math.floor(durationInSeconds / 60);
 
-  console.log(historyData)
+  console.log(historyData);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -86,7 +89,9 @@ export const DetailQuiz = () => {
         </span>
       </div>
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">{quizData?.data.quiz.title}</h1>
+        <h1 className="text-3xl font-semibold pb-3">
+          {quizData?.data.quiz.title}
+        </h1>
         <p className="text-lg">Pertemuan {quizData?.data.session.session_no}</p>
       </div>
       <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
@@ -95,33 +100,66 @@ export const DetailQuiz = () => {
         </div>
         <div className="w-1/2 py-10">
           <h1 className="text-xl font-semibold pb-5">Riwayat Quiz</h1>
-          <div className="border-[1px] rounded-md p-5">
-            <div className="flex justify-between">
-              <h2 className="text-sm font-semibold">Quiz Komunikasi 2</h2>
-              <h2 className="text-[#4B5565] text-sm ">
-                7 Juli 2023 - 19:23:12
-              </h2>
+          {historyData?.data.history_data?.[0] && (
+            <div className="border-[1px] rounded-md p-5">
+              <div className="flex justify-between">
+                <h2 className="text-sm font-semibold">
+                  Quiz Pertemuan {quizData?.data.session.session_no}
+                </h2>
+                <h2 className="text-[#4B5565] text-sm ">
+                  {new Date(
+                    historyData.data.history_data[0].timestamp_taken
+                  ).toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}{" "}
+                  -{" "}
+                  {new Date(
+                    historyData.data.history_data[0].timestamp_taken
+                  ).toLocaleTimeString("id-ID")}
+                </h2>
+              </div>
+              <div className="h-24 flex my-5 gap-x-2">
+                <div className="w-24 flex flex-col justify-center items-center gap-y-1">
+                  <h2 className="text-xs">Total Nilai</h2>
+                  <h1 className="text-3xl font-semibold">
+                    {historyData.data.history_data[0].score}
+                  </h1>
+                </div>
+                <div className="w-52 flex bg-[#DBF2EB] rounded-lg flex-col justify-center items-center gap-y-1">
+                  <h1 className="text-3xl font-semibold">
+                    {historyData.data.history_data[0].correct}
+                  </h1>
+                  <h2 className="text-xs">Jawaban Benar</h2>
+                </div>
+                <div className="w-52 flex bg-[#F6DCDB] rounded-lg flex-col justify-center items-center gap-y-1">
+                  <h1 className="text-3xl font-semibold">
+                    {historyData.data.history_data[0].wrong}
+                  </h1>
+                  <h2 className="text-xs">Jawaban Salah</h2>
+                </div>
+                <div className="w-52 flex bg-[#ECFDBF] rounded-lg flex-col justify-center items-center gap-y-1">
+                  <h1 className="text-3xl font-semibold">
+                    {historyData.data.history_data[0].total_question}
+                  </h1>
+                  <h2 className="text-xs">Soal</h2>
+                </div>
+              </div>
+              <p className="text-sm">
+                Waktu Selesai{" "}
+                {(() => {
+                  const timeInSeconds =
+                    historyData.data.history_data[0].time_elapsed;
+                  const minutes = Math.floor(timeInSeconds / 60);
+                  const seconds = timeInSeconds % 60;
+                  return `${minutes.toString().padStart(2, "0")}:${seconds
+                    .toString()
+                    .padStart(2, "0")}`;
+                })()}
+              </p>
             </div>
-            <div className="h-24 flex my-5 gap-x-2">
-              <div className="w-24 flex flex-col justify-center items-center gap-y-1">
-                <h2 className="text-xs">Poin</h2>
-                <h1 className="text-3xl font-semibold">100</h1>
-              </div>
-              <div className="w-52 flex bg-[#DBF2EB] rounded-lg flex-col justify-center items-center gap-y-1">
-                <h1 className="text-3xl font-semibold">100</h1>
-                <h2 className="text-xs">Poin</h2>
-              </div>
-              <div className="w-52 flex bg-[#F6DCDB] rounded-lg flex-col justify-center items-center gap-y-1">
-                <h1 className="text-3xl font-semibold">100</h1>
-                <h2 className="text-xs">Poin</h2>
-              </div>
-              <div className="w-52 flex bg-[#ECFDBF] rounded-lg flex-col justify-center items-center gap-y-1">
-                <h1 className="text-3xl font-semibold">100</h1>
-                <h2 className="text-xs">Poin</h2>
-              </div>
-            </div>
-            <p className="text-xs">Waktu Selesai: 00:09:51</p>
-          </div>
+          )}
           <div>
             <div>
               <h1 className="text-xl font-semibold pt-5 pb-2">Detail Quiz</h1>
@@ -155,26 +193,37 @@ export const DetailQuiz = () => {
           <div>
             <h1 className="text-xl font-semibold pt-7 pb-2">Pengaturan Quiz</h1>
             <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> 10 Soal
+              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Kerjakan
+              Dengan Jujur
             </div>
             <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Durasi 10
-              Menit
+              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Dilarang
+              Bekerja Sama
             </div>
             <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Nilai
-              Kelulusan minimal 80
+              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Apabila
+              Keluar dari App, Waktu Quiz Tetap Berjalan
             </div>
             <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Max. 3x
-              Pengulangan
+              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Percobaan
+              Quiz Terakhir Merupakan Nilai Dipakai
             </div>
           </div>
           <h1 className="py-3 text-blue-500 font-medium">
-            Kesempatan mengerjakan tersisa : 3 kali
+            Kesempatan mengerjakan tersisa :{" "}
+            {historyData?.data.remaining_attempt} kali
           </h1>
-          <button className="bg-blue-500 text-white flex w-full items-center py-4 rounded-xl justify-center mt-5">
-            Mulai Quiz
+          <button
+            className={`flex w-full items-center py-4 rounded-xl justify-center mt-5 ${
+              historyData?.data.remaining_attempt === 0
+                ? "bg-gray-400 text-white cursor-not-allowed"
+                : "bg-blue-500 text-white"
+            }`}
+            disabled={historyData?.data.remaining_attempt === 0}
+          >
+            {historyData?.data.remaining_attempt === 0
+              ? "Kesempatan Habis!"
+              : "Mulai Quiz"}
           </button>
         </div>
       </div>
