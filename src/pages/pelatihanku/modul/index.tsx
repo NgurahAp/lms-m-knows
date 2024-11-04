@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
+import { FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { FaBookOpen } from "react-icons/fa";
@@ -63,8 +63,8 @@ export const Modul = () => {
           Pertemuan {data?.detail.session_no}
         </span>
       </div>
-      <div className="bg-white flex flex-col items-center mt-5 p-8 justify-center">
-        <h1 className="font-bold text-4xl mb-5">
+      <div className="bg-white flex flex-col  mt-5 p-8">
+        <h1 className="font-bold text-4xl mb-5 flex justify-center">
           Modul Pertemuan {data?.detail.session_no}
         </h1>
         <div className="flex flex-wrap w-full justify-center gap-x-20 gap-y-8">
@@ -122,6 +122,13 @@ export const Modul = () => {
             </Link>
           ))}
         </div>
+        <Link
+          to={`/pelatihanku/${data?.detail.subject_id}`}
+          className="flex items-center gap-2 p-5 underline justify-start text-blue-500"
+        >
+          <FaArrowLeft />
+          Kembali
+        </Link>
       </div>
     </div>
   );

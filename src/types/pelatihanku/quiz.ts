@@ -38,6 +38,9 @@ interface QuizProgress {
 }
 
 export interface QuizResponse {
+  code: number;
+  status: string; // e.g., "OK"
+  message: string;
   data: {
     detail: QuizDetail;
     quizzes: Quizzes[];

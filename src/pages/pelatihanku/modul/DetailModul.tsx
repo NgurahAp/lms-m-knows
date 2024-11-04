@@ -102,7 +102,7 @@ export const DetailModule = () => {
                 Kembali
               </p>
               <Link
-                to={`/quis/${subjectId}/${sessionId}`}
+                to={`/quiz/${subjectId}/${sessionId}`}
                 className=" px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
                 Lanjutkan Ke Kuis
