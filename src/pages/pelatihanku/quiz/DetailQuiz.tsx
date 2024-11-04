@@ -5,7 +5,7 @@ import { MdAccessAlarm } from "react-icons/md";
 import { PiExam } from "react-icons/pi";
 import { FaHistory } from "react-icons/fa";
 import { MdOutlineTaskAlt } from "react-icons/md";
-import { useDetailQuizData } from "../../../services/pelatihanku/QuizService";
+import { useDetailQuizData, useHistoryQuizData } from "../../../services/pelatihanku/QuizService";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -14,13 +14,20 @@ export const DetailQuiz = () => {
     quizId: string;
   }>();
 
-  const { data, isLoading, error } = useDetailQuizData(
-    subjectId,
-    sessionId,
-    quizId
-  );
+  const {
+    data: quizData,
+    isLoading: isQuizLoading,
+    error: quizError,
+  } = useDetailQuizData(subjectId, sessionId, quizId);
 
-  if (isLoading) {
+  const {
+    data: historyData,
+    isLoading: isHistoryLoading,
+    error: historyError,
+  } = useHistoryQuizData(quizId);
+
+  // Handle loading states
+  if (isQuizLoading || isHistoryLoading) {
     return (
       <div className="min-h-[85vh] w-screen flex items-center justify-center">
         Loading...
@@ -28,7 +35,8 @@ export const DetailQuiz = () => {
     );
   }
 
-  if (error) {
+  // Handle error states
+  if (quizError || historyError) {
     return (
       <div className="min-h-[85vh] w-screen flex items-center justify-center">
         Error loading data
@@ -36,8 +44,10 @@ export const DetailQuiz = () => {
     );
   }
 
-  const durationInSeconds = data?.data.quiz.duration ?? 0; // Fallback to 0 if undefined
+  const durationInSeconds = quizData?.data.quiz.duration ?? 0; // Fallback to 0 if undefined
   const durationInMinutes = Math.floor(durationInSeconds / 60);
+
+  console.log(historyData)
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -61,13 +71,13 @@ export const DetailQuiz = () => {
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to={`/pelatihanku/${subjectId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            {data?.data.subject.name}
+            {quizData?.data.subject.name}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to={`/quiz/${subjectId}/${sessionId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pertemuan {data?.data.session.session_no}
+            Pertemuan {quizData?.data.session.session_no}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
@@ -76,8 +86,8 @@ export const DetailQuiz = () => {
         </span>
       </div>
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">{data?.data.quiz.title}</h1>
-        <p className="text-lg">Pertemuan {data?.data.session.session_no}</p>
+        <h1 className="text-3xl font-semibold pb-3">{quizData?.data.quiz.title}</h1>
+        <p className="text-lg">Pertemuan {quizData?.data.session.session_no}</p>
       </div>
       <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
         <div className="w-1/2 flex items-center justify-center">
@@ -117,7 +127,7 @@ export const DetailQuiz = () => {
               <h1 className="text-xl font-semibold pt-5 pb-2">Detail Quiz</h1>
               <div className="flex items-center gap-x-2 py-2">
                 <GoListOrdered className="text-lg text-blue-500" />{" "}
-                {data?.data.quiz.total_questions} Soal
+                {quizData?.data.quiz.total_questions} Soal
               </div>
               <div className="flex items-center gap-x-2 py-2">
                 <MdAccessAlarm className="text-lg text-blue-500" /> Durasi{" "}

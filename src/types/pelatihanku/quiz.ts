@@ -58,6 +58,23 @@ interface Quiz {
   last_score: string; 
 }
 
+interface HistoryData {
+  remaining_attempt: number;
+  history_count: number;
+  history_data: HistoryEntry[];
+}
+
+interface HistoryEntry {
+  id: string;
+  timestamp_taken: string; // ISO 8601 format
+  score: number;
+  correct: number;
+  status: string;
+  wrong: number;
+  total_question: number;
+  time_elapsed: number; // in seconds
+}
+
 export interface QuizResponse {
   code: number;
   status: string; 
@@ -77,4 +94,11 @@ export interface DetailQuizResponse {
     session: Session;
     quiz: Quiz;
   };
+}
+
+export interface HistoryQuizResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: HistoryData;
 }
