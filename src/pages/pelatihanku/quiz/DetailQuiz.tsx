@@ -5,6 +5,7 @@ import { MdAccessAlarm } from "react-icons/md";
 import { PiExam } from "react-icons/pi";
 import { FaHistory } from "react-icons/fa";
 import { MdOutlineTaskAlt } from "react-icons/md";
+import { useDetailQuizData } from "../../../services/pelatihanku/QuizService";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -13,31 +14,30 @@ export const DetailQuiz = () => {
     quizId: string;
   }>();
 
-  // const { data, isLoading, error } = useDetailModuleData(
-  //   subjectId,
-  //   sessionId,
-  //   quizId
-  // );
+  const { data, isLoading, error } = useDetailQuizData(
+    subjectId,
+    sessionId,
+    quizId
+  );
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="min-h-[85vh] w-screen flex items-center justify-center">
-  //       Loading...
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <div className="min-h-[85vh] w-screen flex items-center justify-center">
-  //       Error loading data
-  //     </div>
-  //   );
-  // }
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
 
-  console.log("Subject: ", subjectId);
-  console.log("Session: ", sessionId);
-  console.log("Quiz: ", quizId);
+  const durationInSeconds = data?.data.quiz.duration ?? 0; // Fallback to 0 if undefined
+  const durationInMinutes = Math.floor(durationInSeconds / 60);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -61,25 +61,23 @@ export const DetailQuiz = () => {
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to={`/pelatihanku/${subjectId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            data?.detail.subject_name
+            {data?.data.subject.name}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to={`/quiz/${subjectId}/${sessionId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pertemuan data?.detail.session_no
+            Pertemuan {data?.data.session.session_no}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-gray-400 md:text-base text-sm font-semibold">
-          data?.module.title
+          Quiz
         </span>
       </div>
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">
-          Quiz Pelatihan Keterampilan Komunikasi
-        </h1>
-        <p className="text-lg">Modul 1</p>
+        <h1 className="text-3xl font-semibold pb-3">{data?.data.quiz.title}</h1>
+        <p className="text-lg">Pertemuan {data?.data.session.session_no}</p>
       </div>
       <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
         <div className="w-1/2 flex items-center justify-center">
@@ -118,11 +116,12 @@ export const DetailQuiz = () => {
             <div>
               <h1 className="text-xl font-semibold pt-5 pb-2">Detail Quiz</h1>
               <div className="flex items-center gap-x-2 py-2">
-                <GoListOrdered className="text-lg text-blue-500" /> 10 Soal
+                <GoListOrdered className="text-lg text-blue-500" />{" "}
+                {data?.data.quiz.total_questions} Soal
               </div>
               <div className="flex items-center gap-x-2 py-2">
-                <MdAccessAlarm className="text-lg text-blue-500" /> Durasi 10
-                Menit
+                <MdAccessAlarm className="text-lg text-blue-500" /> Durasi{" "}
+                {durationInMinutes} Menit
               </div>
               <div className="flex items-center gap-x-2 py-2">
                 <PiExam className="text-lg text-blue-500" /> Nilai Kelulusan
@@ -144,7 +143,7 @@ export const DetailQuiz = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-xl font-semibold pt-7 pb-2">Detail Quiz</h1>
+            <h1 className="text-xl font-semibold pt-7 pb-2">Pengaturan Quiz</h1>
             <div className="flex items-center gap-x-2 py-2">
               <MdOutlineTaskAlt className="text-lg text-blue-500" /> 10 Soal
             </div>
@@ -161,8 +160,12 @@ export const DetailQuiz = () => {
               Pengulangan
             </div>
           </div>
-          <h1 className="py-3 text-blue-500 font-medium">Kesempatan mengerjakan tersisa : 3 kali</h1>
-          <button className="bg-blue-500 text-white flex w-full items-center py-4 rounded-xl justify-center mt-5">Mulai Quiz</button>
+          <h1 className="py-3 text-blue-500 font-medium">
+            Kesempatan mengerjakan tersisa : 3 kali
+          </h1>
+          <button className="bg-blue-500 text-white flex w-full items-center py-4 rounded-xl justify-center mt-5">
+            Mulai Quiz
+          </button>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { API_BASE_URL } from "../../config/api";
 import { useQuery } from "@tanstack/react-query";
-import { QuizResponse } from "../../types/pelatihanku/quiz";
+import { DetailQuizResponse, QuizResponse } from "../../types/pelatihanku/quiz";
 
 const fetchQuizData = async (
   subjectId: string | undefined,
@@ -24,6 +24,27 @@ const fetchQuizData = async (
   return response.data;
 };
 
+const fetchDetailQuizData = async (
+  subjectId: string | undefined,
+  sessionId: string | undefined,
+  quizId: string | undefined
+): Promise<DetailQuizResponse> => {
+  if (!subjectId || !sessionId || !quizId) {
+    throw new Error("Subject ID and Session ID are required");
+  }
+
+  const token = Cookies.get("accessToken");
+  const response = await axios.get(
+    `${API_BASE_URL}/api/v2/my-study/subjects/${subjectId}/sessions/${sessionId}/quizzes/${quizId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
 export const useQuizData = (
   subjectId: string | undefined,
   sessionId: string | undefined
@@ -32,5 +53,17 @@ export const useQuizData = (
     queryKey: ["quizData", subjectId, sessionId],
     queryFn: () => fetchQuizData(subjectId, sessionId),
     enabled: !!subjectId && !!sessionId,
+  });
+};
+
+export const useDetailQuizData = (
+  subjectId: string | undefined,
+  sessionId: string | undefined,
+  quizId: string | undefined
+) => {
+  return useQuery({
+    queryKey: ["detailQuizData", subjectId, sessionId, quizId],
+    queryFn: () => fetchDetailQuizData(subjectId, sessionId, quizId),
+    enabled: !!subjectId && !!sessionId && !!quizId,
   });
 };

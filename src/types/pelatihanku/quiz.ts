@@ -37,12 +37,44 @@ interface QuizProgress {
   deadline: string | null;
 }
 
+interface Subject {
+  id: string;
+  name: string;
+}
+
+interface Session {
+  id: string;
+  session_no: number;
+  session_type: string;
+}
+
+interface Quiz {
+  id: string;
+  title: string;
+  duration: number; 
+  question_point: string; 
+  total_questions: number;
+  remaining_attempts: number;
+  last_score: string; 
+}
+
 export interface QuizResponse {
   code: number;
-  status: string; // e.g., "OK"
+  status: string; 
   message: string;
   data: {
     detail: QuizDetail;
     quizzes: Quizzes[];
+  };
+}
+
+export interface DetailQuizResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    subject: Subject;
+    session: Session;
+    quiz: Quiz;
   };
 }
