@@ -97,9 +97,8 @@ export const PelatihankuDetail: React.FC = () => {
         </li>
         <li
           onClick={() =>
-            handleItemClick("QUIZ", session.progress, () => {
-              // Add your navigation logic here for quiz
-              console.log("Navigate to quiz");
+            handleItemClick("MODULE", session.progress, () => {
+              navigate(`/quiz/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 

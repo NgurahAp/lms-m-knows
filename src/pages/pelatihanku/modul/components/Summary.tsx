@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RiFileEditLine, RiLoader4Line } from "react-icons/ri";
 import { UseMutationResult } from "@tanstack/react-query";
-import { useSubmitModuleAnswer } from "../../../../services/modul/ModulService";
+import { useSubmitModuleAnswer } from "../../../../services/pelatihanku/ModulService";
 
 interface ModuleCompletionDialogProps {
   onComplete?: () => void;
