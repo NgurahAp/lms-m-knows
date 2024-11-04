@@ -102,3 +102,8 @@ export interface HistoryQuizResponse {
   message: string;
   data: HistoryData;
 }
+
+export interface QuizProps {
+  historyData: HistoryQuizResponse;
+  quizData: DetailQuizResponse | undefined;
+}

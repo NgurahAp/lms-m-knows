@@ -1,14 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
-import { GoListOrdered } from "react-icons/go";
-import { MdAccessAlarm } from "react-icons/md";
-import { PiExam } from "react-icons/pi";
-import { FaHistory } from "react-icons/fa";
+
 import { MdOutlineTaskAlt } from "react-icons/md";
 import {
   useDetailQuizData,
   useHistoryQuizData,
 } from "../../../services/pelatihanku/QuizService";
+import { QuizHistory } from "./components/HistoryQuiz";
+import { QuizInfo } from "./components/QuizInfo";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -47,8 +46,6 @@ export const DetailQuiz = () => {
     );
   }
 
-  const durationInSeconds = quizData?.data.quiz.duration ?? 0;
-  const durationInMinutes = Math.floor(durationInSeconds / 60);
 
   console.log(historyData);
 
@@ -99,88 +96,10 @@ export const DetailQuiz = () => {
           <img src="/pelatihanku/quiz-left.png" alt="" />
         </div>
         <div className="w-1/2 py-10">
-          <h1 className="text-xl font-semibold pb-5">Riwayat Quiz</h1>
           {historyData?.data.history_data?.[0] && (
-            <div className="border-[1px] rounded-md p-5">
-              <div className="flex justify-between">
-                <h2 className="text-sm font-semibold">
-                  Quiz Pertemuan {quizData?.data.session.session_no}
-                </h2>
-                <h2 className="text-[#4B5565] text-sm ">
-                  {new Date(
-                    historyData.data.history_data[0].timestamp_taken
-                  ).toLocaleDateString("id-ID", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}{" "}
-                  -{" "}
-                  {new Date(
-                    historyData.data.history_data[0].timestamp_taken
-                  ).toLocaleTimeString("id-ID")}
-                </h2>
-              </div>
-              <div className="h-24 flex my-5 gap-x-2">
-                <div className="w-24 flex flex-col justify-center items-center gap-y-1">
-                  <h2 className="text-xs">Total Nilai</h2>
-                  <h1 className="text-3xl font-semibold">
-                    {historyData.data.history_data[0].score}
-                  </h1>
-                </div>
-                <div className="w-52 flex bg-[#DBF2EB] rounded-lg flex-col justify-center items-center gap-y-1">
-                  <h1 className="text-3xl font-semibold">
-                    {historyData.data.history_data[0].correct}
-                  </h1>
-                  <h2 className="text-xs">Jawaban Benar</h2>
-                </div>
-                <div className="w-52 flex bg-[#F6DCDB] rounded-lg flex-col justify-center items-center gap-y-1">
-                  <h1 className="text-3xl font-semibold">
-                    {historyData.data.history_data[0].wrong}
-                  </h1>
-                  <h2 className="text-xs">Jawaban Salah</h2>
-                </div>
-                <div className="w-52 flex bg-[#ECFDBF] rounded-lg flex-col justify-center items-center gap-y-1">
-                  <h1 className="text-3xl font-semibold">
-                    {historyData.data.history_data[0].total_question}
-                  </h1>
-                  <h2 className="text-xs">Soal</h2>
-                </div>
-              </div>
-              <p className="text-sm">
-                Waktu Selesai{" "}
-                {(() => {
-                  const timeInSeconds =
-                    historyData.data.history_data[0].time_elapsed;
-                  const minutes = Math.floor(timeInSeconds / 60);
-                  const seconds = timeInSeconds % 60;
-                  return `${minutes.toString().padStart(2, "0")}:${seconds
-                    .toString()
-                    .padStart(2, "0")}`;
-                })()}
-              </p>
-            </div>
+            <QuizHistory historyData={historyData} quizData={quizData} />
           )}
-          <div>
-            <div>
-              <h1 className="text-xl font-semibold pt-5 pb-2">Detail Quiz</h1>
-              <div className="flex items-center gap-x-2 py-2">
-                <GoListOrdered className="text-lg text-blue-500" />{" "}
-                {quizData?.data.quiz.total_questions} Soal
-              </div>
-              <div className="flex items-center gap-x-2 py-2">
-                <MdAccessAlarm className="text-lg text-blue-500" /> Durasi{" "}
-                {durationInMinutes} Menit
-              </div>
-              <div className="flex items-center gap-x-2 py-2">
-                <PiExam className="text-lg text-blue-500" /> Nilai Kelulusan
-                minimal 80
-              </div>
-              <div className="flex items-center gap-x-2 py-2">
-                <FaHistory className="text-lg text-blue-500" /> Max. 3x
-                Pengulangan
-              </div>
-            </div>
-          </div>
+          <QuizInfo quizData={quizData}/>
           <div>
             <div>
               <h1 className="text-xl font-semibold pt-5 pb-2">Deskripsi</h1>
