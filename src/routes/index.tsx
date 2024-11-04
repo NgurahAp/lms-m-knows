@@ -12,6 +12,7 @@ import Penugasan from "../pages/penugasan";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginRoute from "./LoginRoute";
 import { Login } from "../pages/auth/login";
+import { Quiz } from "../pages/pelatihanku/quiz";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -68,6 +69,14 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
+            path="/penugasan"
+            element={
+              <ProtectedRoute>
+                <Penugasan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/modul/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
@@ -84,10 +93,10 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/penugasan"
+            path="/quiz/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
-                <Penugasan />
+                <Quiz />
               </ProtectedRoute>
             }
           />

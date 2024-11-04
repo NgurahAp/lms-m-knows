@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { FaCheck, FaChevronRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
-import { useDetailModuleData } from "../../../services/modul/ModulService";
+import { useDetailModuleData } from "../../../services/pelatihanku/ModulService";
 import ModuleCompletionDialog from "./components/Summary";
 
 export const DetailModule = () => {
@@ -155,7 +155,7 @@ export const DetailModule = () => {
                   <ModuleCompletionDialog
                     moduleId={data?.module.id}
                     onComplete={() => {
-                      refetch(); 
+                      refetch();
                     }}
                   />
                 )}

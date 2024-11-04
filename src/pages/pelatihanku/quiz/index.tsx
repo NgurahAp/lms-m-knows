@@ -7,7 +7,7 @@ import { IoBookmarksSharp } from "react-icons/io5";
 import { useModuleData } from "../../../services/pelatihanku/ModulService";
 import { FaCheck } from "react-icons/fa";
 
-export const Modul = () => {
+export const Quiz = () => {
   const { subjectId, sessionId } = useParams<{
     subjectId: string;
     sessionId: string;
@@ -31,7 +31,8 @@ export const Modul = () => {
     );
   }
 
-  // console.log("SubjectId: ", data);
+  console.log("SubjectId: ", subjectId);
+  console.log("SessionId: ", sessionId);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
