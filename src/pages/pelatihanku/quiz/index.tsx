@@ -28,7 +28,7 @@ export const Quiz = () => {
     );
   }
 
-  console.log("SubjectId: ", data);
+  // console.log("SubjectId: ", data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -68,7 +68,7 @@ export const Quiz = () => {
           {data?.data.quizzes.map((quiz) => (
             <Link
               key={quiz.id}
-              to={`/detailModul/${subjectId}/${sessionId}/${quiz.id}`}
+              to={`/detailQuiz/${subjectId}/${sessionId}/${quiz.id}`}
               className={`flex p-4 bg-gray-100 rounded-lg shadow-md w-3/5 mb-4`}
             >
               <div
