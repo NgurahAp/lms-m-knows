@@ -2,18 +2,15 @@ import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
-import { FaBookOpen } from "react-icons/fa";
-import { IoBookmarksSharp } from "react-icons/io5";
-import { useModuleData } from "../../../services/pelatihanku/ModulService";
-import { FaCheck } from "react-icons/fa";
+import { useQuizData } from "../../../services/pelatihanku/QuizService";
 
-export const Modul = () => {
+export const Quiz = () => {
   const { subjectId, sessionId } = useParams<{
     subjectId: string;
     sessionId: string;
   }>();
 
-  const { data, isLoading, error } = useModuleData(subjectId, sessionId);
+  const { data, isLoading, error } = useQuizData(subjectId, sessionId);
 
   if (isLoading) {
     return (
@@ -53,77 +50,54 @@ export const Modul = () => {
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/pelatihanku/${data?.detail.subject_id}`}>
+        <Link to={`/pelatihanku/${data?.data.detail.subject_id}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            {data?.detail.subject_name}
+            {data?.data.detail.subject_name}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-gray-400 md:text-base text-sm font-semibold">
-          Pertemuan {data?.detail.session_no}
+          Pertemuan {data?.data.detail.session_no}
         </span>
       </div>
-      <div className="bg-white flex flex-col  mt-5 p-8">
-        <h1 className="font-bold text-4xl mb-5 flex justify-center">
-          Modul Pertemuan {data?.detail.session_no}
+      <div className="bg-white flex flex-col mt-5 p-8 ">
+        <h1 className="font-bold text-4xl mb-10 flex justify-center">
+          Quiz Pertemuan {data?.data.detail.session_no}
         </h1>
         <div className="flex flex-wrap w-full justify-center gap-x-20 gap-y-8">
-          {data?.modules.map((module) => (
+          {data?.data.quizzes.map((quiz) => (
             <Link
-              key={module.id}
-              to={`/detailModul/${subjectId}/${sessionId}/${module.id}`}
-              className={`flex p-4 ${
-                module.submitted ? "bg-green-100" : "bg-gray-100"
-              } rounded-lg shadow-md w-5/12 mb-4`}
+              key={quiz.id}
+              to={`/detailQuiz/${subjectId}/${sessionId}/${quiz.id}`}
+              className={`flex p-4 bg-gray-100 rounded-lg shadow-md w-3/5 mb-4`}
             >
               <div
-                className={`flex flex-col gap-2 p-4 ${
-                  module.submitted ? "bg-green-200" : "bg-gray-200"
-                } rounded-lg`}
+                className={`flex flex-col gap-2 p-4 h-24 justify-center bg-gray-200 rounded-lg`}
               >
-                <div className="flex items-center justify-center">
-                  {module.submitted && (
-                    <div className="bg-green-600 rounded-full">
-                      <FaCheck className="text-white p-1 text-xl" />
-                    </div>
-                  )}
-                </div>
                 <div className="flex gap-2">
                   <div className="flex gap-1 items-center h-12 w-32 p-2 bg-[#333d79] text-white text-sm rounded-lg">
                     <FaPlayCircle className="rounded-full text-4xl" />
-                    {module.total_videos} Vidio
+                    {quiz.duration} Menit
                   </div>
                   <div className="flex gap-1 items-center h-12 w-32 p-2 bg-[#f2aa4c] text-white text-sm rounded-lg">
                     <div className="bg-white rounded-full p-1">
                       <IoDocumentText className="text-3xl text-[#f2aa4c]" />
                     </div>
-                    {module.total_documents} Dokumen
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <div className="flex gap-1 items-center h-12 w-32 p-2 bg-[#a4193d] text-white text-sm rounded-lg">
-                    <div className="bg-white rounded-full p-1">
-                      <FaBookOpen className="text-3xl text-[#a4193d]" />
-                    </div>
-                    {module.total_journals} Jurnal
-                  </div>
-                  <div className="flex gap-1 items-center h-12 w-32 p-2 bg-[#2bae66] text-white text-sm rounded-lg">
-                    <div className="bg-white rounded-full p-2">
-                      <IoBookmarksSharp className="text-2xl text-[#2bae66]" />
-                    </div>
-                    {module.total_articles} Artikel
+                    {quiz.type}
                   </div>
                 </div>
               </div>
-              <div className="ml-4 flex flex-col justify-center">
-                <h3 className="text-lg font-semibold">{module.title}</h3>
-                <p className="text-sm text-gray-600">{module.description}</p>
+              <div className="ml-5 flex flex-col  justify-center">
+                <h3 className="text-lg font-semibold">{quiz.title}</h3>
+                <p className="text-sm text-gray-600">
+                  {data.data.detail.subject_name}
+                </p>
               </div>
             </Link>
           ))}
         </div>
         <Link
-          to={`/pelatihanku/${data?.detail.subject_id}`}
+          to={`/pelatihanku/${data?.data.detail.subject_id}`}
           className="flex items-center gap-2 p-5 underline justify-start text-blue-500"
         >
           <FaArrowLeft />

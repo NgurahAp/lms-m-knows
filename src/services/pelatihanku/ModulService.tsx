@@ -13,7 +13,7 @@ interface ModuleAnswerRequest {
   module_answer: string;
 }
 
-const fetchModulData = async (
+const fetchModuleData = async (
   subjectId: string | undefined,
   sessionId: string | undefined
 ): Promise<ModuleResponse> => {
@@ -94,7 +94,7 @@ export const useModuleData = (
 ) => {
   return useQuery({
     queryKey: ["moduleData", subjectId, sessionId],
-    queryFn: () => fetchModulData(subjectId, sessionId),
+    queryFn: () => fetchModuleData(subjectId, sessionId),
     enabled: !!subjectId && !!sessionId, // Only run query if both IDs are defined
   });
 };
