@@ -1,7 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import { Question, questions } from "./dataQuestion";
+import { ConfirmAttemptQuizDialog } from "./components/ConfirmAttempDialog";
 
 export const QuizAttempt = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -13,13 +14,39 @@ export const QuizAttempt = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const currentQuestion: Question = questions[currentQuestionIndex];
-
-  console.log("quiz id: ", quizId);
+  const isLastQuestion = currentQuestionIndex === questions.length - 1;
+  const isFirstQuestion = currentQuestionIndex === 0;
+  const [isDialogOpen, setDialogOpen] = useState(false); // State untuk dialog konfirmasi
 
   const navigateToQuestion = (index: number) => {
     setCurrentQuestionIndex(index);
-    setSelectedAnswer(null); // Reset jawaban saat pindah soal
+    setSelectedAnswer(null);
   };
+
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    console.log("Pindah ke soal berikutnya");
+    if (!isLastQuestion) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+      setSelectedAnswer(null);
+    }
+  };
+
+  const handlePrevious = () => {
+    console.log("Kembali ke soal sebelumnya");
+    if (!isFirstQuestion) {
+      setCurrentQuestionIndex((prev) => prev - 1);
+      setSelectedAnswer(null);
+    }
+  };
+
+  const handleQuizFinish = () => {
+    setDialogOpen(false);
+    navigate(`/quizAttempt/${subjectId}/${sessionId}/${quizId}`);
+  };
+
+  console.log(quizId);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -85,8 +112,7 @@ export const QuizAttempt = () => {
         </div>
       </div>
       {/* Quiz Question */}
-
-      <div className="bg-white p-6 mt-5  rounded-lg shadow-lg">
+      <div className="bg-white p-6 mt-5 rounded-lg shadow-lg">
         <h1 className="text-end text-red-500 font-bold text-sm pb-3">
           Sisa waktu 09.59
         </h1>
@@ -96,7 +122,7 @@ export const QuizAttempt = () => {
         <p className="pt-2 pb-7 text-sm text-gray-500">*Pilih satu</p>
         <div className="space-y-7">
           {currentQuestion.options.map((option) => (
-            <label key={option.value} className={`block p-5 border rounded `}>
+            <label key={option.value} className="block p-5 border rounded">
               <input
                 type="radio"
                 name="answer"
@@ -109,10 +135,42 @@ export const QuizAttempt = () => {
             </label>
           ))}
         </div>
-        <div className="flex justify-end pt-10">
-          <button className="bg-blue-500 px-6 py-2 rounded-lg text-white">Selanjutnya</button>
+        <div className="flex justify-end gap-5 pt-10">
+          <button
+            onClick={handlePrevious}
+            className={`px-6 py-2 rounded-lg ${
+              isFirstQuestion
+                ? "hidden"
+                : "bg-white border-blue-500 border text-blue-500  hover:bg-blue-500 hover:text-white"
+            }`}
+          >
+            Sebelumnya
+          </button>
+          {isLastQuestion ? (
+            <button
+              onClick={() => setDialogOpen(true)}
+              className="bg-green-500 px-6 py-2 rounded-lg text-white hover:bg-green-600"
+            >
+              Selesai
+            </button>
+          ) : (
+            <button
+              onClick={handleNext}
+              className="bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-600"
+            >
+              Selanjutnya
+            </button>
+          )}
         </div>
       </div>
+      {isDialogOpen && (
+        <ConfirmAttemptQuizDialog
+          onClose={() => setDialogOpen(false)}
+          onStart={handleQuizFinish}
+        />
+      )}
     </div>
   );
 };
+
+export default QuizAttempt;

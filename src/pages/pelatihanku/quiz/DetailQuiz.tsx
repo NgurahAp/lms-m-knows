@@ -10,6 +10,7 @@ import { QuizHistory } from "./components/HistoryQuiz";
 import { QuizInfo } from "./components/QuizInfo";
 import QuizDialog from "./components/QuizDialog";
 import { useNavigate } from "react-router-dom";
+import {  ErrorConsume, Loading } from "../../../components/APIRespone";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -19,6 +20,7 @@ export const DetailQuiz = () => {
   }>();
 
   const navigate = useNavigate();
+  const [isDialogOpen, setDialogOpen] = useState(false); // State untuk dialog konfirmasi
 
   const {
     data: quizData,
@@ -32,24 +34,12 @@ export const DetailQuiz = () => {
     error: historyError,
   } = useHistoryQuizData(quizId);
 
-  const [isDialogOpen, setDialogOpen] = useState(false); // State untuk dialog konfirmasi
-
-  // Handle loading states
   if (isQuizLoading || isHistoryLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    <Loading />;
   }
 
-  // Handle error states
   if (quizError || historyError) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Error loading data
-      </div>
-    );
+    <ErrorConsume />;
   }
 
   // Function to handle the quiz start confirmation
