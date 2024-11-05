@@ -2,6 +2,8 @@ import {  useParams } from "react-router-dom";
 import { useState } from "react";
 import { Question, questions } from "./dataQuestion";
 import { ConfirmAttemptQuizDialog } from "./components/ConfirmAttempDialog";
+import { useQuestionData } from "../../../services/pelatihanku/QuizQuestionService";
+import { ErrorConsume, Loading } from "../../../components/APIRespone";
 
 export const QuizAttempt = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -18,6 +20,21 @@ export const QuizAttempt = () => {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
   const isFirstQuestion = currentQuestionIndex === 0;
   const [isDialogOpen, setDialogOpen] = useState(false);
+
+  const {
+    data: questionData,
+    isLoading: isQuestionLoading,
+    error: questionError,
+  } = useQuestionData(quizId);
+
+  if (isQuestionLoading) {
+    <Loading />;
+  }
+
+  if (questionError) {
+    <ErrorConsume />;
+  }
+
 
   const navigateToQuestion = (index: number) => {
     setCurrentQuestionIndex(index);
@@ -59,6 +76,8 @@ export const QuizAttempt = () => {
     console.log("Quiz Submission:", quizSubmission);
     setDialogOpen(false);
   };
+
+  console.log(questionData)
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
