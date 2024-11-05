@@ -1,6 +1,5 @@
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { Question, questions } from "./dataQuestion";
 import { ConfirmAttemptQuizDialog } from "./components/ConfirmAttempDialog";
 import { useQuestionData } from "../../../services/pelatihanku/QuizQuestionService";
 import { ErrorConsume, Loading } from "../../../components/APIRespone";
@@ -16,9 +15,6 @@ export const QuizAttempt = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{
     [key: number]: string;
   }>({});
-  const currentQuestion: Question = questions[currentQuestionIndex];
-  const isLastQuestion = currentQuestionIndex === questions.length - 1;
-  const isFirstQuestion = currentQuestionIndex === 0;
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   const {
@@ -28,22 +24,30 @@ export const QuizAttempt = () => {
   } = useQuestionData(quizId);
 
   if (isQuestionLoading) {
-    <Loading />;
+    return <Loading />;
   }
 
   if (questionError) {
-    <ErrorConsume />;
+    return <ErrorConsume />;
   }
 
+  if (!questionData?.data) {
+    return <div>No quiz data available</div>;
+  }
+
+  const questions = questionData.data.questions_answers;
+  const currentQuestion = questions[currentQuestionIndex];
+  const isLastQuestion = currentQuestionIndex === questions.length - 1;
+  const isFirstQuestion = currentQuestionIndex === 0;
 
   const navigateToQuestion = (index: number) => {
     setCurrentQuestionIndex(index);
   };
 
-  const handleAnswerSelect = (answer: string) => {
+  const handleAnswerSelect = (answerId: string) => {
     setSelectedAnswers((prev) => ({
       ...prev,
-      [currentQuestionIndex]: answer,
+      [currentQuestionIndex]: answerId,
     }));
   };
 
@@ -60,15 +64,14 @@ export const QuizAttempt = () => {
   };
 
   const handleQuizSubmit = () => {
-    // Membuat object yang berisi semua jawaban dan informasi quiz
     const quizSubmission = {
       quizId,
       subjectId,
       sessionId,
       answers: Object.entries(selectedAnswers).map(
-        ([questionIndex, answer]) => ({
-          questionNumber: parseInt(questionIndex) + 1,
-          selectedAnswer: answer,
+        ([questionIndex, answerId]) => ({
+          questionId: questions[parseInt(questionIndex)].id,
+          answerId: answerId,
         })
       ),
     };
@@ -77,18 +80,15 @@ export const QuizAttempt = () => {
     setDialogOpen(false);
   };
 
-  console.log(questionData)
-
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      {/* Breadcrumb section remains the same */}
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        {/* ... existing breadcrumb code ... */}
-      </div>
-
-      {/* Quiz Info section remains the same */}
+      {/* Quiz Info */}
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        {/* ... existing quiz info code ... */}
+        <h1 className="text-3xl font-semibold pb-3">
+          {questionData.data.title}
+        </h1>
+        <p className="text-lg">Tipe: {questionData.data.type}</p>
+        <p className="text-lg">Durasi: {questionData.data.duration} menit</p>
       </div>
 
       {/* Question List with Answer Status */}
@@ -116,24 +116,24 @@ export const QuizAttempt = () => {
       {/* Quiz Question */}
       <div className="bg-white p-6 mt-5 rounded-lg shadow-lg">
         <h1 className="text-end text-red-500 font-bold text-sm pb-3">
-          Sisa waktu 09.59
+          Sisa waktu: {questionData.data.duration}:00
         </h1>
         <h2 className="text-lg font-semibold mb-4">
           {currentQuestion.question}
         </h2>
         <p className="pt-2 pb-7 text-sm text-gray-500">*Pilih satu</p>
         <div className="space-y-7">
-          {currentQuestion.options.map((option) => (
-            <label key={option.value} className="block p-5 border rounded">
+          {currentQuestion.answers.map((answer) => (
+            <label key={answer.id} className="block p-5 border rounded">
               <input
                 type="radio"
                 name="answer"
-                value={option.value}
-                checked={selectedAnswers[currentQuestionIndex] === option.value}
-                onChange={() => handleAnswerSelect(option.value)}
+                value={answer.id}
+                checked={selectedAnswers[currentQuestionIndex] === answer.id}
+                onChange={() => handleAnswerSelect(answer.id)}
                 className="mr-2"
               />
-              {option.label}
+              {answer.answer}
             </label>
           ))}
         </div>

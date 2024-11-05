@@ -142,12 +142,24 @@ export const DetailQuiz = () => {
                 ? "bg-gray-400 text-white cursor-not-allowed"
                 : "bg-blue-500 text-white"
             }`}
-            disabled={historyData?.data.remaining_attempt === 0}
           >
             {historyData?.data.remaining_attempt === 0
               ? "Kesempatan Habis!"
               : "Mulai Quiz"}
           </button>
+          {/* <button
+            onClick={() => setDialogOpen(true)}
+            className={`flex w-full items-center py-4 rounded-xl justify-center mt-5 ${
+              historyData?.data.remaining_attempt === 0
+                ? "bg-gray-400 text-white cursor-not-allowed"
+                : "bg-blue-500 text-white"
+            }`}
+            disabled={historyData?.data.remaining_attempt === 0}
+          >
+            {historyData?.data.remaining_attempt === 0
+              ? "Kesempatan Habis!"
+              : "Mulai Quiz"}
+          </button> */}
         </div>
       </div>
       {/* Dialog Konfirmasi */}
