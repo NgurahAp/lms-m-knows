@@ -9,6 +9,7 @@ import {
 import { QuizHistory } from "./components/HistoryQuiz";
 import { QuizInfo } from "./components/QuizInfo";
 import QuizDialog from "./components/QuizDialog";
+import { useNavigate } from "react-router-dom";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -16,6 +17,8 @@ export const DetailQuiz = () => {
     sessionId: string;
     quizId: string;
   }>();
+
+  const navigate = useNavigate();
 
   const {
     data: quizData,
@@ -52,8 +55,7 @@ export const DetailQuiz = () => {
   // Function to handle the quiz start confirmation
   const handleQuizStart = () => {
     setDialogOpen(false);
-    // Tambahkan logika untuk memulai kuis di sini
-    console.log("Quiz started!");
+    navigate(`/quizAttempt/${subjectId}/${sessionId}/${quizId}`);
   };
 
   return (
