@@ -1,13 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
-
 import { MdOutlineTaskAlt } from "react-icons/md";
+import { useState } from "react";
 import {
   useDetailQuizData,
   useHistoryQuizData,
 } from "../../../services/pelatihanku/QuizService";
 import { QuizHistory } from "./components/HistoryQuiz";
 import { QuizInfo } from "./components/QuizInfo";
+import QuizDialog from "./components/QuizDialog";
+import { useNavigate } from "react-router-dom";
+import {  ErrorConsume, Loading } from "../../../components/APIRespone";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -15,6 +18,9 @@ export const DetailQuiz = () => {
     sessionId: string;
     quizId: string;
   }>();
+
+  const navigate = useNavigate();
+  const [isDialogOpen, setDialogOpen] = useState(false); // State untuk dialog konfirmasi
 
   const {
     data: quizData,
@@ -28,29 +34,23 @@ export const DetailQuiz = () => {
     error: historyError,
   } = useHistoryQuizData(quizId);
 
-  // Handle loading states
   if (isQuizLoading || isHistoryLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    <Loading />;
   }
 
-  // Handle error states
   if (quizError || historyError) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Error loading data
-      </div>
-    );
+    <ErrorConsume />;
   }
 
-
-  console.log(historyData);
+  // Function to handle the quiz start confirmation
+  const handleQuizStart = () => {
+    setDialogOpen(false);
+    navigate(`/quizAttempt/${subjectId}/${sessionId}/${quizId}`);
+  };
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+      {/* Breadcrumb */}
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <Link to="/dashboard" className="flex items-center">
           <img
@@ -85,12 +85,14 @@ export const DetailQuiz = () => {
           Quiz
         </span>
       </div>
+      {/* Quiz Info */}
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
         <h1 className="text-3xl font-semibold pb-3">
           {quizData?.data.quiz.title}
         </h1>
         <p className="text-lg">Pertemuan {quizData?.data.session.session_no}</p>
       </div>
+      {/* Quiz Content */}
       <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
         <div className="w-1/2 flex items-center justify-center">
           <img src="/pelatihanku/quiz-left.png" alt="" />
@@ -99,7 +101,7 @@ export const DetailQuiz = () => {
           {historyData?.data.history_data?.[0] && (
             <QuizHistory historyData={historyData} quizData={quizData} />
           )}
-          <QuizInfo quizData={quizData}/>
+          <QuizInfo quizData={quizData} />
           <div>
             <div>
               <h1 className="text-xl font-semibold pt-5 pb-2">Deskripsi</h1>
@@ -130,9 +132,11 @@ export const DetailQuiz = () => {
           </div>
           <h1 className="py-3 text-blue-500 font-medium">
             Kesempatan mengerjakan tersisa :{" "}
-            {historyData?.data.remaining_attempt} kali
+            {historyData?.data.remaining_attempt ?? 3} kali
           </h1>
+          {/* Button Mulai Quiz */}  
           <button
+            onClick={() => setDialogOpen(true)}
             className={`flex w-full items-center py-4 rounded-xl justify-center mt-5 ${
               historyData?.data.remaining_attempt === 0
                 ? "bg-gray-400 text-white cursor-not-allowed"
@@ -146,6 +150,13 @@ export const DetailQuiz = () => {
           </button>
         </div>
       </div>
+      {/* Dialog Konfirmasi */}
+      {isDialogOpen && (
+        <QuizDialog
+          onClose={() => setDialogOpen(false)}
+          onStart={handleQuizStart}
+        />
+      )}
     </div>
   );
 };

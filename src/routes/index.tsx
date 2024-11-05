@@ -14,6 +14,7 @@ import LoginRoute from "./LoginRoute";
 import { Login } from "../pages/auth/login";
 import { Quiz } from "../pages/pelatihanku/quiz";
 import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
+import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -106,6 +107,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <DetailQuiz />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/quizAttempt/:subjectId/:sessionId/:quizId"
+            element={
+              <ProtectedRoute>
+                <QuizAttempt />
               </ProtectedRoute>
             }
           />

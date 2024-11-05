@@ -53,7 +53,7 @@ interface ProgressAssignment {
 
 export interface SessionProgress {
   type: "MODULE" | "QUIZ" | "ASSIGNMENT" | "REFLECTION" | "ASSESSMENT";
-  status: "FINISHED" | "PENDING" | "LOCKED" | "ONGOING";
+  status: "FINISHED" | "FAILED" | "LOCKED" | "ONGOING";
   modules?: ProgressModule[];
   quizzes?: ProgressQuiz[];
   assignments?: ProgressAssignment[];
