@@ -3,11 +3,28 @@ import { SubjectProgressProps } from "../../../types/dashboard";
 export const SubjectProgress: React.FC<SubjectProgressProps> = ({
   subjectProgressData,
 }) => {
+  // Check if there's no data or empty subjects array
+  if (!subjectProgressData?.dataSubjects?.length) {
+    return (
+      <div className="mt-6 bg-white shadow-lg p-8 rounded-xl">
+        <h2 className="text-xl font-semibold md:pb-3">Terakhir Pengerjaan</h2>
+        <div className="flex flex-col items-center justify-center py-8">
+          <p className="text-gray-500 text-lg">Subject Progress Kosong</p>
+          <p className="text-gray-400 text-sm mt-2">
+            Belum ada progress pembelajaran yang tersedia
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-6 bg-white shadow-lg p-8 rounded-xl">
       <h2 className="text-xl font-semibold md:pb-3">Terakhir Pengerjaan</h2>
       <div className="md:flex justify-between items-center pb-5">
-        <p className="text-lg">Semester {subjectProgressData.dataSubjects[0].subject_semester}</p>
+        <p className="text-lg">
+          Semester {subjectProgressData.dataSubjects[0].subject_semester}
+        </p>
         <a href="" className="text-blue-500 font-medium md:text-lg">
           Lihat Semua
         </a>
