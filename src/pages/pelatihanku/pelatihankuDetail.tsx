@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useSubjectData } from "../../services/MyStudyService";
 import { Session, SessionProgress } from "../../types/pelatihanku/pelatihanku";
 import { FaChevronRight } from "react-icons/fa";
+import { FaCircleXmark } from "react-icons/fa6";
+
 
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
@@ -27,6 +29,9 @@ export const PelatihankuDetail: React.FC = () => {
     if (itemProgress?.status === "FINISHED") {
       return <FaCheckCircle className="text-green-500 ml-2" />;
     }
+     if (itemProgress?.status === "FAILED") {
+       return <FaCircleXmark className="text-red-500 ml-2" />;
+     }
     if (itemProgress?.status === "LOCKED") {
       return <CiLock className="text-gray-500 ml-2" />;
     }
