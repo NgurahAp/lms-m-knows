@@ -74,7 +74,7 @@ export const Assignment = () => {
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/quiz/${subjectId}/${sessionId}`}>
+        <Link to={`/assignment/${subjectId}/${sessionId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
             Pertemuan {data?.data.detail.session_no}
           </span>
@@ -95,7 +95,10 @@ export const Assignment = () => {
       <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
         <div className="my-6 grid gap-8 w-full">
           {data?.data.assignments.map((assignment) => (
-            <div className="flex items-center justify-between p-7 border border-gray-300 rounded-lg shadow-sm w-full">
+            <Link
+              to={`/detailAssignment/${subjectId}/${sessionId}/${assignment.id}`}
+              className="flex items-center justify-between p-7 border border-gray-300 rounded-lg shadow-sm w-full"
+            >
               <div className="flex items-center space-x-2">
                 <IoDocumentText className="text-red-500 text-3xl mr-3" />
                 <div>
@@ -113,10 +116,10 @@ export const Assignment = () => {
                   </p>
                 </div>
               </div>
-              {assignment.progress.status === "FINISHED"  && (
+              {assignment.progress.status === "FINISHED" && (
                 <FaCheckCircle className="text-green-500 text-xl" />
               )}
-            </div>
+            </Link>
           ))}
         </div>
       </div>
