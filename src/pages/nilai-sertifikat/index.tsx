@@ -5,6 +5,15 @@ import { Sertifikat } from "./popup";
 import { useNilaiResponse } from "../../services/NilaiService";
 import { FaChevronRight } from "react-icons/fa";
 
+// Define the structure of subject data
+interface Subject {
+  id: string;
+  name: string;
+  status: "SELESAI" | "BELUM SELESAI";
+  score: number;
+  score_letter: string;
+}
+
 export const NilaiSertifikat: React.FC = () => {
   const {
     data: nilaiResponse,
@@ -70,7 +79,7 @@ export const NilaiSertifikat: React.FC = () => {
         <div className="p-8">
           <div className="flex flex-wrap border-b border-white">
             <button
-              className={`py-4 px-10 text-xl font-semibold border-1 whitespace-nowrap ${
+              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
                 activeTab === "nilai"
                   ? "text-blue-500 border-b-4 border-blue-500"
                   : "text-gray-500"
@@ -80,7 +89,7 @@ export const NilaiSertifikat: React.FC = () => {
               Nilai
             </button>
             <button
-              className={`py-4 px-10 text-xl font-semibold border-1 whitespace-nowrap ${
+              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
                 activeTab === "sertifikat"
                   ? "text-blue-500 border-b-4 border-blue-500"
                   : "text-gray-500"
@@ -172,14 +181,7 @@ export const NilaiSertifikat: React.FC = () => {
                     }
                     disabled={subject.status === "BELUM SELESAI"}
                   >
-                    <div className="pt-2">
-                      <Link
-                        to="/pelatihan-keterampilan"
-                        className="inline-block w-full text-center px-4 py-2 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
-                      >
-                        Lihat Sertifikat
-                      </Link>
-                    </div>
+                    Lihat Sertifikat
                   </button>
                 </div>
               ))}

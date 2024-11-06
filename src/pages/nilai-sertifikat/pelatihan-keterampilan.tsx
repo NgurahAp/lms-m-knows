@@ -26,12 +26,12 @@ export const PelatihanKet: React.FC = () => {
     );
   }
 
-  // Mengakses subjects dari dalam properti data
+  // Mengakses sessions dari dalam properti data
   const sessions = nilaiData?.sessions ?? [];
   console.log(sessions);
 
   return (
-    <div className=" flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <Link to="/dashboard" className="flex items-center">
           <img
@@ -54,14 +54,14 @@ export const PelatihanKet: React.FC = () => {
       </div>
 
       <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className=" md:text-lg text-sm font-semibold">Nilai</h1>
+        <h1 className="md:text-lg text-sm font-semibold">Nilai</h1>
       </div>
-      <div className=" bg-white w-full h-full items-center justify-between p-9 mt-5 rounded-xl mb-4">
+      <div className="bg-white w-full h-full items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className="text-xl font-semibold mb-4">
           Pelatihan Keterampilan Komunikasi
         </h1>
         <div className="overflow-x-auto border rounded-xl shadow-md">
-          <table className="min-w-full bg-white border border-gray-300">
+          <table className="min-w-full bg-white border border-gray-300 text-sm">
             <thead>
               <tr className="h-14 px-4 py-4 border-b-2 border-gray-200 text-center bg-blue-500 text-white">
                 <th className="py-2 px-4 border">Judul</th>
@@ -75,14 +75,18 @@ export const PelatihanKet: React.FC = () => {
             <tbody>
               {sessions.map((session) => (
                 <tr key={session.id} className="text-center">
-                  <td className="flex h-14 px-4 py-4 border-b-2 border-gray-200 text-left">
+                  <td className="py-2 px-4 border-b-2 border-gray-200 text-left">
                     {session.title}
                   </td>
                   <td className="py-2 px-4 border">{session.module_score}</td>
                   <td className="py-2 px-4 border">{session.quiz_score}</td>
-                  <td className="py-2 px-4 border">{session.assignment_score}</td>
+                  <td className="py-2 px-4 border">
+                    {session.assignment_score}
+                  </td>
                   <td className="py-2 px-4 border">{session.average_score}</td>
-                  <td className="py-2 px-4 border">{session.average_score_letter}</td>
+                  <td className="py-2 px-4 border">
+                    {session.average_score_letter}
+                  </td>
                 </tr>
               ))}
             </tbody>

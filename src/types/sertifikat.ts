@@ -6,4 +6,5 @@ export interface Sertifikat {
 }
 
 interface Certificate {
+  certificates: unknown[];
 }
