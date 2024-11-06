@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
+import { useDetailAssignmentData } from "../../../services/pelatihanku/AssignmentService";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -8,7 +9,24 @@ export const DetailAssignment = () => {
     assignmentId: string;
   }>();
 
-  console.log(assignmentId);
+  const { data, isLoading, error } = useDetailAssignmentData(subjectId, sessionId, assignmentId);
+  if (isLoading) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  console.log(data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">

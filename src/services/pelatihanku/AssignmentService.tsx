@@ -24,6 +24,27 @@ const fetchAssignmentData = async (
   return response.data;
 };
 
+const fetchDetailAssignmentData = async (
+  subjectId: string | undefined,
+  sessionId: string | undefined,
+  assignmentId: string | undefined
+): Promise<AssignmentsResponse> => {
+  if (!subjectId || !sessionId || !assignmentId) {
+    throw new Error("Subject ID, Assignment ID and Session ID are required");
+  }
+
+  const token = Cookies.get("accessToken");
+  const response = await axios.get(
+    `${API_BASE_URL}/api/v2/my-study/subjects/${subjectId}/sessions/${sessionId}/assignments/${assignmentId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
 export const useAssignmentData = (
   subjectId: string | undefined,
   sessionId: string | undefined
@@ -32,6 +53,19 @@ export const useAssignmentData = (
     queryKey: ["assignmentData", subjectId, sessionId],
     queryFn: () => fetchAssignmentData(subjectId, sessionId),
     enabled: !!subjectId && !!sessionId,
+  });
+};
+
+export const useDetailAssignmentData = (
+  subjectId: string | undefined,
+  sessionId: string | undefined,
+  assignmentId: string | undefined,
+) => {
+  return useQuery({
+    queryKey: ["detailAssignmentData", subjectId, sessionId, assignmentId],
+    queryFn: () =>
+      fetchDetailAssignmentData(subjectId, sessionId, assignmentId),
+    enabled: !!subjectId && !!sessionId && !!assignmentId,
   });
 };
 
