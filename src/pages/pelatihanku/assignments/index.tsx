@@ -1,7 +1,26 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import { useAssignmentData } from "../../../services/pelatihanku/AssignmentService";
-import AssignmentCard from "./components/AssignmentCard";
+import { IoDocumentText } from "react-icons/io5";
+import { FaCheckCircle } from "react-icons/fa";
+
+const formatTimestamp = (timestamp: string) => {
+  if (!timestamp) {
+    return "Belum mengerjakan";
+  }
+
+  const date = new Date(timestamp);
+  const formattedDate = date.toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const [datePart, timePart] = formattedDate.split(" ");
+  return `Selesai ${datePart} ${timePart}`;
+};
 
 export const Assignment = () => {
   const { subjectId, sessionId } = useParams<{
@@ -76,11 +95,28 @@ export const Assignment = () => {
       <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
         <div className="my-6 grid gap-8 w-full">
           {data?.data.assignments.map((assignment) => (
-            <AssignmentCard
-              key={assignment.id}
-              assignment={assignment}
-              sessionNo={data.data.detail.session_no}
-            />
+            <div className="flex items-center justify-between p-7 border border-gray-300 rounded-lg shadow-sm w-full">
+              <div className="flex items-center space-x-2">
+                <IoDocumentText className="text-red-500 text-3xl mr-3" />
+                <div>
+                  <h2 className="text-lg font-semibold pb-1">
+                    Tugas Modul {data.data.detail.session_no}
+                  </h2>
+                  <p
+                    className={
+                      assignment.progress.timestamp_submitted
+                        ? "text-gray-500"
+                        : "text-red-500"
+                    }
+                  >
+                    {formatTimestamp(assignment.progress.timestamp_submitted)}
+                  </p>
+                </div>
+              </div>
+              {assignment.progress.status === "FINISHED"  && (
+                <FaCheckCircle className="text-green-500 text-xl" />
+              )}
+            </div>
           ))}
         </div>
       </div>
