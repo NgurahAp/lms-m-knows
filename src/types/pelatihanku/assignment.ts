@@ -23,7 +23,7 @@ interface AssignmentProgress {
   deadline: string;
 }
 
-interface Assignment {
+export interface Assignment {
   id: string;
   session_id: string;
   module_id: string;
