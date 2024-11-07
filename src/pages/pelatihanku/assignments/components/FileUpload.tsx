@@ -47,7 +47,7 @@ export const FileUploadForm = ({ onSubmit, onCancel }: FileUploadFormProps) => {
 
   return (
     <div>
-      <h1 className="text-2xl pt-10 font-bold">Penyerahan Berkas</h1>
+      <h1 className="text-2xl font-bold">Penyerahan Berkas</h1>
       <div>
         {/* Description Box */}
         <label

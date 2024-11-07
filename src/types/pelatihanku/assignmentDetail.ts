@@ -31,6 +31,12 @@ interface Document {
   document_filename: string;
 }
 
+interface File {
+  id: string;
+  document_filename: string;
+  document_url: string;
+}
+
 interface Progress {
   id: string;
   student_id: string;
@@ -47,7 +53,7 @@ interface Progress {
   timestamp_submitted: string;
   deadline: string;
   text: string;
-  files: unknown[]; 
+  files: File[]; 
   total_files: number;
 }
 
