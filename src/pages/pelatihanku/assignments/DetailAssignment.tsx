@@ -3,6 +3,7 @@ import { useDetailAssignmentData } from "../../../services/pelatihanku/Assignmen
 import { PageInfo } from "../../../components/reusable/PageInfo";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
+import { FinishedAssignment } from "./components/FinishedAssignment";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -72,13 +73,11 @@ export const DetailAssignment = () => {
         <p className="pt-5 whitespace-pre-line">{data?.data.assignment.desc}</p>
         <div className="border-b-[1px] border-gray-400 my-10" />
         {/* Status */}
-        <FileUploadForm />
-
-        {/* {data?.data.assignment.progress.status === "FINISHED" ? (
+        {data?.data.assignment.progress.status === "FINISHED" ? (
           <FinishedAssignment assignmentData={data?.data.assignment} />
         ) : (
-          <FileUploadForm onSubmit={handleSubmit} onCancel={handleCancel} />
-        )} */}
+          <FileUploadForm />
+        )}
       </div>
     </div>
   );
