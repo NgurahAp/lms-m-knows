@@ -5,14 +5,6 @@ import { Sertifikat } from "./popup";
 import { useNilaiResponse } from "../../services/NilaiService";
 import { FaChevronRight } from "react-icons/fa";
 
-// Define the structure of subject data
-interface Subject {
-  id: string;
-  name: string;
-  status: "SELESAI" | "BELUM SELESAI";
-  score: number;
-  score_letter: string;
-}
 
 export const NilaiSertifikat: React.FC = () => {
   const {
