@@ -11,7 +11,7 @@ interface Detail {
   session_type: string;
 }
 
-interface Assignment {
+export interface Assignment {
   id: string;
   session_id: string;
   title: string;

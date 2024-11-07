@@ -3,10 +3,7 @@ import { useDetailAssignmentData } from "../../../services/pelatihanku/Assignmen
 import { PageInfo } from "../../../components/reusable/PageInfo";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
-import {
-  calculateRemainingTime,
-  formatToIndonesianDateTime,
-} from "./components/Date";
+import { FinishedAssignment } from "./components/FinishedAssignment";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -74,7 +71,7 @@ export const DetailAssignment = () => {
     // Handle cancel logic here
   };
 
-  console.log(data);
+  console.log(data?.data.assignment.progress.status);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -91,83 +88,12 @@ export const DetailAssignment = () => {
         <p className="pt-5 whitespace-pre-line">{data?.data.assignment.desc}</p>
         <div className="border-b-[1px] border-gray-400 my-10" />
         {/* Status */}
-        {/* <FileUploadForm onSubmit={handleSubmit} onCancel={handleCancel} /> */}
-        <div className="overflow-x-auto">
-          <h1 className="text-2xl font-semibold pb-5">Status Penyerahan</h1>
-          <table className="table-auto w-full border border-gray-300">
-            <tbody>
-              <tr className="border-b">
-                <td className="p-4 font-medium border-r w-1/4 border-gray-300 bg-gray-50">
-                  Status Penyerahan
-                </td>
-                <td className="p-4 bg-[#EBF5FB]">
-                  {data?.data.assignment.progress.status === "FINISHED"
-                    ? "Sudah Terkirim"
-                    : data?.data.assignment.progress.status}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium border-r border-gray-300">
-                  Status Penilaian
-                </td>
-                <td className="p-4">{data?.data.assignment.progress.score}</td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium border-r border-gray-300 bg-gray-50">
-                  Tenggat Waktu
-                </td>
-                <td className="p-4 bg-gray-50">
-                  {formatToIndonesianDateTime(
-                    data?.data.assignment.progress.deadline
-                  )}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium border-r border-gray-300">
-                  Waktu Tersisa
-                </td>
-                <td className="p-4 bg-[#EBF5FB]">
-                  {calculateRemainingTime(
-                    data?.data.assignment.progress.deadline
-                  )}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium border-r border-gray-300 bg-gray-50">
-                  Terakhir Diubah
-                </td>
-                <td className="p-4 bg-gray-50">
-                  {formatToIndonesianDateTime(
-                    data?.data.assignment.progress.timestamp_submitted
-                  )}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="p-4 font-medium border-r border-gray-300">
-                  Deskripsi
-                </td>
-                <td className="p-4">{data?.data.assignment.progress.text}</td>
-              </tr>
-              <tr>
-                <td className="p-4 font-medium border-r border-gray-300 bg-gray-50">
-                  Penyerahan Tugas
-                </td>
-                {data?.data.assignment.progress.files.map((file) => (
-                  <td className="p-4 bg-gray-50" key={file.document_url}>
-                    <a
-                      href={file.document_url}
-                      className="text-blue-500 hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {file.document_filename}
-                    </a>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <FileUploadForm onSubmit={handleSubmit} onCancel={handleCancel} />
+        {/* {data?.data.assignment.progress.status === "FINISHED" ? (
+          <FinishedAssignment assignmentData={data?.data.assignment} />
+        ) : (
+          <FileUploadForm onSubmit={handleSubmit} onCancel={handleCancel} />
+        )} */}
       </div>
     </div>
   );
