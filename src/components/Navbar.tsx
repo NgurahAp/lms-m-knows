@@ -48,24 +48,24 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-    useEffect(() => {
-      const getUserProfile = () => {
-        try {
-          const storedUser = localStorage.getItem("user_profile");
+  useEffect(() => {
+    const getUserProfile = () => {
+      try {
+        const storedUser = localStorage.getItem("user_profile");
 
-          if (storedUser) {
-            const userData: UserData = JSON.parse(storedUser);
-            setProfileData(userData);
-          } else {
-            console.log("Data profil tidak ditemukan di localStorage");
-          }
-        } catch (error) {
-          console.error("Error parsing user profile:", error);
+        if (storedUser) {
+          const userData: UserData = JSON.parse(storedUser);
+          setProfileData(userData);
+        } else {
+          console.log("Data profil tidak ditemukan di localStorage");
         }
-      };
+      } catch (error) {
+        console.error("Error parsing user profile:", error);
+      }
+    };
 
-      getUserProfile();
-    }, []);
+    getUserProfile();
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
