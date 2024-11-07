@@ -1,6 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import { useDetailAssignmentData } from "../../../services/pelatihanku/AssignmentService";
+import { useState } from "react";
+import { FaUpload } from "react-icons/fa6";
+import { CiSearch } from "react-icons/ci";
+import { PageInfo } from "../../../components/reusable/PageInfo";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -9,7 +13,25 @@ export const DetailAssignment = () => {
     assignmentId: string;
   }>();
 
-  const { data, isLoading, error } = useDetailAssignmentData(subjectId, sessionId, assignmentId);
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log("File:", file);
+    console.log("Description:", description);
+  };
+
+  const { data, isLoading, error } = useDetailAssignmentData(
+    subjectId,
+    sessionId,
+    assignmentId
+  );
   if (isLoading) {
     return (
       <div className="min-h-[85vh] w-screen flex items-center justify-center">
@@ -25,8 +47,6 @@ export const DetailAssignment = () => {
       </div>
     );
   }
-
-  console.log(data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -51,29 +71,109 @@ export const DetailAssignment = () => {
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to={`/pelatihanku/${subjectId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            quizData?.data.subject.name
+            {data?.data.detail.subject_name}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/quiz/${subjectId}/${sessionId}`}>
+        <Link to={`/assignment/${subjectId}/${sessionId}`}>
           <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pertemuan quizData?.data.session.session_no
+            Pertemuan {data?.data.detail.session_no}
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-gray-400 md:text-base text-sm font-semibold">
-          Quiz
+          Tugas
         </span>
       </div>
-      {/* Quiz Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">
-          quizData?.data.quiz.titl
-        </h1>
-        <p className="text-lg">Pertemuan quizData?.data.session.session_n</p>
-      </div>
+      {/* Assignment Info */}
+      <PageInfo
+        title={data?.data.assignment.title}
+        detail={`Modul ${data?.data.detail.session_no}`}
+      />
       {/* Quiz Content */}
-      <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg"></div>
+      <div className="bg-white  mt-5 w-full p-8 h-full rounded-lg">
+        <h1 className="font-bold">{data?.data.assignment.title}</h1>
+        <p className="pt-5 whitespace-pre-line">{data?.data.assignment.desc}</p>
+        <div className="border-b-[1px]  border-gray-400 mt-10" />
+        {/* Status */}
+        <div>
+          <h1 className="text-2xl pt-10 font-bold">Penyerahan Berkas</h1>
+          <div>
+            {/* Description Box */}
+            <label
+              htmlFor="description"
+              className="block text-sm pt-3 font-medium text-gray-700"
+            >
+              Deskripsi
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              rows={8}
+              className="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Tulis Deskripsi Disini"
+            />
+            {/* File Box */}
+            <div>
+              <label
+                htmlFor="file"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Unggah Berkas File
+              </label>
+              <div className="mt-2 border-2 border-dashed border-gray-300 bg-gray-50 py-20 rounded-md">
+                <input
+                  type="file"
+                  id="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                  accept=".jpg,.png,.pdf, .doc, .docx"
+                />
+
+                {file && (
+                  <div className="mt-2 text-sm text-gray-700">
+                    File Terpilih: {file.name}
+                  </div>
+                )}
+                <label
+                  htmlFor="file"
+                  className="block text-center text-gray-500 cursor-pointer"
+                >
+                  <FaUpload className="flex justify-center items-center w-full text-4xl pb-3" />
+                  Klik untuk upload atau drag and drop
+                  <p className="mt-1 text-xs text-gray-500">
+                    Max. File Size: 2MB
+                  </p>
+                  <div className="flex justify-center pt-5">
+                    <button className="flex gap-2 py-2 px-3 text-sm bg-blue-500 text-white rounded-lg items-center justify-center">
+                      <CiSearch />
+                      Cari File
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+            {/* Buttons */}
+            <div className="flex justify-between pt-8">
+              <button
+                type="button"
+                className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                className="px-14 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                onClick={handleSubmit}
+              >
+                Kirim
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

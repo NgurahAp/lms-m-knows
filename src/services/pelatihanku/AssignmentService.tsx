@@ -3,6 +3,7 @@ import { AssignmentsResponse } from "../../types/pelatihanku/assignment";
 import Cookies from "js-cookie";
 import { API_BASE_URL } from "../../config/api";
 import { useQuery } from "@tanstack/react-query";
+import { AssignmentDetailResponse } from "../../types/pelatihanku/assignmentDetail";
 
 const fetchAssignmentData = async (
   subjectId: string | undefined,
@@ -28,7 +29,7 @@ const fetchDetailAssignmentData = async (
   subjectId: string | undefined,
   sessionId: string | undefined,
   assignmentId: string | undefined
-): Promise<AssignmentsResponse> => {
+): Promise<AssignmentDetailResponse> => {
   if (!subjectId || !sessionId || !assignmentId) {
     throw new Error("Subject ID, Assignment ID and Session ID are required");
   }
