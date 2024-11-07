@@ -9,7 +9,6 @@ import { Modul } from "../pages/pelatihanku/modul";
 import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
-import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihanket";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginRoute from "./LoginRoute";
@@ -17,6 +16,8 @@ import { Login } from "../pages/auth/login";
 import { Quiz } from "../pages/pelatihanku/quiz";
 import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
 import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
+import { Assignment } from "../pages/pelatihanku/assignments";
+import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -121,13 +122,23 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/nilai-sertifikat"
+
+            path="/assignment/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
-                <NilaiSertifikat />
+                <Assignment />
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/detailAssignment/:subjectId/:sessionId/:assignmentId"
+            element={
+              <ProtectedRoute>
+                <DetailAssignment />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/pelatihan-keterampilan"
             element={
@@ -136,6 +147,9 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
+
+          <Route path="/pelatihan-keterampilan" element={<PelatihanKet />} />
+
         </Routes>
       </MainLayout>
     </Router>
