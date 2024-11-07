@@ -123,6 +123,7 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
+
             path="/assignment/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
@@ -138,6 +139,8 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/pelatihan-keterampilan" element={<PelatihanKet />} />
+
         </Routes>
       </MainLayout>
     </Router>

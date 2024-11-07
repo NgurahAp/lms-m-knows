@@ -1,16 +1,13 @@
-// FileUploadForm.tsx
 import { useState } from "react";
 import { FaUpload, FaFileWord, FaFileImage } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
+import SubmitDialog from "../../quiz/components/SubmitDialog";
 
-interface FileUploadFormProps {
-  onSubmit: (data: { description: string; file: File | null }) => void;
-  onCancel?: () => void;
-}
 
-export const FileUploadForm = ({ onSubmit, onCancel }: FileUploadFormProps) => {
+export const FileUploadForm = () => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [showDialog, setShowDialog] = useState(false);
 
   const getFileIcon = (fileName: string) => {
     const extension = fileName.split(".").pop()?.toLowerCase();
@@ -36,13 +33,38 @@ export const FileUploadForm = ({ onSubmit, onCancel }: FileUploadFormProps) => {
   };
 
   const handleRemoveFile = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevent event bubbling to label click
-    e.stopPropagation(); // Prevent event bubbling to label click
+    e.preventDefault();
+    e.stopPropagation();
     setFile(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmitClick = () => {
+    setShowDialog(true);
+  };
+
+  const handleConfirmSubmit = () => {
+    setShowDialog(false);
     onSubmit({ description, file });
+  };
+
+  const onSubmit = ({
+    description,
+    file,
+  }: {
+    description: string;
+    file: File | null;
+  }) => {
+    console.log("Description:", description);
+    console.log("File:", file);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+  };
+
+  const handleCancelClick = () => {
+    setDescription("");
+    setFile(null);
   };
 
   return (
@@ -133,7 +155,7 @@ export const FileUploadForm = ({ onSubmit, onCancel }: FileUploadFormProps) => {
         <div className="flex justify-between pt-8">
           <button
             type="button"
-            onClick={onCancel}
+            onClick={handleCancelClick}
             className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors"
           >
             Batal
@@ -141,13 +163,19 @@ export const FileUploadForm = ({ onSubmit, onCancel }: FileUploadFormProps) => {
           <button
             type="button"
             className="px-14 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
-            onClick={handleSubmit}
+            onClick={handleSubmitClick}
             disabled={!description.trim() && !file}
           >
             Kirim
           </button>
         </div>
       </div>
+      {showDialog && (
+        <SubmitDialog
+          onClose={handleCloseDialog}
+          onSubmit={handleConfirmSubmit}
+        />
+      )}
     </div>
   );
 };
