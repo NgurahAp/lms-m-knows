@@ -9,7 +9,6 @@ import { Modul } from "../pages/pelatihanku/modul";
 import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
-import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihanket";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginRoute from "./LoginRoute";
@@ -136,14 +135,6 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <DetailAssignment />
-              </ProtectedRoute>
-            }
-          />
-
-            path="/nilai-sertifikat"
-            element={
-              <ProtectedRoute>
-                <NilaiSertifikat />
               </ProtectedRoute>
             }
           />

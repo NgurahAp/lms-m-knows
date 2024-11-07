@@ -3,7 +3,6 @@ import { useDetailAssignmentData } from "../../../services/pelatihanku/Assignmen
 import { PageInfo } from "../../../components/reusable/PageInfo";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
-import { FinishedAssignment } from "./components/FinishedAssignment";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -56,21 +55,6 @@ export const DetailAssignment = () => {
     },
   ];
 
-  const handleSubmit = ({
-    description,
-    file,
-  }: {
-    description: string;
-    file: File | null;
-  }) => {
-    console.log("Description:", description);
-    console.log("File:", file);
-  };
-
-  const handleCancel = () => {
-    // Handle cancel logic here
-  };
-
   console.log(data?.data.assignment.progress.status);
 
   return (
@@ -88,11 +72,13 @@ export const DetailAssignment = () => {
         <p className="pt-5 whitespace-pre-line">{data?.data.assignment.desc}</p>
         <div className="border-b-[1px] border-gray-400 my-10" />
         {/* Status */}
-        {data?.data.assignment.progress.status === "FINISHED" ? (
+        <FileUploadForm />
+
+        {/* {data?.data.assignment.progress.status === "FINISHED" ? (
           <FinishedAssignment assignmentData={data?.data.assignment} />
         ) : (
           <FileUploadForm onSubmit={handleSubmit} onCancel={handleCancel} />
-        )}
+        )} */}
       </div>
     </div>
   );
