@@ -17,6 +17,7 @@ import { Login } from "../pages/auth/login";
 import { Quiz } from "../pages/pelatihanku/quiz";
 import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
 import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
+import {RoleplayAsses} from "../pages/roleplay-asses";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -128,7 +129,22 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/pelatihan-keterampilan" element={<PelatihanKet />} />
+          <Route 
+          path="/pelatihan-keterampilan" 
+          element={
+            <ProtectedRoute>
+              <PelatihanKet />
+            </ProtectedRoute>
+          } 
+          />
+          <Route 
+          path="/roleplay-asses" 
+          element={
+            <ProtectedRoute>
+              <RoleplayAsses />
+            </ProtectedRoute>
+          } 
+          />
         </Routes>
       </MainLayout>
     </Router>
