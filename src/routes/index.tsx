@@ -138,18 +138,22 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-
           <Route
-            path="/pelatihan-keterampilan"
+            path="/nilai-sertifikat"
+            element={
+              <ProtectedRoute>
+                <NilaiSertifikat />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pelatihanKet"
             element={
               <ProtectedRoute>
                 <PelatihanKet />
               </ProtectedRoute>
             }
           />
-
-          <Route path="/pelatihan-keterampilan" element={<PelatihanKet />} />
-
         </Routes>
       </MainLayout>
     </Router>
