@@ -7,7 +7,6 @@ import { Session, SessionProgress } from "../../types/pelatihanku/pelatihanku";
 import { FaChevronRight } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
 
-
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
   const { data, isLoading, error } = useSubjectData(pelatihankuId || "");
@@ -29,9 +28,9 @@ export const PelatihankuDetail: React.FC = () => {
     if (itemProgress?.status === "FINISHED") {
       return <FaCheckCircle className="text-green-500 ml-2" />;
     }
-     if (itemProgress?.status === "FAILED") {
-       return <FaCircleXmark className="text-red-500 ml-2" />;
-     }
+    if (itemProgress?.status === "FAILED") {
+      return <FaCircleXmark className="text-red-500 ml-2" />;
+    }
     if (itemProgress?.status === "LOCKED") {
       return <CiLock className="text-gray-500 ml-2" />;
     }
@@ -120,8 +119,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("ASSIGNMENT", session.progress, () => {
-              // Add your navigation logic here for assignment
-              console.log("Navigate to assignment");
+              navigate(`/assignment/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -191,7 +189,7 @@ export const PelatihankuDetail: React.FC = () => {
           <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
             Beranda
           </span>
-        </Link> 
+        </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to="/pelatihanku">
           <span className="text-blue-500 md:text-base text-sm font-semibold">
