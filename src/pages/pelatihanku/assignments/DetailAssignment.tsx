@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDetailAssignmentData } from "../../../services/pelatihanku/AssignmentService";
 import { PageInfo } from "../../../components/reusable/PageInfo";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
 import { FinishedAssignment } from "./components/FinishedAssignment";
+import { FaArrowLeft } from "react-icons/fa";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -76,8 +77,19 @@ export const DetailAssignment = () => {
         {data?.data.assignment.progress.status === "FINISHED" ? (
           <FinishedAssignment assignmentData={data?.data.assignment} />
         ) : (
-          <FileUploadForm />
+          <FileUploadForm
+            subjectId={subjectId}
+            sessionId={sessionId}
+            assignmentId={assignmentId}
+          />
         )}
+        <Link
+          to={`/assignment/${subjectId}/${sessionId}`}
+          className="flex items-center gap-2 p-5 pt-8 underline justify-start text-blue-500"
+        >
+          <FaArrowLeft />
+          Kembali
+        </Link>
       </div>
     </div>
   );
