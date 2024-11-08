@@ -46,12 +46,14 @@ interface SessionDetail {
   session_type: string;
 }
 
+interface Data {
+  detail: SessionDetail;
+  assignments: Assignment[];
+}
+
 export interface AssignmentsResponse {
   code: number;
   status: string;
   message: string;
-  data: {
-    detail: SessionDetail;
-    assignments: Assignment[];
-  };
+  data: Data;
 }

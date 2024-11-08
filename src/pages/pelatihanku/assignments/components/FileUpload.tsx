@@ -2,16 +2,24 @@ import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import SubmitDialog from "../../quiz/components/SubmitDialog";
+import { useSubmitAssignment } from "../../../../hooks/pelatihanku/useAssignment";
 
-type SubmitData = {
-  description: string;
-  file: File | null;
+type FileUploadFormProps = {
+  subjectId: string;
+  sessionId: string;
+  assignmentId: string;
 };
 
-export const FileUploadForm = () => {
+export const FileUploadForm = ({
+  subjectId,
+  sessionId,
+  assignmentId,
+}: FileUploadFormProps) => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [showDialog, setShowDialog] = useState(false);
+
+  const { mutate: submitAssignment, isPending } = useSubmitAssignment();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -23,20 +31,32 @@ export const FileUploadForm = () => {
   };
 
   const handleSubmit = () => {
-    const submitData: SubmitData = {
-      description,
-      file,
-    };
-    console.log("Submitted data:", submitData);
-    setShowDialog(false);
-    resetForm();
+    submitAssignment(
+      {
+        subjectId,
+        sessionId,
+        assignmentId,
+        text: description,
+        file,
+      },
+      {
+        onSuccess: () => {
+          setShowDialog(false);
+          resetForm();
+          // Optional: Redirect or show success message
+        },
+        onError: (error) => {
+          // Handle error appropriately
+          alert(error);
+        },
+      }
+    );
   };
 
   const resetForm = () => {
     setDescription("");
     setFile(null);
   };
-
   return (
     <div>
       <h1 className="text-2xl font-bold">Penyerahan Berkas</h1>
@@ -133,9 +153,9 @@ export const FileUploadForm = () => {
             type="button"
             className="px-14 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
             onClick={() => setShowDialog(true)}
-            disabled={!description.trim() && !file}
+            disabled={(!description.trim() && !file) || isPending}
           >
-            Kirim
+            {isPending ? "Mengirim..." : "Kirim"}
           </button>
         </div>
       </div>

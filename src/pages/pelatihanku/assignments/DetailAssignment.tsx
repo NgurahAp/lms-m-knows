@@ -72,8 +72,11 @@ export const DetailAssignment = () => {
         <p className="pt-5 whitespace-pre-line">{data?.data.assignment.desc}</p>
         <div className="border-b-[1px] border-gray-400 my-10" />
         {/* Status */}
-        <FileUploadForm />
-
+        <FileUploadForm
+          subjectId={subjectId}
+          sessionId={sessionId}
+          assignmentId={assignmentId}
+        />
         {/* {data?.data.assignment.progress.status === "FINISHED" ? (
           <FinishedAssignment assignmentData={data?.data.assignment} />
         ) : (
