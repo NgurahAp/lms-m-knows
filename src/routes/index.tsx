@@ -9,7 +9,6 @@ import { Modul } from "../pages/pelatihanku/modul";
 import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
-import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihanket";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginRoute from "./LoginRoute";
@@ -19,6 +18,7 @@ import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
 import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
 import { Assignment } from "../pages/pelatihanku/assignments";
 import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
+import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -139,8 +139,22 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/pelatihan-keterampilan" element={<PelatihanKet />} />
-
+          <Route
+            path="/nilai-sertifikat"
+            element={
+              <ProtectedRoute>
+                <NilaiSertifikat />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pelatihanKet"
+            element={
+              <ProtectedRoute>
+                <PelatihanKet />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </MainLayout>
     </Router>
