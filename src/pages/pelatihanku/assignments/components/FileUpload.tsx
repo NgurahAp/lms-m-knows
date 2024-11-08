@@ -1,68 +1,77 @@
 import { useState } from "react";
-import { FaUpload, FaFileWord, FaFileImage } from "react-icons/fa6";
+import { FaUpload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import SubmitDialog from "../../quiz/components/SubmitDialog";
+import SubmitDialog from "./SubmitDialog";
+import { useSubmit } from "../../../../hooks/pelatihanku/useAssignment";
+import { useNavigate } from "react-router-dom";
+import CancelDialog from "./cancelDialog";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+type FileUploadFormProps = {
+  subjectId: string | undefined;
+  sessionId: string | undefined;
+  assignmentId: string | undefined;
+};
 
-export const FileUploadForm = () => {
+export const FileUploadForm = ({
+  subjectId,
+  sessionId,
+  assignmentId,
+}: FileUploadFormProps) => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [showDialog, setShowDialog] = useState(false);
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const navigate = useNavigate();
 
-  const getFileIcon = (fileName: string) => {
-    const extension = fileName.split(".").pop()?.toLowerCase();
-    switch (extension) {
-      case "pdf":
-        return <img src="/penugasan/pdf.png" className="w-1/3" alt="" />;
-      case "doc":
-      case "docx":
-        return <FaFileWord className="text-blue-500 text-4xl" />;
-      case "jpg":
-      case "jpeg":
-      case "png":
-        return <FaFileImage className="text-green-500 text-4xl" />;
-      default:
-        return <FaUpload className="text-gray-500 text-4xl" />;
-    }
-  };
+  const { mutate: submitAssignment, isPending } = useSubmit();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile?.type === "application/pdf") {
+      setFile(selectedFile);
     }
   };
 
-  const handleRemoveFile = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setFile(null);
+  const handleSubmit = () => {
+    submitAssignment(
+      {
+        subjectId,
+        sessionId,
+        assignmentId,
+        text: description,
+        file,
+      },
+      {
+        onSuccess: () => {
+          // setShowSubmitDialog(false);
+          resetForm();
+          navigate(0); // Refresh the page
+        },
+        onError: () => {
+          toast.error(`Terjadi kesalahan saat mengirim file`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        },
+      }
+    );
+    setShowSubmitDialog(false);
   };
 
-  const handleSubmitClick = () => {
-    setShowDialog(true);
+  const handleCancel = () => {
+    resetForm();
+    setShowCancelDialog(false);
   };
 
-  const handleConfirmSubmit = () => {
-    setShowDialog(false);
-    onSubmit({ description, file });
-  };
-
-  const onSubmit = ({
-    description,
-    file,
-  }: {
-    description: string;
-    file: File | null;
-  }) => {
-    console.log("Description:", description);
-    console.log("File:", file);
-  };
-
-  const handleCloseDialog = () => {
-    setShowDialog(false);
-  };
-
-  const handleCancelClick = () => {
+  const resetForm = () => {
     setDescription("");
     setFile(null);
   };
@@ -101,12 +110,7 @@ export const FileUploadForm = () => {
               id="file"
               className="hidden"
               onChange={handleFileChange}
-              accept=".jpg,.png,.pdf,.doc,.docx"
-              onClick={(e) => {
-                // Reset file input value if needed
-                const target = e.target as HTMLInputElement;
-                target.value = "";
-              }}
+              accept=".pdf,application/pdf"
             />
 
             <label
@@ -121,7 +125,11 @@ export const FileUploadForm = () => {
                     </p>
                     <button
                       type="button"
-                      onClick={handleRemoveFile}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setFile(null);
+                      }}
                       className="text-3xl hover:text-red-500 transition-colors"
                     >
                       ✕
@@ -129,7 +137,7 @@ export const FileUploadForm = () => {
                   </div>
                   <div className="mx-3 h-36 bg-gray-300">
                     <div className="flex items-center justify-center h-full">
-                      {getFileIcon(file.name)}
+                      <img src="/penugasan/pdf.png" className="w-1/3" alt="" />
                     </div>
                   </div>
                 </div>
@@ -138,7 +146,7 @@ export const FileUploadForm = () => {
                   <FaUpload className="flex justify-center items-center w-full text-4xl pb-3" />
                   Klik untuk upload atau drag and drop
                   <p className="mt-1 text-xs text-gray-500">
-                    Max. File Size: 2MB
+                    Upload file PDF (Max. 2MB)
                   </p>
                   <div className="flex justify-center pt-5">
                     <div className="flex gap-2 py-2 px-3 text-sm bg-blue-500 text-white rounded-lg items-center justify-center">
@@ -155,27 +163,46 @@ export const FileUploadForm = () => {
         <div className="flex justify-between pt-8">
           <button
             type="button"
-            onClick={handleCancelClick}
-            className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors"
+            onClick={() => setShowCancelDialog(true)}
+            className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:bg-red-300 disabled:cursor-not-allowed"
+            disabled={(!description.trim() && !file) || isPending}
           >
             Batal
           </button>
           <button
             type="button"
             className="px-14 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
-            onClick={handleSubmitClick}
-            disabled={!description.trim() && !file}
+            onClick={() => setShowSubmitDialog(true)}
+            disabled={(!description.trim() && !file) || isPending}
           >
-            Kirim
+            {isPending ? "Mengirim..." : "Kirim"}
           </button>
         </div>
       </div>
-      {showDialog && (
-        <SubmitDialog
-          onClose={handleCloseDialog}
-          onSubmit={handleConfirmSubmit}
+      {showCancelDialog && (
+        <CancelDialog
+          onClose={() => setShowCancelDialog(false)}
+          onSubmit={handleCancel}
         />
       )}
+      {showSubmitDialog && (
+        <SubmitDialog
+          onClose={() => setShowSubmitDialog(false)}
+          onSubmit={handleSubmit}
+        />
+      )}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

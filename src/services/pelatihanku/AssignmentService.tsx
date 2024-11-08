@@ -5,6 +5,14 @@ import { API_BASE_URL } from "../../config/api";
 import { useQuery } from "@tanstack/react-query";
 import { AssignmentDetailResponse } from "../../types/pelatihanku/assignmentDetail";
 
+export interface SubmitAssignmentRequest {
+  subjectId: string | undefined;
+  sessionId: string | undefined;
+  assignmentId: string | undefined;
+  text: string;
+  file: File | null;
+}
+
 const fetchAssignmentData = async (
   subjectId: string | undefined,
   sessionId: string | undefined
@@ -46,6 +54,34 @@ const fetchDetailAssignmentData = async (
   return response.data;
 };
 
+export const submitAssignment = async ({
+  subjectId,
+  sessionId,
+  assignmentId,
+  text,
+  file,
+}: SubmitAssignmentRequest): Promise<AssignmentsResponse> => {
+  if (!file) {
+    throw new Error("No file selected");
+  }
+
+  const formData = new FormData();
+  formData.append("text", text);
+  formData.append("files", file);
+
+  const token = Cookies.get("accessToken");
+  const response = await axios.post(
+    `${API_BASE_URL}/api/v2/my-study/subjects/${subjectId}/sessions/${sessionId}/assignments/${assignmentId}/submission`,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
 export const useAssignmentData = (
   subjectId: string | undefined,
   sessionId: string | undefined
@@ -60,7 +96,7 @@ export const useAssignmentData = (
 export const useDetailAssignmentData = (
   subjectId: string | undefined,
   sessionId: string | undefined,
-  assignmentId: string | undefined,
+  assignmentId: string | undefined
 ) => {
   return useQuery({
     queryKey: ["detailAssignmentData", subjectId, sessionId, assignmentId],
@@ -69,4 +105,3 @@ export const useDetailAssignmentData = (
     enabled: !!subjectId && !!sessionId && !!assignmentId,
   });
 };
-
