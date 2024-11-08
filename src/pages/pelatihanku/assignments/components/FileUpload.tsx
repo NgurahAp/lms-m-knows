@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import SubmitDialog from "../../quiz/components/SubmitDialog";
+import SubmitDialog from "./SubmitDialog";
 import { useSubmit } from "../../../../hooks/pelatihanku/useAssignment";
 import { useNavigate } from "react-router-dom";
+import CancelDialog from "./cancelDialog";
 
 type FileUploadFormProps = {
   subjectId: string | undefined;
@@ -18,7 +19,8 @@ export const FileUploadForm = ({
 }: FileUploadFormProps) => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [showDialog, setShowDialog] = useState(false);
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
   const navigate = useNavigate();
 
   const { mutate: submitAssignment, isPending } = useSubmit();
@@ -43,7 +45,7 @@ export const FileUploadForm = ({
       },
       {
         onSuccess: () => {
-          // setShowDialog(false);
+          // setShowSubmitDialog(false);
           resetForm();
           navigate(0); // Refresh the page
         },
@@ -52,7 +54,12 @@ export const FileUploadForm = ({
         },
       }
     );
-    setShowDialog(false);
+    setShowSubmitDialog(false);
+  };
+
+  const handleCancel = () => {
+    resetForm();
+    setShowCancelDialog(false);
   };
 
   const resetForm = () => {
@@ -146,24 +153,31 @@ export const FileUploadForm = ({
         <div className="flex justify-between pt-8">
           <button
             type="button"
-            onClick={resetForm}
-            className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors"
+            onClick={() => setShowCancelDialog(true)}
+            className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:bg-red-300 disabled:cursor-not-allowed"
+            disabled={(!description.trim() && !file) || isPending}
           >
             Batal
           </button>
           <button
             type="button"
             className="px-14 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
-            onClick={() => setShowDialog(true)}
+            onClick={() => setShowSubmitDialog(true)}
             disabled={(!description.trim() && !file) || isPending}
           >
             {isPending ? "Mengirim..." : "Kirim"}
           </button>
         </div>
       </div>
-      {showDialog && (
+      {showCancelDialog && (
+        <CancelDialog
+          onClose={() => setShowCancelDialog(false)}
+          onSubmit={handleCancel}
+        />
+      )}
+      {showSubmitDialog && (
         <SubmitDialog
-          onClose={() => setShowDialog(false)}
+          onClose={() => setShowSubmitDialog(false)}
           onSubmit={handleSubmit}
         />
       )}
