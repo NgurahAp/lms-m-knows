@@ -6,9 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { AssignmentDetailResponse } from "../../types/pelatihanku/assignmentDetail";
 
 export interface SubmitAssignmentRequest {
-  subjectId: string;
-  sessionId: string;
-  assignmentId: string;
+  subjectId: string | undefined;
+  sessionId: string | undefined;
+  assignmentId: string | undefined;
   text: string;
   file: File | null;
 }
@@ -76,7 +76,6 @@ export const submitAssignment = async ({
     {
       headers: {
         Authorization: `Bearer ${token}`,
-        // "Content-Type": "multipart/form-data",
       },
     }
   );

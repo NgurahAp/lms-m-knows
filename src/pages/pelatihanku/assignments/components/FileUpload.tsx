@@ -2,12 +2,13 @@ import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import SubmitDialog from "../../quiz/components/SubmitDialog";
-import { useSubmitAssignment } from "../../../../hooks/pelatihanku/useAssignment";
+import { useSubmit } from "../../../../hooks/pelatihanku/useAssignment";
+import { useNavigate } from "react-router-dom";
 
 type FileUploadFormProps = {
-  subjectId: string;
-  sessionId: string;
-  assignmentId: string;
+  subjectId: string | undefined;
+  sessionId: string | undefined;
+  assignmentId: string | undefined;
 };
 
 export const FileUploadForm = ({
@@ -18,8 +19,9 @@ export const FileUploadForm = ({
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [showDialog, setShowDialog] = useState(false);
+  const navigate = useNavigate();
 
-  const { mutate: submitAssignment, isPending } = useSubmitAssignment();
+  const { mutate: submitAssignment, isPending } = useSubmit();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -41,16 +43,16 @@ export const FileUploadForm = ({
       },
       {
         onSuccess: () => {
-          setShowDialog(false);
+          // setShowDialog(false);
           resetForm();
-          // Optional: Redirect or show success message
+          navigate(0); // Refresh the page
         },
         onError: (error) => {
-          // Handle error appropriately
           alert(error);
         },
       }
     );
+    setShowDialog(false);
   };
 
   const resetForm = () => {
