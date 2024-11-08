@@ -5,6 +5,8 @@ import SubmitDialog from "./SubmitDialog";
 import { useSubmit } from "../../../../hooks/pelatihanku/useAssignment";
 import { useNavigate } from "react-router-dom";
 import CancelDialog from "./cancelDialog";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type FileUploadFormProps = {
   subjectId: string | undefined;
@@ -29,8 +31,6 @@ export const FileUploadForm = ({
     const selectedFile = e.target.files?.[0];
     if (selectedFile?.type === "application/pdf") {
       setFile(selectedFile);
-    } else {
-      alert("Hanya file PDF yang diperbolehkan");
     }
   };
 
@@ -49,8 +49,17 @@ export const FileUploadForm = ({
           resetForm();
           navigate(0); // Refresh the page
         },
-        onError: (error) => {
-          alert(error);
+        onError: () => {
+          toast.error(`Terjadi kesalahan saat mengirim file`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         },
       }
     );
@@ -66,6 +75,7 @@ export const FileUploadForm = ({
     setDescription("");
     setFile(null);
   };
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Penyerahan Berkas</h1>
@@ -181,6 +191,18 @@ export const FileUploadForm = ({
           onSubmit={handleSubmit}
         />
       )}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

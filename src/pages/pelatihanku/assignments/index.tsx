@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
+import { FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { useAssignmentData } from "../../../services/pelatihanku/AssignmentService";
 import { IoDocumentText } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
@@ -74,14 +74,8 @@ export const Assignment = () => {
           </span>
         </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/assignment/${subjectId}/${sessionId}`}>
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pertemuan {data?.data.detail.session_no}
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-gray-400 md:text-base text-sm font-semibold">
-          Tugas
+          Pertemuan {data?.data.detail.session_no}
         </span>
       </div>
       {/* Info */}
@@ -92,8 +86,8 @@ export const Assignment = () => {
         <p className="text-lg">Pertemuan {data?.data.detail.session_no}</p>
       </div>
       {/* Content */}
-      <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
-        <div className="my-6 grid gap-8 w-full">
+      <div className="bg-white flex flex-col mt-5 w-full px-8 h-full justify-center rounded-lg">
+        <div className="my-6  w-full">
           {data?.data.assignments.map((assignment) => (
             <Link
               to={`/detailAssignment/${subjectId}/${sessionId}/${assignment.id}`}
@@ -122,6 +116,13 @@ export const Assignment = () => {
             </Link>
           ))}
         </div>
+        <Link
+          to={`/pelatihanku/${subjectId}`}
+          className="flex items-center gap-2 p-5 underline justify-start text-blue-500"
+        >
+          <FaArrowLeft />
+          Kembali
+        </Link>
       </div>
     </div>
   );
