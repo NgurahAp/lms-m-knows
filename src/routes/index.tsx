@@ -17,9 +17,9 @@ import { Login } from "../pages/auth/login";
 import { Quiz } from "../pages/pelatihanku/quiz";
 import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
 import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
-import {RoleplayAsses} from "../pages/roleplay-asses";
-import {PilihRoleplay} from "../pages/roleplay-asses/pilih-roleplay";
-import {PilihAses} from "../pages/roleplay-asses/pilih-ases";
+import { RoleplayAsses } from "../pages/roleplay-asses";
+import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
+import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -131,37 +131,37 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route 
-          path="/pelatihan-keterampilan" 
-          element={
-            <ProtectedRoute>
-              <PelatihanKet />
-            </ProtectedRoute>
-          } 
+          <Route
+            path="/pelatihan-keterampilan"
+            element={
+              <ProtectedRoute>
+                <PelatihanKet />
+              </ProtectedRoute>
+            }
           />
-          <Route 
-          path="/roleplay-asses" 
-          element={
-            <ProtectedRoute>
-              <RoleplayAsses />
-            </ProtectedRoute>
-          } 
+          <Route
+            path="/roleplay-asses"
+            element={
+              <ProtectedRoute>
+                <RoleplayAsses />
+              </ProtectedRoute>
+            }
           />
-          <Route 
-          path="/pilih-roleplay" 
-          element={
-            <ProtectedRoute>
-              <PilihRoleplay />
-            </ProtectedRoute>
-          } 
+          <Route
+            path="/pilih-roleplay"
+            element={
+              <ProtectedRoute>
+                <PilihRoleplay />
+              </ProtectedRoute>
+            }
           />
-          <Route 
-          path="/pilih-ases" 
-          element={
-            <ProtectedRoute>
-              <PilihAses />
-            </ProtectedRoute>
-          } 
+          <Route
+            path="/pilih-ases"
+            element={
+              <ProtectedRoute>
+                <PilihAses />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </MainLayout>
