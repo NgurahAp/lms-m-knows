@@ -10,7 +10,8 @@ import { QuizHistory } from "./components/HistoryQuiz";
 import { QuizInfo } from "./components/QuizInfo";
 import QuizDialog from "./components/QuizDialog";
 import { useNavigate } from "react-router-dom";
-import {  ErrorConsume, Loading } from "../../../components/APIRespone";
+import {  ErrorConsume } from "../../../components/APIRespone";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -35,7 +36,7 @@ export const DetailQuiz = () => {
   } = useHistoryQuizData(quizId);
 
   if (isQuizLoading || isHistoryLoading) {
-    <Loading />;
+    <LoadingSpinner text="Loading..." />;
   }
 
   if (quizError || historyError) {

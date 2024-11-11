@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Sertifikat } from "./popup";
 import { useNilaiResponse } from "../../services/NilaiService";
 import { FaChevronRight } from "react-icons/fa";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 
 export const NilaiSertifikat: React.FC = () => {
   const {
@@ -20,11 +21,7 @@ export const NilaiSertifikat: React.FC = () => {
   };
 
   if (isNilaiLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (isNilaiError) {

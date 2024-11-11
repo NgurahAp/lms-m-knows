@@ -4,6 +4,7 @@ import { useReflectionData } from "../../../hooks/pelatihanku/useReflection";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { IoDocumentText } from "react-icons/io5";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const HistoryReflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -55,14 +56,7 @@ export const HistoryReflection = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-          <p className="text-gray-600">Memuat data...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {

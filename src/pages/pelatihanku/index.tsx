@@ -5,6 +5,7 @@ import { useState } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { useMyStudyData } from "../../services/MyStudyService";
 import { MyStudyData } from "../../types/pelatihanku/pelatihanku";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 
 export const Pelatihanku = () => {
   const [activeTab, setActiveTab] = useState<"ongoing" | "completed">(
@@ -21,11 +22,7 @@ export const Pelatihanku = () => {
   const isError = isMyStudyDataError;
 
   if (isLoading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (isError) {

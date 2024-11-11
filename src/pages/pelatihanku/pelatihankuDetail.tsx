@@ -6,6 +6,7 @@ import { useSubjectData } from "../../services/MyStudyService";
 import { Session, SessionProgress } from "../../types/pelatihanku/pelatihanku";
 import { FaChevronRight } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
@@ -64,11 +65,7 @@ export const PelatihankuDetail: React.FC = () => {
   }
 
   if (isLoading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {

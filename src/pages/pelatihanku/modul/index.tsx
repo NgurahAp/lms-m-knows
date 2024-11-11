@@ -6,6 +6,7 @@ import { FaBookOpen } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
 import { useModuleData } from "../../../services/pelatihanku/ModulService";
 import { FaCheck } from "react-icons/fa";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const Modul = () => {
   const { subjectId, sessionId } = useParams<{
@@ -16,11 +17,7 @@ export const Modul = () => {
   const { data, isLoading, error } = useModuleData(subjectId, sessionId);
 
   if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {

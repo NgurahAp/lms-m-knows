@@ -4,6 +4,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { useDetailModuleData } from "../../../services/pelatihanku/ModulService";
 import ModuleCompletionDialog from "./components/Summary";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const DetailModule = () => {
   const { subjectId, sessionId, moduleId } = useParams<{
@@ -20,9 +21,7 @@ export const DetailModule = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
+      <LoadingSpinner text="Loading..." />
     );
   }
 

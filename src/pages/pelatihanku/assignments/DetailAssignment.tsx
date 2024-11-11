@@ -5,6 +5,7 @@ import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
 import { FinishedAssignment } from "./components/FinishedAssignment";
 import { FaArrowLeft } from "react-icons/fa";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -20,11 +21,7 @@ export const DetailAssignment = () => {
   );
 
   if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {

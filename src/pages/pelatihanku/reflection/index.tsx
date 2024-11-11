@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useReflectionData } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FaArrowLeft } from "react-icons/fa6";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const Reflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -13,14 +14,7 @@ export const Reflection = () => {
   const navigate = useNavigate();
 
   if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-          <p className="text-gray-600">Memuat data...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {
