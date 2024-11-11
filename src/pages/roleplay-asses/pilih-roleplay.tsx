@@ -1,24 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useNilaiResponse } from "../../services/NilaiService";
 import { FaChevronRight } from "react-icons/fa";
+import { useRoleplayData } from "../../services/RoleplayService"; // Import the new service
 
 export const PilihRoleplay: React.FC = () => {
   const {
-    data: nilaiResponse,
-    isLoading: isNilaiLoading,
-    isError: isNilaiError,
-  } = useNilaiResponse();
+    data: roleplayData,
+    isLoading: isRoleplayLoading,
+    isError: isRoleplayError,
+  } = useRoleplayData(); // Use the custom hook to fetch roleplay data
 
-  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "selesai">("daftar");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<
+    "daftar" | "terjadwal" | "selesai"
+  >("daftar");
 
-  const handleDownload = () => {
-    alert("Certificate Downloaded!");
-  };
-
-  if (isNilaiLoading) {
+  if (isRoleplayLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         Loading...
@@ -26,17 +22,15 @@ export const PilihRoleplay: React.FC = () => {
     );
   }
 
-  if (isNilaiError) {
+  if (isRoleplayError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Error fetching nilai response.
+        Error fetching roleplay data.
       </div>
     );
   }
 
-  // Mengakses subjects dari dalam properti data
-  const subjects = nilaiResponse?.subjects ?? [];
-  console.log(subjects);
+  const roleplays = roleplayData?.roleplays ?? [];
 
   return (
     <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -44,7 +38,7 @@ export const PilihRoleplay: React.FC = () => {
         <Link to="/dashboard" className="flex items-center">
           <img
             src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1 "
+            className="md:w-6 w-5 -mt-1"
             alt="Home"
           />
           <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
@@ -62,118 +56,80 @@ export const PilihRoleplay: React.FC = () => {
       </div>
 
       <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className=" md:text-lg text-sm font-semibold">Roleplay</h1>
+        <h1 className="md:text-lg text-sm font-semibold">Roleplay</h1>
       </div>
 
       {/* Main Content Card */}
       <div className="bg-white rounded-lg shadow-lg w-full">
         {/* Tabs */}
-        <div className="p-8">
+        <div className="p-6">
           <div className="flex flex-wrap border-b border-white">
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "daftar"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("daftar")}
-            >
-              Daftar
-            </button>
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "terjadwal"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("terjadwal")}
-            >
-              Terjadwal
-            </button>
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "selesai"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("selesai")}
-            >
-              Selesai
-            </button>
+            {["daftar", "terjadwal", "selesai"].map((tab) => (
+              <button
+                key={tab}
+                className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
+                  activeTab === tab
+                    ? "text-blue-500 border-b-4 border-blue-500"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setActiveTab(tab as typeof activeTab)}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="px-6">
           {activeTab === "daftar" && (
-            <div className="max-w-xs bg-white rounded-lg shadow-md overflow-hidden">
-              {/* Label */}
-              <span className="absolute top-2 right-2 bg-blue-200 text-blue-700 text-xs font-semibold px-2 py-1 rounded">
-                Roleplay
-              </span>
-
-              {/* Image */}
-              <img
-                src="/roleplay/daftar-roleplay-1.png"
-                alt="Roleplay Image"
-                className="w-full h-40 object-cover"
-              />
-
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">
-                  Roleplay Kewirausahaan
-                </h3>
-                <p className="text-gray-500 text-sm mt-2">Rizki Pratama</p>
-
-                {/* Buttons */}
-                <div className="flex justify-center mt-4">
-                  <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
-                    Lihat Detail
-                  </button>
-                  <button className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg">
-                    Daftar
-                  </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {roleplays.map((roleplay) => (
+                <div
+                  key={roleplay.id}
+                  className="bg-white rounded-lg shadow-md p-4"
+                >
+                  <img
+                    src={roleplay.subject_thumbnail}
+                    alt="Roleplay Image"
+                    className="w-full  object-cover"
+                  />
+                  <h3 className="text-lg font-semibold mt-2">
+                    {roleplay.topic}
+                  </h3>
+                  <p className="text-gray-500 text-sm mt-2">
+                    {roleplay.subject_name}
+                  </p>
+                  <div className="flex justify-center mt-4">
+                    <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
+                      Lihat Detail
+                    </button>
+                    <button className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg">
+                      Daftar
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           )}
 
           {activeTab === "terjadwal" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {subjects.map((subject) => (
+              {roleplays.map((roleplay) => (
                 <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
+                  key={roleplay.id}
+                  className="bg-white border rounded-md p-4 shadow-md"
                 >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
+                  <h3 className="text-gray-800 font-medium">
+                    {roleplay.topic}
                   </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-600">Status</span>
-                    <span
-                      className={`text-sm font-medium ${
-                        subject.status === "BELUM SELESAI"
-                          ? "text-yellow-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {subject.status}
-                    </span>
-                  </div>
-                  <button
-                    className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
-                      subject.status === "BELUM SELESAI"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={() =>
-                      subject.status !== "BELUM SELESAI" && setIsModalOpen(true)
-                    }
-                    disabled={subject.status === "BELUM SELESAI"}
+                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <a
+                    href="#"
+                    className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Sertifikat
-                  </button>
+                    Lihat Rekan Roleplay
+                  </a>
                 </div>
               ))}
             </div>
@@ -181,37 +137,27 @@ export const PilihRoleplay: React.FC = () => {
 
           {activeTab === "selesai" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {subjects.map((subject) => (
+              {roleplays.map((roleplay) => (
                 <div
-                  key={subject.id}
+                  key={roleplay.id}
                   className="bg-white border rounded-lg p-4 shadow-sm"
                 >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
+                  <h3 className="font-medium text-base mb-4">
+                    {roleplay.topic}
                   </h3>
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-sm text-gray-600">Status</span>
                     <span
                       className={`text-sm font-medium ${
-                        subject.status === "BELUM SELESAI"
-                          ? "text-yellow-500"
-                          : "text-green-500"
+                        roleplay.subject_type === "selesai"
+                          ? "text-green-500"
+                          : "text-yellow-500"
                       }`}
                     >
-                      {subject.status}
+                      {roleplay.subject_type}
                     </span>
                   </div>
-                  <button
-                    className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
-                      subject.status === "BELUM SELESAI"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={() =>
-                      subject.status !== "BELUM SELESAI" && setIsModalOpen(true)
-                    }
-                    disabled={subject.status === "BELUM SELESAI"}
-                  >
+                  <button className="w-full px-4 py-2 rounded-lg text-white text-sm bg-blue-500">
                     Lihat Sertifikat
                   </button>
                 </div>
