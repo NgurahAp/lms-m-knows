@@ -19,6 +19,9 @@ import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
 import { Assignment } from "../pages/pelatihanku/assignments";
 import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
 import { NilaiSertifikat } from "../pages/nilai-sertifikat";
+import { Reflection } from "../pages/pelatihanku/reflection";
+import { SubmitReflection } from "../pages/pelatihanku/reflection/SubmitReflection";
+import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflection";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -123,7 +126,6 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-
             path="/assignment/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
@@ -136,6 +138,30 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <DetailAssignment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <Reflection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/submitReflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <SubmitReflection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/historyReflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <HistoryReflection />
               </ProtectedRoute>
             }
           />
