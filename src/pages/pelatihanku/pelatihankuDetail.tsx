@@ -136,8 +136,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("REFLECTION", session.progress, () => {
-              // Add your navigation logic here for reflection
-              console.log("Navigate to reflection");
+              navigate(`/reflection/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 

@@ -19,6 +19,7 @@ import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
 import { Assignment } from "../pages/pelatihanku/assignments";
 import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
 import { NilaiSertifikat } from "../pages/nilai-sertifikat";
+import { Reflection } from "../pages/pelatihanku/reflection";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -123,7 +124,6 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-
             path="/assignment/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
@@ -136,6 +136,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <DetailAssignment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <Reflection />
               </ProtectedRoute>
             }
           />
