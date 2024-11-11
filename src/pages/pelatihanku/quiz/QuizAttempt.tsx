@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { ConfirmAttemptQuizDialog } from "./components/ConfirmAttempDialog";
 import { useQuestionData } from "../../../services/pelatihanku/QuizQuestionService";
-import { ErrorConsume, Loading } from "../../../components/APIRespone";
+import { ErrorConsume} from "../../../components/APIRespone";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const QuizAttempt = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -24,7 +25,7 @@ export const QuizAttempt = () => {
   } = useQuestionData(quizId);
 
   if (isQuestionLoading) {
-    return <Loading />;
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (questionError) {

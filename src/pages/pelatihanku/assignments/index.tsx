@@ -3,6 +3,7 @@ import { FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { useAssignmentData } from "../../../services/pelatihanku/AssignmentService";
 import { IoDocumentText } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 const formatTimestamp = (timestamp: string) => {
   if (!timestamp) {
@@ -30,11 +31,7 @@ export const Assignment = () => {
 
   const { data, isLoading, error } = useAssignmentData(subjectId, sessionId);
   if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {

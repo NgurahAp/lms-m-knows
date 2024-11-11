@@ -5,6 +5,7 @@ import {
 } from "../../services/DashboardService";
 import DashboardContent from "./DashboardContent";
 import Sidebar from "./Sidebar";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 
 const Dashboard: React.FC = () => {
   const {
@@ -37,9 +38,7 @@ const Dashboard: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">Loading...</p>
-      </div>
+        <LoadingSpinner text="Loading..." />
     );
   }
 

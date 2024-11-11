@@ -2,6 +2,7 @@ import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNilaiData } from "../../services/PelatihanKetService";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 
 export const PelatihanKet: React.FC = () => {
   const {
@@ -11,11 +12,7 @@ export const PelatihanKet: React.FC = () => {
   } = useNilaiData();
 
   if (isNilaiLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (isNilaiError) {
