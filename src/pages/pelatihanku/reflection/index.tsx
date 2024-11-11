@@ -78,7 +78,7 @@ export const Reflection = () => {
             <div className="flex gap-8 pt-4 w-full">
               <Link
                 to={`/historyReflection/${subjectId}/${sessionId}`}
-                className="border rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full"
+                className="border text-center rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full"
               >
                 Riwayat Refleksi Eksplorasi
               </Link>
