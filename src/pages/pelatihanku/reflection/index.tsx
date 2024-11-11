@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useReflectionData } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -10,10 +10,15 @@ export const Reflection = () => {
   }>();
 
   const { data, isLoading, error } = useReflectionData(sessionId);
+  const navigate = useNavigate();
+
   if (isLoading) {
     return (
       <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
+        <div className="flex flex-col items-center gap-2">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          <p className="text-gray-600">Memuat data...</p>
+        </div>
       </div>
     );
   }
@@ -61,7 +66,7 @@ export const Reflection = () => {
           </div>
           <div className="w-1/2 flex flex-col justify-center pr-10">
             <h1 className="text-2xl font-semibold">Deskripsi</h1>
-            <p className="text-lg text-justify py-4 text-gray-500  ">
+            <p className="text-lg text-justify py-4 text-gray-500">
               Refleksi Eksplorasi dilakukan dengan tujuan untuk meningkatkan
               pemahaman diri, memperkuat koneksi antara teori dan praktik, serta
               merancang strategi perbaikan atau pengembangan diri ke depannya.
@@ -71,17 +76,34 @@ export const Reflection = () => {
               berkelanjutan.
             </p>
             <div className="flex gap-8 pt-4 w-full">
-              <button className="border rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full">
-                Riwayat Refleksi Eksplorasi
-              </button>
               <Link
-                to={`/submitReflection/${subjectId}/${sessionId}`}
-                className="border text-center bg-blue-500 rounded-lg text-white py-3 w-full hover:bg-blue-600"
+                to={`/historyReflection/${subjectId}/${sessionId}`}
+                className="border rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full"
               >
-                Mulai
+                Riwayat Refleksi Eksplorasi
               </Link>
+              {data?.data.is_eligible ? (
+                <button
+                  onClick={() =>
+                    navigate(`/submitReflection/${subjectId}/${sessionId}`, {
+                      state: { reflectionData: data?.data },
+                    })
+                  }
+                  className="border text-center bg-blue-500 rounded-lg text-white py-3 w-full hover:bg-blue-600"
+                >
+                  Mulai
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="border text-center bg-gray-400 rounded-lg text-white py-3 w-full cursor-not-allowed"
+                  title="Anda sudah mengisi refleksi"
+                >
+                  Anda Sudah Mengisi Refleksi
+                </button>
+              )}
             </div>
-          </div>  
+          </div>
         </div>
         <Link
           to={`/pelatihanku/${subjectId}`}

@@ -21,6 +21,7 @@ import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignm
 import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { Reflection } from "../pages/pelatihanku/reflection";
 import { SubmitReflection } from "../pages/pelatihanku/reflection/SubmitReflection";
+import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflection";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -153,6 +154,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <SubmitReflection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/historyReflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <HistoryReflection />
               </ProtectedRoute>
             }
           />

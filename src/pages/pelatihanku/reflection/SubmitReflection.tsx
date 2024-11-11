@@ -1,6 +1,5 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
-  useReflectionData,
   useSubmitReflection,
 } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
@@ -15,9 +14,12 @@ export const SubmitReflection = () => {
   }>();
   const [summary, setSummary] = useState("");
 
-  const { data, isLoading, error } = useReflectionData(sessionId);
   const { mutate: submitReflection, isPending } = useSubmitReflection();
   const navigate = useNavigate();
+  const location = useLocation();
+  const reflectionData = location.state?.reflectionData;
+
+  console.log(reflectionData);
 
   // Function to get initials from full name
   const getInitials = (fullName: string | undefined) => {
@@ -30,21 +32,6 @@ export const SubmitReflection = () => {
       .substring(0, 2);
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Error loading data
-      </div>
-    );
-  }
 
   const breadcrumbItems = [
     {
@@ -56,7 +43,7 @@ export const SubmitReflection = () => {
       path: "/pelatihanku",
     },
     {
-      label: data?.data.subject_name,
+      label: reflectionData?.data.subject_name,
       path: `/pelatihanku/${subjectId}`,
     },
     {
@@ -104,26 +91,26 @@ export const SubmitReflection = () => {
       {/* Info */}
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
         <h1 className="text-3xl font-semibold pb-3">Refleksi Ekplorasi</h1>
-        <p className="text-lg">Pertemuan {data?.data.session_no}</p>
+        <p className="text-lg">Pertemuan {reflectionData?.reflectionData.session_no}</p>
       </div>
       {/* Content */}
       <div className="p-8 my-8 bg-white">
         <div className="border p-5 rounded-lg">
           <div className="flex items-center">
-            {data?.data.teacher.avatar ? (
+            {reflectionData?.data.teacher.avatar ? (
               <img
-                src={data.data.teacher.avatar}
+                src={reflectionData.data.teacher.avatar}
                 alt="Avatar"
                 className="w-10 h-10 rounded-full mr-3"
               />
             ) : (
               <div className="w-10 h-10 rounded-full mr-3 bg-blue-500 flex items-center justify-center text-white font-semibold">
-                {getInitials(data?.data.teacher.full_name)}
+                {getInitials(reflectionData?.data.teacher.full_name)}
               </div>
             )}
             <div>
               <p className="font-bold text-gray-800">
-                {data?.data.teacher.full_name}
+                {reflectionData?.data.teacher.full_name}
               </p>
               <p className="text-sm text-gray-600">Pengajar</p>
             </div>
