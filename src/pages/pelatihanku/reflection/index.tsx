@@ -1,29 +1,30 @@
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
+import { useReflectionData } from "../../../hooks/pelatihanku/useReflection";
 
 export const Reflection = () => {
   const { subjectId, sessionId } = useParams<{
     sessionId: string;
   }>();
 
-  // const { data, isLoading, error } = useAssignmentData(subjectId, sessionId);
-  // if (isLoading) {
-  //   return (
-  //     <div className="min-h-[85vh] w-screen flex items-center justify-center">
-  //       Loading...
-  //     </div>
-  //   );
-  // }
+  const { data, isLoading, error } = useReflectionData(sessionId);
+  if (isLoading) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <div className="min-h-[85vh] w-screen flex items-center justify-center">
-  //       Error loading data
-  //     </div>
-  //   );
-  // }
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -61,10 +62,11 @@ export const Reflection = () => {
         <h1 className="text-3xl font-semibold pb-3">
           data?.data.detail.subject_name
         </h1>
-        <p className="text-lg">Pertemuan Refleksi data?.data.detail.session_no</p>
+        <p className="text-lg">
+          Pertemuan Refleksi data?.data.detail.session_no
+        </p>
       </div>
       {/* Content */}
-      
     </div>
   );
 };
