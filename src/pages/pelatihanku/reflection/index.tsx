@@ -74,11 +74,14 @@ export const Reflection = () => {
               <button className="border rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full">
                 Riwayat Refleksi Eksplorasi
               </button>
-              <button className="border bg-blue-500 rounded-lg text-white py-3 w-full hover:bg-blue-600">
+              <Link
+                to={`/submitReflection/${subjectId}/${sessionId}`}
+                className="border text-center bg-blue-500 rounded-lg text-white py-3 w-full hover:bg-blue-600"
+              >
                 Mulai
-              </button>
+              </Link>
             </div>
-          </div>
+          </div>  
         </div>
         <Link
           to={`/pelatihanku/${subjectId}`}
