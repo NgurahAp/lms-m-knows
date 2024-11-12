@@ -150,8 +150,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("ASSESSMENT", session.progress, () => {
-              // Add your navigation logic here for assessment
-              console.log("Navigate to assessment");
+              navigate(`/assesment/${pelatihankuId}/${session.id}/${data?.subject.name}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
