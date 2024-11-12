@@ -120,7 +120,6 @@ export const AttemptAssesment = () => {
 
     // Log the formatted answers (replace with your API call)
     console.log(JSON.stringify(formattedAnswers, null, 2));
-
   };
 
   const isLastQuestion = currentStep === data.length - 1;
@@ -139,22 +138,33 @@ export const AttemptAssesment = () => {
       {/* Content */}
       <div className="my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
         {/* Question Preview Buttons */}
-        <div className="w-full mb-8 flex flex-wrap gap-2 justify-center">
+        <div className="w-full mb-8 flex flex-wrap justify-center">
           {data.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleQuestionClick(index)}
-              className={`w-10 h-10 rounded-full flex items-center justify-center border-2 
-                ${
-                  currentStep === index
-                    ? "bg-blue-500 text-white border-blue-500"
-                    : responses[data[index].id]
-                    ? "bg-green-100 border-green-500 text-green-500"
-                    : "border-gray-300 text-gray-500"
-                }`}
-            >
-              {index + 1}
-            </button>
+            <div className="flex items-center" key={index}>
+              <button
+                onClick={() => handleQuestionClick(index)}
+                className={`w-12 h-12 rounded-full flex items-center justify-center border-2 
+          ${
+            currentStep === index
+              ? "bg-blue-100 text-blue-500 border-blue-500"
+              : responses[data[index].id]
+              ? "bg-blue-500 border-blue-500 text-white"
+              : "border-gray-300 text-gray-500"
+          }`}
+              >
+                {index + 1}
+              </button>
+              {/* Hanya render <hr> jika elemen bukan yang terakhir */}
+              {index < data.length - 1 && (
+                <hr
+                  className={`w-12 border-t-2 ${
+                    responses[data[index].id]
+                      ? "border-blue-500"
+                      : "border-gray-300"
+                  } `}
+                />
+              )}
+            </div>
           ))}
         </div>
 
@@ -167,11 +177,11 @@ export const AttemptAssesment = () => {
         <div className="mb-6 w-full">
           <p className="font-semibold mb-4">{currentQuestion.question}</p>
           {currentQuestion.type === "OPTION" ? (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               {currentQuestion.answers.map((answer) => (
                 <label
                   key={answer}
-                  className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded"
+                  className="flex items-center space-x-2 p-5 hover:bg-gray-50 rounded border border-gray-200"
                 >
                   <input
                     type="radio"
@@ -192,7 +202,7 @@ export const AttemptAssesment = () => {
               {currentQuestion.answers.map((answer) => (
                 <label
                   key={answer}
-                  className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded"
+                  className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded border border-gray-500"
                 >
                   <input
                     type="radio"
@@ -219,11 +229,11 @@ export const AttemptAssesment = () => {
           )}
         </div>
 
-        <div className="flex justify-between w-full">
+        <div className="flex justify-end gap-5 w-full">
           <button
             onClick={handlePrevious}
             disabled={currentStep === 0}
-            className={`px-4 py-2 bg-gray-300 text-white rounded hover:bg-gray-400 focus:outline-none ${
+            className={`px-4 py-2  border-blue-500 border text-blue-500 rounded focus:outline-none ${
               currentStep === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
