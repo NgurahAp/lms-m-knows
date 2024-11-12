@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { useState } from "react";
 import { AssesmentQuestion } from "../../../types/pelatihanku/assesment";
+import { AssesmentDialog } from "./AssesmentDialog";
 
 const getRatingLabel = (value: number): string => {
   const labels: { [key: number]: string } = {
@@ -67,7 +68,7 @@ export const AttemptAssesment = () => {
     sessionId: string;
     subjectName: string;
   }>();
-
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const breadcrumbItems = [
     {
       label: "Beranda",
@@ -154,7 +155,6 @@ export const AttemptAssesment = () => {
               >
                 {index + 1}
               </button>
-              {/* Hanya render <hr> jika elemen bukan yang terakhir */}
               {index < data.length - 1 && (
                 <hr
                   className={`w-12 border-t-2 ${
@@ -181,7 +181,7 @@ export const AttemptAssesment = () => {
               {currentQuestion.answers.map((answer) => (
                 <label
                   key={answer}
-                  className="flex items-center space-x-2 p-5 hover:bg-gray-50 rounded border border-gray-200"
+                  className="flex items-center space-x-2 p-5 hover:bg-gray-50 rounded-lg border border-gray-200"
                 >
                   <input
                     type="radio"
@@ -202,7 +202,7 @@ export const AttemptAssesment = () => {
               {currentQuestion.answers.map((answer) => (
                 <label
                   key={answer}
-                  className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded border border-gray-500"
+                  className="flex items-center space-x-2 p-3 hover:bg-gray-50 rounded-lg border border-gray-200"
                 >
                   <input
                     type="radio"
@@ -241,7 +241,7 @@ export const AttemptAssesment = () => {
           </button>
           {isLastQuestion ? (
             <button
-              onClick={handleSubmit}
+              onClick={() => setDialogOpen(true)}
               disabled={!areAllQuestionsAnswered}
               className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none ${
                 !areAllQuestionsAnswered ? "opacity-50 cursor-not-allowed" : ""
@@ -259,6 +259,12 @@ export const AttemptAssesment = () => {
           )}
         </div>
       </div>
+      {isDialogOpen && (
+        <AssesmentDialog
+          onClose={() => setDialogOpen(false)}
+          onSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 };
