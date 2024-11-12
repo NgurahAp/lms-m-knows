@@ -5,7 +5,7 @@ export interface AssessmentResponse {
   data: TeacherAssessmentData;
 }
 
-interface TeacherAssessmentData {
+export interface TeacherAssessmentData {
   id: string;
   session_no: string;
   status: string;

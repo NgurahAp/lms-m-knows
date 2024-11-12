@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useAssesmentData } from "../../../hooks/pelatihanku/useAssesment";
@@ -10,6 +10,7 @@ export const Assesment = () => {
     sessionId: string;
     subjectName: string;
   }>();
+  const navigate = useNavigate();
 
   const breadcrumbItems = [
     {
@@ -43,8 +44,6 @@ export const Assesment = () => {
     );
   }
 
-  console.log(data);
-
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       {/* Breadcrumb */}
@@ -66,12 +65,19 @@ export const Assesment = () => {
       {/* Content */}
       <div className=" my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
         <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-        <Link
-          to={`/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`}
+        <button
+          onClick={() =>
+            navigate(
+              `/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`,
+              {
+                state: { assesmentData: data?.data },
+              }
+            )
+          }
           className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4"
         >
           Mulai
-        </Link>
+        </button>
         <Link
           to={`/pelatihanku/${subjectId}`}
           className="flex items-center gap-2 px-5 pt-4 underline justify-start text-left w-full text-blue-500"
