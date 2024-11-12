@@ -166,7 +166,7 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/assesment/:subjectId/:sessionId"
+            path="/assesment/:subjectId/:sessionId/:subjectName"
             element={
               <ProtectedRoute>
                 <Assesment />

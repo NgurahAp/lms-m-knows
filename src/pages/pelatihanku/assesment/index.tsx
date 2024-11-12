@@ -1,26 +1,13 @@
-import {  useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
+import { FaArrowLeft } from "react-icons/fa6";
 
 export const Assesment = () => {
-  const { subjectId, sessionId } = useParams<{
+  const { subjectId, sessionId, subjectName } = useParams<{
     subjectId: string;
     sessionId: string;
+    subjectName: string;
   }>();
-
-  // const { data, isLoading, error } = useReflectionData(sessionId);
-  // const navigate = useNavigate();
-
-  // if (isLoading) {
-  //   return <LoadingSpinner text="Loading..." />;
-  // }
-
-  // if (error) {
-  //   return (
-  //     <div className="min-h-[85vh] w-screen flex items-center justify-center">
-  //       Error loading data
-  //     </div>
-  //   );
-  // }
 
   const breadcrumbItems = [
     {
@@ -32,7 +19,7 @@ export const Assesment = () => {
       path: "/pelatihanku",
     },
     {
-      label: "data?.data.subject_name",
+      label: subjectName,
       path: `/pelatihanku/${subjectId}`,
     },
     {
@@ -45,31 +32,32 @@ export const Assesment = () => {
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
+      <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
         <h1 className="text-3xl font-semibold pb-3">Penilaian Pengajar</h1>
       </div>
+      <div className="bg-blue-100 flex flex-col mt-5 px-8 h-24 justify-center rounded-lg">
+        <h1 className=" text-blue-700 pb-1">
+          Pilihlah keterangan nilai yang paling mewakili penilaian Anda terhadap
+          instruktur.
+        </h1>
+        <h1 className=" text-blue-700">
+          Keterangan : Sangat Setuju, Setuju, Tidak Setuju dan Sangat Tidak
+          Setuju
+        </h1>
+      </div>
       {/* Content */}
-      <div className="p-8 my-8 bg-white">
-        <div className="flex items-center">
-          <div className="w-1/2 flex items-center justify-center">
-            <img src="/pelatihanku/quiz-left.png" alt="" />
-          </div>
-          <div className="w-1/2 flex flex-col justify-center pr-10">
-            <h1 className="text-2xl font-semibold">Deskripsi</h1>
-            <p className="text-lg text-justify py-4 text-gray-500">
-              Refleksi Eksplorasi dilakukan dengan tujuan untuk meningkatkan
-              pemahaman diri, memperkuat koneksi antara teori dan praktik, serta
-              merancang strategi perbaikan atau pengembangan diri ke depannya.
-              Dengan refleksi, pengguna dapat mengidentifikasi pencapaian,
-              tantangan, dan area yang perlu diperbaiki, menciptakan lingkungan
-              pembelajaran yang lebih efektif dan memastikan pertumbuhan yang
-              berkelanjutan.
-            </p>
-            <div className="flex gap-8 pt-4 w-full">
-             
-            </div>
-          </div>
-        </div>
+      <div className=" my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
+        <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
+        <button className="bg-blue-500 text-white py-2 rounded-lg my-4 w-1/4">
+          Mulai
+        </button>
+        <Link
+          to={`/pelatihanku/${subjectId}`}
+          className="flex items-center gap-2 px-5 pt-4 underline justify-start text-left w-full text-blue-500"
+        >
+          <FaArrowLeft />
+          Kembali
+        </Link>
       </div>
     </div>
   );
