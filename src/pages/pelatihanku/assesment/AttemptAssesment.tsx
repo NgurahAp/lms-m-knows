@@ -131,6 +131,8 @@ export const AttemptAssesment = () => {
     (question) => responses[question.id]
   );
 
+  console.log(sessionId)
+
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       {/* Breadcrumb */}

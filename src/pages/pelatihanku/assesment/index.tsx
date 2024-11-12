@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useAssesmentData } from "../../../hooks/pelatihanku/useAssesment";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const Assesment = () => {
   const { subjectId, sessionId, subjectName } = useParams<{
@@ -27,6 +29,22 @@ export const Assesment = () => {
     },
   ];
 
+  const { data, isLoading, error } = useAssesmentData(subjectId, sessionId);
+
+  if (isLoading) {
+    return <LoadingSpinner text="Loading..." />;
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  console.log(data);
+
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       {/* Breadcrumb */}
@@ -48,7 +66,10 @@ export const Assesment = () => {
       {/* Content */}
       <div className=" my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
         <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-        <Link to={`/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`} className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4">
+        <Link
+          to={`/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`}
+          className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4"
+        >
           Mulai
         </Link>
         <Link
