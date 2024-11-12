@@ -23,7 +23,7 @@ export const Assesment = () => {
       path: `/pelatihanku/${subjectId}`,
     },
     {
-      label: "Refleksi Pembelajaran",
+      label: "Penilaian Pengajar",
     },
   ];
 
@@ -48,9 +48,9 @@ export const Assesment = () => {
       {/* Content */}
       <div className=" my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
         <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-        <button className="bg-blue-500 text-white py-2 rounded-lg my-4 w-1/4">
+        <Link to={`/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`} className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4">
           Mulai
-        </button>
+        </Link>
         <Link
           to={`/pelatihanku/${subjectId}`}
           className="flex items-center gap-2 px-5 pt-4 underline justify-start text-left w-full text-blue-500"
