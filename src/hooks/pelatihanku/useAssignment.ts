@@ -4,11 +4,12 @@ import {
   SubmitAssignmentRequest,
 } from "../../services/pelatihanku/AssignmentService";
 import { AssignmentsResponse } from "../../types/pelatihanku/assignment";
+import { AxiosError } from "axios";
 
 export const useSubmit = () => {
   return useMutation<
     AssignmentsResponse, // Response data type
-    Error, // Error type
+    AxiosError, // Error type
     SubmitAssignmentRequest,
     unknown
   >({
