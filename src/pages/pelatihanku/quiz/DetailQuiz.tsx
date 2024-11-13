@@ -2,16 +2,13 @@ import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import { MdOutlineTaskAlt } from "react-icons/md";
 import { useState } from "react";
-import {
-  useDetailQuizData,
-  useHistoryQuizData,
-} from "../../../services/pelatihanku/QuizService";
 import { QuizHistory } from "./components/HistoryQuiz";
 import { QuizInfo } from "./components/QuizInfo";
 import QuizDialog from "./components/QuizDialog";
 import { useNavigate } from "react-router-dom";
 import { ErrorConsume } from "../../../components/APIRespone";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { useDetailQuizData, useHistoryQuizData } from "../../../hooks/pelatihanku/useQuiz";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
