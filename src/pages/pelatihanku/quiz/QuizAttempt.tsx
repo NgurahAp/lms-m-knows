@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ConfirmAttemptQuizDialog } from "./components/ConfirmAttempDialog";
 import { useQuestionData } from "../../../services/pelatihanku/QuizQuestionService";
-import { ErrorConsume} from "../../../components/APIRespone";
+import { ErrorConsume } from "../../../components/APIRespone";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { QuizSubmissionPayload } from "../../../services/pelatihanku/QuizService";
+import { useQuizSubmission } from "../../../hooks/pelatihanku/useQuiz";
 
 export const QuizAttempt = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -17,6 +19,9 @@ export const QuizAttempt = () => {
     [key: number]: string;
   }>({});
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const { mutate: submitQuiz } = useQuizSubmission(quizId);
+
+  const navigate = useNavigate();
 
   const {
     data: questionData,
@@ -65,19 +70,29 @@ export const QuizAttempt = () => {
   };
 
   const handleQuizSubmit = () => {
-    const quizSubmission = {
-      quizId,
-      subjectId,
-      sessionId,
-      answers: Object.entries(selectedAnswers).map(
+    const quizSubmission: QuizSubmissionPayload = {
+      questions_answers: Object.entries(selectedAnswers).map(
         ([questionIndex, answerId]) => ({
-          questionId: questions[parseInt(questionIndex)].id,
-          answerId: answerId,
+          question: questions[parseInt(questionIndex)].id,
+          answer: answerId,
         })
       ),
     };
 
-    console.log("Quiz Submission:", quizSubmission);
+    submitQuiz(quizSubmission, {
+      onSuccess: () => {
+        // Handle successful submission
+        console.log("Quiz submitted successfully:");
+        // You can add toast notification or redirect to results page
+        navigate(`/detailQuiz/${subjectId}/${sessionId}/${quizId}`);
+      },  
+      onError: () => {
+        // Handle submission error
+        console.error("Failed to submit quiz:");
+        // You can add toast notification or other error handling
+      },
+    });
+
     setDialogOpen(false);
   };
 
@@ -104,7 +119,7 @@ export const QuizAttempt = () => {
                 index === currentQuestionIndex
                   ? "bg-blue-500 text-white"
                   : selectedAnswers[index]
-                  ? "bg-green-100 text-green-700 border-green-500"
+                  ? "bg-blue-500 text-white"
                   : "bg-white text-gray-700"
               }`}
             >
@@ -117,7 +132,7 @@ export const QuizAttempt = () => {
       {/* Quiz Question */}
       <div className="bg-white p-6 mt-5 rounded-lg shadow-lg">
         <h1 className="text-end text-red-500 font-bold text-sm pb-3">
-          Sisa waktu: {questionData.data.duration}:00
+          Sisa waktu: {questionData.data.duration}
         </h1>
         <h2 className="text-lg font-semibold mb-4">
           {currentQuestion.question}
