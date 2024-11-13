@@ -6,6 +6,8 @@ import { ErrorConsume } from "../../../components/APIRespone";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 import { QuizSubmissionPayload } from "../../../services/pelatihanku/QuizService";
 import { useQuizSubmission } from "../../../hooks/pelatihanku/useQuiz";
+import CountdownTimer from "./components/CountdownTimer";
+import toast from "react-hot-toast";
 
 export const QuizAttempt = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -79,17 +81,18 @@ export const QuizAttempt = () => {
       ),
     };
 
+    const loadingToast = toast.loading("Sedang mengirim rangkuman...");
+
     submitQuiz(quizSubmission, {
       onSuccess: () => {
-        // Handle successful submission
-        console.log("Quiz submitted successfully:");
-        // You can add toast notification or redirect to results page
+        toast.dismiss(loadingToast);
+        toast.success("Rangkuman berhasil dikirim!");
         navigate(`/detailQuiz/${subjectId}/${sessionId}/${quizId}`);
-      },  
-      onError: () => {
-        // Handle submission error
-        console.error("Failed to submit quiz:");
-        // You can add toast notification or other error handling
+      },
+      onError: (error) => {
+        toast.dismiss(loadingToast);
+        toast.error("Terjadi kesalahan saat mengirim rangkuman");
+        console.log(error);
       },
     });
 
@@ -104,7 +107,9 @@ export const QuizAttempt = () => {
           {questionData.data.title}
         </h1>
         <p className="text-lg">Tipe: {questionData.data.type}</p>
-        <p className="text-lg">Durasi: {questionData.data.duration} menit</p>
+        <p className="text-lg">
+          Durasi: {Math.floor(questionData.data.duration / 60)} menit
+        </p>
       </div>
 
       {/* Question List with Answer Status */}
@@ -132,7 +137,11 @@ export const QuizAttempt = () => {
       {/* Quiz Question */}
       <div className="bg-white p-6 mt-5 rounded-lg shadow-lg">
         <h1 className="text-end text-red-500 font-bold text-sm pb-3">
-          Sisa waktu: {questionData.data.duration}
+          Sisa waktu:{" "}
+          <CountdownTimer
+            initialDuration={questionData.data.duration}
+            onTimeUp={handleQuizSubmit}
+          />
         </h1>
         <h2 className="text-lg font-semibold mb-4">
           {currentQuestion.question}
