@@ -10,7 +10,7 @@ import { QuizHistory } from "./components/HistoryQuiz";
 import { QuizInfo } from "./components/QuizInfo";
 import QuizDialog from "./components/QuizDialog";
 import { useNavigate } from "react-router-dom";
-import {  ErrorConsume } from "../../../components/APIRespone";
+import { ErrorConsume } from "../../../components/APIRespone";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const DetailQuiz = () => {
@@ -48,6 +48,8 @@ export const DetailQuiz = () => {
     setDialogOpen(false);
     navigate(`/quizAttempt/${subjectId}/${sessionId}/${quizId}`);
   };
+
+  console.log(quizData?.data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -135,7 +137,7 @@ export const DetailQuiz = () => {
             Kesempatan mengerjakan tersisa :{" "}
             {historyData?.data.remaining_attempt ?? 3} kali
           </h1>
-          {/* Button Mulai Quiz */}  
+          {/* Button Mulai Quiz */}
           <button
             onClick={() => setDialogOpen(true)}
             className={`flex w-full items-center py-4 rounded-xl justify-center mt-5 ${
