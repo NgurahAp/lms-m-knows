@@ -2,8 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
-import { useQuizData } from "../../../services/pelatihanku/QuizService";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { useQuizData } from "../../../hooks/pelatihanku/useQuiz";
 
 export const Quiz = () => {
   const { subjectId, sessionId } = useParams<{
