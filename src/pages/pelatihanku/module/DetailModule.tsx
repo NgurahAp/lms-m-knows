@@ -32,34 +32,32 @@ export const DetailModule = () => {
     );
   }
 
-   const breadcrumbItems = [
-     {
-       label: "Beranda",
-       path: "/dashboard",
-     },
-     {
-       label: "Pelatihan-ku",
-       path: "/pelatihanku",
-     },
-     {
-       label: data?.detail.subject_name,
-       path: `/pelatihanku/${subjectId}`,
-     },
-     {
-       label: "Modul",
-       path: `/module/${subjectId}/${sessionId}`,
-     },
-     {
-       label: "Modul",
-     },
-   ];
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Pelatihan-ku",
+      path: "/pelatihanku",
+    },
+    {
+      label: data?.detail.subject_name,
+      path: `/pelatihanku/${subjectId}`,
+    },
+    {
+      label: "Modul",
+      path: `/module/${subjectId}/${sessionId}`,
+    },
+    {
+      label: `Pertemuan ${data?.detail.session_no}`,
+    },
+  ];
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+      {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">Penilaian Pengajar</h1>
-      </div>
       <div className="bg-white flex flex-col items-center mt-5 px-8 py-20 justify-center rounded-lg">
         <h1 className="font-bold text-4xl mb-8">{data?.module.title}</h1>
         <div className="flex flex-col md:flex-row justify-center items-start gap-6  bg-white w-full">

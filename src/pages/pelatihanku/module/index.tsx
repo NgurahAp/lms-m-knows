@@ -41,7 +41,7 @@ export const Module = () => {
       path: `/pelatihanku/${subjectId}`,
     },
     {
-      label: "Module",
+      label: "Modul",
     },
   ];
 
