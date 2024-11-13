@@ -25,3 +25,10 @@ interface Teacher {
   full_name: string;
   avatar: string | null;
 }
+
+export interface AssesmentRequest {
+  answers: Array<{
+    question_id: string;
+    answer: string;
+  }>;
+}

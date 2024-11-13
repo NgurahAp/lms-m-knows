@@ -1,8 +1,12 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { useState } from "react";
 import { AssesmentDialog } from "./AssesmentDialog";
-import { AssesmentQuestion } from "../../../types/pelatihanku/assesment";
+import {
+  AssesmentQuestion,
+  AssesmentRequest,
+} from "../../../types/pelatihanku/assesment";
+import { useAssesmentSubmission } from "../../../hooks/pelatihanku/useAssesment";
 
 const getRatingLabel = (value: number): string => {
   const labels: { [key: number]: string } = {
@@ -15,13 +19,6 @@ const getRatingLabel = (value: number): string => {
   return labels[value] || String(value);
 };
 
-interface FormattedAnswers {
-  answers: Array<{
-    question_id: string;
-    answer: string;
-  }>;
-}
-
 export const AttemptAssesment = () => {
   const { subjectId, sessionId, subjectName } = useParams<{
     subjectId: string;
@@ -31,7 +28,11 @@ export const AttemptAssesment = () => {
   const location = useLocation();
   const assesmentData = location.state?.assesmentData;
   const [isDialogOpen, setDialogOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const { mutate: submitAssesment, isPending } = useAssesmentSubmission(
+    subjectId,
+    sessionId
+  );
   // Get questions from assesmentData
   const questions: AssesmentQuestion[] = assesmentData?.questions || [];
 
@@ -77,15 +78,24 @@ export const AttemptAssesment = () => {
   };
 
   const handleSubmit = (): void => {
-    const formattedAnswers: FormattedAnswers = {
+    const assesmentSubmission: AssesmentRequest = {
       answers: questions.map((question) => ({
         question_id: question.id,
         answer: responses[question.id] || "",
       })),
     };
 
-    // Log the formatted answers (replace with your API call)
-    console.log(formattedAnswers);
+    submitAssesment(assesmentSubmission, {
+      onSuccess: () => {
+        console.log("Quiz submitted successfully:");
+        navigate(`/pelatihanku/${subjectId}`);
+      },
+      onError: () => {
+        console.error("Failed to submit quiz:");
+      },
+    });
+
+    setDialogOpen(false);
   };
 
   const isLastQuestion = currentStep === questions.length - 1;
@@ -95,8 +105,6 @@ export const AttemptAssesment = () => {
   const areAllQuestionsAnswered = questions.every(
     (question) => responses[question.id]
   );
-
-  console.log(sessionId);
 
   const getInitials = (fullName: string | undefined) => {
     if (!fullName) return "";
@@ -240,12 +248,14 @@ export const AttemptAssesment = () => {
           {isLastQuestion ? (
             <button
               onClick={() => setDialogOpen(true)}
-              disabled={!areAllQuestionsAnswered}
+              disabled={!areAllQuestionsAnswered || isPending}
               className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none ${
-                !areAllQuestionsAnswered ? "opacity-50 cursor-not-allowed" : ""
+                !areAllQuestionsAnswered || isPending
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
               }`}
             >
-              Submit
+              {isPending ? "Submitting..." : "Submit"}
             </button>
           ) : (
             <button
