@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
-import { FaCheck, FaChevronRight } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { useDetailModuleData } from "../../../services/pelatihanku/ModulService";
 import ModuleCompletionDialog from "./components/Summary";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 
 export const DetailModule = () => {
   const { subjectId, sessionId, moduleId } = useParams<{
@@ -20,9 +21,7 @@ export const DetailModule = () => {
   );
 
   if (isLoading) {
-    return (
-      <LoadingSpinner text="Loading..." />
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {
@@ -33,43 +32,33 @@ export const DetailModule = () => {
     );
   }
 
-  console.log(data);
+   const breadcrumbItems = [
+     {
+       label: "Beranda",
+       path: "/dashboard",
+     },
+     {
+       label: "Pelatihan-ku",
+       path: "/pelatihanku",
+     },
+     {
+       label: data?.detail.subject_name,
+       path: `/pelatihanku/${subjectId}`,
+     },
+     {
+       label: "Modul",
+       path: `/module/${subjectId}/${sessionId}`,
+     },
+     {
+       label: "Modul",
+     },
+   ];
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1"
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to="/pelatihanku">
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pelatihan-ku
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/pelatihanku/${subjectId}`}>
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            {data?.detail.subject_name}
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/modul/${subjectId}/${sessionId}`}>
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pertemuan {data?.detail.session_no}
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-gray-400 md:text-base text-sm font-semibold">
-          {data?.module.title}
-        </span>
+      <Breadcrumb items={breadcrumbItems} />
+      <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
+        <h1 className="text-3xl font-semibold pb-3">Penilaian Pengajar</h1>
       </div>
       <div className="bg-white flex flex-col items-center mt-5 px-8 py-20 justify-center rounded-lg">
         <h1 className="font-bold text-4xl mb-8">{data?.module.title}</h1>
