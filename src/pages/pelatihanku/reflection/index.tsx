@@ -39,7 +39,7 @@ export const Reflection = () => {
       path: `/pelatihanku/${subjectId}`,
     },
     {
-      label: "Refleksi Pembelajaran",
+      label: "Refleksi Eksplorasi",
     },
   ];
 
@@ -80,7 +80,7 @@ export const Reflection = () => {
                 <button
                   onClick={() =>
                     navigate(`/submitReflection/${subjectId}/${sessionId}`, {
-                      state: { reflectionData: data?.data },
+                      state: { reflectionData: data },
                     })
                   }
                   className="border text-center bg-blue-500 rounded-lg text-white py-3 w-full hover:bg-blue-600"
