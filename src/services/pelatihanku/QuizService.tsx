@@ -83,7 +83,7 @@ export const submitQuizAttempt = async (
   try {
     const token = Cookies.get("accessToken");
     const response = await axios.post<QuizResponse>(
-      `${API_BASE_URL}/quiz/${quizId}/submit`,
+      `${API_BASE_URL}/api/v1/studi-ku/quiz/submit/${quizId}`,
       submission,
       {
         headers: {
