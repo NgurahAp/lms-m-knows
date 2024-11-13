@@ -24,17 +24,26 @@ export const FileUploadForm = ({
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
   const navigate = useNavigate();
+  const [isFileTooLarge, setIsFileTooLarge] = useState(false); // State baru
 
   const { mutate: submitAssignment, isPending } = useSubmit();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile?.type === "application/pdf") {
-      setFile(selectedFile);
+      if (selectedFile.size > 2 * 1024 * 1024) {
+        setIsFileTooLarge(true);
+        toast.error("File terlalu besar! Maksimal ukuran file adalah 2MB");
+        setFile(null);
+      } else {
+        setIsFileTooLarge(false);
+        setFile(selectedFile);
+      }
     }
   };
 
   const handleSubmit = () => {
+    const loadingToast = toast.loading("Sedang mengirim rangkuman...");
     submitAssignment(
       {
         subjectId,
@@ -45,21 +54,15 @@ export const FileUploadForm = ({
       },
       {
         onSuccess: () => {
-          // setShowSubmitDialog(false);
+          toast.dismiss(loadingToast);
+          toast.success("Tugas berhasil dikirim!");
           resetForm();
           navigate(0); // Refresh the page
         },
-        onError: () => {
-          toast.error(`Terjadi kesalahan saat mengirim file`, {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+        onError: (error) => {
+          toast.dismiss(loadingToast);
+          toast.error("Terjadi kesalahan saat mengirim tugas");
+          console.log(error);
         },
       }
     );
@@ -75,6 +78,9 @@ export const FileUploadForm = ({
     setDescription("");
     setFile(null);
   };
+
+ const isSubmitDisabled =
+   (!description.trim() && !file) || isPending || isFileTooLarge;
 
   return (
     <div>
@@ -165,7 +171,7 @@ export const FileUploadForm = ({
             type="button"
             onClick={() => setShowCancelDialog(true)}
             className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:bg-red-300 disabled:cursor-not-allowed"
-            disabled={(!description.trim() && !file) || isPending}
+            disabled={isSubmitDisabled}
           >
             Batal
           </button>

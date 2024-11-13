@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useDetailAssignmentData } from "../../../services/pelatihanku/AssignmentService";
-import { PageInfo } from "../../../components/reusable/PageInfo";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
 import { FinishedAssignment } from "./components/FinishedAssignment";
@@ -59,10 +58,10 @@ export const DetailAssignment = () => {
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       {/* Assignment Info */}
-      <PageInfo
+      {/* <PageInfo
         title={data?.data.assignment.title}
         detail={`Modul ${data?.data.detail.session_no}`}
-      />
+      /> */}
       {/* Quiz Content */}
       <div className="bg-white mt-5 w-full p-8 h-full rounded-lg">
         <h1 className="font-bold">{data?.data.assignment.title}</h1>
