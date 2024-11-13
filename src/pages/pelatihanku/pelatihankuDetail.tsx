@@ -82,7 +82,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("MODULE", session.progress, () => {
-              navigate(`/modul/${pelatihankuId}/${session.id}`);
+              navigate(`/module/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 

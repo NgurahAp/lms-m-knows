@@ -5,8 +5,8 @@ import { Bootcamp } from "../pages/bootcamp";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
 import { Pelatihanku } from "../pages/pelatihanku";
-import { Modul } from "../pages/pelatihanku/modul";
-import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
+import { Module } from "../pages/pelatihanku/module";
+import { DetailModule } from "../pages/pelatihanku/module/DetailModule";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
 import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihanket";
@@ -87,15 +87,15 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/modul/:subjectId/:sessionId"
+            path="/module/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
-                <Modul />
+                <Module />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/detailModul/:subjectId/:sessionId/:moduleId"
+            path="/detailModule/:subjectId/:sessionId/:moduleId"
             element={
               <ProtectedRoute>
                 <DetailModule />
