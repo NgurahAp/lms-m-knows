@@ -76,17 +76,17 @@ export const AttemptAssesment = () => {
     setCurrentStep(index);
   };
 
- const handleSubmit = (): void => {
-   const formattedAnswers: FormattedAnswers = {
-     answers: questions.map((question) => ({
-       question_id: question.id,
-       answer: responses[question.id] || "",
-     })),
-   };
+  const handleSubmit = (): void => {
+    const formattedAnswers: FormattedAnswers = {
+      answers: questions.map((question) => ({
+        question_id: question.id,
+        answer: responses[question.id] || "",
+      })),
+    };
 
-   // Log the formatted answers (replace with your API call)
-   console.log(JSON.stringify(formattedAnswers, null, 2));
- };
+    // Log the formatted answers (replace with your API call)
+    console.log(formattedAnswers);
+  };
 
   const isLastQuestion = currentStep === questions.length - 1;
   const currentQuestion = questions[currentStep];
@@ -96,7 +96,17 @@ export const AttemptAssesment = () => {
     (question) => responses[question.id]
   );
 
-  console.log(sessionId)
+  console.log(sessionId);
+
+  const getInitials = (fullName: string | undefined) => {
+    if (!fullName) return "";
+    return fullName
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .substring(0, 2);
+  };
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -104,32 +114,6 @@ export const AttemptAssesment = () => {
       <Breadcrumb items={breadcrumbItems} />
 
       {/* Teacher Info */}
-      {assesmentData?.teacher && (
-        <div className="mb-8 bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-xl font-semibold mb-2">Informasi Pengajar</h2>
-          <div className="flex items-center gap-4">
-            {assesmentData.teacher.avatar ? (
-              <img
-                src={assesmentData.teacher.avatar}
-                alt="Teacher"
-                className="w-12 h-12 rounded-full"
-              />
-            ) : (
-              <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-500 text-xl">
-                  {assesmentData.teacher.full_name.charAt(0)}
-                </span>
-              </div>
-            )}
-            <div>
-              <p className="font-medium">{assesmentData.teacher.full_name}</p>
-              <p className="text-sm text-gray-500">
-                Sesi {assesmentData.session_no}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Content */}
       <div className="my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
@@ -163,15 +147,30 @@ export const AttemptAssesment = () => {
           ))}
         </div>
 
-        <div className="flex justify-between mb-4 w-full">
-          <span>
-            Soal {currentStep + 1} dari {questions.length}
-          </span>
+        <div className="mb-8 bg-[#E1F0FA] p-4 w-full rounded-lg shadow-sm">
+          <div className="flex items-center gap-4">
+            {assesmentData.teacher.avatar ? (
+              <img
+                src={assesmentData.teacher.avatar}
+                alt="Avatar"
+                className="w-10 h-10 rounded-full "
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full  bg-red-500 flex items-center justify-center text-white font-semibold">
+                {getInitials(assesmentData.teacher.full_name)}
+              </div>
+            )}
+            <div>
+              <p className="font-medium">{assesmentData.teacher.full_name}</p>
+              <p className="text-sm text-gray-500">Pengajar </p>
+            </div>
+          </div>
         </div>
 
         {currentQuestion && (
           <div className="mb-6 w-full">
-            <p className="font-semibold mb-4">{currentQuestion.question}</p>
+            <p className="font-semibold ">{currentQuestion.question}</p>
+            <p className="mb-6 text-sm text-[#6B7280]">*Pilih Satu</p>
             {currentQuestion.type === "OPTION" ? (
               <div className="flex flex-col gap-4">
                 {currentQuestion.answers.map((answer) => (
