@@ -91,7 +91,7 @@ export const SubmitReflection = () => {
       {/* Info */}
       <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
         <h1 className="text-3xl font-semibold pb-3">Refleksi Ekplorasi</h1>
-        <p className="text-lg">Pertemuan {reflectionData?.reflectionData.session_no}</p>
+        <p className="text-lg">Pertemuan {reflectionData?.data.session_no}</p>
       </div>
       {/* Content */}
       <div className="p-8 my-8 bg-white">
