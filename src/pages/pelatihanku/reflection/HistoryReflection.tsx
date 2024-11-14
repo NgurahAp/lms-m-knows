@@ -81,11 +81,11 @@ export const HistoryReflection = () => {
       path: `/pelatihanku/${subjectId}`,
     },
     {
-      label: "Refleksi Pembelajaran",
+      label: "Refleksi Eksplorasi",
       path: `/reflection/${subjectId}/${sessionId}`,
     },
     {
-      label: "Refleksi",
+      label: "Riwayat",
     },
   ];
 
@@ -129,25 +129,33 @@ export const HistoryReflection = () => {
         {/* Main Content */}
         <main className="flex-1 ml-4 bg-white rounded-lg shadow-md p-6">
           <div className="text-gray-500 text-sm mb-4">{formattedDate}</div>
-          <div className="flex items-start">
-            <div className="w-10 mr-3">
-              {data?.data.teacher.avatar ? (
-                <img
-                  src={data.data.teacher.avatar}
-                  alt="Avatar"
-                  className="w-10 h-10 rounded-full "
-                />
-              ) : (
-                <div className="w-10 h-10 rounded-full  bg-red-500 flex items-center justify-center text-white font-semibold">
-                  {getInitials(data?.data.teacher.full_name)}
-                </div>
-              )}
+          {data?.data.reflection ? (
+            <div className="flex items-start">
+              <div className="w-10 mr-3">
+                {data?.data.teacher.avatar ? (
+                  <img
+                    src={data.data.teacher.avatar}
+                    alt="Avatar"
+                    className="w-10 h-10 rounded-full "
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-semibold">
+                    {getInitials(data?.data.teacher.full_name)}
+                  </div>
+                )}
+              </div>
+              <div className="bg-gray-200 p-4 rounded-lg">
+                <h3 className="font-semibold">
+                  {data?.data.teacher.full_name}
+                </h3>
+                <p className="mt-1">{data?.data.reflection}</p>
+              </div>
             </div>
-            <div className="bg-gray-200 p-4 rounded-lg">
-              <h3 className="font-semibold">{data?.data.teacher.full_name}</h3>
-              <p className=" mt-1">{data?.data.reflection}</p>
+          ) : (
+            <div className="text-gray-500 text-center mt-4">
+              Anda belum mengisi refleksi eksplorasi.
             </div>
-          </div>
+          )}
         </main>
       </div>
     </div>

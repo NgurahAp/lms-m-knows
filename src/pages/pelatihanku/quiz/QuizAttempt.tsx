@@ -99,6 +99,10 @@ export const QuizAttempt = () => {
     setDialogOpen(false);
   };
 
+  const handleTimesUp = () => {
+    navigate(`/detailQuiz/${subjectId}/${sessionId}/${quizId}`);
+  };
+
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
       {/* Quiz Info */}
@@ -140,7 +144,7 @@ export const QuizAttempt = () => {
           Sisa waktu:{" "}
           <CountdownTimer
             initialDuration={questionData.data.duration}
-            onTimeUp={handleQuizSubmit}
+            onTimeUp={handleTimesUp}
           />
         </h1>
         <h2 className="text-lg font-semibold mb-4">
