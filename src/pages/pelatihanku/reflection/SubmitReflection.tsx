@@ -1,7 +1,5 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  useSubmitReflection,
-} from "../../../hooks/pelatihanku/useReflection";
+import { useSubmitReflection } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useState } from "react";
@@ -32,7 +30,6 @@ export const SubmitReflection = () => {
       .substring(0, 2);
   };
 
-
   const breadcrumbItems = [
     {
       label: "Beranda",
@@ -56,28 +53,23 @@ export const SubmitReflection = () => {
   ];
 
   const handleSubmit = () => {
-    toast.promise(
-      new Promise((resolve, reject) => {
-        submitReflection(
-          {
-            sessionId,
-            message: summary,
-          },
-          {
-            onSuccess: () => {
-              resolve("success");
-              navigate(`/reflection/${subjectId}/${sessionId}`);
-            },
-            onError: (error) => {
-              reject(error);
-            },
-          }
-        );
-      }),
+    const loadingToast = toast.loading("Sedang mengirim rangkuman...");
+    submitReflection(
       {
-        loading: "Mengirim refleksi...",
-        success: "Refleksi berhasil dikirim!",
-        error: "Gagal mengirim refleksi. Silakan coba lagi.",
+        sessionId,
+        message: summary,
+      },
+      {
+        onSuccess: () => {
+          toast.dismiss(loadingToast);
+          toast.success("Refleksi berhasil dikirim!");
+          navigate(`/reflection/${subjectId}/${sessionId}`);
+        },
+        onError: (error) => {
+          toast.dismiss(loadingToast);
+          toast.error("Terjadi kesalahan saat mengirim Refleksi");
+          console.log(error);
+        },
       }
     );
   };
@@ -104,7 +96,7 @@ export const SubmitReflection = () => {
                 className="w-10 h-10 rounded-full mr-3"
               />
             ) : (
-              <div className="w-10 h-10 rounded-full mr-3 bg-blue-500 flex items-center justify-center text-white font-semibold">
+              <div className="w-10 h-10 rounded-full mr-3 bg-red-500 flex items-center justify-center text-white font-semibold">
                 {getInitials(reflectionData?.data.teacher.full_name)}
               </div>
             )}
