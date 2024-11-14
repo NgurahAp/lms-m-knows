@@ -7,6 +7,7 @@ import {
   AssesmentRequest,
 } from "../../../types/pelatihanku/assesment";
 import { useAssesmentSubmission } from "../../../hooks/pelatihanku/useAssesment";
+import toast from "react-hot-toast";
 
 const getRatingLabel = (value: number): string => {
   const labels: { [key: number]: string } = {
@@ -77,21 +78,25 @@ export const AttemptAssesment = () => {
     setCurrentStep(index);
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = () => {
     const assesmentSubmission: AssesmentRequest = {
       answers: questions.map((question) => ({
         question_id: question.id,
         answer: responses[question.id] || "",
       })),
     };
+    const loadingToast = toast.loading("Sedang mengirim rangkuman...");
 
     submitAssesment(assesmentSubmission, {
       onSuccess: () => {
-        console.log("Quiz submitted successfully:");
+        toast.dismiss(loadingToast);
+        toast.success("Refleksi berhasil dikirim!");
         navigate(`/pelatihanku/${subjectId}`);
       },
-      onError: () => {
-        console.error("Failed to submit quiz:");
+      onError: (error) => {
+        toast.dismiss(loadingToast);
+        toast.error("Terjadi kesalahan saat mengirim Refleksi");
+        console.log(error);
       },
     });
 

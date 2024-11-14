@@ -65,19 +65,29 @@ export const Assesment = () => {
       {/* Content */}
       <div className=" my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
         <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-        <button
-          onClick={() =>
-            navigate(
-              `/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`,
-              {
-                state: { assesmentData: data?.data },
-              }
-            )
-          }
-          className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4"
-        >
-          Mulai
-        </button>
+        {data?.data.is_eligible ? (
+          <button
+            onClick={() =>
+              navigate(
+                `/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`,
+                {
+                  state: { assesmentData: data?.data },
+                }
+              )
+            }
+            className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4"
+          >
+            Mulai
+          </button>
+        ) : (
+          <button
+            disabled
+            className="border text-center bg-gray-400 rounded-lg text-white py-2 my-4 w-1/4 cursor-not-allowed"
+            title="Anda sudah mengisi refleksi"
+          >
+            Anda Sudah Mengisi Penilaian
+          </button>
+        )}
         <Link
           to={`/pelatihanku/${subjectId}`}
           className="flex items-center gap-2 px-5 pt-4 underline justify-start text-left w-full text-blue-500"
