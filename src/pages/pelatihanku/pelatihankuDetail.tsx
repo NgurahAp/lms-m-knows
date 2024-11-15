@@ -166,7 +166,7 @@ export const PelatihankuDetail: React.FC = () => {
         </li>
         <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
           <img src="/pelatihanku/diskusi.png" className="mr-2" alt="" />
-          <span className="flex-1">Diskusi</span>
+          <Link to={`/discussion/${pelatihankuId}/${session.id}`} className="flex-1">Diskusi</Link>
         </li>
       </ul>
     </div>

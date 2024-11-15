@@ -24,6 +24,7 @@ import { SubmitReflection } from "../pages/pelatihanku/reflection/SubmitReflecti
 import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflection";
 import { Assesment } from "../pages/pelatihanku/assesment";
 import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesment";
+import { Discussion } from "../pages/pelatihanku/discussion";
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -179,6 +180,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <AttemptAssesment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/discussion/:subjectId/:sessionI"
+            element={
+              <ProtectedRoute>
+                <Discussion />
               </ProtectedRoute>
             }
           />
