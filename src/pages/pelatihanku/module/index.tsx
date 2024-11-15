@@ -63,10 +63,14 @@ export const Module = () => {
             <Link
               key={module.id}
               to={`/detailModule/${subjectId}/${sessionId}/${module.id}`}
-              className="flex p-4 rounded-lg shadow-md  mb-4 gap-8"
+              className="flex rounded-lg shadow-md  mb-4 gap-8"
             >
-              <img src="/pelatihanku/modul-books.png" alt="" />
-              <div className="flex flex-col justify-center">
+              <div
+                className={`w-2 rounded-l-lg ${
+                  module.submitted ? "bg-green-500" : "bg-blue-500"
+                }`}
+              ></div>
+              <div className="flex flex-col justify-center p-2 py-5 ">
                 <h1 className="font-semibold pb-2">
                   Modul {data.detail.session_no}
                 </h1>
