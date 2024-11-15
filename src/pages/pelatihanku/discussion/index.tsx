@@ -1,6 +1,8 @@
-import { Link,  useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useDiscussionData } from "../../../hooks/pelatihanku/useDiscussion";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 
 export const Discussion = () => {
   const { subjectId, sessionId } = useParams<{
@@ -8,20 +10,19 @@ export const Discussion = () => {
     sessionId: string;
   }>();
 
-  // const { data, isLoading, error } = useReflectionData(sessionId);
-  // const navigate = useNavigate();
+  const { data, isLoading, error } = useDiscussionData(subjectId, sessionId);
 
-  // if (isLoading) {
-  //   return <LoadingSpinner text="Loading..." />;
-  // }
+  if (isLoading) {
+    return <LoadingSpinner text="Loading..." />;
+  }
 
-  // if (error) {
-  //   return (
-  //     <div className="min-h-[85vh] w-screen flex items-center justify-center">
-  //       Error loading data
-  //     </div>
-  //   );
-  // }
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
 
   const breadcrumbItems = [
     {
@@ -33,11 +34,11 @@ export const Discussion = () => {
       path: "/pelatihanku",
     },
     {
-      label: "data?.data.subject_name",
+      label: data?.data.detail.subject_name,
       path: `/pelatihanku/${subjectId}`,
     },
     {
-      label: "Refleksi Eksplorasi",
+      label: "Diskusi",
     },
   ];
 

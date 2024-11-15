@@ -184,7 +184,7 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/discussion/:subjectId/:sessionI"
+            path="/discussion/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
                 <Discussion />
