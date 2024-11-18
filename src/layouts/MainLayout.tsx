@@ -16,11 +16,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     location.pathname === "/forgetpw" ||
     location.pathname === "/verification";
 
+  // Add check for QuizAttempt page using regex to match the pattern
+  const isQuizAttemptPage = /^\/quizAttempt\/.*\/.*\/.*$/.test(
+    location.pathname
+  );
+
+  const showNavbarAndFooter = !isHomePage && !isAuthPage && !isQuizAttemptPage;
+
   return (
     <div className="layout">
-      {!isHomePage && !isAuthPage && <Navbar />}
+      {showNavbarAndFooter && <Navbar />}
       <main>{children}</main>
-      {!isHomePage && !isAuthPage && <Footer />}
+      {showNavbarAndFooter && <Footer />}
     </div>
   );
 };
