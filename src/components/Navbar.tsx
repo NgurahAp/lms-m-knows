@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom"; // Import Link
-import FeatureBox from "./FeatureBox";
 import ProfileBox from "./ProfileBox";
 import { CgProfile } from "react-icons/cg";
 import { UserData } from "../types/auth";
@@ -10,19 +9,10 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [profileData, setProfileData] = useState<UserData | null>(null);
-  const [showFeatures, setShowFeatures] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
-  const toggleFeatures = () => {
-    setShowFeatures((prev) => !prev);
-  };
 
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
-  };
-
-  const handleCloseFeatures = () => {
-    setShowFeatures(false);
   };
 
   const handleCloseProfileMenu = () => {
@@ -47,24 +37,24 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-    useEffect(() => {
-      const getUserProfile = () => {
-        try {
-          const storedUser = localStorage.getItem("user_profile");
+  useEffect(() => {
+    const getUserProfile = () => {
+      try {
+        const storedUser = localStorage.getItem("user_profile");
 
-          if (storedUser) {
-            const userData: UserData = JSON.parse(storedUser);
-            setProfileData(userData);
-          } else {
-            console.log("Data profil tidak ditemukan di localStorage");
-          }
-        } catch (error) {
-          console.error("Error parsing user profile:", error);
+        if (storedUser) {
+          const userData: UserData = JSON.parse(storedUser);
+          setProfileData(userData);
+        } else {
+          console.log("Data profil tidak ditemukan di localStorage");
         }
-      };
+      } catch (error) {
+        console.error("Error parsing user profile:", error);
+      }
+    };
 
-      getUserProfile();
-    }, []);
+    getUserProfile();
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
@@ -80,23 +70,12 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4 md:space-x-8">
           {!isMobile && (
             <>
-              <button
-                onClick={toggleFeatures}
-                className="bg-sky-700 hover:bg-sky-600 text-white px-6 py-3 rounded-lg font-medium flex items-center"
-              >
-                Semua Fitur
-                <img
-                  src="/landing/semua-fitur.png"
-                  className="pl-2   w-7 h-auto"
-                  alt=""
-                />
-              </button>
-              {showFeatures && (
-                <FeatureBox
-                  offset="right-[14rem]"
-                  onClose={handleCloseFeatures}
-                />
-              )}
+              <Link to={"/dashboard"}>
+                <img src="/navbar/square.png" className="px-1" alt="" />
+              </Link>
+              <img src="/navbar/moon.png" className="px-1" alt="" />
+              <img src="/navbar/bell.png" className="px-1" alt="" />
+              <img src="/navbar/separator.png" className="px-4" alt="" />
               <button onClick={toggleProfileMenu}>
                 {profileData?.avatar ? (
                   <img

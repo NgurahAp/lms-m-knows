@@ -80,7 +80,7 @@ export const DetailModule = () => {
               </p>
             </div>
             <Link
-              to={`/modul/${subjectId}/${sessionId}`}
+              to={`/module/${subjectId}/${sessionId}`}
               className="mt-8 flex items-center justify-between w-full text-blue-500"
             >
               <p className="flex items-center gap-2 underline">

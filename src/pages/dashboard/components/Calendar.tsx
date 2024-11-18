@@ -44,7 +44,7 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
   });
 
   return (
-    <div className="mt-6 bg-white shadow-lg md:p-8 p-4 h-2/5">
+    <div className="mt-6 bg-white shadow-lg md:p-8 p-4 min-h-2/5">
       <div className="md:flex justify-between items-center mb-4">
         <h2 className="md:text-2xl text-xl font-semibold">Kalender Saya</h2>
         <a
@@ -125,7 +125,7 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
                 <div>
                   <img
                     src="/dashboard/calender-info.png"
-                    className="pr-3 hidden md:block"
+                    className="pr-5 hidden md:block"
                     alt=""
                   />
                 </div>
@@ -142,7 +142,7 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
                     })}{" "}
                     WIB
                   </p>
-                  <h4 className="font-semibold md:py-3 py-1 md:text-base text-sm">
+                  <h4 className="font-semibold md:py-3 pr-5 py-1 md:text-base text-sm">
                     {event.summary}
                   </h4>
                   <p className="text-gray-500 md:text-base md:pb-0 pb-2 text-sm">
