@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserData } from "../types/auth";
-import FeatureBox from "./FeatureBox";
 import ProfileBox from "./ProfileBox";
 import { CgProfile } from "react-icons/cg";
 import NavigationDialog from "../pages/pelatihanku/quiz/components/NavConfirmDialog";
@@ -12,18 +11,13 @@ export const NavbarQuiz = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [profileData, setProfileData] = useState<UserData | null>(null);
-  const [showFeatures, setShowFeatures] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNavigationDialog, setShowNavigationDialog] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState<string | null>(
     null
   );
 
-  
-
-  const handleCloseFeatures = () => {
-    setShowFeatures(false);
-  };
+ 
 
   const handleCloseProfileMenu = () => {
     setShowProfileMenu(false);
@@ -99,13 +93,13 @@ export const NavbarQuiz = () => {
           <div className="flex items-center space-x-4 md:space-x-8">
             {!isMobile && (
               <>
-                {showFeatures && (
-                  <FeatureBox
-                    offset="right-[14rem]"
-                    onClose={handleCloseFeatures}
-                  />
-                )}
-                <button >
+                <button onClick={() => handleNavigation("/dashboard")}>
+                  <img src="/navbar/square.png" className="px-1" alt="" />
+                </button>
+                <img src="/navbar/moon.png" className="px-1" alt="" />
+                <img src="/navbar/bell.png" className="px-1" alt="" />
+                <img src="/navbar/separator.png" className="px-4" alt="" />
+                <button>
                   {profileData?.avatar ? (
                     <img
                       src={profileData.avatar}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SubjectProgressProps } from "../../../types/dashboard";
 
 export const SubjectProgress: React.FC<SubjectProgressProps> = ({
@@ -64,7 +65,8 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
 
           {/* Tombol Aksi */}
           <div className="md:w-1/4 flex md:justify-end justify-center pb-5 md:pb-0">
-            <button
+            <Link
+              to={`/pelatihanku/${subject.id}`}
               className={`${
                 subject.current_session / subject.session_count === 1
                   ? "bg-gray-200"
@@ -74,7 +76,7 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
               {subject.current_session / subject.session_count === 1
                 ? "Selesai"
                 : "Lanjut Belajar"}
-            </button>
+            </Link>
           </div>
         </div>
       ))}
