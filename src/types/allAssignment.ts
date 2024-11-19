@@ -1,4 +1,4 @@
-interface Assignment {
+export interface AllAssignment {
     assignment_id: string;
     assignment_session_id: string;
     assignment_title: string;
@@ -15,5 +15,5 @@ export interface AllAssignmentResponse {
     code: number;
     status: string;
     message: string;
-    data: Assignment[];
+    data: AllAssignment[];
 }
