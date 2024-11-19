@@ -2,6 +2,7 @@ import { useState } from "react";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { useAllAssignmentData } from "../../hooks/useAllAsignment";
 import { AllAssignment } from "../../types/allAssignment";
+import { Link } from "react-router-dom";
 
 export const Penugasan = () => {
   const { data, isLoading, error } = useAllAssignmentData();
@@ -24,7 +25,13 @@ export const Penugasan = () => {
               new Date(a.progress_deadline)
         );
       case "Selesai":
-        return assignments.filter((a) => a.progress_status === "FINISHED");
+        return assignments.filter(
+          (a) =>
+            a.progress_status === "FINISHED" &&
+            a.progress_timestamp_submitted &&
+            new Date(a.progress_timestamp_submitted) <
+              new Date(a.progress_deadline)
+        );
       default:
         return [];
     }
@@ -40,17 +47,23 @@ export const Penugasan = () => {
     if (isLate && assignment.progress_status === "FINISHED") {
       return {
         text: "Terlambat",
-        className: "bg-red-100 text-red-600",
+        textStyle: "text-yellow-500",
+        line: "bg-yellow-500",
+        img: "/penugasan/terlambat.png",
       };
     } else if (assignment.progress_status === "FINISHED") {
       return {
         text: "Selesai",
-        className: "bg-green-100 text-green-600",
+        textStyle: "text-green-500",
+        line: "bg-green-500",
+        img: "/penugasan/selesai.png",
       };
     } else {
       return {
         text: "Ditugaskan",
-        className: "bg-blue-100 text-blue-600",
+        textStyle: "text-blue-500",
+        line: "bg-blue-500",
+        img: "/penugasan/ditugaskan.png",
       };
     }
   };
@@ -68,9 +81,9 @@ export const Penugasan = () => {
   }
 
   return (
-    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      <section className="bg-white mt-5 rounded-xl">
-        <div className="flex mb-4 space-x-4 border-b">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+      <section className="bg-white p-10 rounded-xl">
+        <div className="flex mb-4 space-x-8">
           {[
             "Semua",
             "Ditugaskan",
@@ -81,7 +94,7 @@ export const Penugasan = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`py-2 px-4 text-sm ${
+              className={`py-4 px-10  ${
                 activeTab === tab
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -91,33 +104,53 @@ export const Penugasan = () => {
             </button>
           ))}
         </div>
-        <div>
+        <div className="pt-4">
           {filteredAssignments().map((assignment, index) => (
-            <div
+            <Link
+              to={`/detailAssignment/${assignment.subject_id}/${assignment.assignment_session_id}/${assignment.assignment_id}`}
               key={index}
-              className="p-4 border rounded-lg shadow-sm bg-white mb-4"
+              className=" border rounded-lg shadow-sm flex justify-between bg-white mb-8"
             >
-              <h2 className="font-bold text-lg">
-                {assignment.assignment_title}
-              </h2>
-              <p className="text-gray-500">{assignment.subject_name}</p>
-              <p className="text-gray-400 text-sm">
-                Tenggat:{" "}
-                {new Date(assignment.progress_deadline).toLocaleString()}
-              </p>
-              <div className="mt-2 text-right">
+              <div className="flex">
+                <div
+                  className={`h-full w-2 rounded-l-lg ${
+                    getStatusDisplay(assignment).line
+                  }`}
+                ></div>
+                <div className="py-10 px-8">
+                  <h2 className="font-bold text-xl">
+                    {assignment.assignment_title}
+                  </h2>
+                  <p className="text-gray-500 py-2 text-lg">
+                    {assignment.subject_name}
+                  </p>
+                  <p className="text-gray-400">
+                    Tenggat:{" "}
+                    {new Date(assignment.progress_deadline).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+              <div className=" flex flex-col w-48 items-center justify-center pr-8">
+                <img
+                  src={`${getStatusDisplay(assignment).img}`}
+                  className="w-11 pb-2"
+                  alt=""
+                />
                 <span
-                  className={`py-1 px-3 rounded text-sm ${
-                    getStatusDisplay(assignment).className
+                  className={` rounded text-lg ${
+                    getStatusDisplay(assignment).textStyle
                   }`}
                 >
                   {getStatusDisplay(assignment).text}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
           {filteredAssignments().length === 0 && (
-            <p className="text-gray-500">Tidak ada data.</p>
+            <div className="flex flex-col items-center py-5">
+              <img src="/dashboard/empty-state.png" className="w-80 " alt="" />
+              <p className="text-gray-500">Tidak ada tugas di kategori ini.</p>
+            </div>
           )}
         </div>
       </section>
