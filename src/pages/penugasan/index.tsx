@@ -3,7 +3,6 @@ import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { useAllAssignmentData } from "../../hooks/useAllAsignment";
 import { AllAssignment } from "../../types/allAssignment";
 
-
 export const Penugasan = () => {
   const { data, isLoading, error } = useAllAssignmentData();
   const [activeTab, setActiveTab] = useState("Semua");
@@ -28,6 +27,31 @@ export const Penugasan = () => {
         return assignments.filter((a) => a.progress_status === "FINISHED");
       default:
         return [];
+    }
+  };
+
+  const getStatusDisplay = (assignment: AllAssignment) => {
+    // Cek apakah tugas terlambat
+    const isLate =
+      assignment.progress_timestamp_submitted &&
+      new Date(assignment.progress_timestamp_submitted) >
+        new Date(assignment.progress_deadline);
+
+    if (isLate && assignment.progress_status === "FINISHED") {
+      return {
+        text: "Terlambat",
+        className: "bg-red-100 text-red-600",
+      };
+    } else if (assignment.progress_status === "FINISHED") {
+      return {
+        text: "Selesai",
+        className: "bg-green-100 text-green-600",
+      };
+    } else {
+      return {
+        text: "Ditugaskan",
+        className: "bg-blue-100 text-blue-600",
+      };
     }
   };
 
@@ -84,14 +108,10 @@ export const Penugasan = () => {
               <div className="mt-2 text-right">
                 <span
                   className={`py-1 px-3 rounded text-sm ${
-                    assignment.progress_status === "FINISHED"
-                      ? "bg-green-100 text-green-600"
-                      : "bg-blue-100 text-blue-600"
+                    getStatusDisplay(assignment).className
                   }`}
                 >
-                  {assignment.progress_status === "FINISHED"
-                    ? "Selesai"
-                    : "Ditugaskan"}
+                  {getStatusDisplay(assignment).text}
                 </span>
               </div>
             </div>
