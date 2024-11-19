@@ -1,10 +1,28 @@
 import { useState } from "react";
 import { PenugasanData } from "./components/penugasanData";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { useAllAssignmentData } from "../../hooks/useAllAsignment";
 
 export const Penugasan = () => {
   const [activeTab, setActiveTab] = useState<
     "semua" | "ditugaskan" | "sedang-dinilai" | "terlambat" | "selesai"
   >("semua");
+
+  const { data, isLoading, error } = useAllAssignmentData();
+
+  if (isLoading) {
+    return <LoadingSpinner text="Loading..." />;
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  console.log(data);
 
   const filterPenugasan = () => {
     if (activeTab === "semua") return PenugasanData;
