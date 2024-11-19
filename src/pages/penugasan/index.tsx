@@ -1,26 +1,34 @@
 import { useState } from "react";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { useAllAssignmentData } from "../../hooks/useAllAsignment";
-import { PenugasanData } from "./components/penugasanData";
+import { AllAssignment } from "../../types/allAssignment";
+
 
 export const Penugasan = () => {
   const { data, isLoading, error } = useAllAssignmentData();
   const [activeTab, setActiveTab] = useState("Semua");
 
-  const filteredAssignments = () => {
-    if (activeTab === "Semua") return PenugasanData;
-    if (activeTab === "Ditugaskan")
-      return PenugasanData.filter((a) => a.progress_status === "ONGOING");
-    if (activeTab === "Terlambat")
-      return PenugasanData.filter(
-        (a) =>
-          a.progress_status === "FINISHED" &&
-          new Date(a.progress_timestamp_submitted!) >
-            new Date(a.progress_deadline)
-      );
-    if (activeTab === "Selesai")
-      return PenugasanData.filter((a) => a.progress_status === "FINISHED");
-    return [];
+  const filteredAssignments = (): AllAssignment[] => {
+    const assignments = data?.data ?? [];
+
+    switch (activeTab) {
+      case "Semua":
+        return assignments;
+      case "Ditugaskan":
+        return assignments.filter((a) => a.progress_status === "ONGOING");
+      case "Terlambat":
+        return assignments.filter(
+          (a) =>
+            a.progress_status === "FINISHED" &&
+            a.progress_timestamp_submitted &&
+            new Date(a.progress_timestamp_submitted) >
+              new Date(a.progress_deadline)
+        );
+      case "Selesai":
+        return assignments.filter((a) => a.progress_status === "FINISHED");
+      default:
+        return [];
+    }
   };
 
   if (isLoading) {
@@ -34,8 +42,6 @@ export const Penugasan = () => {
       </div>
     );
   }
-
-  console.log(data);
 
   return (
     <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -62,8 +68,11 @@ export const Penugasan = () => {
           ))}
         </div>
         <div>
-          {filteredAssignments().map((assignment) => (
-            <div className="p-4 border rounded-lg shadow-sm bg-white mb-4">
+          {filteredAssignments().map((assignment, index) => (
+            <div
+              key={index}
+              className="p-4 border rounded-lg shadow-sm bg-white mb-4"
+            >
               <h2 className="font-bold text-lg">
                 {assignment.assignment_title}
               </h2>
