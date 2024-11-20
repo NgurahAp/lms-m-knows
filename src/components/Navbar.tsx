@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
     { name: "Dashboard", path: "/dashboard" },
     { name: "Pelatihan-ku", path: "/pelatihanku" },
     { name: "Penugasan", path: "/penugasan" },
-    { name: "Nilai & Sertifikat", path: "/nilai-sertifikat" },
+    { name: "Nilai & Sertifikat", path: "/score" },
   ];
 
   useEffect(() => {

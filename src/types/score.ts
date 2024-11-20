@@ -4,7 +4,7 @@ interface Student {
   major: string;
 }
 
-interface Subject {
+export interface Subject {
   id: string;
   name: string;
   credit: number;
@@ -25,7 +25,7 @@ interface Meta {
   max_page: number;
 }
 
-export interface NilaiResponse {
+export interface ScoreResponse {
   code: number;
   status: string;
   message: string;

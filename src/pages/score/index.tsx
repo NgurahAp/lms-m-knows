@@ -2,16 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Sertifikat } from "./popup";
-import { useNilaiResponse } from "../../services/NilaiService";
 import { FaChevronRight } from "react-icons/fa";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { useScoreResponse } from "../../hooks/useScore";
 
-export const NilaiSertifikat: React.FC = () => {
-  const {
-    data: nilaiResponse,
-    isLoading: isNilaiLoading,
-    isError: isNilaiError,
-  } = useNilaiResponse();
+export const Score: React.FC = () => {
+  const { data, isLoading, isError } = useScoreResponse();
 
   const [activeTab, setActiveTab] = useState<"nilai" | "sertifikat">("nilai");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -20,11 +16,11 @@ export const NilaiSertifikat: React.FC = () => {
     alert("Certificate Downloaded!");
   };
 
-  if (isNilaiLoading) {
+  if (isLoading) {
     return <LoadingSpinner text="Loading..." />;
   }
 
-  if (isNilaiError) {
+  if (isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         Error fetching nilai response.
@@ -33,7 +29,7 @@ export const NilaiSertifikat: React.FC = () => {
   }
 
   // Mengakses subjects dari dalam properti data
-  const subjects = nilaiResponse?.subjects ?? [];
+  const subjects = data?.subjects ?? [];
   console.log(subjects);
 
   return (
@@ -62,14 +58,14 @@ export const NilaiSertifikat: React.FC = () => {
       </div>
 
       {/* Main Content Card */}
-      <div className="bg-white rounded-lg shadow-lg w-full">
+      <div className="px-5 bg-white rounded-lg shadow-lg w-full">
         {/* Tabs */}
         <div className="p-8">
           <div className="flex flex-wrap border-b border-white">
             <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
+              className={`py-4 px-10 md:text-lg text-lg font-semibold border-1 whitespace-nowrap ${
                 activeTab === "nilai"
-                  ? "text-blue-500 border-b-4 border-blue-500"
+                  ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
               }`}
               onClick={() => setActiveTab("nilai")}
@@ -77,9 +73,9 @@ export const NilaiSertifikat: React.FC = () => {
               Nilai
             </button>
             <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
+              className={`py-4 px-10 md:text-lg text-lg font-semibold border-1 whitespace-nowrap ${
                 activeTab === "sertifikat"
-                  ? "text-blue-500 border-b-4 border-blue-500"
+                  ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
               }`}
               onClick={() => setActiveTab("sertifikat")}
@@ -90,15 +86,15 @@ export const NilaiSertifikat: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="px-6 pb-8">
           {activeTab === "nilai" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {subjects.map((subject) => (
                 <div
                   key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
+                  className="bg-white border rounded-lg p-6 shadow-sm"
                 >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
+                  <h3 className="text-xl font-bold mb-4 line-clamp-2">
                     {subject.name}
                   </h3>
                   <div className="space-y-3">
@@ -122,10 +118,10 @@ export const NilaiSertifikat: React.FC = () => {
                         {subject.score} ({subject.score_letter})
                       </span>
                     </div>
-                    <div className="pt-2">
+                    <div className="pt-2 flex justify-end">
                       <Link
                         to="/pelatihan-keterampilan"
-                        className="inline-block w-full text-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                        className="  px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
                       >
                         Lihat Detail
                       </Link>

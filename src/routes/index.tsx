@@ -9,7 +9,7 @@ import { Module } from "../pages/pelatihanku/module";
 import { DetailModule } from "../pages/pelatihanku/module/DetailModule";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
-import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihanket";
+import { PelatihanKet } from "../pages/score/pelatihanket";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginRoute from "./LoginRoute";
 import { Login } from "../pages/auth/login";
@@ -18,13 +18,13 @@ import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
 import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
 import { Assignment } from "../pages/pelatihanku/assignments";
 import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
-import { NilaiSertifikat } from "../pages/nilai-sertifikat";
 import { Reflection } from "../pages/pelatihanku/reflection";
 import { SubmitReflection } from "../pages/pelatihanku/reflection/SubmitReflection";
 import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflection";
 import { Assesment } from "../pages/pelatihanku/assesment";
 import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesment";
 import { Discussion } from "../pages/pelatihanku/discussion";
+import { Score } from "../pages/score";
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -192,10 +192,10 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/nilai-sertifikat"
+            path="/score"
             element={
               <ProtectedRoute>
-                <NilaiSertifikat />
+                <Score />
               </ProtectedRoute>
             }
           />
