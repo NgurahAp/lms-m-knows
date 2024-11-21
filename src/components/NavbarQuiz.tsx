@@ -49,6 +49,7 @@ export const NavbarQuiz = () => {
     { name: "Pelatihan-ku", path: "/pelatihanku" },
     { name: "Penugasan", path: "/penugasan" },
     { name: "Nilai & Sertifikat", path: "/nilai-sertifikat" },
+    { name: "Roleplay & Asesmen", path: "/roleplay" },
   ];
 
   useEffect(() => {
@@ -94,10 +95,10 @@ export const NavbarQuiz = () => {
             {!isMobile && (
               <>
                 <button onClick={() => handleNavigation("/dashboard")}>
-                  <img src="/navbar/square.png" className="px-1" alt="" />
+                  <img src="/navbar/square.png" className="px-1 w-8" alt="" />
                 </button>
-                <img src="/navbar/moon.png" className="px-1" alt="" />
-                <img src="/navbar/bell.png" className="px-1" alt="" />
+                <img src="/navbar/moon.png" className="px-1 w-9" alt="" />
+                <img src="/navbar/bell.png" className="px-1 w-9" alt="" />
                 <img src="/navbar/separator.png" className="px-4" alt="" />
                 <button>
                   {profileData?.avatar ? (
