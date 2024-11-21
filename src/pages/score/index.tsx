@@ -5,6 +5,7 @@ import { Sertifikat } from "./popup";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { useCertificateResponse, useScoreResponse } from "../../hooks/useScore";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
+import { EmptyState } from "../../components/reusable/EmptyState";
 
 export const Score: React.FC = () => {
   const {
@@ -53,7 +54,7 @@ export const Score: React.FC = () => {
 
   // Mengakses subjects dari dalam properti data
   const subjects = scoreData?.data.subjects ?? [];
-  console.log(certificateData);
+  const certificate = certificateData?.data.subjects ?? [];
 
   return (
     <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
@@ -95,93 +96,106 @@ export const Score: React.FC = () => {
         {/* Content */}
         <div className="px-6 pb-8">
           {activeTab === "nilai" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {subjects.map((subject) => (
-                <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-6 shadow-sm"
-                >
-                  <h3 className="text-xl font-bold mb-4 line-clamp-2">
-                    {subject.name}
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">
-                        Status Perkuliahan
-                      </span>
-                      <span
-                        className={`text-sm font-medium ${
-                          subject.status === "BELUM SELESAI"
-                            ? "text-yellow-500"
-                            : "text-green-500"
-                        }`}
-                      >
-                        {subject.status}
-                      </span>
+            <>
+              {subjects.length === 0 ? (
+                <EmptyState message="Tidak ada data nilai yang tersedia" />
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                  {subjects.map((subject) => (
+                    <div
+                      key={subject.id}
+                      className="bg-white border rounded-lg p-6 shadow-sm"
+                    >
+                      <h3 className="text-xl font-bold mb-4 line-clamp-2">
+                        {subject.name}
+                      </h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">
+                            Status Perkuliahan
+                          </span>
+                          <span
+                            className={`text-sm font-medium ${
+                              subject.status === "BELUM SELESAI"
+                                ? "text-yellow-500"
+                                : "text-green-500"
+                            }`}
+                          >
+                            {subject.status}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Nilai</span>
+                          <span className="text-sm font-medium">
+                            {subject.score} ({subject.score_letter})
+                          </span>
+                        </div>
+                        <div className="pt-2 flex justify-end">
+                          <Link
+                            to="/detailScore"
+                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                          >
+                            Lihat Detail
+                          </Link>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Nilai</span>
-                      <span className="text-sm font-medium">
-                        {subject.score} ({subject.score_letter})
-                      </span>
-                    </div>
-                    <div className="pt-2 flex justify-end">
-                      <Link
-                        to="/detailScore"
-                        className="  px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
-                      >
-                        Lihat Detail
-                      </Link>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
 
           {activeTab === "sertifikat" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {subjects.map((subject) => (
-                <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
-                >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
-                  </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-600">Status</span>
-                    <span
-                      className={`text-sm font-medium ${
-                        subject.status === "BELUM SELESAI"
-                          ? "text-yellow-500"
-                          : "text-green-500"
-                      }`}
+            <>
+              {certificate.length === 0 ? (
+                <EmptyState message="Tidak ada sertifikat yang tersedia" width="w-1/6" />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {certificate.map((certificate) => (
+                    <div
+                      key={certificate.id}
+                      className="bg-white border rounded-lg p-4 shadow-sm"
                     >
-                      {subject.status}
-                    </span>
-                  </div>
-                  <button
-                    className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
-                      subject.status === "BELUM SELESAI"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={() =>
-                      subject.status !== "BELUM SELESAI" && setIsModalOpen(true)
-                    }
-                    disabled={subject.status === "BELUM SELESAI"}
-                  >
-                    Lihat Sertifikat
-                  </button>
+                      <h3 className="font-medium text-base mb-4 line-clamp-2">
+                        {certificate.name}
+                      </h3>
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-sm text-gray-600">Status</span>
+                        <span
+                          className={`text-sm font-medium ${
+                            certificate.status === "BELUM SELESAI"
+                              ? "text-yellow-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {certificate.status}
+                        </span>
+                      </div>
+                      <button
+                        className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
+                          certificate.status === "BELUM SELESAI"
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-blue-500 hover:bg-blue-600"
+                        }`}
+                        onClick={() =>
+                          certificate.status !== "BELUM SELESAI" &&
+                          setIsModalOpen(true)
+                        }
+                        disabled={certificate.status === "BELUM SELESAI"}
+                      >
+                        Lihat Sertifikat
+                      </button>
+                    </div>
+                  ))}
+                  <Sertifikat
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onDownload={handleDownload}
+                  />
                 </div>
-              ))}
-              <Sertifikat
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onDownload={handleDownload}
-              />
-            </div>
+              )}
+            </>
           )}
         </div>
       </div>
