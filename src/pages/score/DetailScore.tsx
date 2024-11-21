@@ -1,10 +1,9 @@
 import React from "react";
-import { FaChevronRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { useNilaiData } from "../../services/PelatihanKetService";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
-export const PelatihanKet: React.FC = () => {
+export const DetailScore: React.FC = () => {
   const {
     data: nilaiData,
     isLoading: isNilaiLoading,
@@ -23,33 +22,27 @@ export const PelatihanKet: React.FC = () => {
     );
   }
 
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Nilai & Sertifikat",
+      path: "/score",
+    },
+    {
+      label: "Nilai",
+    },
+  ];
+
   // Mengakses sessions dari dalam properti data
   const sessions = nilaiData?.sessions ?? [];
   console.log(sessions);
 
   return (
     <div className="flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1 "
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Nilai & Sertifikat
-        </span>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Pelatihan Keterampilan Komunikasi
-        </span>
-      </div>
-
+      <Breadcrumb items={breadcrumbItems} />
       <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className="md:text-lg text-sm font-semibold">Nilai</h1>
       </div>

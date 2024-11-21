@@ -1,10 +1,21 @@
+export interface ScoreResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    student: Student;
+    subjects: Subject[];
+  };
+  meta: Meta;
+}
+
 interface Student {
   id: string;
   full_name: string;
   major: string;
 }
 
-export interface Subject {
+interface Subject {
   id: string;
   name: string;
   credit: number;
@@ -23,13 +34,4 @@ interface Meta {
   total_data: number;
   current_page: number;
   max_page: number;
-}
-
-export interface ScoreResponse {
-  code: number;
-  status: string;
-  message: string;
-  student: Student;
-  subjects: Subject[];
-  meta: Meta;
 }

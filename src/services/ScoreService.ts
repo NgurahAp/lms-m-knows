@@ -10,7 +10,17 @@ export const fetchScoreResponse = async (): Promise<ScoreResponse> => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data.data;
+  return response.data;
+};
+
+export const fetchCertificateResponse = async (): Promise<ScoreResponse> => {
+  const token = Cookies.get("accessToken");
+  const response = await axios.get(`${API_BASE_URL}/api/v1/certificate`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
 };
 
 
