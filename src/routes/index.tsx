@@ -201,7 +201,7 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/detailScore"
+            path="/detailScore/:subjectId"
             element={
               <ProtectedRoute>
                 <DetailScore />

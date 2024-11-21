@@ -2,15 +2,19 @@ import React from "react";
 import { useNilaiData } from "../../services/PelatihanKetService";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 export const DetailScore: React.FC = () => {
+  const { subjectId } = useParams<{
+    subjectId: string;
+  }>();
+
   const {
     data: nilaiData,
     isLoading: isNilaiLoading,
     isError: isNilaiError,
-  } = useNilaiData();
+  } = useNilaiData(subjectId);
 
   if (isNilaiLoading) {
     return <LoadingSpinner text="Loading..." />;
@@ -40,7 +44,7 @@ export const DetailScore: React.FC = () => {
 
   // Mengakses sessions dari dalam properti data
   const sessions = nilaiData?.sessions ?? [];
-  console.log(sessions);
+  console.log(subjectId);
 
   return (
     <div className="flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
