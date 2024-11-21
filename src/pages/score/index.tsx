@@ -132,7 +132,7 @@ export const Score: React.FC = () => {
                         </div>
                         <div className="pt-2 flex justify-end">
                           <Link
-                            to="/detailScore"
+                            to={`/detailScore/${subject.id}`}
                             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
                           >
                             Lihat Detail
@@ -149,7 +149,10 @@ export const Score: React.FC = () => {
           {activeTab === "sertifikat" && (
             <>
               {certificate.length === 0 ? (
-                <EmptyState message="Tidak ada sertifikat yang tersedia" width="w-1/6" />
+                <EmptyState
+                  message="Tidak ada sertifikat yang tersedia"
+                  width="w-1/6"
+                />
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {certificate.map((certificate) => (
