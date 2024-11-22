@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import Clients from "../components/Clients";
 import { AboutUs } from "../components/Landing/AboutUs";
 import { Article } from "../components/Landing/Article";
@@ -8,7 +10,6 @@ import { Hero } from "../components/Landing/Hero";
 import { TrainingProgram } from "../components/Landing/TrainingProgram";
 import { useAuth } from "../hooks/useAuth";
 import { useDashboardData } from "../services/DashboardService";
-import { useState } from "react";
 import FeatureBox from "../components/FeatureBox";
 import ProfileBox from "../components/ProfileBox";
 
@@ -18,13 +19,20 @@ export default function Home() {
 
   const [showFeatures, setShowFeatures] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const toggleFeatures = () => {
     setShowFeatures((prev) => !prev);
+    setShowProfileMenu(false);
   };
 
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
+    setShowFeatures(false);
   };
 
   const handleCloseFeatures = () => {
@@ -48,18 +56,27 @@ export default function Home() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center py-2 px-4 bg-white shadow-md">
+      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center py-2 px-4 bg-white shadow-sm">
         <div className="flex items-center space-x-2">
           <div className="flex items-center">
             <img
               src="/landing/logo.png"
-              className="w-56 bg-white bg-opacity-20 rounded"
+              className="md:w-56 w-32 bg-white bg-opacity-20 rounded"
               alt="Logo"
             />
           </div>
         </div>
 
-        <div className="flex items-center space-x-3">
+        {/* Hamburger Menu Button - Only visible on mobile */}
+        <button
+          className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-3">
           {authState.isAuthenticated && dashboardData ? (
             <div className="flex gap-4">
               <button
@@ -74,7 +91,10 @@ export default function Home() {
                 />
               </button>
               {showFeatures && (
-                <FeatureBox offset="right-20" onClose={handleCloseFeatures} />
+                <FeatureBox
+                  offset="md:right-20"
+                  onClose={handleCloseFeatures}
+                />
               )}
               <button onClick={toggleProfileMenu}>
                 <img
@@ -85,7 +105,7 @@ export default function Home() {
               </button>
               {showProfileMenu && (
                 <ProfileBox
-                  offset="right-1"
+                  offset="md:right-1"
                   onClose={handleCloseProfileMenu}
                 />
               )}
@@ -104,7 +124,10 @@ export default function Home() {
                 />
               </button>
               {showFeatures && (
-                <FeatureBox offset="right-32" onClose={handleCloseFeatures} />
+                <FeatureBox
+                  offset="md:right-32"
+                  onClose={handleCloseFeatures}
+                />
               )}
               <Link to="/login">
                 <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
@@ -114,9 +137,70 @@ export default function Home() {
             </div>
           )}
         </div>
-      </nav>
 
-      {/* Render konten hanya jika tidak dalam status loading */}
+        {/* Mobile Menu - Only visible when hamburger is clicked */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full right-0 w-full bg-white shadow-lg rounded-lg  py-2 z-20">
+            {authState.isAuthenticated && dashboardData ? (
+              <div className="flex justify-between p-4">
+                <button
+                  onClick={toggleFeatures}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 text-sm rounded-lg font-medium flex items-center justify-center"
+                >
+                  Semua Fitur
+                  <img
+                    src="/landing/semua-fitur.png"
+                    className="pl-2 w-5 h-auto"
+                    alt=""
+                  />
+                </button>
+                {showFeatures && (
+                  <FeatureBox offset="right-1" onClose={handleCloseFeatures} />
+                )}
+                <button
+                  onClick={toggleProfileMenu}
+                  className="flex items-center justify-center"
+                >
+                  <img
+                    src={dashboardData.profile.avatar}
+                    className="w-10 rounded-full"
+                    alt=""
+                  />
+                </button>
+                {showProfileMenu && (
+                  <ProfileBox
+                    offset="right-1"
+                    onClose={handleCloseProfileMenu}
+                  />
+                )}
+              </div>
+            ) : (
+              <div className="flex justify-between p-4">
+                <button
+                  onClick={toggleFeatures}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-white text-sm px-4 py-2 rounded-lg font-medium flex items-center justify-center"
+                >
+                  Semua Fitur
+                  <img
+                    src="/landing/semua-fitur.png"
+                    className="pl-2 w-5 h-auto"
+                    alt=""
+                  />
+                </button>
+                {showFeatures && (
+                  <FeatureBox offset="right-1" onClose={handleCloseFeatures} />
+                )}
+                <Link to="/login" className="">
+                  <button className="w-full border border-[#106fa4] text-[#106fa4] text-sm px-4 py-2 rounded-lg font-medium hover:bg-blue-50">
+                    Masuk
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
+      </nav>
+      {/* Rest of the content */}
       {(!authState.isAuthenticated || !isLoading) && (
         <>
           <Hero />
@@ -166,14 +250,14 @@ export default function Home() {
           </div>
           <div className="flex-1 p-4">
             <h2 className="text-lg font-bold pb-4">Halaman</h2>
-            <p className=" py-3 text-lg">Pelatihanku</p>
-            <p className=" py-3 text-lg">Penugasan</p>
-            <p className=" py-3 text-lg">Asesmen</p>
+            <p className="py-3 text-lg">Pelatihanku</p>
+            <p className="py-3 text-lg">Penugasan</p>
+            <p className="py-3 text-lg">Asesmen</p>
           </div>
           <div className="flex-1 p-4">
             <h2 className="text-lg font-bold pb-4">Kontak</h2>
-            <p className=" py-3 text-lg">+6285183004001</p>
-            <p className=" py-3 text-lg">info@kampusgratis.com</p>
+            <p className="py-3 text-lg">+6285183004001</p>
+            <p className="py-3 text-lg">info@kampusgratis.com</p>
           </div>
           <div className="flex-1 p-4">
             <h2 className="text-lg font-bold pb-4">Alamat</h2>
