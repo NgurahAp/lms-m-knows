@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 import { FaCircleInfo } from "react-icons/fa6";
 
+
 export const Roleplay = () => {
+
   const breadcrumbItems = [
     {
       label: "Beranda",
@@ -44,16 +46,17 @@ export const Roleplay = () => {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <h3 className="text-lg font-semibold pb-1">
-                  Roleplay
-                </h3>
+                <h3 className="text-lg font-semibold pb-1">Roleplay</h3>
                 <p className="text-lg text-gray-600 ">
                   Tes dengan rekan roleplay yang membantu anda memahami diri
                   sendiri lebih baik.
                 </p>
               </div>
             </div>
-            <Link to={'/listRoleplay'} className="bg-blue-500 text-white py-3 flex w-full justify-center rounded-md font-semibold hover:bg-blue-600">
+            <Link
+              to={"/listRoleplay"}
+              className="bg-blue-500 text-white py-3 flex w-full justify-center rounded-md font-semibold hover:bg-blue-600"
+            >
               Mulai Tes
             </Link>
           </div>

@@ -1,6 +1,23 @@
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { useRoleplayData } from "../../hooks/useRoleplay";
 
 export const ListRoleplay = () => {
+  const { data, isLoading, error } = useRoleplayData();
+
+  if (isLoading) {
+    return <LoadingSpinner text="Loading..." />;
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  console.log(data);
   const breadcrumbItems = [
     {
       label: "Beranda",
@@ -27,7 +44,6 @@ export const ListRoleplay = () => {
       {/* Content */}
       <div className=" my-8 p-10 bg-white flex flex-col items-center justify-center">
         <div className="bg-blue-100 flex flex-col p-5 w-full justify-center rounded-lg">
-         
           <h1 className=" text-blue-700 font-medium pt-1 text-lg">
             Lihat detail tentang Simulasi dan Roleplay
           </h1>
@@ -82,4 +98,4 @@ export const ListRoleplay = () => {
       </div>
     </div>
   );
-}
+};
