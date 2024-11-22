@@ -6,33 +6,38 @@ export const Hero = () => {
         backgroundImage: "url('/landing/hero-bg.png')",
       }}
     >
-      <div className="flex w-5/6 h-full">
-        <div className="w-11/12 h-full flex flex-col justify-center text-left">
-          <h1 className="text-3xl font-light text-gray-600 pb-5">Pelatihan</h1>
-          <h1 className="text-6xl font-bold pb-3">
+      <div className="flex md:flex-row flex-col-reverse w-full md:px-14 px-1 items-end h-full">
+        <div className="md:w-1/2 max-w-full h-full  flex flex-col justify-center md:pt-28 px-10 md:text-left text-center">
+          <h1 className="md:text-3xl text-xl font-light text-gray-600 md:pb-5 pb-2">
+            Pelatihan
+          </h1>
+          <h1 className="md:text-6xl text-2xl font-bold pb-3">
             Building Confidence & Effective Communication for RBC
           </h1>
-          <h1 className="text-2xl font-medium">
+          <h1 className="md:text-2xl text-sm font-medium">
             1 - 2 Juli 2024 - Hotel Mercure Cikino, Jakarta
           </h1>
-          <img
-            src="/landing/logo.png"
-            className="w-56 bg-white bg-opacity-20 rounded my-10"
-            alt=""
-          />
-          <div className="flex items-center">
-            <button className="w-56 h-14 bg-[#FAB317] text-white font-bold text-xl rounded-lg">
+          <div className="w-full flex md:justify-start justify-center">
+            <img
+              src="/landing/logo.png"
+              className="md:w-56 w-36  rounded text-center md:my-10 my-5"
+              alt=""
+            />
+          </div>
+
+          <div className="flex md:flex-row flex-col-reverse items-center">
+            <button className="md:w-56 w-36 h-12 md:h-14 bg-[#FAB317] text-white font-bold md:text-xl  rounded-lg">
               Klik Disini
             </button>
-            <h1 className="text-2xl font-bold pl-5">
+            <h1 className="md:text-2xl text-sm md:pb-0 pb-3 font-bold md:pl-5">
               Silahkan login bagi peserta pelatihan.
             </h1>
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex md:w-1/2 w-full px-5 md:h-full mt-16 items-center">
           <img src="/landing/hero-right.png" alt="" />
         </div>
       </div>
     </section>
   );
-}
+};

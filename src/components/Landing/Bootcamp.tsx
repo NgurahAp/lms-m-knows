@@ -3,11 +3,11 @@ import { trainingCategories } from "../../assets/landingData";
 export const Bootcamp = () => {
   return (
     <section className="min-h-screen">
-      <div className="w-11/12 mx-auto py-14 ">
-        <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-4">
+      <div className="w-11/12 mx-auto md:py-14 ">
+        <h1 className="md:text-5xl text-2xl text-[#106FA4] text-center font-bold md:pb-4">
           Bootcamp <span className="text-[#FAB317]">LMS M-Knows</span>
         </h1>
-        <h1 className="text-2xl font-light text-center text-gray-600 pb-14">
+        <h1 className="md:text-2xl text-lg px-10 font-light text-center text-gray-600 md:pb-14">
           Temukan bootcamp yang sesuai dengan minat dan kebutuhan Anda.
         </h1>
         <section className="pb-16 pt-7">
@@ -41,7 +41,7 @@ export const Bootcamp = () => {
             </div>
           </div>
           <div className="flex justify-center mt-8">
-            <button className="rounded-lg bg-[#106fa4] hover:bg-blue-700 text-white font-semibold p-4">
+            <button className="rounded-lg bg-[#106fa4] hover:bg-blue-700 text-white md:text-base text-sm font-semibold p-4">
               Lihat Bootcamp Lainnya
             </button>
           </div>

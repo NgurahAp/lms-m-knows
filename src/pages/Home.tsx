@@ -155,7 +155,7 @@ export default function Home() {
                   />
                 </button>
                 {showFeatures && (
-                  <FeatureBox offset="right-1" onClose={handleCloseFeatures} />
+                  <FeatureBox offset="left-1" onClose={handleCloseFeatures} />
                 )}
                 <button
                   onClick={toggleProfileMenu}
