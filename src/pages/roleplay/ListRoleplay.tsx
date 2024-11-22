@@ -1,10 +1,23 @@
-import { Link } from "react-router-dom";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
-import { FaCircleInfo } from "react-icons/fa6";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { useRoleplayData } from "../../hooks/useRoleplay";
 
+export const ListRoleplay = () => {
+  const { data, isLoading, error } = useRoleplayData();
 
-export const Roleplay = () => {
+  if (isLoading) {
+    return <LoadingSpinner text="Loading..." />;
+  }
 
+  if (error) {
+    return (
+      <div className="min-h-[85vh] w-screen flex items-center justify-center">
+        Error loading data
+      </div>
+    );
+  }
+
+  console.log(data);
   const breadcrumbItems = [
     {
       label: "Beranda",
@@ -12,6 +25,10 @@ export const Roleplay = () => {
     },
     {
       label: "Roleplay & Assesment",
+      path: "/roleplay",
+    },
+    {
+      label: "Pilih Roleplay",
     },
   ];
 
@@ -21,15 +38,12 @@ export const Roleplay = () => {
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
       <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
-        <h1 className="text-2xl font-semibold">Roleplay & Assesment</h1>
+        <h1 className="text-2xl font-semibold">Roleplay</h1>
       </div>
 
       {/* Content */}
       <div className=" my-8 p-10 bg-white flex flex-col items-center justify-center">
         <div className="bg-blue-100 flex flex-col p-5 w-full justify-center rounded-lg">
-          <h1 className=" text-blue-700 pb-1 flex items-center font-bold text-lg">
-            Roleplay dan Assesment <FaCircleInfo className="ml-3 text-2xl" />
-          </h1>
           <h1 className=" text-blue-700 font-medium pt-1 text-lg">
             Lihat detail tentang Simulasi dan Roleplay
           </h1>
@@ -53,12 +67,9 @@ export const Roleplay = () => {
                 </p>
               </div>
             </div>
-            <Link
-              to={"/listRoleplay"}
-              className="bg-blue-500 text-white py-3 flex w-full justify-center rounded-md font-semibold hover:bg-blue-600"
-            >
+            <button className="bg-blue-500 text-white py-3 flex w-full justify-center rounded-md font-semibold hover:bg-blue-600">
               Mulai Tes
-            </Link>
+            </button>
           </div>
 
           {/* Assessment Card */}
