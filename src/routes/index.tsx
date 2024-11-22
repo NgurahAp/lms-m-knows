@@ -26,6 +26,7 @@ import { Discussion } from "../pages/pelatihanku/discussion";
 import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
 import { Roleplay } from "../pages/roleplay";
+import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -213,6 +214,14 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Roleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/listRoleplay"
+            element={
+              <ProtectedRoute>
+                <ListRoleplay />
               </ProtectedRoute>
             }
           />
