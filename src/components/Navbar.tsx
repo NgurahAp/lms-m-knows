@@ -112,12 +112,16 @@ const Navbar: React.FC = () => {
                 </button>
 
                 {showDropdown && (
-                  <div className="absolute top-full -left-3  mt-1 w-40 bg-white rounded-md shadow-lg py-1 z-20">
+                  <div className="absolute top-full -left-3 mt-1 w-40 bg-white rounded-md shadow-lg py-1 z-20">
                     {navItems.map((item) => (
                       <Link
                         key={item.path}
                         to={item.path}
-                        className="block px-4 py-2 text-xs text-gray-700 hover:bg-sky-50 hover:text-sky-700"
+                        className={`block px-4 py-2 text-xs font-medium rounded-md border ${
+                          location.pathname.startsWith(item.path)
+                            ? "bg-blue-500 text-white border-blue-500 m-2"
+                            : "text-gray-700 border-transparent hover:bg-sky-50 mx-2 hover:text-sky-700 hover:border-sky-700"
+                        }`}
                         onClick={() => setShowDropdown(false)}
                       >
                         {item.name}
