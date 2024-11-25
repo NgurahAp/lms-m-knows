@@ -5,6 +5,9 @@ import { CgProfile } from "react-icons/cg";
 import { UserData } from "../types/auth";
 import { IoIosMenu } from "react-icons/io";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { HiMiniSquaresPlus } from "react-icons/hi2";
+import { LuLogOut } from "react-icons/lu";
+import { useAuth } from "../hooks/useAuth";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -13,6 +16,8 @@ const Navbar: React.FC = () => {
   const [profileData, setProfileData] = useState<UserData | null>(null);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const { handleLogout } = useAuth();
 
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
@@ -112,7 +117,7 @@ const Navbar: React.FC = () => {
                 </button>
 
                 {showDropdown && (
-                  <div className="absolute top-full -left-3 mt-1 w-40 bg-white rounded-md shadow-lg py-1 z-20">
+                  <div className="absolute top-full -left-3 mt-1 w-40 bg-white rounded-md shadow-l5 py-2 z-20">
                     {navItems.map((item) => (
                       <Link
                         key={item.path}
@@ -190,33 +195,61 @@ const Navbar: React.FC = () => {
         </div>
       )}
 
+      {/* Navbar hamburger */}
       {isMobile && isOpen && (
-        <div className="bg-sky-700">
-          <div className="p-4 border-b border-sky-600">
+        <div className="">
+          <div className="p-4 flex items-center border-b">
             <img
               src={profileData?.avatar}
-              className="w-12 h-12 rounded-full mx-auto"
+              className="w-12 h-12 rounded-lg"
               alt="Profile"
             />
-            <p className="text-white text-center mt-2">
-              {profileData?.full_name}
-            </p>
+            <div className="pl-3 flex flex-col">
+              <p className="font-medium text-sm">{profileData?.full_name}</p>
+              <p className="text-xs text-gray-500">{profileData?.email}</p>
+            </div>
           </div>
+
+          {/* Tombol "Semua Fitur" */}
+          <div className="p-4">
+            <button className="w-full bg-yellow-500 text-white font-medium text-sm py-2 rounded-lg flex items-center justify-center hover:bg-yellow-600">
+              <span>Semua Fitur</span>
+              <span className="ml-2">
+                <HiMiniSquaresPlus />
+              </span>
+            </button>
+          </div>
+
+          {/* Menu Navigasi */}
           <div className="flex flex-col">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`font-semibold text-lg p-4 ${
-                  location.pathname === item.path
-                    ? "text-green-300"
-                    : "text-white"
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {/* Beranda */}
+            <Link
+              to="/"
+              className={`flex items-center text-sm px-5 py-3   `}
+              onClick={() => setIsOpen(false)}
+            >
+              <HiMiniSquaresPlus className="mr-3 text-2xl text-blue-500" />
+              <span>Beranda</span>
+            </Link>
+            <Link
+              to=""
+              className={`flex items-center text-sm px-5 py-3 `}
+              onClick={() => setIsOpen(false)}
+            >
+              <CgProfile className="mr-3 text-2xl text-green-500" />
+              <span>Profile</span>
+            </Link>
+            <Link
+              to="/"
+              className={`flex items-center text-sm px-5 py-3 pb-8`}
+              onClick={() => {
+                setIsOpen(false);
+                handleLogout();
+              }}
+            >
+              <LuLogOut className="mr-3 text-2xl text-red-500" />
+              <span>Logout</span>
+            </Link>
           </div>
         </div>
       )}
