@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import { useNilaiResponse } from "../../services/NilaiService";
 import { FaChevronRight } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 
 export const RoleplayAsses: React.FC = () => {
   const {
-    data: nilaiResponse,
+    // data: nilaiResponse,
     isLoading: isNilaiLoading,
     isError: isNilaiError,
   } = useNilaiResponse();
 
-  const [activeTab, setActiveTab] = useState<"nilai" | "sertifikat">("nilai");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const [activeTab, setActiveTab] = useState<"nilai" | "sertifikat">("nilai");
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   if (isNilaiLoading) {
     return (

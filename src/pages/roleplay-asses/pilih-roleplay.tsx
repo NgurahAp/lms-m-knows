@@ -55,7 +55,7 @@ export const PilihRoleplay: React.FC = () => {
         </span>
       </div>
 
-      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
+      <div className="bg-white w-full h-6 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className="md:text-lg text-sm font-semibold">Roleplay</h1>
       </div>
 

@@ -12,11 +12,11 @@ export const PilihAses: React.FC = () => {
   } = useNilaiResponse();
 
   const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "penilaian" | "selesai">("daftar");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const handleDownload = () => {
-    alert("Certificate Downloaded!");
-  };
+  // const handleDownload = () => {
+  //   alert("Certificate Downloaded!");
+  // };
 
   if (isNilaiLoading) {
     return (
@@ -189,7 +189,7 @@ export const PilihAses: React.FC = () => {
                         : "bg-blue-500 hover:bg-blue-600"
                     }`}
                     onClick={() =>
-                      subject.status !== "BELUM SELESAI" && setIsModalOpen(true)
+                      subject.status !== "BELUM SELESAI" //&& setIsModalOpen(true)
                     }
                     disabled={subject.status === "BELUM SELESAI"}
                   >
@@ -229,7 +229,7 @@ export const PilihAses: React.FC = () => {
                         : "bg-blue-500 hover:bg-blue-600"
                     }`}
                     onClick={() =>
-                      subject.status !== "BELUM SELESAI" && setIsModalOpen(true)
+                      subject.status !== "BELUM SELESAI" //&& setIsModalOpen(true)
                     }
                     disabled={subject.status === "BELUM SELESAI"}
                   >
@@ -269,7 +269,7 @@ export const PilihAses: React.FC = () => {
                         : "bg-blue-500 hover:bg-blue-600"
                     }`}
                     onClick={() =>
-                      subject.status !== "BELUM SELESAI" && setIsModalOpen(true)
+                      subject.status !== "BELUM SELESAI" //&& setIsModalOpen(true)
                     }
                     disabled={subject.status === "BELUM SELESAI"}
                   >
