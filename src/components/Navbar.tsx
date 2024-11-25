@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom"; // Import Link
+import { useLocation, Link } from "react-router-dom";
 import ProfileBox from "./ProfileBox";
 import { CgProfile } from "react-icons/cg";
 import { UserData } from "../types/auth";
+import { IoIosMenu } from "react-icons/io";
+import { IoChevronDownOutline } from "react-icons/io5";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -10,6 +12,7 @@ const Navbar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [profileData, setProfileData] = useState<UserData | null>(null);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
@@ -19,6 +22,10 @@ const Navbar: React.FC = () => {
     setShowProfileMenu(false);
   };
 
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+
   const navItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Pelatihan-ku", path: "/pelatihanku" },
@@ -26,6 +33,15 @@ const Navbar: React.FC = () => {
     { name: "Nilai & Sertifikat", path: "/score" },
     { name: "Roleplay & Asesmen", path: "/roleplay" },
   ];
+
+  // Get current page name based on location
+  const getCurrentPageName = () => {
+    const currentPath = location.pathname;
+    const currentPage = navItems.find((item) =>
+      currentPath.startsWith(item.path)
+    );
+    return currentPage?.name;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,12 +58,9 @@ const Navbar: React.FC = () => {
     const getUserProfile = () => {
       try {
         const storedUser = localStorage.getItem("user_profile");
-
         if (storedUser) {
           const userData: UserData = JSON.parse(storedUser);
           setProfileData(userData);
-        } else {
-          console.log("Data profil tidak ditemukan di localStorage");
         }
       } catch (error) {
         console.error("Error parsing user profile:", error);
@@ -57,15 +70,64 @@ const Navbar: React.FC = () => {
     getUserProfile();
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const dropdown = document.getElementById("navbar-dropdown");
+      if (dropdown && !dropdown.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Get current page name
+  const currentPageName = getCurrentPageName();
+
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
       <div className="flex justify-between px-4 md:px-36 h-20 items-center">
-        <div className="flex items-center space-x-2">
-          <img
-            src="/navbar/logo.png"
-            className="w-32 md:w-48 bg-white bg-opacity-20 rounded"
-            alt="Logo"
-          />
+        <div className="flex items-center">
+          <div className="flex items-center space-x-3">
+            <img
+              src="/navbar/logo.png"
+              className="w-32 md:w-48 bg-white bg-opacity-20 rounded"
+              alt="Logo"
+            />
+
+            {/* Only show dropdown if we're on a valid page */}
+            {currentPageName && (
+              <div className="relative md:hidden" id="navbar-dropdown">
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-1 text-gray-700 hover:text-sky-700 focus:outline-none  "
+                >
+                  <span className="font-medium text-xs">{currentPageName}</span>
+                  <IoChevronDownOutline
+                    className={`transition-transform duration-200 ${
+                      showDropdown ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {showDropdown && (
+                  <div className="absolute top-full -left-3  mt-1 w-40 bg-white rounded-md shadow-lg py-1 z-20">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className="block px-4 py-2 text-xs text-gray-700 hover:bg-sky-50 hover:text-sky-700"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="flex items-center space-x-4 md:space-x-8">
@@ -98,13 +160,12 @@ const Navbar: React.FC = () => {
           )}
           {isMobile && (
             <button onClick={() => setIsOpen(!isOpen)} className="text-3xl">
-              ☰
+              <IoIosMenu />
             </button>
           )}
         </div>
       </div>
 
-      {/* Navbar items for desktop */}
       {!isMobile && (
         <div className="bg-sky-700">
           <div className="flex h-20 items-center space-x-8 md:space-x-14 px-4 md:px-36">
@@ -125,7 +186,6 @@ const Navbar: React.FC = () => {
         </div>
       )}
 
-      {/* Navbar for mobile */}
       {isMobile && isOpen && (
         <div className="bg-sky-700">
           <div className="p-4 border-b border-sky-600">
@@ -138,17 +198,17 @@ const Navbar: React.FC = () => {
               {profileData?.full_name}
             </p>
           </div>
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             {navItems.map((item) => (
               <Link
                 key={item.path}
-                to={item.path} // Navigasi menggunakan Link
+                to={item.path}
                 className={`font-semibold text-lg p-4 ${
                   location.pathname === item.path
                     ? "text-green-300"
                     : "text-white"
                 }`}
-                onClick={() => setIsOpen(false)} // Tutup navbar setelah klik
+                onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
