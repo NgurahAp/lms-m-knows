@@ -4,9 +4,9 @@ import { CiLock } from "react-icons/ci";
 import { useState } from "react";
 import { useSubjectData } from "../../services/MyStudyService";
 import { Session, SessionProgress } from "../../types/pelatihanku/pelatihanku";
-import { FaChevronRight } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
@@ -76,6 +76,21 @@ export const PelatihankuDetail: React.FC = () => {
     );
   }
 
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Pelatihan-ku",
+      path: "/pelatihanku",
+    },
+
+    {
+      label: data?.subject.name,
+    },
+  ];
+
   const renderSessionContent = (session: Session) => (
     <div className="bg-gray-50">
       <ul>
@@ -92,8 +107,8 @@ export const PelatihankuDetail: React.FC = () => {
                 : "hover:bg-gray-100 cursor-pointer"
             }`}
         >
-          <img src="/pelatihanku/modul.png" className="mr-2" alt="" />
-          <span className="flex-1">Modul</span>
+          <img src="/pelatihanku/modul.png" className="mr-2 " alt="" />
+          <span className="flex-1 md:text-base text-xs">Modul</span>
           {getStatusIcon("MODULE", session.progress)}
         </li>
         <li
@@ -109,8 +124,8 @@ export const PelatihankuDetail: React.FC = () => {
                 : "hover:bg-gray-100 cursor-pointer"
             }`}
         >
-          <img src="/pelatihanku/quiz.png" className="mr-2" alt="" />
-          <span className="flex-1">Quiz</span>
+          <img src="/pelatihanku/quiz.png" className="mr-2 " alt="" />
+          <span className="flex-1 md:text-base text-xs">Quiz</span>
           {getStatusIcon("QUIZ", session.progress)}
         </li>
         <li
@@ -126,8 +141,8 @@ export const PelatihankuDetail: React.FC = () => {
                 : "hover:bg-gray-100 cursor-pointer"
             }`}
         >
-          <img src="/pelatihanku/tugas.png" className="mr-2" alt="" />
-          <span className="flex-1">Tugas</span>
+          <img src="/pelatihanku/tugas.png" className="mr-2 " alt="" />
+          <span className="flex-1 md:text-base text-xs">Tugas</span>
           {getStatusIcon("ASSIGNMENT", session.progress)}
         </li>
         <li
@@ -143,14 +158,18 @@ export const PelatihankuDetail: React.FC = () => {
                 : "hover:bg-gray-100 cursor-pointer"
             }`}
         >
-          <img src="/pelatihanku/eksplorasi.png" className="mr-2" alt="" />
-          <span className="flex-1">Refleksi Eksplorasi</span>
+          <img src="/pelatihanku/eksplorasi.png" className="mr-2 " alt="" />
+          <span className="flex-1 md:text-base text-xs">
+            Refleksi Eksplorasi
+          </span>
           {getStatusIcon("REFLECTION", session.progress)}
         </li>
         <li
           onClick={() =>
             handleItemClick("ASSESSMENT", session.progress, () => {
-              navigate(`/assesment/${pelatihankuId}/${session.id}/${data?.subject.name}`);
+              navigate(
+                `/assesment/${pelatihankuId}/${session.id}/${data?.subject.name}`
+              );
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -160,45 +179,32 @@ export const PelatihankuDetail: React.FC = () => {
                 : "hover:bg-gray-100 cursor-pointer"
             }`}
         >
-          <img src="/pelatihanku/kualitas.png" className="mr-2" alt="" />
-          <span className="flex-1">Kualitas Pengajar & Materi Ajar</span>
+          <img src="/pelatihanku/kualitas.png" className="mr-2 " alt="" />
+          <span className="flex-1 md:text-base text-xs">
+            Kualitas Pengajar & Materi Ajar
+          </span>
           {getStatusIcon("ASSESSMENT", session.progress)}
         </li>
         <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
-          <img src="/pelatihanku/diskusi.png" className="mr-2" alt="" />
-          <Link to={`/discussion/${pelatihankuId}/${session.id}`} className="flex-1">Diskusi</Link>
+          <img src="/pelatihanku/diskusi.png" className="mr-2 " alt="" />
+          <Link
+            to={`/discussion/${pelatihankuId}/${session.id}`}
+            className="flex-1 md:text-base text-xs"
+          >
+            Diskusi
+          </Link>
         </li>
       </ul>
     </div>
   );
 
   return (
-    <div className="bg-gray-50 md:p-48 px-8 py-28">
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1"
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to="/pelatihanku">
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pelatihan-ku
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          {data?.subject.name}
-        </span>
-      </div>
-      <div className="bg-white p-6 mt-8 shadow-lg rounded-lg">
+    <div className="bg-gray-50 md:p-36  px-4 md:pt-44 pt-24">
+      <Breadcrumb items={breadcrumbItems} />
+
+      <div className="bg-white p-6 md:mt-8 mt-4 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold pb-5">Pendahuluan</h1>
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col md:text-base text-xs lg:flex-row ">
           <div className="lg:w-1/3 mb-6 lg:mb-0">
             <div className="relative">
               <img src={data?.subject.thumbnail} alt="" />
@@ -206,9 +212,13 @@ export const PelatihankuDetail: React.FC = () => {
           </div>
 
           <div className="lg:w-2/3 lg:pl-14">
-            <h2 className="text-xl font-semibold mb-4">{data?.subject.name}</h2>
-            <h3 className="text-base font-semibold mb-4">Deskripsi</h3>
-            <p className="text-base text-gray-500 mb-6 text-justify">
+            <h2 className="md:text-xl text-base font-semibold mb-5">
+              {data?.subject.name}
+            </h2>
+            <h3 className="md:text-base text-xs font-semibold mb-2">
+              Deskripsi
+            </h3>
+            <p className="md:text-base text-xs text-gray-500 mb-2 text-justify">
               {data?.subject.description}
             </p>
           </div>
@@ -222,8 +232,8 @@ export const PelatihankuDetail: React.FC = () => {
             <div className="mx-auto my-4 bg-white rounded-lg shadow">
               {session.is_locked ? (
                 // Locked session
-                <div className="w-full flex justify-between h-14 items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">
-                  <span>
+                <div className="w-full flex justify-between md:text-base text-sm text-left  items-center bg-gray-200 text-gray-700 px-4 py-5 rounded-lg">
+                  <span className="pr-5">
                     Pertemuan {index + 1}: {session.title}
                   </span>
                   <CiLock className="text-xl" />
@@ -233,9 +243,9 @@ export const PelatihankuDetail: React.FC = () => {
                 <>
                   <button
                     onClick={() => toggleDropdown(session.id)}
-                    className="w-full flex justify-between h-14 items-center bg-blue-500 text-white px-4 py-2 rounded-t-lg"
+                    className="w-full flex justify-between md:text-base text-sm text-left  items-center bg-blue-500 text-white px-4 py-5 rounded-t-lg"
                   >
-                    <span>
+                    <span className="pr-5">
                       Pertemuan {index + 1}: {session.title}
                     </span>
                     {openSessions[session.id] ? (

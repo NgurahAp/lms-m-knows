@@ -1,11 +1,10 @@
-import { FaChevronRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { MyStudyCard } from "./components/MyStudyCard";
 import { useState } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { useMyStudyData } from "../../services/MyStudyService";
 import { MyStudyData } from "../../types/pelatihanku/pelatihanku";
 import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
 export const Pelatihanku = () => {
   const [activeTab, setActiveTab] = useState<"ongoing" | "completed">(
@@ -33,6 +32,16 @@ export const Pelatihanku = () => {
     );
   }
 
+   const breadcrumbItems = [
+     {
+       label: "Beranda",
+       path: "/dashboard",
+     },
+     {
+       label: "Pelatihanku",
+     },
+   ];
+
   // Pastikan myStudyData adalah array dan beri default empty array jika undefined
   const studyDataArray = Array.isArray(myStudyData) ? myStudyData : [];
 
@@ -51,8 +60,8 @@ export const Pelatihanku = () => {
       return (
         <div className="flex flex-col items-center justify-center py-10">
           <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-          <h1 className="text-gray-500 text-lg py-3">Tidak ada pelatihan</h1>
-          <button className="bg-blue-500 text-white py-2 px-7 rounded-lg">
+          <h1 className="text-gray-500 md:text-lg text-base py-3">Tidak ada pelatihan</h1>
+          <button className="bg-blue-500 md:text-base text-sm text-white py-2 px-7 rounded-lg">
             Ikuti Pelatihan
           </button>
         </div>
@@ -69,30 +78,14 @@ export const Pelatihanku = () => {
   };
 
   return (
-    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1"
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Pelatihan-ku
-        </span>
-      </div>
-
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+      <Breadcrumb items={breadcrumbItems} />
       <section className="bg-white mt-5 rounded-xl">
         <SearchBar />
         <div className="p-6">
           <div className="flex space-x-8">
             <button
-              className={`py-2 md:px-4 px-2 md:text-lg text-base font-semibold ${
+              className={`md:py-2 md:px-4 px-2 md:text-lg text-base font-semibold ${
                 activeTab === "ongoing"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
