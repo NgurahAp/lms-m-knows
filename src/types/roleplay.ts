@@ -10,8 +10,8 @@ interface Roleplay {
   session_id: string;
   session_title: string;
   session_no: number;
-  start_at: string;
-  end_at: string;
+  start_at: string; // Using string to represent ISO date format
+  end_at: string; // Using string to represent ISO date format
 }
 
 interface Meta {
@@ -26,12 +26,10 @@ interface Meta {
   next: string | null;
 }
 
-export interface RoleplayResponse {
+export interface RoleplayData {
   code: number;
   status: string;
   message: string;
-  data: {
-    roleplays: Roleplay[];
-  };
+  roleplays: Roleplay[];
   meta: Meta;
 }
