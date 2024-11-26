@@ -1,5 +1,4 @@
-import { Link, useParams } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import { MdOutlineTaskAlt } from "react-icons/md";
 import { useState } from "react";
 import { QuizHistory } from "./components/HistoryQuiz";
@@ -8,7 +7,11 @@ import QuizDialog from "./components/QuizDialog";
 import { useNavigate } from "react-router-dom";
 import { ErrorConsume } from "../../../components/APIRespone";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
-import { useDetailQuizData, useHistoryQuizData } from "../../../hooks/pelatihanku/useQuiz";
+import {
+  useDetailQuizData,
+  useHistoryQuizData,
+} from "../../../hooks/pelatihanku/useQuiz";
+import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -18,7 +21,7 @@ export const DetailQuiz = () => {
   }>();
 
   const navigate = useNavigate();
-  const [isDialogOpen, setDialogOpen] = useState(false); // State untuk dialog konfirmasi
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const {
     data: quizData,
@@ -46,98 +49,90 @@ export const DetailQuiz = () => {
     navigate(`/quizAttempt/${subjectId}/${sessionId}/${quizId}`);
   };
 
-  console.log(quizData?.data);
-
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Pelatihan-ku",
+      path: "/pelatihanku",
+    },
+    {
+      label: quizData?.data.subject.name,
+      path: `/pelatihanku/${subjectId}`,
+    },
+    {
+      label: `Pertemuan ${quizData?.data.session.session_no}`,
+      path: `/quiz/${subjectId}/${sessionId}`,
+    },
+    {
+      label: "Quiz",
+    },
+  ];
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1"
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to="/pelatihanku">
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pelatihan-ku
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/pelatihanku/${subjectId}`}>
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            {quizData?.data.subject.name}
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <Link to={`/quiz/${subjectId}/${sessionId}`}>
-          <span className="text-blue-500 md:text-base text-sm font-semibold">
-            Pertemuan {quizData?.data.session.session_no}
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-gray-400 md:text-base text-sm font-semibold">
-          Quiz
-        </span>
-      </div>
+      <Breadcrumb items={breadcrumbItems} />
       {/* Quiz Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">
+      <div className="bg-white flex flex-col mt-5 px-4 md:px-8 md:py-10 py-5 justify-center rounded-lg">
+        <h1 className="text-xl md:text-3xl font-semibold md:pb-3">
           {quizData?.data.quiz.title}
         </h1>
-        <p className="text-lg">Pertemuan {quizData?.data.session.session_no}</p>
+        <p className="text-sm md:text-lg">
+          Pertemuan {quizData?.data.session.session_no}
+        </p>
       </div>
       {/* Quiz Content */}
-      <div className="bg-white flex mt-5 w-full px-8 h-full justify-center rounded-lg">
-        <div className="w-1/2 flex items-center justify-center">
+      <div className="bg-white flex md:flex-row flex-col mt-5 w-full px-4 md:px-8 h-full justify-center rounded-lg">
+        <div className="w-1/2  md:block hidden items-center justify-center">
           <img src="/pelatihanku/quiz-left.png" alt="" />
         </div>
-        <div className="w-1/2 py-10">
+        <div className="md:w-1/2 py-5 md:py-10">
           {historyData?.data.history_data?.[0] && (
             <QuizHistory historyData={historyData} quizData={quizData} />
           )}
           <QuizInfo quizData={quizData} />
           <div>
             <div>
-              <h1 className="text-xl font-semibold pt-5 pb-2">Deskripsi</h1>
-              <p className="text-gray-500">
+              <h1 className="text-base md:text-xl font-semibold pt-5 pb-2">
+                Deskripsi
+              </h1>
+              <p className="text-gray-500 md:text-base text-sm">
                 Quiz ini bertujuan untuk menguji pengetahuan Anda tentang materi
                 yang telah dipelajari di pertemuan ini.
               </p>
             </div>
           </div>
           <div>
-            <h1 className="text-xl font-semibold pt-7 pb-2">Pengaturan Quiz</h1>
-            <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Kerjakan
-              Dengan Jujur
+            <h1 className="text-base md:text-xl font-semibold pt-7 pb-2">
+              Pengaturan Quiz
+            </h1>
+            <div className="flex items-center text-sm gap-x-2 py-2">
+              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
+              Kerjakan Dengan Jujur
             </div>
-            <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Dilarang
-              Bekerja Sama
+            <div className="flex items-center text-sm gap-x-2 py-2">
+              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
+              Dilarang Bekerja Sama
             </div>
-            <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Apabila
-              Keluar dari App, Waktu Quiz Tetap Berjalan
+            <div className="flex items-center text-sm gap-x-2 py-2">
+              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
+              Apabila Keluar dari App, Waktu Quiz Tetap Berjalan
             </div>
-            <div className="flex items-center gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-lg text-blue-500" /> Percobaan
-              Quiz Terakhir Merupakan Nilai Dipakai
+            <div className="flex items-center text-sm gap-x-2 py-2">
+              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
+              Percobaan Quiz Terakhir Merupakan Nilai Dipakai
             </div>
           </div>
-          <h1 className="py-3 text-blue-500 font-medium">
+          <h1 className="py-3 md:text-base text-base text-blue-500 font-medium">
             Kesempatan mengerjakan tersisa :{" "}
             {historyData?.data.remaining_attempt ?? 3} kali
           </h1>
           {/* Button Mulai Quiz */}
           <button
             onClick={() => setDialogOpen(true)}
-            className={`flex w-full items-center py-4 rounded-xl justify-center mt-5 ${
+            className={`flex w-full items-center md:text-base text-sm py-4 rounded-xl justify-center mt-5 ${
               historyData?.data.remaining_attempt === 0
                 ? "bg-gray-400 text-white cursor-not-allowed"
                 : "bg-blue-500 text-white"

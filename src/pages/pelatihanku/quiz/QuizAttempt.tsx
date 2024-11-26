@@ -108,25 +108,25 @@ export const QuizAttempt = () => {
       <NavbarQuiz />
       <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
         {/* Quiz Info */}
-        <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-          <h1 className="text-3xl font-semibold pb-3">
+        <div className="bg-white flex flex-col mt-5 px-4 md:px-8 md:h-36 md:py-0 py-4 justify-center rounded-lg">
+          <h1 className="text-xl md:text-3xl font-semibold pb-3">
             {questionData.data.title}
           </h1>
-          <p className="text-lg">Tipe: {questionData.data.type}</p>
-          <p className="text-lg">
+          <p className="text-sm md:text-lg">Tipe: {questionData.data.type}</p>
+          <p className="text-sm md:text-lg">
             Durasi: {Math.floor(questionData.data.duration / 60)} menit
           </p>
         </div>
 
         {/* Question List with Answer Status */}
-        <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
+        <div className="bg-white flex flex-col mt-5 px-4 md:px-8 md:h-28 h-full py-4 md:py-0 justify-center rounded-lg">
           <h1 className="font-bold mb-3">Daftar Soal</h1>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap md:justify-normal justify-center gap-1 md:gap-2 ">
             {questions.map((_, index) => (
               <button
                 key={index}
                 onClick={() => navigateToQuestion(index)}
-                className={`w-8 h-8 flex items-center justify-center border rounded ${
+                className={`w-8 h-8 text-sm md:text-base flex items-center justify-center border rounded ${
                   index === currentQuestionIndex
                     ? "bg-blue-500 text-white"
                     : selectedAnswers[index]
@@ -142,18 +142,20 @@ export const QuizAttempt = () => {
 
         {/* Quiz Question */}
         <div className="bg-white p-6 mt-5 rounded-lg shadow-lg">
-          <h1 className="text-end text-red-500 font-bold text-sm pb-3">
+          <h1 className="text-end text-red-500 font-bold text-xs md:text-sm pb-3">
             Sisa waktu:{" "}
             <CountdownTimer
               initialDuration={questionData.data.duration}
               onTimeUp={handleTimesUp}
             />
           </h1>
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-base md:text-lg font-semibold mb-4">
             {currentQuestion.question}
           </h2>
-          <p className="pt-2 pb-7 text-sm text-gray-500">*Pilih satu</p>
-          <div className="space-y-7">
+          <p className="md:pt-2 pb-4 md:pb-7 text-sm text-gray-500">
+            *Pilih satu
+          </p>
+          <div className="space-y-4 md:space-y-7">
             {currentQuestion.answers.map((answer) => (
               <label key={answer.id} className="block p-5 border rounded">
                 <input
@@ -162,19 +164,19 @@ export const QuizAttempt = () => {
                   value={answer.id}
                   checked={selectedAnswers[currentQuestionIndex] === answer.id}
                   onChange={() => handleAnswerSelect(answer.id)}
-                  className="mr-2"
+                  className="mr-2 md:text-base text-sm"
                 />
                 {answer.answer}
               </label>
             ))}
           </div>
-          <div className="flex justify-end gap-5 pt-10">
+          <div className="flex justify-between md:justify-end gap-5 pt-5 md:pt-10">
             <button
               onClick={handlePrevious}
               className={`px-6 py-2 rounded-lg ${
                 isFirstQuestion
                   ? "hidden"
-                  : "bg-white border-blue-500 border text-blue-500 hover:bg-blue-500 hover:text-white"
+                  : "bg-white border-blue-500 border md:text-base text-sm text-blue-500 hover:bg-blue-500 hover:text-white"
               }`}
             >
               Sebelumnya
@@ -182,14 +184,14 @@ export const QuizAttempt = () => {
             {isLastQuestion ? (
               <button
                 onClick={() => setDialogOpen(true)}
-                className="bg-green-500 px-6 py-2 rounded-lg text-white hover:bg-green-600"
+                className="bg-green-500 px-6 py-2 md:text-base text-sm rounded-lg text-white hover:bg-green-600"
               >
                 Selesai
               </button>
             ) : (
               <button
                 onClick={handleNext}
-                className="bg-blue-500 px-6 py-2 rounded-lg text-white hover:bg-blue-600"
+                className="bg-blue-500 px-6 py-2 md:text-base text-sm rounded-lg text-white hover:bg-blue-600"
               >
                 Selanjutnya
               </button>
