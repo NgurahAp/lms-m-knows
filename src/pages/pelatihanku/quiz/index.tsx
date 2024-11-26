@@ -48,7 +48,7 @@ export const Quiz = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
       <div className="bg-white flex flex-col mt-5 p-8 ">
-        <h1 className="font-bold md:text-4xl text-2xl mb-10 flex justify-center">
+        <h1 className="font-bold md:text-4xl text-2xl mb-5 md:mb-8 flex justify-center">
           Quiz Pertemuan {data?.data.detail.session_no}
         </h1>
         <div className="flex flex-wrap w-full justify-center gap-x-20 gap-y-8">
