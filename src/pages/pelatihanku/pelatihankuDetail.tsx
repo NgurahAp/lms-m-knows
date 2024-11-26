@@ -6,7 +6,7 @@ import { useSubjectData } from "../../services/MyStudyService";
 import { Session, SessionProgress } from "../../types/pelatihanku/pelatihanku";
 import { FaChevronRight } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
-
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 
 export const PelatihankuDetail: React.FC = () => {
   const { pelatihankuId } = useParams<{ pelatihankuId: string }>();
@@ -29,9 +29,9 @@ export const PelatihankuDetail: React.FC = () => {
     if (itemProgress?.status === "FINISHED") {
       return <FaCheckCircle className="text-green-500 ml-2" />;
     }
-     if (itemProgress?.status === "FAILED") {
-       return <FaCircleXmark className="text-red-500 ml-2" />;
-     }
+    if (itemProgress?.status === "FAILED") {
+      return <FaCircleXmark className="text-red-500 ml-2" />;
+    }
     if (itemProgress?.status === "LOCKED") {
       return <CiLock className="text-gray-500 ml-2" />;
     }
@@ -65,11 +65,7 @@ export const PelatihankuDetail: React.FC = () => {
   }
 
   if (isLoading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {
@@ -86,7 +82,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("MODULE", session.progress, () => {
-              navigate(`/modul/${pelatihankuId}/${session.id}`);
+              navigate(`/module/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -120,8 +116,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("ASSIGNMENT", session.progress, () => {
-              // Add your navigation logic here for assignment
-              console.log("Navigate to assignment");
+              navigate(`/assignment/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -138,8 +133,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("REFLECTION", session.progress, () => {
-              // Add your navigation logic here for reflection
-              console.log("Navigate to reflection");
+              navigate(`/reflection/${pelatihankuId}/${session.id}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -156,8 +150,7 @@ export const PelatihankuDetail: React.FC = () => {
         <li
           onClick={() =>
             handleItemClick("ASSESSMENT", session.progress, () => {
-              // Add your navigation logic here for assessment
-              console.log("Navigate to assessment");
+              navigate(`/assesment/${pelatihankuId}/${session.id}/${data?.subject.name}`);
             })
           }
           className={`flex h-14 items-center px-4 py-2 border-b-2 border-gray-200 
@@ -173,7 +166,7 @@ export const PelatihankuDetail: React.FC = () => {
         </li>
         <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
           <img src="/pelatihanku/diskusi.png" className="mr-2" alt="" />
-          <span className="flex-1">Diskusi</span>
+          <Link to={`/discussion/${pelatihankuId}/${session.id}`} className="flex-1">Diskusi</Link>
         </li>
       </ul>
     </div>
@@ -191,7 +184,7 @@ export const PelatihankuDetail: React.FC = () => {
           <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
             Beranda
           </span>
-        </Link> 
+        </Link>
         <FaChevronRight className="text-gray-300 mx-4" />
         <Link to="/pelatihanku">
           <span className="text-blue-500 md:text-base text-sm font-semibold">

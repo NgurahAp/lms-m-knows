@@ -1,10 +1,22 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { API_BASE_URL } from "../../config/api";
-import { useQuery } from "@tanstack/react-query";
-import { DetailQuizResponse, HistoryQuizResponse, QuizResponse } from "../../types/pelatihanku/quiz";
+import {
+  DetailQuizResponse,
+  HistoryQuizResponse,
+  QuizResponse,
+} from "../../types/pelatihanku/quiz";
 
-const fetchQuizData = async (
+interface QuestionAnswer {
+  question: string;
+  answer: string;
+}
+
+export interface QuizSubmissionPayload {
+  questions_answers: QuestionAnswer[];
+}
+
+export const fetchQuizData = async (
   subjectId: string | undefined,
   sessionId: string | undefined
 ): Promise<QuizResponse> => {
@@ -24,7 +36,7 @@ const fetchQuizData = async (
   return response.data;
 };
 
-const fetchDetailQuizData = async (
+export const fetchDetailQuizData = async (
   subjectId: string | undefined,
   sessionId: string | undefined,
   quizId: string | undefined
@@ -45,8 +57,8 @@ const fetchDetailQuizData = async (
   return response.data;
 };
 
-const fetchHistoryQuizData = async (
-  quizId: string | undefined,
+export const fetchHistoryQuizData = async (
+  quizId: string | undefined
 ): Promise<HistoryQuizResponse> => {
   if (!quizId) {
     throw new Error("Quiz ID are required");
@@ -64,35 +76,29 @@ const fetchHistoryQuizData = async (
   return response.data;
 };
 
-export const useQuizData = (
-  subjectId: string | undefined,
-  sessionId: string | undefined
-) => {
-  return useQuery({
-    queryKey: ["quizData", subjectId, sessionId],
-    queryFn: () => fetchQuizData(subjectId, sessionId),
-    enabled: !!subjectId && !!sessionId,
-  });
-};
-
-export const useDetailQuizData = (
-  subjectId: string | undefined,
-  sessionId: string | undefined,
-  quizId: string | undefined
-) => {
-  return useQuery({
-    queryKey: ["detailQuizData", subjectId, sessionId, quizId],
-    queryFn: () => fetchDetailQuizData(subjectId, sessionId, quizId),
-    enabled: !!subjectId && !!sessionId && !!quizId,
-  });
-};
-
-export const useHistoryQuizData = (
+export const submitQuizAttempt = async (
   quizId: string | undefined,
-) => {
-  return useQuery({
-    queryKey: ["historyQuizData", quizId],
-    queryFn: () => fetchHistoryQuizData(quizId),
-    enabled: !!quizId
-  });
+  submission: QuizSubmissionPayload
+): Promise<QuizResponse> => {
+  try {
+    const token = Cookies.get("accessToken");
+    const response = await axios.post<QuizResponse>(
+      `${API_BASE_URL}/api/v1/studi-ku/quiz/submit/${quizId}`,
+      submission,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Failed to submit quiz");
+    }
+    throw error;
+  }
 };
+
+

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { RiFileEditLine, RiLoader4Line } from "react-icons/ri";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useSubmitModuleAnswer } from "../../../../services/pelatihanku/ModulService";
+import toast from "react-hot-toast";
 
 interface ModuleCompletionDialogProps {
   onComplete?: () => void;
@@ -53,21 +54,27 @@ const ModuleCompletionDialog: React.FC<ModuleCompletionDialogProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (summary.length >= 52 && moduleId) {
-      submitAnswer(
-        {
-          moduleId,
-          module_answer: summary,
+    const loadingToast = toast.loading("Sedang mengirim rangkuman...");
+    submitAnswer(
+      {
+        moduleId,
+        module_answer: summary,
+      },
+      {
+        onSuccess: () => {
+          toast.dismiss(loadingToast);
+          toast.success("Rangkuman berhasil dikirim!");
+          onComplete?.();
+          setSummary("");
+          setIsOpen(false);
         },
-        {
-          onSuccess: () => {
-            onComplete?.();
-            setSummary("");
-            setIsOpen(false);
-          },
-        }
-      );
-    }
+        onError: (error) => {
+          toast.dismiss(loadingToast);
+          toast.error("Terjadi kesalahan saat mengirim rangkuman");
+          console.log(error);
+        },
+      }
+    );
   };
 
   const isSubmitDisabled = summary.length < 52 || isPending;

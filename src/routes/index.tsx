@@ -5,12 +5,10 @@ import { Bootcamp } from "../pages/bootcamp";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
 import { Pelatihanku } from "../pages/pelatihanku";
-import { Modul } from "../pages/pelatihanku/modul";
-import { DetailModule } from "../pages/pelatihanku/modul/DetailModul";
+import { Module } from "../pages/pelatihanku/module";
+import { DetailModule } from "../pages/pelatihanku/module/DetailModule";
 import { PelatihankuDetail } from "../pages/pelatihanku/pelatihankuDetail";
 import Penugasan from "../pages/penugasan";
-import { NilaiSertifikat } from "../pages/nilai-sertifikat";
-import { PelatihanKet } from "../pages/nilai-sertifikat/pelatihanket";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginRoute from "./LoginRoute";
 import { Login } from "../pages/auth/login";
@@ -20,7 +18,18 @@ import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
 import { RoleplayAsses } from "../pages/roleplay-asses";
 import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
 import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
-
+import { Assignment } from "../pages/pelatihanku/assignments";
+import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
+import { Reflection } from "../pages/pelatihanku/reflection";
+import { SubmitReflection } from "../pages/pelatihanku/reflection/SubmitReflection";
+import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflection";
+import { Assesment } from "../pages/pelatihanku/assesment";
+import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesment";
+import { Discussion } from "../pages/pelatihanku/discussion";
+import { Score } from "../pages/score";
+import { DetailScore } from "../pages/score/DetailScore";
+import { Roleplay } from "../pages/roleplay";
+import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -84,15 +93,15 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/modul/:subjectId/:sessionId"
+            path="/module/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
-                <Modul />
+                <Module />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/detailModul/:subjectId/:sessionId/:moduleId"
+            path="/detailModule/:subjectId/:sessionId/:moduleId"
             element={
               <ProtectedRoute>
                 <DetailModule />
@@ -124,10 +133,98 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/nilai-sertifikat"
+            path="/assignment/:subjectId/:sessionId"
             element={
               <ProtectedRoute>
-                <NilaiSertifikat />
+                <Assignment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/detailAssignment/:subjectId/:sessionId/:assignmentId"
+            element={
+              <ProtectedRoute>
+                <DetailAssignment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <Reflection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/submitReflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <SubmitReflection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/historyReflection/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <HistoryReflection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assesment/:subjectId/:sessionId/:subjectName"
+            element={
+              <ProtectedRoute>
+                <Assesment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/attemptAssesment/:subjectId/:sessionId/:subjectName"
+            element={
+              <ProtectedRoute>
+                <AttemptAssesment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/discussion/:subjectId/:sessionId"
+            element={
+              <ProtectedRoute>
+                <Discussion />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/score"
+            element={
+              <ProtectedRoute>
+                <Score />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/detailScore/:subjectId"
+            element={
+              <ProtectedRoute>
+                <DetailScore />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/roleplay"
+            element={
+              <ProtectedRoute>
+                <Roleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/listRoleplay"
+            element={
+              <ProtectedRoute>
+                <ListRoleplay />
               </ProtectedRoute>
             }
           />

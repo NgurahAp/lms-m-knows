@@ -1,3 +1,14 @@
+export interface ScoreResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    student: Student;
+    subjects: Subject[];
+  };
+  meta: Meta;
+}
+
 interface Student {
   id: string;
   full_name: string;
@@ -23,13 +34,4 @@ interface Meta {
   total_data: number;
   current_page: number;
   max_page: number;
-}
-
-export interface NilaiResponse {
-  code: number;
-  status: string;
-  message: string;
-  student: Student;
-  subjects: Subject[];
-  meta: Meta;
 }

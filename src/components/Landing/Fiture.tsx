@@ -4,7 +4,7 @@ export const Fiture = () => {
   return (
     <section className="min-h-screen">
       <div className="w-11/12 mx-auto py-14 ">
-        <h1 className="text-5xl text-[#106FA4] text-center font-bold pb-14">
+        <h1 className="md:text-5xl text-3xl text-[#106FA4] text-center font-bold md:pb-14 pb-5">
           Fitur <span className="text-[#FAB317]">LMS M-Knows</span>
         </h1>
         <div className="container mx-auto">

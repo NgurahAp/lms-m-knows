@@ -2,7 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
-import { useQuizData } from "../../../services/pelatihanku/QuizService";
+import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { useQuizData } from "../../../hooks/pelatihanku/useQuiz";
 
 export const Quiz = () => {
   const { subjectId, sessionId } = useParams<{
@@ -13,11 +14,7 @@ export const Quiz = () => {
   const { data, isLoading, error } = useQuizData(subjectId, sessionId);
 
   if (isLoading) {
-    return (
-      <div className="min-h-[85vh] w-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner text="Loading..." />;
   }
 
   if (error) {

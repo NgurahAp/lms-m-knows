@@ -23,7 +23,7 @@ const Clients: React.FC<ClientsProps> = () => {
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-5xl text-[#ED3768] font-bold text-center mb-8 py-9 pt-20">
+      <h2 className="md:text-5xl text-3xl px-16 text-[#ED3768] font-bold text-center mb-8 py-9 pt-20">
         <span className="text-black">Mitra</span> Perusahaan Klien M-Knows
       </h2>
       <Marquee>
