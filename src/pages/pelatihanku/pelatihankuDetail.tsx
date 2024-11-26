@@ -159,7 +159,9 @@ export const PelatihankuDetail: React.FC = () => {
             }`}
         >
           <img src="/pelatihanku/eksplorasi.png" className="mr-2 " alt="" />
-          <span className="flex-1 md:text-base text-xs">Refleksi Eksplorasi</span>
+          <span className="flex-1 md:text-base text-xs">
+            Refleksi Eksplorasi
+          </span>
           {getStatusIcon("REFLECTION", session.progress)}
         </li>
         <li
@@ -178,7 +180,9 @@ export const PelatihankuDetail: React.FC = () => {
             }`}
         >
           <img src="/pelatihanku/kualitas.png" className="mr-2 " alt="" />
-          <span className="flex-1 md:text-base text-xs">Kualitas Pengajar & Materi Ajar</span>
+          <span className="flex-1 md:text-base text-xs">
+            Kualitas Pengajar & Materi Ajar
+          </span>
           {getStatusIcon("ASSESSMENT", session.progress)}
         </li>
         <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
@@ -195,12 +199,12 @@ export const PelatihankuDetail: React.FC = () => {
   );
 
   return (
-    <div className="bg-gray-50 md:p-48 px-8 py-28">
+    <div className="bg-gray-50 md:p-36  px-4 md:pt-44 pt-24">
       <Breadcrumb items={breadcrumbItems} />
 
-      <div className="bg-white p-6 mt-8 shadow-lg rounded-lg">
+      <div className="bg-white p-6 md:mt-8 mt-4 shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold pb-5">Pendahuluan</h1>
-        <div className="flex flex-c md:text-base text-xsol lg:flex-r text-xsow">
+        <div className="flex flex-col md:text-base text-xs lg:flex-row ">
           <div className="lg:w-1/3 mb-6 lg:mb-0">
             <div className="relative">
               <img src={data?.subject.thumbnail} alt="" />
@@ -208,8 +212,12 @@ export const PelatihankuDetail: React.FC = () => {
           </div>
 
           <div className="lg:w-2/3 lg:pl-14">
-            <h2 className="md:text-xl text-base font-semibold mb-5">{data?.subject.name}</h2>
-            <h3 className="md:text-base text-xs font-semibold mb-2">Deskripsi</h3>
+            <h2 className="md:text-xl text-base font-semibold mb-5">
+              {data?.subject.name}
+            </h2>
+            <h3 className="md:text-base text-xs font-semibold mb-2">
+              Deskripsi
+            </h3>
             <p className="md:text-base text-xs text-gray-500 mb-2 text-justify">
               {data?.subject.description}
             </p>
