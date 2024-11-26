@@ -55,13 +55,7 @@ export const DetailAssignment = () => {
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      {/* Breadcrumb */}
-      <Breadcrumb items={breadcrumbItems} />
-      {/* Assignment Info */}
-      {/* <PageInfo
-        title={data?.data.assignment.title}
-        detail={`Modul ${data?.data.detail.session_no}`}
-      /> */}
+      <Breadcrumb items={breadcrumbItems} />    
       {/* Quiz Content */}
       <div className="bg-white mt-5 w-full p-8 h-full rounded-lg">
         <h1 className="font-bold">{data?.data.assignment.title}</h1>

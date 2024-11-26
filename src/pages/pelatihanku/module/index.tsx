@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
 import { useModuleData } from "../../../services/pelatihanku/ModulService";
 import { FaCheckCircle } from "react-icons/fa";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { MdVideoLibrary } from "react-icons/md";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { BackLink } from "../../../components/reusable/BackLink";
 
 export const Module = () => {
   const { subjectId, sessionId } = useParams<{
@@ -46,36 +46,38 @@ export const Module = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white flex flex-col mt-5 px-8  justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-1 pt-8">
+      <div className="bg-white flex flex-col mt-5 px-5 md:px-8  justify-center rounded-lg">
+        <h1 className="md:text-3xl text-base font-semibold pb-1 md:pt-8 pt-4">
           {data?.detail.subject_name}
         </h1>
-        <p className="text-gray-500 text-lg pb-8">
+        <p className="text-gray-500 text-sm md:text-lg md:pb-8 pb-4">
           Pertemuan {data?.detail.session_no}
         </p>
       </div>
-      <div className="bg-white flex flex-col  mt-5 p-8">
+      <div className="bg-white flex flex-col  mt-5 md:p-8 p-5">
         <div className=" w-full  gap-y-8">
           {data?.modules.map((module) => (
             <Link
               key={module.id}
               to={`/detailModule/${subjectId}/${sessionId}/${module.id}`}
-              className="flex rounded-lg shadow-md  mb-4 gap-8"
+              className="flex rounded-lg shadow-md  mb-4 md:gap-8 gap-4"
             >
               <div
-                className={`w-2 rounded-l-lg ${
+                className={`md:w-2 w-1 rounded-l-lg ${
                   module.submitted ? "bg-green-500" : "bg-blue-500"
                 }`}
               ></div>
-              <div className="flex flex-col justify-center p-2 py-5 ">
-                <h1 className="font-semibold pb-2">
+              <div className="flex flex-col justify-center md:p-2 md:py-5 py-3 ">
+                <h1 className="font-light md:text-base text-sm pb-0 md:pb-1">
                   Modul {data.detail.session_no}
                 </h1>
-                <h1 className="text-lg font-semibold pb-1">{module.title}</h1>
-                <div className="flex items-center text-blue-500 ">
+                <h1 className="md:text-lg text-base font-semibold pb-1">
+                  {module.title}
+                </h1>
+                <div className="flex items-center md:text-base text-sm text-blue-500 ">
                   <MdVideoLibrary className="mr-2" /> {module.total_videos}{" "}
                   Video
                   <IoDocumentTextOutline className="ml-4 mr-2 text-red-500" />
@@ -85,11 +87,11 @@ export const Module = () => {
                   </p>
                 </div>
                 {module.submitted === true ? (
-                  <div className="text-green-500 pt-2 flex items-center">
+                  <div className="text-green-500 pt-2 md:text-base text-sm flex items-center">
                     <FaCheckCircle className="mr-2" /> Modul Sudah Selesai
                   </div>
                 ) : (
-                  <div className="pt-2 text-gray-500 flex items-center">
+                  <div className="pt-2 text-gray-500 md:text-base text-sm flex items-center">
                     Modul belum dikerjakan.{" "}
                   </div>
                 )}
@@ -97,13 +99,7 @@ export const Module = () => {
             </Link>
           ))}
         </div>
-        <Link
-          to={`/pelatihanku/${data?.detail.subject_id}`}
-          className="flex items-center gap-2 p-5 underline justify-start text-blue-500"
-        >
-          <FaArrowLeft />
-          Kembali
-        </Link>
+        <BackLink to={`/pelatihanku/${data?.detail.subject_id}`} />
       </div>
     </div>
   );
