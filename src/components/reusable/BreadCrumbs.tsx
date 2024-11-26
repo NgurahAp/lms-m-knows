@@ -12,7 +12,7 @@ interface BreadcrumbProps {
 
 export const Breadcrumb = ({ items }: BreadcrumbProps) => {
   return (
-    <div className="bg-white w-full min-h-14 flex items-center pl-5 rounded-xl py-2">
+    <div className="bg-white w-full min-h-14 flex items-center px-5 rounded-xl py-2">
       <div className="flex items-center overflow-x-auto whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {items.map((item, index) => (
           <div key={index} className="flex items-center">
@@ -29,7 +29,7 @@ export const Breadcrumb = ({ items }: BreadcrumbProps) => {
               <Link to={item.path} className="flex items-center">
                 <span
                   className={`${
-                    index === 0 ? "md:pl-5 pl-0" : ""
+                    index === 0 ? "md:px-5 px-0" : ""
                   } text-blue-500 md:text-base text-xs font-semibold whitespace-nowrap`}
                 >
                   {item.label}
@@ -38,7 +38,7 @@ export const Breadcrumb = ({ items }: BreadcrumbProps) => {
             ) : (
               <span
                 className={`${
-                  index === 0 ? "md:pl-5 pl-3" : ""
+                  index === 0 ? "md:px-5 px-3" : ""
                 } text-gray-400 md:text-base text-xs font-semibold whitespace-nowrap`}
               >
                 {item.label}
