@@ -228,14 +228,14 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/pelatihan-keterampilan"
             element={
               <ProtectedRoute>
                 <PelatihanKet />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/roleplay-asses"
             element={
