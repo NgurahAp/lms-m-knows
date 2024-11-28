@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useNilaiResponse } from "../../services/NilaiService";
+import { useScoreResponse } from "../../services/ScoreService";
 import { FaChevronRight } from "react-icons/fa";
 
 export const PilihAses: React.FC = () => {
   const {
-    data: nilaiResponse,
+    data: scoreResponse,
     isLoading: isNilaiLoading,
     isError: isNilaiError,
-  } = useNilaiResponse();
+  } = useScoreResponse();
 
   const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "penilaian" | "selesai">("daftar");
   // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export const PilihAses: React.FC = () => {
   }
 
   // Mengakses subjects dari dalam properti data
-  const subjects = nilaiResponse?.subjects ?? [];
+  const subjects = scoreResponse?.data.subjects ?? [];
   console.log(subjects);
 
   return (
