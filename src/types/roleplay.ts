@@ -26,7 +26,7 @@ interface Meta {
   next: string | null;
 }
 
-export interface RoleplayResponse {
+export interface RoleplayData {
   code: number;
   status: string;
   message: string;
