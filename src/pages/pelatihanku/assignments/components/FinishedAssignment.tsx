@@ -9,9 +9,9 @@ export const FinishedAssignment: React.FC<OngoingStatusProps> = ({ assignmentDat
   if (!assignmentData) return null;
 
   return (
-    <div className="overflow-x-auto">
-      <h1 className="text-2xl font-semibold pb-5">Status Penyerahan</h1>
-      <table className="table-auto w-full border border-gray-300">
+    <div className="overflow-x-auto pb-3">
+      <h1 className="text-lg md:text-2xl font-semibold pb-4 md:pb-5">Status Penyerahan</h1>
+      <table className="table-auto w-full border md:textbase text-xs border-gray-300">
         <tbody>
           <tr className="border-b">
             <td className="p-4 font-medium border-r w-1/4 border-gray-300 bg-gray-50">
