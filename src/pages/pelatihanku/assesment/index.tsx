@@ -1,8 +1,8 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
-import { FaArrowLeft } from "react-icons/fa6";
 import { useAssesmentData } from "../../../hooks/pelatihanku/useAssesment";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { BackLink } from "../../../components/reusable/BackLink";
 
 export const Assesment = () => {
   const { subjectId, sessionId, subjectName } = useParams<{
@@ -45,14 +45,16 @@ export const Assesment = () => {
   }
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">Penilaian Pengajar</h1>
+      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
+        <h1 className="text-base md:text-3xl font-semibold">
+          Penilaian Pengajar
+        </h1>
       </div>
-      <div className="bg-blue-100 flex flex-col mt-5 px-8 h-24 justify-center rounded-lg">
+      <div className="bg-blue-100 flex flex-col mt-5 p-4 md:p-8 md:text-base text-xs justify-center rounded-lg">
         <h1 className=" text-blue-700 pb-1">
           Pilihlah keterangan nilai yang paling mewakili penilaian Anda terhadap
           instruktur.
@@ -63,38 +65,39 @@ export const Assesment = () => {
         </h1>
       </div>
       {/* Content */}
-      <div className=" my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
-        <img src="/pelatihanku/empty-state.png" className="w-1/4" alt="" />
-        {data?.data.is_eligible ? (
-          <button
-            onClick={() =>
-              navigate(
-                `/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`,
-                {
-                  state: { assesmentData: data?.data },
-                }
-              )
-            }
-            className="bg-blue-500 text-center text-white py-2 rounded-lg my-4 w-1/4"
-          >
-            Mulai
-          </button>
-        ) : (
-          <button
-            disabled
-            className="border text-center bg-gray-400 rounded-lg text-white py-2 my-4 w-1/4 cursor-not-allowed"
-            title="Anda sudah mengisi refleksi"
-          >
-            Anda Sudah Mengisi Penilaian
-          </button>
-        )}
-        <Link
-          to={`/pelatihanku/${subjectId}`}
-          className="flex items-center gap-2 px-5 pt-4 underline justify-start text-left w-full text-blue-500"
-        >
-          <FaArrowLeft />
-          Kembali
-        </Link>
+      <div className=" my-6 py-8 md:py-10 px-8 bg-white flex flex-col justify-center">
+        <div className="flex flex-col items-center pb-3">
+          <img
+            src="/pelatihanku/empty-state.png"
+            className="md:w-1/4 "
+            alt=""
+          />
+          {data?.data.is_eligible ? (
+            <button
+              onClick={() =>
+                navigate(
+                  `/attemptAssesment/${subjectId}/${sessionId}/${subjectName}`,
+                  {
+                    state: { assesmentData: data?.data },
+                  }
+                )
+              }
+              className="bg-blue-500 md:text-base text-sm text-center text-white py-2 rounded-lg my-2 px-10"
+            >
+              Mulai
+            </button>
+          ) : (
+            <button
+              disabled
+              className="border text-center md:text-base text-sm bg-gray-400 rounded-lg text-white py-2 my-2 px-5 cursor-not-allowed"
+              title="Anda sudah mengisi refleksi"
+            >
+              Anda Sudah Mengisi Penilaian
+            </button>
+          )}
+        </div>
+
+        <BackLink to={`/pelatihanku/${subjectId}`} />
       </div>
     </div>
   );
