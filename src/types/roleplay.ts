@@ -30,8 +30,6 @@ export interface RoleplayData {
   code: number;
   status: string;
   message: string;
-  data: {
-    roleplays: Roleplay[];
-  };
+  roleplays: Roleplay[];
   meta: Meta;
 }

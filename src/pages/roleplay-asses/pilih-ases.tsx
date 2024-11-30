@@ -41,7 +41,7 @@ export const PilihAses: React.FC = () => {
   console.log(subjects);
 
   return (
-    <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 md:pb-4 px-8 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <Link to="/dashboard" className="flex items-center">
           <img
@@ -68,7 +68,7 @@ export const PilihAses: React.FC = () => {
       </div>
 
       {/* Main Content Card */}
-      <div className="bg-white rounded-lg shadow-lg w-full">
+      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10">
         {/* Tabs */}
         <div className="p-8">
           <div className="flex flex-wrap border-b border-white">

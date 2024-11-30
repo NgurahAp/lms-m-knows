@@ -26,6 +26,8 @@ import { Discussion } from "../pages/pelatihanku/discussion";
 import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
 import { RoleplayAsses } from "../pages/roleplay-asses";
+import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
+import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
 const AppRoutes: React.FC = () => {
   return (
@@ -214,6 +216,22 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <RoleplayAsses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pilih-roleplay"
+            element={
+              <ProtectedRoute>
+                <PilihRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pilih-ases"
+            element={
+              <ProtectedRoute>
+                <PilihAses />
               </ProtectedRoute>
             }
           />
