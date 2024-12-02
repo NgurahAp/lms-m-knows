@@ -68,7 +68,6 @@ const Navbar: React.FC = () => {
           setProfileData(userData);
         } else {
           console.log("Data profil tidak ditemukan di localStorage");
-
         }
       } catch (error) {
         console.error("Error parsing user profile:", error);
@@ -145,7 +144,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4 md:space-x-8">
           {!isMobile && (
             <>
-              <Link to={"/dashboard"}>
+              <Link to={"/allFeatures"}>
                 <img src="/navbar/square.png" className="px-1 w-8" alt="" />
               </Link>
               <img src="/navbar/moon.png" className="px-1 w-9" alt="" />
@@ -215,12 +214,16 @@ const Navbar: React.FC = () => {
 
           {/* Tombol "Semua Fitur" */}
           <div className="p-4">
-            <button className="w-full bg-yellow-500 text-white font-medium text-sm py-2 rounded-lg flex items-center justify-center hover:bg-yellow-600">
+            <Link
+              to={"/allFeatures"}
+              onClick={() => setIsOpen(false)}
+              className="w-full bg-yellow-500 text-white font-medium text-sm py-2 rounded-lg flex items-center justify-center hover:bg-yellow-600"
+            >
               <span>Semua Fitur</span>
               <span className="ml-2">
                 <HiMiniSquaresPlus />
               </span>
-            </button>
+            </Link>
           </div>
 
           {/* Menu Navigasi */}

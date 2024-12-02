@@ -117,7 +117,7 @@ export const Penugasan = () => {
                     getStatusDisplay(assignment).line
                   }`}
                 ></div>
-                <div className="pt-10 md:px-8 px-2">
+                <div className="pt-10 md:pb-10 pb-0 md:px-8 px-2">
                   <h2 className="font-bold text-xl">
                     {assignment.assignment_title}
                   </h2>
