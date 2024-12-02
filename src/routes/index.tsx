@@ -25,7 +25,13 @@ import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesmen
 import { Discussion } from "../pages/pelatihanku/discussion";
 // import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
-import { Roleplay } from "../pages/roleplay";
+import { RoleplayAsses } from "../pages/roleplay-asses";
+import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
+import { DaftarRoleplay } from "../pages/roleplay-asses/daftar-roleplay";
+import { KonfirRoleplay } from "../pages/roleplay-asses/konfir-roleplay";
+import { NilaiRoleplay } from "../pages/roleplay-asses/nilai-roleplay";
+import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
+import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -209,10 +215,58 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/roleplay"
+            path="/roleplay-asses"
             element={
               <ProtectedRoute>
-                <Roleplay />
+                <RoleplayAsses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pilih-roleplay"
+            element={
+              <ProtectedRoute>
+                <PilihRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/daftar-roleplay"
+            element={
+              <ProtectedRoute>
+                <DaftarRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/konfir-roleplay"
+            element={
+              <ProtectedRoute>
+                <KonfirRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nilai-roleplay"
+            element={
+              <ProtectedRoute>
+                <NilaiRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/submit-roleplay"
+            element={
+              <ProtectedRoute>
+                <SubmitRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pilih-ases"
+            element={
+              <ProtectedRoute>
+                <PilihAses />
               </ProtectedRoute>
             }
           />
