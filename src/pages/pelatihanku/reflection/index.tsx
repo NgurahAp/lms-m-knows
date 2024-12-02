@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useReflectionData } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
-import { FaArrowLeft } from "react-icons/fa6";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { BackLink } from "../../../components/reusable/BackLink";
 
 export const Reflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -44,23 +44,25 @@ export const Reflection = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">Refleksi Ekplorasi</h1>
-        <p className="text-lg">Pertemuan {data?.data.session_no}</p>
+      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
+        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
+          Refleksi Ekplorasi
+        </h1>
+        <p className="text-sm md:text-lg">Pertemuan {data?.data.session_no}</p>
       </div>
       {/* Content */}
       <div className="p-8 my-8 bg-white">
-        <div className="flex items-center">
-          <div className="w-1/2 flex items-center justify-center">
+        <div className="flex md:flex-row flex-col items-center pb-3">
+          <div className="md:w-1/2 flex items-center justify-center">
             <img src="/pelatihanku/quiz-left.png" alt="" />
           </div>
-          <div className="w-1/2 flex flex-col justify-center pr-10">
-            <h1 className="text-2xl font-semibold">Deskripsi</h1>
-            <p className="text-lg text-justify py-4 text-gray-500">
+          <div className="md:w-1/2 flex flex-col justify-center md:pr-10">
+            <h1 className="text-lg md:text-2xl font-semibold">Deskripsi</h1>
+            <p className="text-sm md:text-lg text-justify py-4 text-gray-500">
               Refleksi Eksplorasi dilakukan dengan tujuan untuk meningkatkan
               pemahaman diri, memperkuat koneksi antara teori dan praktik, serta
               merancang strategi perbaikan atau pengembangan diri ke depannya.
@@ -69,7 +71,7 @@ export const Reflection = () => {
               pembelajaran yang lebih efektif dan memastikan pertumbuhan yang
               berkelanjutan.
             </p>
-            <div className="flex gap-8 pt-4 w-full">
+            <div className="flex gap-8 pt-4 w-full text-xs md:text-base">
               <Link
                 to={`/historyReflection/${subjectId}/${sessionId}`}
                 className="border text-center rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full"
@@ -99,13 +101,7 @@ export const Reflection = () => {
             </div>
           </div>
         </div>
-        <Link
-          to={`/pelatihanku/${subjectId}`}
-          className="flex items-center gap-2 p-5 underline justify-start text-blue-500"
-        >
-          <FaArrowLeft />
-          Kembali
-        </Link>
+        <BackLink to={`/pelatihanku/${subjectId}`} />
       </div>
     </div>
   );

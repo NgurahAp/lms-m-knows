@@ -90,31 +90,31 @@ export const HistoryReflection = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">
+      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
+        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
           Riwayat Refleksi Ekplorasi
         </h1>
       </div>
       {/* Content */}
-      <div className="my-8 flex ">
-        <aside className="w-1/4 bg-white rounded-lg shadow-md p-4">
-          <div className="mb-4">
+      <div className="my-4 flex md:flex-row flex-col">
+        <aside className="md:w-1/4 bg-white rounded-lg shadow-md p-4">
+          <div className="mb-4 md:text-base text-sm">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="w-full text-left bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between items-center"
+              className="w-full text-left  bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between items-center"
             >
               <span className="flex items-center gap-2">
-                <IoDocumentText className="text-2xl" />
+                <IoDocumentText className="text-lg md:text-2xl" />
                 Pertemuan {data?.data.session_no}
               </span>
               {isOpen ? (
-                <FaChevronUp className="w-4 h-4" />
+                <FaChevronUp className="text-sm md:text-lg" />
               ) : (
-                <FaChevronDown className="w-4 h-4" />
+                <FaChevronDown className="text-sm md:text-lg" />
               )}
             </button>
             {isOpen && (
@@ -127,7 +127,7 @@ export const HistoryReflection = () => {
           </div>
         </aside>
         {/* Main Content */}
-        <main className="flex-1 ml-4 bg-white rounded-lg shadow-md p-6">
+        <main className="flex-1 md:ml-4 md:mt-0 mt-5 bg-white rounded-lg shadow-md p-6">
           <div className="text-gray-500 text-sm mb-4">{formattedDate}</div>
           {data?.data.reflection ? (
             <div className="flex items-start">
@@ -144,7 +144,7 @@ export const HistoryReflection = () => {
                   </div>
                 )}
               </div>
-              <div className="bg-gray-200 p-4 rounded-lg">
+              <div className="bg-gray-200 md:text-base text-sm p-4 rounded-lg">
                 <h3 className="font-semibold">
                   {data?.data.teacher.full_name}
                 </h3>
@@ -152,7 +152,7 @@ export const HistoryReflection = () => {
               </div>
             </div>
           ) : (
-            <div className="text-gray-500 text-center mt-4">
+            <div className="text-gray-500 text-center">
               Anda belum mengisi refleksi eksplorasi.
             </div>
           )}

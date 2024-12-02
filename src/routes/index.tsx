@@ -23,7 +23,7 @@ import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflec
 import { Assesment } from "../pages/pelatihanku/assesment";
 import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesment";
 import { Discussion } from "../pages/pelatihanku/discussion";
-import { Score } from "../pages/score";
+// import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
 import { RoleplayAsses } from "../pages/roleplay-asses";
 import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
@@ -33,6 +33,7 @@ import { NilaiRoleplay } from "../pages/roleplay-asses/nilai-roleplay";
 import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
 import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -199,14 +200,14 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/score"
             element={
               <ProtectedRoute>
                 <Score />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/detailScore/:subjectId"
             element={
@@ -271,14 +272,46 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/listRoleplay"
             element={
               <ProtectedRoute>
                 <ListRoleplay />
               </ProtectedRoute>
             }
+          /> */}
+          {/* <Route
+            path="/pelatihan-keterampilan"
+            element={
+              <ProtectedRoute>
+                <PelatihanKet />
+              </ProtectedRoute>
+            }
+          /> */}
+          {/* <Route
+            path="/roleplay-asses"
+            element={
+              <ProtectedRoute>
+                <RoleplayAsses />
+              </ProtectedRoute>
+            }
           />
+          <Route
+            path="/pilih-roleplay"
+            element={
+              <ProtectedRoute>
+                <PilihRoleplay />
+              </ProtectedRoute>
+            }
+          /> */}
+          {/* <Route
+            path="/pilih-ases"
+            element={
+              <ProtectedRoute>
+                <PilihAses />
+              </ProtectedRoute>
+            }
+          /> */}
         </Routes>
       </MainLayout>
     </Router>

@@ -1,9 +1,9 @@
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSubmitReflection } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
-import { FaArrowLeft } from "react-icons/fa6";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { BackLink } from "../../../components/reusable/BackLink";
 
 export const SubmitReflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -77,17 +77,21 @@ export const SubmitReflection = () => {
   const isButtonDisabled = summary.length < 52 || isPending;
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
-      <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-        <h1 className="text-3xl font-semibold pb-3">Refleksi Ekplorasi</h1>
-        <p className="text-lg">Pertemuan {reflectionData?.data.session_no}</p>
+      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
+        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
+          Refleksi Ekplorasi
+        </h1>
+        <p className="text-sm md:text-lg">
+          Pertemuan {reflectionData?.data.session_no}{" "}
+        </p>
       </div>
       {/* Content */}
-      <div className="p-8 my-8 bg-white">
-        <div className="border p-5 rounded-lg">
+      <div className="md:p-8 my-6 bg-white">
+        <div className="md:border p-5 rounded-lg">
           <div className="flex items-center">
             {reflectionData?.data.teacher.avatar ? (
               <img
@@ -107,25 +111,25 @@ export const SubmitReflection = () => {
               <p className="text-sm text-gray-600">Pengajar</p>
             </div>
           </div>
-          <h3 className="text-lg font-semibold pt-5 pb-8">
+          <h3 className="md:text-lg text-base font-semibold pt-3 md:pt-5 pb-5 md:pb-8">
             Apa pembelajaran dan kesimpulan kamu dari pertemuan ini?
           </h3>
           <textarea
             id="summary"
             name="summary"
             placeholder="Masukkan jawaban anda..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 md:text-base text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={8}
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             disabled={isPending}
           />
           {summary.length < 52 && (
-            <span className="flex justify-end text-red-500">
+            <span className="flex md:justify-end md:text-base text-sm text-red-500">
               Minimal {52 - summary.length} karakter lagi untuk dapat mengirim
             </span>
           )}
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end md:text-base text-sm mt-4">
             <button
               onClick={handleSubmit}
               disabled={isButtonDisabled}
@@ -140,13 +144,7 @@ export const SubmitReflection = () => {
             </button>
           </div>
         </div>
-        <Link
-          to={`/reflection/${subjectId}/${sessionId}`}
-          className="flex items-center gap-2 p-5 underline justify-start text-blue-500"
-        >
-          <FaArrowLeft />
-          Kembali
-        </Link>
+        <BackLink to={`/reflection/${subjectId}/${sessionId}`} />
       </div>
     </div>
   );

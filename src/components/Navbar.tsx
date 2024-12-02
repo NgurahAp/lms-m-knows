@@ -66,6 +66,9 @@ const Navbar: React.FC = () => {
         if (storedUser) {
           const userData: UserData = JSON.parse(storedUser);
           setProfileData(userData);
+        } else {
+          console.log("Data profil tidak ditemukan di localStorage");
+
         }
       } catch (error) {
         console.error("Error parsing user profile:", error);
