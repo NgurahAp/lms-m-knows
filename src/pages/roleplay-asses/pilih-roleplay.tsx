@@ -33,11 +33,11 @@ export const PilihRoleplay: React.FC = () => {
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:pb-4 md:px-36 px-8 bg-gray-100">
       {/* Breadcrumb */}
-      <div className="bg-white w-full flex items-center pl-5 rounded-xl">
+      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <Link to="/dashboard" className="flex items-center">
           <img
             src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1"
+            className="md:w-6 w-5 -mt-1 "
             alt="Home"
           />
           <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
@@ -107,9 +107,12 @@ export const PilihRoleplay: React.FC = () => {
                     <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
                       Lihat Detail
                     </button>
-                    <button className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg">
+                    <Link
+                      to="/daftar-roleplay"
+                      className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg"
+                    >
                       Daftar
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -143,26 +146,18 @@ export const PilihRoleplay: React.FC = () => {
               {roleplays.map((roleplay) => (
                 <div
                   key={roleplay.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
+                  className="bg-white border rounded-md p-4 shadow-md"
                 >
-                  <h3 className="font-medium text-base mb-4">
+                  <h3 className="text-gray-800 font-medium">
                     {roleplay.topic}
                   </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-600">Status</span>
-                    <span
-                      className={`text-sm font-medium ${
-                        roleplay.subject_type === "selesai"
-                          ? "text-green-500"
-                          : "text-yellow-500"
-                      }`}
-                    >
-                      {roleplay.subject_type}
-                    </span>
-                  </div>
-                  <button className="w-full px-4 py-2 rounded-lg text-white text-sm bg-blue-500">
-                    Lihat Sertifikat
-                  </button>
+                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <a
+                    href="#"
+                    className="block mt-4 text-blue-500 hover:underline text-sm"
+                  >
+                    Lihat Rekan Roleplay
+                  </a>
                 </div>
               ))}
             </div>

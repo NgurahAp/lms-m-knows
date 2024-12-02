@@ -27,6 +27,10 @@ import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
 import { RoleplayAsses } from "../pages/roleplay-asses";
 import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
+import { DaftarRoleplay } from "../pages/roleplay-asses/daftar-roleplay";
+import { KonfirRoleplay } from "../pages/roleplay-asses/konfir-roleplay";
+import { NilaiRoleplay } from "../pages/roleplay-asses/nilai-roleplay";
+import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
 import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
 const AppRoutes: React.FC = () => {
@@ -224,6 +228,38 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <PilihRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/daftar-roleplay"
+            element={
+              <ProtectedRoute>
+                <DaftarRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/konfir-roleplay"
+            element={
+              <ProtectedRoute>
+                <KonfirRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nilai-roleplay"
+            element={
+              <ProtectedRoute>
+                <NilaiRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/submit-roleplay"
+            element={
+              <ProtectedRoute>
+                <SubmitRoleplay />
               </ProtectedRoute>
             }
           />
