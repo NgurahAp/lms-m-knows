@@ -1,10 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDetailAssignmentData } from "../../../services/pelatihanku/AssignmentService";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { FileUploadForm } from "./components/FileUpload";
 import { FinishedAssignment } from "./components/FinishedAssignment";
-import { FaArrowLeft } from "react-icons/fa";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import { BackLink } from "../../../components/reusable/BackLink";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -52,16 +52,24 @@ export const DetailAssignment = () => {
       label: "Tugas",
     },
   ];
+  console.log(data);
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
-      <Breadcrumb items={breadcrumbItems} />    
-      {/* Quiz Content */}
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+      <Breadcrumb items={breadcrumbItems} />
+      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
+        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
+          {data?.data.assignment.title}
+        </h1>
+        <p className="text-sm md:text-lg">
+          Modul {data?.data.detail.session_no}
+        </p>
+      </div>
       <div className="bg-white mt-5 w-full p-8 h-full rounded-lg">
-        <h1 className="font-bold">{data?.data.assignment.title}</h1>
-        <p className="pt-5 whitespace-pre-line">{data?.data.assignment.desc}</p>
-        <div className="border-b-[1px] border-gray-400 my-10" />
-        {/* Status */}
+        <p className="whitespace-pre-line md:text-base text-sm">
+          {data?.data.assignment.desc}
+        </p>
+        <div className="border-b-[1px] border-gray-400 md:my-8 my-3" />
         {data?.data.assignment.progress.status === "FINISHED" ? (
           <FinishedAssignment assignmentData={data?.data.assignment} />
         ) : (
@@ -71,13 +79,7 @@ export const DetailAssignment = () => {
             assignmentId={assignmentId}
           />
         )}
-        <Link
-          to={`/assignment/${subjectId}/${sessionId}`}
-          className="flex items-center gap-2 p-5 pt-8 underline justify-start text-blue-500"
-        >
-          <FaArrowLeft />
-          Kembali
-        </Link>
+        <BackLink to={`/assignment/${subjectId}/${sessionId}`} />
       </div>
     </div>
   );

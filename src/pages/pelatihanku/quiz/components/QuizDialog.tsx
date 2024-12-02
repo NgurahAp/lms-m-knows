@@ -7,7 +7,7 @@ interface QuizDialogProps {
 
 const QuizDialog: React.FC<QuizDialogProps> = ({ onClose, onStart }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg h-64 flex flex-col justify-center w-[30rem]">
         <h2 className="text-xl font-semibold text-center mb-2">Mulai Quiz ?</h2>
         <div className="border-b-2 border-blue-500 mx-auto w-20 mb-4"></div>

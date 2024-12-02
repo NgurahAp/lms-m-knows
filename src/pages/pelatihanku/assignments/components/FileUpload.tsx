@@ -84,12 +84,12 @@ export const FileUploadForm = ({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Penyerahan Berkas</h1>
+      <h1 className="md:text-2xl text-base font-bold">Penyerahan Berkas</h1>
       <div>
         {/* Description Box */}
         <label
           htmlFor="description"
-          className="block text-sm pt-3 font-medium text-gray-700"
+          className="block md:text-base text-xs  pt-1 md:pt-3 font-medium text-gray-700"
         >
           Deskripsi
         </label>
@@ -97,7 +97,7 @@ export const FileUploadForm = ({
           id="description"
           name="description"
           rows={8}
-          className="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none resize-none"
+          className="mt-2 p-2 w-full border md:text-base text-xs border-gray-300 rounded-md shadow-sm focus:outline-none resize-none"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Tulis Deskripsi Disini"
@@ -106,7 +106,7 @@ export const FileUploadForm = ({
         <div>
           <label
             htmlFor="file"
-            className="block text-sm font-medium text-gray-700"
+            className="block md:text-base text-xs font-medium text-gray-700"
           >
             Unggah Berkas File
           </label>
@@ -124,9 +124,9 @@ export const FileUploadForm = ({
               className="block text-center h-56 text-gray-500 cursor-pointer"
             >
               {file ? (
-                <div className="w-1/5">
+                <div className="md:w-1/5 flex flex-col justify-center h-full">
                   <div className="flex justify-between mx-3 p-3 border border-gray-200 rounded-t-md bg-white">
-                    <p className="font-medium text-gray-700 text-left pr-5 truncate">
+                    <p className="font-medium md:text-base text-sm text-gray-700 text-left pr-5 truncate">
                       {file.name}
                     </p>
                     <button
@@ -136,7 +136,7 @@ export const FileUploadForm = ({
                         e.stopPropagation();
                         setFile(null);
                       }}
-                      className="text-3xl hover:text-red-500 transition-colors"
+                      className="md:text-3xl hover:text-red-500 transition-colors"
                     >
                       ✕
                     </button>
@@ -148,14 +148,14 @@ export const FileUploadForm = ({
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col justify-center items-center h-full">
-                  <FaUpload className="flex justify-center items-center w-full text-4xl pb-3" />
+                <div className="flex flex-col justify-center md:text-base text-sm px-5 items-center h-full">
+                  <FaUpload className="flex justify-center items-center w-full text-3xl  md:text-4xl pb-3" />
                   Klik untuk upload atau drag and drop
                   <p className="mt-1 text-xs text-gray-500">
                     Upload file PDF (Max. 2MB)
                   </p>
-                  <div className="flex justify-center pt-5">
-                    <div className="flex gap-2 py-2 px-3 text-sm bg-blue-500 text-white rounded-lg items-center justify-center">
+                  <div className="flex justify-center pt-3 md:pt-5">
+                    <div className="flex gap-2 py-2 px-3 text-xs md:text-sm bg-blue-500 text-white rounded-lg items-center justify-center">
                       <CiSearch />
                       Cari File
                     </div>
@@ -166,18 +166,18 @@ export const FileUploadForm = ({
           </div>
         </div>
         {/* Buttons */}
-        <div className="flex justify-between pt-8">
+        <div className="flex justify-between pt-8 pb-4">
           <button
             type="button"
             onClick={() => setShowCancelDialog(true)}
-            className="px-14 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:bg-red-300 disabled:cursor-not-allowed"
+            className="md:px-14 px-8 py-2 text-xs md:text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:bg-red-300 disabled:cursor-not-allowed"
             disabled={isSubmitDisabled}
           >
             Batal
           </button>
           <button
             type="button"
-            className="px-14 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
+            className="md:px-14 px-8 py-2 text-xs md:text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
             onClick={() => setShowSubmitDialog(true)}
             disabled={(!description.trim() && !file) || isPending}
           >

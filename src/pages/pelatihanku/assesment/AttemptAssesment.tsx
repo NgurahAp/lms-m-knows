@@ -122,21 +122,19 @@ export const AttemptAssesment = () => {
   };
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Teacher Info */}
-
       {/* Content */}
-      <div className="my-8 py-16 px-8 bg-white flex flex-col items-center justify-center">
+      <div className="my-8 py-8 md:py-16 md:px-8 px-4 bg-white flex flex-col items-center justify-center">
         {/* Question Preview Buttons */}
         <div className="w-full mb-8 flex flex-wrap justify-center">
           {questions.map((_, index) => (
             <div className="flex items-center" key={index}>
               <button
                 onClick={() => handleQuestionClick(index)}
-                className={`w-12 h-12 rounded-full flex items-center justify-center border-2 
+                className={`md:w-12 w-6 md:h-12 h-6 md:text-base text-xs rounded-full flex items-center justify-center border-2 
                   ${
                     currentStep === index
                       ? "bg-blue-100 text-blue-500 border-blue-500"
@@ -149,7 +147,7 @@ export const AttemptAssesment = () => {
               </button>
               {index < questions.length - 1 && (
                 <hr
-                  className={`w-12 border-t-2 ${
+                  className={`md:w-12 w-6 border-t-2 ${
                     responses[questions[index].id]
                       ? "border-blue-500"
                       : "border-gray-300"
@@ -160,7 +158,7 @@ export const AttemptAssesment = () => {
           ))}
         </div>
 
-        <div className="mb-8 bg-[#E1F0FA] p-4 w-full rounded-lg shadow-sm">
+        <div className="md:mb-8 mb-5 bg-[#E1F0FA] p-4 w-full rounded-lg shadow-sm">
           <div className="flex items-center gap-4">
             {assesmentData.teacher.avatar ? (
               <img
@@ -174,22 +172,28 @@ export const AttemptAssesment = () => {
               </div>
             )}
             <div>
-              <p className="font-medium">{assesmentData.teacher.full_name}</p>
-              <p className="text-sm text-gray-500">Pengajar </p>
+              <p className="font-medium md:text-base text-sm">
+                {assesmentData.teacher.full_name}
+              </p>
+              <p className="text-xs md:text-sm text-gray-500">Pengajar </p>
             </div>
           </div>
         </div>
 
         {currentQuestion && (
-          <div className="mb-6 w-full">
-            <p className="font-semibold ">{currentQuestion.question}</p>
-            <p className="mb-6 text-sm text-[#6B7280]">*Pilih Satu</p>
+          <div className="md:mb-6 mb-3 w-full">
+            <p className="font-semibold md:text-base text-sm">
+              {currentQuestion.question}
+            </p>
+            <p className="md:mb-6 mb-3 text-xs md:text-sm text-[#6B7280]">
+              *Pilih Satu
+            </p>
             {currentQuestion.type === "OPTION" ? (
               <div className="flex flex-col gap-4">
                 {currentQuestion.answers.map((answer) => (
                   <label
                     key={answer}
-                    className="flex items-center space-x-2 p-5 hover:bg-gray-50 rounded-lg border border-gray-200"
+                    className="flex items-center space-x-2 p-3 md:p-5 hover:bg-gray-50 rounded-lg border border-gray-200"
                   >
                     <input
                       type="radio"
@@ -199,9 +203,11 @@ export const AttemptAssesment = () => {
                         handleChange(currentQuestion.id, e.target.value)
                       }
                       checked={responses[currentQuestion.id] === String(answer)}
-                      className="form-radio text-blue-600"
+                      className="form-radio text-blue-600 "
                     />
-                    <span>{getRatingLabel(answer)}</span>
+                    <span className="md:text-base text-sm">
+                      {getRatingLabel(answer)}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -229,7 +235,7 @@ export const AttemptAssesment = () => {
             ) : (
               <textarea
                 rows={4}
-                className="w-full p-2 mt-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 mt-2 md:text-base text-sm border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tuliskan jawaban Anda di sini..."
                 onChange={(e) =>
                   handleChange(currentQuestion.id, e.target.value)
@@ -240,11 +246,11 @@ export const AttemptAssesment = () => {
           </div>
         )}
 
-        <div className="flex justify-end gap-5 w-full">
+        <div className="flex justify-end gap-5 w-full md:text-base text-sm">
           <button
             onClick={handlePrevious}
             disabled={currentStep === 0}
-            className={`px-4 py-2 border-blue-500 border text-blue-500 rounded focus:outline-none ${
+            className={`md:px-4 px-3 py-2 border-blue-500 border text-blue-500 rounded focus:outline-none ${
               currentStep === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
@@ -254,7 +260,7 @@ export const AttemptAssesment = () => {
             <button
               onClick={() => setDialogOpen(true)}
               disabled={!areAllQuestionsAnswered || isPending}
-              className={`px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none ${
+              className={`md:px-4 px-3 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none ${
                 !areAllQuestionsAnswered || isPending
                   ? "opacity-50 cursor-not-allowed"
                   : ""
@@ -265,7 +271,7 @@ export const AttemptAssesment = () => {
           ) : (
             <button
               onClick={handleNext}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
+              className="md:px-4 px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
             >
               Selanjutnya
             </button>
