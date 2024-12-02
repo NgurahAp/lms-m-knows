@@ -22,7 +22,7 @@ const teamsData = [
     id: 2,
     name: "Tim Roleplay 2",
     members: ["Cahyadi", "Guntoro Abdul", "Tersedia", "Tersedia"],
-    notes: "Sudah di-booking untuk John dan Lukas yaa",
+    notes: "Sudah di-booking untuk John dan Lukas yaaa",
     isFull: false,
   },
 ];
