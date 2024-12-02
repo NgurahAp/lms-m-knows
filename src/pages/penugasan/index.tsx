@@ -81,9 +81,9 @@ export const Penugasan = () => {
   }
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <section className="bg-white p-10 rounded-xl">
-        <div className="flex mb-4 space-x-8">
+        <div className="flex flex-wrap mb-4 md:space-x-8 md:justify-start justify-center">
           {[
             "Semua",
             "Ditugaskan",
@@ -94,7 +94,7 @@ export const Penugasan = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`py-4 px-10  ${
+              className={`md:py-4 py-1 md:px-10 px-3 md:text-base text-sm  ${
                 activeTab === tab
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
