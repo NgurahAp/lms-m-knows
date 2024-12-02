@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
     { name: "Pelatihan-ku", path: "/pelatihanku" },
     { name: "Penugasan", path: "/penugasan" },
     { name: "Nilai & Sertifikat", path: "/score" },
-    { name: "Roleplay & Asesmen", path: "/roleplay" },
+    { name: "Roleplay & Asesmen", path: "/roleplay-asses" },
   ];
 
   // Get current page name based on location
@@ -66,6 +66,9 @@ const Navbar: React.FC = () => {
         if (storedUser) {
           const userData: UserData = JSON.parse(storedUser);
           setProfileData(userData);
+        } else {
+          console.log("Data profil tidak ditemukan di localStorage");
+
         }
       } catch (error) {
         console.error("Error parsing user profile:", error);
