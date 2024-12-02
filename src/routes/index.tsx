@@ -23,7 +23,7 @@ import { HistoryReflection } from "../pages/pelatihanku/reflection/HistoryReflec
 import { Assesment } from "../pages/pelatihanku/assesment";
 import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesment";
 import { Discussion } from "../pages/pelatihanku/discussion";
-// import { Score } from "../pages/score";
+import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
 import { RoleplayAsses } from "../pages/roleplay-asses";
 import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
@@ -200,14 +200,14 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/score"
             element={
               <ProtectedRoute>
                 <Score />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/detailScore/:subjectId"
             element={

@@ -57,7 +57,7 @@ export const Score: React.FC = () => {
   const certificate = certificateData?.data.subjects ?? [];
 
   return (
-    <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 md:pb-4">
       <Breadcrumb items={breadcrumbItems} />
       <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className=" md:text-lg text-sm font-semibold">
@@ -66,7 +66,7 @@ export const Score: React.FC = () => {
       </div>
 
       {/* Main Content Card */}
-      <div className="px-5 bg-white rounded-lg shadow-lg w-full">
+      <div className="px-5 bg-white rounded-lg shadow-lg w-full ">
         {/* Tabs */}
         <div className="p-8">
           <div className="flex flex-wrap border-b border-white">
