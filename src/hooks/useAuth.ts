@@ -43,12 +43,6 @@ export const useAuth = () => {
           refreshToken,
         });
 
-        console.log("Login successful, authState updated:", {
-          isAuthenticated: true,
-          accessToken,
-          refreshToken,
-        });
-
         return true;
       } catch (error) {
         console.error("Login failed:", error);

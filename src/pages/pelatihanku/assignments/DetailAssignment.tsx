@@ -52,7 +52,6 @@ export const DetailAssignment = () => {
       label: "Tugas",
     },
   ];
-  console.log(data);
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
