@@ -109,35 +109,35 @@ export const Penugasan = () => {
             <Link
               to={`/detailAssignment/${assignment.subject_id}/${assignment.assignment_session_id}/${assignment.assignment_id}`}
               key={index}
-              className=" border rounded-lg shadow-sm flex justify-between bg-white mb-8"
+              className=" border rounded-lg shadow-sm flex md:flex-row flex-col justify-between bg-white mb-8"
             >
               <div className="flex">
                 <div
-                  className={`h-full w-2 rounded-l-lg ${
+                  className={`h-full md:w-2 w-8 rounded-l-lg ${
                     getStatusDisplay(assignment).line
                   }`}
                 ></div>
-                <div className="py-10 px-8">
+                <div className="pt-10 md:px-8 px-2">
                   <h2 className="font-bold text-xl">
                     {assignment.assignment_title}
                   </h2>
-                  <p className="text-gray-500 py-2 text-lg">
+                  <p className="text-gray-500 py-2  text-sm md:text-lg">
                     {assignment.subject_name}
                   </p>
-                  <p className="text-gray-400">
+                  <p className="text-gray-400 md:text-base text-xs">
                     Tenggat:{" "}
                     {new Date(assignment.progress_deadline).toLocaleString()}
                   </p>
                 </div>
               </div>
-              <div className=" flex flex-col w-48 items-center justify-center pr-8">
+              <div className=" flex flex-col md:w-48 items-center justify-center md:pr-8 md:pb-0 py-8">
                 <img
                   src={`${getStatusDisplay(assignment).img}`}
-                  className="w-11 pb-2"
+                  className="md:w-11 w-8 pb-2"
                   alt=""
                 />
                 <span
-                  className={` rounded text-lg ${
+                  className={` rounded text-sm md:text-lg ${
                     getStatusDisplay(assignment).textStyle
                   }`}
                 >
