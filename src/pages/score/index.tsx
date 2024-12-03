@@ -6,7 +6,6 @@ import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { useCertificateResponse, useScoreResponse } from "../../hooks/useScore";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 import { EmptyState } from "../../components/reusable/EmptyState";
-import PageInfo from "../../components/reusable/PageInfo";
 
 export const Score: React.FC = () => {
   const {
@@ -60,7 +59,10 @@ export const Score: React.FC = () => {
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 md:pb-4">
       <Breadcrumb items={breadcrumbItems} />
-      <PageInfo title="Nilai dan Sertifikat" />
+      {/* <PageInfo title="Nilai dan Sertifikat" className="text-sm" /> */}
+      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
+        <h1 className=" md:text-lg text-sm font-semibold">Nilai dan Sertifikat</h1>
+      </div>
       {/* Main Content Card */}
       <div className="px-5 mt-5 bg-white rounded-lg shadow-lg w-full ">
         <div>
