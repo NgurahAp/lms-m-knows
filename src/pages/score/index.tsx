@@ -104,7 +104,6 @@ export const Score: React.FC = () => {
                   {subjects.map((subject) => (
                     <div
                       key={subject.id}
-                      className="w-96 bg-white border rounded-lg p-6 shadow-sm"
                     >
                       <h3 className="text-xl font-bold mb-4 line-clamp-2">
                         {subject.name}
