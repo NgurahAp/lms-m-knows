@@ -14,14 +14,6 @@ export const fetchScoreResponse = async (): Promise<ScoreResponse> => {
   return response.data;
 };
 
-export const useScoreResponse = (): UseQueryResult<ScoreResponse, Error> => {
-  return useQuery<ScoreResponse, Error>({
-    queryKey: ["roleplayData"],
-    queryFn: fetchScoreResponse,
-  });
-};
-
-
 export const fetchCertificateResponse = async (): Promise<ScoreResponse> => {
   const token = Cookies.get("accessToken");
   const response = await axios.get(`${API_BASE_URL}/api/v1/certificate`, {
@@ -32,4 +24,9 @@ export const fetchCertificateResponse = async (): Promise<ScoreResponse> => {
   return response.data;
 };
 
-
+export const useScoreResponse = (): UseQueryResult<ScoreResponse, Error> => {
+  return useQuery<ScoreResponse, Error>({
+    queryKey: ["scoreResponse"],
+    queryFn: fetchScoreResponse,
+  });
+};

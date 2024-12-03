@@ -21,7 +21,7 @@ export const Roleplay = () => {
       <Breadcrumb items={breadcrumbItems} />
       {/* Info */}
       <div className="bg-white flex flex-col mt-5 px-8 h-28 justify-center rounded-lg">
-        <h1 className="text-2xl font-semibold">Roleplay & Assesment</h1>
+        <h1 className="text-2xl font-semibold">Roleplay & Assessment</h1>
       </div>
 
       {/* Content */}

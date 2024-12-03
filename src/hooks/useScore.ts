@@ -1,6 +1,9 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { ScoreResponse } from "../types/score";
-import { fetchCertificateResponse, fetchScoreResponse } from "../services/ScoreService";
+import {
+  fetchCertificateResponse,
+  fetchScoreResponse,
+} from "../services/ScoreService";
 
 export const useScoreResponse = (): UseQueryResult<ScoreResponse, Error> => {
   return useQuery<ScoreResponse, Error>({
@@ -9,7 +12,10 @@ export const useScoreResponse = (): UseQueryResult<ScoreResponse, Error> => {
   });
 };
 
-export const useCertificateResponse = (): UseQueryResult<ScoreResponse, Error> => {
+export const useCertificateResponse = (): UseQueryResult<
+  ScoreResponse,
+  Error
+> => {
   return useQuery<ScoreResponse, Error>({
     queryKey: ["certificateResponse"],
     queryFn: fetchCertificateResponse,
