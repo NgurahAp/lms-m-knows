@@ -5,6 +5,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { IoDocumentText } from "react-icons/io5";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const HistoryReflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -93,12 +94,9 @@ export const HistoryReflection = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      {/* Info */}
-      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
-        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
-          Riwayat Refleksi Ekplorasi
-        </h1>
-      </div>
+      <PageInfo
+        title="Riwayat Refleksi Eksplorasi"
+      />
       {/* Content */}
       <div className="my-4 flex md:flex-row flex-col">
         <aside className="md:w-1/4 bg-white rounded-lg shadow-md p-4">

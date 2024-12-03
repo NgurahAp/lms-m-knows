@@ -12,6 +12,7 @@ import {
   useHistoryQuizData,
 } from "../../../hooks/pelatihanku/useQuiz";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const DetailQuiz = () => {
   const { subjectId, sessionId, quizId } = useParams<{
@@ -74,15 +75,10 @@ export const DetailQuiz = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      {/* Quiz Info */}
-      <div className="bg-white flex flex-col mt-5 px-4 md:px-8 md:py-10 py-5 justify-center rounded-lg">
-        <h1 className="text-xl md:text-3xl font-semibold md:pb-3">
-          {quizData?.data.quiz.title}
-        </h1>
-        <p className="text-sm md:text-lg">
-          Pertemuan {quizData?.data.session.session_no}
-        </p>
-      </div>
+      <PageInfo
+        title={quizData?.data.quiz.title}
+        subtitle={`Pertemuan ${quizData?.data.session.session_no}`}
+      />
       {/* Quiz Content */}
       <div className="bg-white flex md:flex-row flex-col mt-5 w-full px-4 md:px-8 h-full justify-center rounded-lg">
         <div className="w-1/2  md:block hidden items-center justify-center">

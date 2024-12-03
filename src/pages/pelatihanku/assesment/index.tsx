@@ -3,6 +3,7 @@ import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { useAssesmentData } from "../../../hooks/pelatihanku/useAssesment";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 import { BackLink } from "../../../components/reusable/BackLink";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const Assesment = () => {
   const { subjectId, sessionId, subjectName } = useParams<{
@@ -48,12 +49,9 @@ export const Assesment = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      {/* Info */}
-      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
-        <h1 className="text-base md:text-3xl font-semibold">
-          Penilaian Pengajar
-        </h1>
-      </div>
+      <PageInfo
+        title="Penilaian Pengajar"
+      />
       <div className="bg-blue-100 flex flex-col mt-5 p-4 md:p-8 md:text-base text-xs justify-center rounded-lg">
         <h1 className=" text-blue-700 pb-1">
           Pilihlah keterangan nilai yang paling mewakili penilaian Anda terhadap

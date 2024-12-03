@@ -5,6 +5,7 @@ import { FileUploadForm } from "./components/FileUpload";
 import { FinishedAssignment } from "./components/FinishedAssignment";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 import { BackLink } from "../../../components/reusable/BackLink";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const DetailAssignment = () => {
   const { subjectId, sessionId, assignmentId } = useParams<{
@@ -56,14 +57,10 @@ export const DetailAssignment = () => {
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
-        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
-          {data?.data.assignment.title}
-        </h1>
-        <p className="text-sm md:text-lg">
-          Modul {data?.data.detail.session_no}
-        </p>
-      </div>
+      <PageInfo
+        title={data?.data.assignment.title}
+        subtitle={`Modul ${data?.data.detail.session_no}`}
+      />
       <div className="bg-white mt-5 w-full p-8 h-full rounded-lg">
         <p className="whitespace-pre-line md:text-base text-sm">
           {data?.data.assignment.desc}

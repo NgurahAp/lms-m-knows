@@ -1,17 +1,26 @@
-// AssignmentInfo.tsx
 import React from "react";
 
-interface AssignmentInfoProps {
+interface PageInfoProps {
   title: string | undefined;
-  detail: string | undefined;
+  subtitle?: string | undefined;
+  className?: string;
 }
 
-export const PageInfo: React.FC<AssignmentInfoProps> = ({ title, detail }) => {
+const PageInfo: React.FC<PageInfoProps> = ({
+  title,
+  subtitle,
+  className,
+}) => {
   return (
-    <div className="bg-white flex flex-col mt-5 px-8 h-36 justify-center rounded-lg">
-      <h1 className="text-3xl font-semibold pb-3">{title}</h1>
-      <p className="text-lg font-light">{detail}</p>
+    <div
+      className={`bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg ${className}`}
+    >
+      <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
+        {title}
+      </h1>
+      {subtitle && <p className="text-sm md:text-lg">{subtitle}</p>}
     </div>
   );
 };
 
+export default PageInfo;
