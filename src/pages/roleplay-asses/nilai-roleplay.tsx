@@ -11,9 +11,10 @@ import { FaUsers } from "react-icons/fa";
      bobot: "30%",
      deskripsi: [
        { range: [1, 2], text: "Tidak mendengarkan" },
-       { range: [3, 4], text: "Mendengarkan sebagian kecil waktu" },
+       { range: [3, 4], text: "Mendengarkan hanya sebagian kecil waktu" },
        { range: [5, 6], text: "Mendengarkan sebagian besar waktu" },
-       { range: [7, 8], text: "Mendengarkan sepenuhnya" },
+       { range: [7, 8], text: "Mendengarkan hampir semua waktu" },
+       { range: [9, 10], text: "Mendengarkan hingga sepenuhnya" },
      ],
    },
    {
@@ -24,10 +25,14 @@ import { FaUsers } from "react-icons/fa";
      deskripsi: [
        { range: [1, 2], text: "Tidak mengajukan pertanyaan" },
        { range: [3, 4], text: "Mengajukan pertanyaan tidak relevan" },
-       { range: [5, 6], text: "Mengajukan pertanyaan relevan" },
+       { range: [5, 6], text: "Mengajukan pertanyaan cukup relevan" },
        {
          range: [7, 8],
-         text: "Mengajukan pertanyaan yang mendalam dan relevan",
+         text: "Mengajukan pertanyaan yang relevan",
+       },
+       {
+         range: [9, 10],
+         text: "Mengajukan pertanyaan sangat relevan",
        },
      ],
    },
@@ -40,7 +45,32 @@ import { FaUsers } from "react-icons/fa";
        { range: [1, 2], text: "Tidak memberdayakan" },
        { range: [3, 4], text: "Memberdayakan sebagian kecil waktu" },
        { range: [5, 6], text: "Memberdayakan sebagian besar waktu" },
-       { range: [7, 8], text: "Memberdayakan sepenuhnya" },
+       { range: [7, 8], text: "Memberdayakan hampir semua waktu" },
+       { range: [9, 10], text: "Memberdayakan hingga sepenuhnya" },
+     ],
+   },
+   {
+     id: 4,
+     kompetensi: "Tingkat pemahaman terhadap materi yang disampaikan.",
+     bobot: "20%",
+     deskripsi: [
+       { range: [1, 2], text: "Tidak memahami materi" },
+       { range: [3, 4], text: "Memahami sebagian kecil materi" },
+       { range: [5, 6], text: "Memahami sebagian besar materi" },
+       { range: [7, 8], text: "Memahami hampir semua bagian materi" },
+       { range: [9, 10], text: "Memahami seluruh materi yang disampaikan" },
+     ],
+   },
+   {
+     id: 5,
+     kompetensi: "Kejelasan, volume, intonasi, dan tata bahasa saat berbicara.",
+     bobot: "30%",
+     deskripsi: [
+       { range: [1, 2], text: "Tidak jelas berbicara" },
+       { range: [3, 4], text: "Memperjelas sebagian kecil bicara" },
+       { range: [5, 6], text: "Memperjelas sebagian besar bicara" },
+       { range: [7, 8], text: "Memperjelas hampir semua bicara" },
+       { range: [9, 10], text: "Berbicara dengan intonasi sangat jelas" },
      ],
    },
  ];
@@ -121,54 +151,68 @@ export const NilaiRoleplay: React.FC = () => {
         </div>
         <div className="p-4">
           <h1 className="text-xl font-bold mb-4">Berikan Nilai Teman Anda!</h1>
-          <div
-            className="flex items-center p-2 border rounded-lg text-center"> 
-              <FaUsers className="mr-4 items-center text-lg text-gray-500" />
+          <div className="flex items-center p-2 border rounded-lg text-center">
+            <FaUsers className="mr-4 items-center text-lg text-gray-500" />
             <span>Rizki Prarara</span>
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-300">
+          <table className="w-max border-collapse border border-gray-300">
             <thead>
               <tr className="bg-blue-200">
-                <th className="p-2 border border-gray-300">Kompetensi</th>
-                <th className="p-2 border border-gray-300 text-center">
+                <th className="p-2 border border-gray-300 w-72 bg-blue-500 text-white">
+                  Kompetensi
+                </th>
+                <th className="p-2 border border-gray-300 text-center w-72 bg-blue-500 text-white">
                   Bobot
                 </th>
-                <th className="p-2 border border-gray-300 text-center">
-                  Penilaian (1-4)
+                <th className="p-2 border border-gray-300 text-center bg-blue-500 text-white">
+                  Kurang (1-4)
                 </th>
-                {/* {Array.from({ length: 8 }, (_, i) => (
-                  <th
-                    key={i}
-                    className="p-2 border border-gray-300 text-center"
-                  >
-                    {i + 1}
-                  </th>
-                ))} */}
+                <th className="p-2 border border-gray-300 text-center bg-blue-500 text-white">
+                  Cukup (5-6)
+                </th>
+                <th className="p-2 border border-gray-300 text-center bg-blue-500 text-white">
+                  Baik (7-8)
+                </th>
+                <th className=" p-2 border border-gray-300 text-center bg-blue-500 text-white">
+                  Sangat Baik<br></br> (9-10)
+                </th>
+                <th className="w-10 p-2 border border-gray-300 text-center bg-blue-500 text-white">
+                  Alasan Nilai
+                </th>
+                <th className="w-10 p-2 border border-gray-300 text-center bg-blue-500 text-white">
+                  Agar mendapat nilai sempurna, apa yang harus diperbaiki?
+                </th>
               </tr>
             </thead>
             <tbody>
               {data.map((row) => (
-                <tr key={row.id} className="bg-white hover:bg-gray-100">
-                  <td className="p-2 border border-gray-300">
+                <tr key={row.id} className="bg-white">
+                  <td className="p-2 border border-gray-300 text-center">
                     {row.kompetensi}
                   </td>
                   <td className="p-2 border border-gray-300 text-center">
                     {row.bobot}
                   </td>
-                  <td className=" border border-gray-300 text-center">
+                  {/* kurang 1 - 4 */}
+                  <td className="w-1/6 border border-gray-300 text-center">
                     <tr>
-                      {Array.from({ length: 8 }, (_, i) => (
+                      {Array.from({ length: 4 }, (_, i) => (
                         <td
                           key={i}
-                          className="p-2 border border-gray-300 text-center"
+                          className={`w-1/6 p-2 border-r border-b text-center cursor-pointer ${
+                            selectedValues[row.id] === i + 1
+                              ? "bg-blue-500 text-white"
+                              : "hover:bg-gray-200"
+                          }`}
+                          onClick={() => handleSelect(row.id, i + 1)}
                         >
                           {i + 1}
                         </td>
                       ))}
                     </tr>
-                    {Array.from({ length: 8 }, (_, i) => {
+                    {Array.from({ length: 4 }, (_, i) => {
                       const description = row.deskripsi.find(
                         (d) => d.range[0] === i + 1
                       );
@@ -179,7 +223,7 @@ export const NilaiRoleplay: React.FC = () => {
                             colSpan={
                               description.range[1] - description.range[0] + 1
                             }
-                            className="p-2 border border-gray-300 text-center bg-gray-100"
+                            className="p-2 border-r text-center"
                           >
                             <span className="text-sm text-gray-600">
                               {description.text}
@@ -210,10 +254,211 @@ export const NilaiRoleplay: React.FC = () => {
                       return null; // Skip cells that fall within a merged range
                     })}
                   </td>
+                  {/* cukup 5 - 6*/}
+                  <td className="w-10 border border-gray-300 text-center">
+                    <tr>
+                      {Array.from({ length: 2 }, (_, i) => (
+                        <td
+                          key={5}
+                          className={`w-20 p-2 border-r border-b text-center cursor-pointer ${
+                            selectedValues[row.id] === i + 5
+                              ? "bg-blue-500 text-white"
+                              : "hover:bg-gray-200"
+                          }`}
+                          onClick={() => handleSelect(row.id, i + 5)}
+                        >
+                          {i + 5}
+                        </td>
+                      ))}
+                    </tr>
+                    {Array.from({ length: 2 }, (_, i) => {
+                      const description = row.deskripsi.find(
+                        (d) => d.range[0] === i + 5
+                      );
+                      if (description) {
+                        return (
+                          <td
+                            key={5}
+                            colSpan={
+                              description.range[1] - description.range[0] + 1
+                            }
+                            className="p-2 border-r  text-cente"
+                          >
+                            <span className="text-sm text-gray-600">
+                              {description.text}
+                            </span>
+                          </td>
+                        );
+                      } else if (
+                        !row.deskripsi.some((d) => d.range.includes(i + 5))
+                      ) {
+                        return (
+                          <td
+                            key={5}
+                            className="p-2 border border-gray-300 text-center"
+                          >
+                            <button
+                              className={`px-2 py-1 rounded ${
+                                selectedValues[row.id] === i + 5
+                                  ? "bg-blue-500 text-white"
+                                  : "bg-gray-200"
+                              }`}
+                              onClick={() => handleSelect(row.id, i + 5)}
+                            >
+                              {i + 5}
+                            </button>
+                          </td>
+                        );
+                      }
+                      return null; // Skip cells that fall within a merged range
+                    })}
+                  </td>
+                  {/* baik 7 - 8*/}
+                  <td className="w-20 border border-gray-300 text-center">
+                    <tr>
+                      {Array.from({ length: 2 }, (_, i) => (
+                        <td
+                          key={7}
+                          className={`w-20 p-2 border-r border-b text-center cursor-pointer ${
+                            selectedValues[row.id] === i + 7
+                              ? "bg-blue-500 text-white"
+                              : "hover:bg-gray-200"
+                          }`}
+                          onClick={() => handleSelect(row.id, i + 7)}
+                        >
+                          {i + 7}
+                        </td>
+                      ))}
+                    </tr>
+                    {Array.from({ length: 2 }, (_, i) => {
+                      const description = row.deskripsi.find(
+                        (d) => d.range[0] === i + 7
+                      );
+                      if (description) {
+                        return (
+                          <td
+                            key={5}
+                            colSpan={
+                              description.range[1] - description.range[0] + 1
+                            }
+                            className="p-2 border-r  text-cente"
+                          >
+                            <span className="text-sm text-gray-600">
+                              {description.text}
+                            </span>
+                          </td>
+                        );
+                      } else if (
+                        !row.deskripsi.some((d) => d.range.includes(i + 7))
+                      ) {
+                        return (
+                          <td
+                            key={7}
+                            className="p-2 border border-gray-300 text-center"
+                          >
+                            <button
+                              className={`px-2 py-1 rounded ${
+                                selectedValues[row.id] === i + 7
+                                  ? "bg-blue-500 text-white"
+                                  : "bg-gray-200"
+                              }`}
+                              onClick={() => handleSelect(row.id, i + 7)}
+                            >
+                              {i + 7}
+                            </button>
+                          </td>
+                        );
+                      }
+                      return null; // Skip cells that fall within a merged range
+                    })}
+                  </td>
+                  {/* sangat baik 9 - 10*/}
+                  <td className="w-32 border border-gray-300 text-center">
+                    <tr>
+                      {Array.from({ length: 2 }, (_, i) => (
+                        <td
+                          key={9}
+                          className={`w-20 p-2 border-r border-b text-center cursor-pointer ${
+                            selectedValues[row.id] === i + 9
+                              ? "bg-blue-500 text-white"
+                              : "hover:bg-gray-200"
+                          }`}
+                          onClick={() => handleSelect(row.id, i + 9)}
+                        >
+                          {i + 9}
+                        </td>
+                      ))}
+                    </tr>
+                    {Array.from({ length: 2 }, (_, i) => {
+                      const description = row.deskripsi.find(
+                        (d) => d.range[0] === i + 9
+                      );
+                      if (description) {
+                        return (
+                          <td
+                            key={9}
+                            colSpan={
+                              description.range[1] - description.range[0] + 1
+                            }
+                            className="p-2 border-r  text-cente"
+                          >
+                            <span className="text-sm text-gray-600">
+                              {description.text}
+                            </span>
+                          </td>
+                        );
+                      } else if (
+                        !row.deskripsi.some((d) => d.range.includes(i + 9))
+                      ) {
+                        return (
+                          <td
+                            key={9}
+                            className="p-2 border border-gray-300 text-center"
+                          >
+                            <button
+                              className={`px-2 py-1 rounded ${
+                                selectedValues[row.id] === i + 9
+                                  ? "bg-blue-500 text-white"
+                                  : "bg-gray-200"
+                              }`}
+                              onClick={() => handleSelect(row.id, i + 9)}
+                            >
+                              {i + 9}
+                            </button>
+                          </td>
+                        );
+                      }
+                      return null; // Skip cells that fall within a merged range
+                    })}
+                  </td>
+                  <td className="w-40 border border-gray-300 text-center">
+                    <input
+                      type="text"
+                      placeholder="Ketik disini"
+                      className="text-center w-full rounded p-2 focus:outline-none"
+                    />
+                  </td>
+                  <td className="w-60 border border-gray-300 text-center">
+                    <input
+                      type="text"
+                      placeholder="Ketik disini"
+                      className="text-center w-full rounded p-2 focus:outline-none"
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Buttons */}
+        <div className="mt-6 flex justify-end">
+          <Link
+            to="/submit-roleplay"
+            className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg"
+          >
+            Kumpulkan
+          </Link>
         </div>
       </div>
     </div>
