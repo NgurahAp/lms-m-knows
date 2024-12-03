@@ -14,7 +14,7 @@ const data = [
       { range: [3, 4], text: "Mendengarkan hanya sebagian kecil waktu" },
       { range: [5, 6], text: "Mendengarkan sebagian besar waktu" },
       { range: [7, 8], text: "Mendengarkan hampir semua waktu" },
-      { range: [9, 10], text: "Mendengarkan hingga sepenuhnya" },
+      { range: [9, 10], text: "Mendengarkan hingga sepenuhnyaa" },
     ],
   },
   {

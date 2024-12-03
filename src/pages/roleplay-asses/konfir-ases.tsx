@@ -182,7 +182,7 @@ export const KonfirAses: React.FC = () => {
             Resolusi Konflik di Tempat Kerja Dalam tim kerja Anda, terjadi
             konflik antara dua anggota tim, yaitu Alex dan Dana. Alex merasa
             bahwa Dana tidak memberikan kontribusi yang cukup dan merasa
-            frustrasi.
+            frustrasii.
           </p>
           <p className="text-gray-700 mb-2">
             Berikut merupakan link pertemuan Asesmen via zoom :
