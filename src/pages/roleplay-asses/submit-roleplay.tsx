@@ -1,40 +1,26 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
-import { FaInfoCircle } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { FaCalendar } from "react-icons/fa";
-
-const teamsData = [
-  {
-    id: 1,
-    name: "Tim Roleplay 1",
-    members: [
-      "Rizki Pratama",
-      "Wizil Pratama",
-      "Meyza Pratama",
-      "Alfatih Pratama",
-    ],
-    notes: "",
-    isFull: true,
-  },
-  {
-    id: 2,
-    name: "Tim Roleplay 2",
-    members: ["Cahyadi", "Guntoro Abdul", "Tersedia", "Tersedia"],
-    notes: "Sudah di-booking untuk John dan Lukas yaaa",
-    isFull: false,
-  },
-];
+import { useRoleplayData } from "../../services/RoleplayService"; // Import the new service
 
 export const SubmitRoleplay: React.FC = () => {
-  const [teams, setTeams] = useState(teamsData);
+  const { isLoading: isRoleplayLoading, isError: isRoleplayError } =
+    useRoleplayData(); // Use the custom hook to fetch roleplay data
 
-  const handleNotesChange = (id: number, value: string) => {
-    setTeams((prev) =>
-      prev.map((team) => (team.id === id ? { ...team, notes: value } : team))
+  if (isRoleplayLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
     );
-  };
+  }
+
+  if (isRoleplayError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Error fetching roleplay data.
+      </div>
+    );
+  }
 
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:pb-4 md:px-36 px-8 bg-gray-100">
@@ -56,132 +42,107 @@ export const SubmitRoleplay: React.FC = () => {
         </span>
         <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
+          Pilih Roleplay
+        </span>
+        <FaChevronRight className="text-gray-300 mx-4" />
+        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
           Roleplay Kewirausahaan
         </span>
         <FaChevronRight className="text-gray-300 mx-4" />
         <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Pilih Rekan
+          Detail Roleplay
         </span>
       </div>
 
       {/* Header */}
-      <div className="bg-white w-full h-72 items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className="md:text-lg text-sm font-semibold">
-          Roleplay Kewirausahaan
-        </h1>
-        <div className="mt-5">
-          <p className="text-lg mt-2">
-            Mata Kuliah : Pendidikan Kewarganegaraan
-          </p>
-          <p className="text-lg mt-2">
-            Peran : Peran Satu, Peran Dua, Peran Tiga
-          </p>
-          <p className="text-lg mt-2">Kode Roleplay : 12AFS5</p>
-          <p className="text-lg mt-2">
-            Deskirpsi : Resolusi Konflik di Tempat Kerja Dalam tim kerja Anda,
-            terjadi konflik antara dua anggota tim, yaitu Alex dan Dana. Alex
-            merasa bahwa Dana tidak memberikan kontribusi yang cukup dan merasa
-            frustrasi.
-          </p>
-        </div>
+      <div className="bg-white w-full h-6 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
+        <h1 className="md:text-lg text-sm font-semibold">Roleplay</h1>
       </div>
 
       {/* Main Content */}
-      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10 flex flex-col items-center p-6">
-        <h1 className="text-2xl font-semibold mb-6 mt-6">
-          Pilih Rekan Roleplay
-        </h1>
-        <div className="w-full max-w-5xl space-y-6">
-          {teams.map((team) => (
-            <div
-              key={team.id}
-              className="bg-white rounded-lg p-6 border border-gray-200"
-            >
-              <div className="flex items-center mb-4 justify-between">
-                <div className="flex">
-                  <h2 className="text-lg font-semibold">{team.name}</h2>
-                  <FaInfoCircle className="text-lg text-blue-600 ml-4 mt-1" />
-                </div>
-                <div className="w-1/2">
-                  <h2 className="text-lg font-semibold">Catatan</h2>
-                </div>
-              </div>
+      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10 flex flex-col p-6">
+        <div className="mb-2">
+          <h3 className="text-lg font-semibold mt-6 mb-6 ml-4">
+            Status Penyerahan
+          </h3>
+        </div>
+        <table className="table-auto w-full border md:text-base text-xs border-gray-300 mx-2">
+          <tbody>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300 w-1/2">
+                Tenggat Waktu
+              </td>
+              <td className="p-4">Rabu, 15 November 2023, 15:00 WIB</td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Link Rekaman Roleplay
+              </td>
+              <td className="p-4">
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r w-1/4 border-gray-300">
+                Status Penyerahan
+              </td>
+              <td className="p-4 bg-green-100">Sudah Mengumpulkan</td>
+            </tr>
 
-              {/* Members */}
-              <div className="flex justify-between">
-                <div className="w-96 grid gap-4 mb-4">
-                  {team.members.map((member, index) => (
-                    <div key={index} className="flex items-center gap-4">
-                      {/* Box Nama */}
-                      <div
-                        className={`flex items-center p-2 border rounded-lg text-center ${
-                          member === "Tersedia" ? "text-gray-400" : "text-black"
-                        }`}
-                        style={{
-                          width: "400px", // Set panjang seragam
-                        }}
-                      >
-                        {member !== "Tersedia" && (
-                          <FaUsers className="mr-4 items-center text-lg text-gray-500" />
-                        )}
-                        <span>{member}</span>
-                      </div>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Nilai Anda (Berdasarkan Penilaian Rekan)
+              </td>
+              <td className="p-4">85</td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Role Utama
+              </td>
+              <td className="p-4">Rizki Pratama</td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Role Rekan
+              </td>
+              <td className="p-4">Theopilus Lukas</td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Role Observer
+              </td>
+              <td className="p-4">Aryo Bhodro</td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Waktu Tersisa
+              </td>
+              <td className="p-4">15 hari 22 jam 8 menit</td>
+            </tr>
 
-                      {/* Checkbox */}
-                      <input
-                        type="checkbox"
-                        className="form-checkbox text-blue-600 rounded"
-                        disabled={member === "Tersedia"} // Disable if "Tersedia"
-                        onChange={(e) => {
-                          console.log(
-                            `${member} is ${
-                              e.target.checked ? "selected" : "unselected"
-                            }`
-                          );
-                        }}
-                      />
-                    </div>
-                  ))}
+            <tr className="border-b">
+              <td className="p-4 font-medium border-r border-gray-300">
+                Kode Roleplay
+              </td>
+              <td className="p-4">KGRPOB1212</td>
+            </tr>
+          </tbody>
+        </table>
 
-                  <select
-                    className="border rounded-lg p-2 text-gray-600"
-                    disabled={team.isFull}
-                  >
-                    <option>
-                      <FaCalendar className="text-lg text-gray-500" /> Pilih
-                      Jadwal
-                    </option>
-                    <option>Jadwal 1</option>
-                    <option>Jadwal 2</option>
-                  </select>
-                </div>
-
-                {/* Actions */}
-                <div className="w-3/6">
-                  {/* Notes */}
-                  <textarea
-                    className="w-full h-52 border rounded-lg p-2 mb-4 text-gray-700"
-                    placeholder="Tulis catatan"
-                    value={team.notes}
-                    onChange={(e) => handleNotesChange(team.id, e.target.value)}
-                  />
-                  <a
-                    href={team.isFull ? "#" : "/konfir-roleplay"}
-                    className={`w-full px-4 py-2 rounded-lg text-white text-center block ${
-                      team.isFull
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={(e) => {
-                      if (team.isFull) e.preventDefault();
-                    }}
-                  >
-                    {team.isFull ? "Tim Penuh" : "Konfirmasi"}
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="mt-6 text-right">
+          <Link
+            to="/pilih-roleplay"
+            className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition"
+          >
+            Kembali
+          </Link>
         </div>
       </div>
     </div>
