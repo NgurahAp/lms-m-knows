@@ -6,6 +6,7 @@ import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { MdVideoLibrary } from "react-icons/md";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { BackLink } from "../../../components/reusable/BackLink";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const Module = () => {
   const { subjectId, sessionId } = useParams<{
@@ -49,14 +50,10 @@ export const Module = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white flex flex-col mt-5 px-5 md:px-8  justify-center rounded-lg">
-        <h1 className="md:text-3xl text-base font-semibold pb-1 md:pt-8 pt-4">
-          {data?.detail.subject_name}
-        </h1>
-        <p className="text-gray-500 text-sm md:text-lg md:pb-8 pb-4">
-          Pertemuan {data?.detail.session_no}
-        </p>
-      </div>
+      <PageInfo
+        title={data?.detail.subject_name}
+        subtitle={`Pertemuan ${data?.detail.session_no}`}
+      />
       <div className="bg-white flex flex-col  mt-5 md:p-8 p-5">
         <div className=" w-full  gap-y-8">
           {data?.modules.map((module) => (

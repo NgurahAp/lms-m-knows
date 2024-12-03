@@ -68,12 +68,12 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
             <Link
               to={`/pelatihanku/${subject.id}`}
               className={`${
-                subject.current_session / subject.session_count === 1
+                subject.progress_percentage === 100
                   ? "bg-gray-200"
                   : "bg-blue-500 text-white"
               } px-4 py-2 mr-5 rounded-lg md:text-base text-sm`}
             >
-              {subject.current_session / subject.session_count === 1
+              {subject.progress_percentage === 100
                 ? "Selesai"
                 : "Lanjut Belajar"}
             </Link>

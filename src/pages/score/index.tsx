@@ -6,6 +6,7 @@ import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { useCertificateResponse, useScoreResponse } from "../../hooks/useScore";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 import { EmptyState } from "../../components/reusable/EmptyState";
+import PageInfo from "../../components/reusable/PageInfo";
 
 export const Score: React.FC = () => {
   const {
@@ -58,20 +59,19 @@ export const Score: React.FC = () => {
 
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 md:pb-4">
+    <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className=" md:text-lg text-sm font-semibold">
-          Nilai dan Sertifikat
-        </h1>
-      </div>
-
+      <PageInfo
+        title="Nilai dan Sertifikat"
+      />
       {/* Main Content Card */}
       <div className="px-5 bg-white rounded-lg shadow-lg w-full ">
+      <div className="px-5 mt-5 bg-white rounded-lg shadow-lg w-full">
         {/* Tabs */}
         <div className="p-8">
-          <div className="flex flex-wrap border-b border-white">
+          <div className="flex flex-wrap justify-center md:justify-normal border-b border-white">
             <button
-              className={`py-4 px-10 md:text-lg text-lg font-semibold border-1 whitespace-nowrap ${
+              className={`md:py-4 py-2 md:px-10 px-5 md:text-lg text-base font-semibold border-1  ${
                 activeTab === "nilai"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -81,7 +81,7 @@ export const Score: React.FC = () => {
               Nilai
             </button>
             <button
-              className={`py-4 px-10 md:text-lg text-lg font-semibold border-1 whitespace-nowrap ${
+              className={`md:py-4 py-2 px-10 md:text-lg text-base font-semibold border-1  ${
                 activeTab === "sertifikat"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -94,7 +94,7 @@ export const Score: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="px-6 pb-8">
+        <div className="md:px-6 px-2 pb-8">
           {activeTab === "nilai" && (
             <>
               {subjects.length === 0 ? (
@@ -104,18 +104,18 @@ export const Score: React.FC = () => {
                   {subjects.map((subject) => (
                     <div
                       key={subject.id}
-                      className="bg-white border rounded-lg p-6 shadow-sm"
+                      className="bg-white border rounded-lg md:p-6 p-4 shadow-sm"
                     >
-                      <h3 className="text-xl font-bold mb-4 line-clamp-2">
+                      <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4 line-clamp-2">
                         {subject.name}
                       </h3>
                       <div className="space-y-3">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">
+                          <span className="text-xs md:text-sm text-gray-600">
                             Status Perkuliahan
                           </span>
                           <span
-                            className={`text-sm font-medium ${
+                            className={`text-xs md:text-sm font-medium ${
                               subject.status === "BELUM SELESAI"
                                 ? "text-yellow-500"
                                 : "text-green-500"
@@ -125,15 +125,15 @@ export const Score: React.FC = () => {
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Nilai</span>
-                          <span className="text-sm font-medium">
+                          <span className="text-xs md:text-sm text-gray-600">Nilai</span>
+                          <span className="text-xs md:text-sm font-medium">
                             {subject.score} ({subject.score_letter})
                           </span>
                         </div>
                         <div className="pt-2 flex justify-end">
                           <Link
                             to={`/detailScore/${subject.id}`}
-                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs md:text-sm"
                           >
                             Lihat Detail
                           </Link>

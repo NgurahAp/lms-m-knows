@@ -52,19 +52,21 @@ export const AuthCarousel: React.FC = () => {
 
   return (
     <div
-      className="w-full h-full bg-[#3498DB] bg-cover  flex flex-col items-center justify-center relative overflow-hidden"
+      className="w-full h-full bg-[#3498DB] bg-cover flex flex-col items-center justify-center relative"
       style={{ backgroundImage: "url('/auth/bg.png')" }}
     >
-      {carouselData.map((item, index) => (
-        <div
-          key={index}
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <CarouselItem {...item} />
-        </div>
-      ))}
+      <div className="w-full h-full relative">
+        {carouselData.map((item, index) => (
+          <div
+            key={index}
+            className={`w-full h-full transition-opacity duration-500 ${
+              index === currentSlide ? "block" : "hidden"
+            }`}
+          >
+            <CarouselItem {...item} />
+          </div>
+        ))}
+      </div>
       <div className="absolute bottom-28 left-0 right-0 flex justify-center">
         {carouselData.map((_, index) => (
           <button
