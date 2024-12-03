@@ -4,7 +4,6 @@ import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import PageInfo from "../../components/reusable/PageInfo";
 
 export const DetailScore: React.FC = () => {
   const { subjectId } = useParams<{
@@ -50,9 +49,11 @@ export const DetailScore: React.FC = () => {
   return (
     <div className="flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
-      <PageInfo
-        title='Nilai'
-      />
+      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl">
+        <h1 className=" md:text-lg text-sm font-semibold">
+          Nilai
+        </h1>
+      </div>
       <div className="bg-white w-full h-full items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className="text-base md:text-xl font-semibold mb-4">
           Pelatihan Keterampilan Komunikasi
@@ -75,11 +76,21 @@ export const DetailScore: React.FC = () => {
                   <td className="md:p-8 p-4 md:text-base text-xs border-b-2 border-gray-200 text-left">
                     {session.title}
                   </td>
-                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.module_score}</td>
-                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.quiz_score}</td>
-                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.assignment_score}</td>
-                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.average_score}</td>
-                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.average_score_letter}</td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">
+                    {session.module_score}
+                  </td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">
+                    {session.quiz_score}
+                  </td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">
+                    {session.assignment_score}
+                  </td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">
+                    {session.average_score}
+                  </td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">
+                    {session.average_score_letter}
+                  </td>
                 </tr>
               ))}
             </tbody>
