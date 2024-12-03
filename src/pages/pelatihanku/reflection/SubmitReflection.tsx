@@ -4,6 +4,7 @@ import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BackLink } from "../../../components/reusable/BackLink";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const SubmitReflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -80,15 +81,10 @@ export const SubmitReflection = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      {/* Info */}
-      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
-        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
-          Refleksi Ekplorasi
-        </h1>
-        <p className="text-sm md:text-lg">
-          Pertemuan {reflectionData?.data.session_no}{" "}
-        </p>
-      </div>
+      <PageInfo
+        title="Refleksi Eksplorasi"
+        subtitle={`Pertemuan ${reflectionData?.data.session_no}`}
+      />
       {/* Content */}
       <div className="md:p-8 my-6 bg-white">
         <div className="md:border p-5 rounded-lg">

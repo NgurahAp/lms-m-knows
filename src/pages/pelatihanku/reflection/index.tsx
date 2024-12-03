@@ -3,6 +3,7 @@ import { useReflectionData } from "../../../hooks/pelatihanku/useReflection";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 import { BackLink } from "../../../components/reusable/BackLink";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 export const Reflection = () => {
   const { subjectId, sessionId } = useParams<{
@@ -47,13 +48,10 @@ export const Reflection = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      {/* Info */}
-      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
-        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
-          Refleksi Ekplorasi
-        </h1>
-        <p className="text-sm md:text-lg">Pertemuan {data?.data.session_no}</p>
-      </div>
+      <PageInfo
+        title="Refleksi Eksplorasi"
+        subtitle={`Pertemuan ${data?.data.session_no}`}
+      />      
       {/* Content */}
       <div className="p-8 my-8 bg-white">
         <div className="flex md:flex-row flex-col items-center pb-3">

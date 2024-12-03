@@ -4,6 +4,7 @@ import LoadingSpinner from "../../components/reusable/LoadingSpinner";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import PageInfo from "../../components/reusable/PageInfo";
 
 export const DetailScore: React.FC = () => {
   const { subjectId } = useParams<{
@@ -47,19 +48,19 @@ export const DetailScore: React.FC = () => {
   console.log(subjectId);
 
   return (
-    <div className="flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className="md:text-lg text-sm font-semibold">Nilai</h1>
-      </div>
+      <PageInfo
+        title='Nilai'
+      />
       <div className="bg-white w-full h-full items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className="text-xl font-semibold mb-4">
+        <h1 className="text-base md:text-xl font-semibold mb-4">
           Pelatihan Keterampilan Komunikasi
         </h1>
         <div className="overflow-x-auto border rounded-xl shadow-md">
           <table className="min-w-full bg-white border border-gray-300 text-sm">
             <thead>
-              <tr className="h-14 px-4 py-4 border-b-2 border-gray-200 text-lg  text-center bg-blue-500 text-white">
+              <tr className="h-14 px-4 py-4 border-b-2 border-gray-200 md:text-lg text-base  text-center bg-blue-500 text-white">
                 <th className="py-2 px-4 border font-normal">Judul</th>
                 <th className="py-2 px-6 border font-normal">Modul</th>
                 <th className="py-2 px-6 border font-normal">Quiz</th>
@@ -71,14 +72,14 @@ export const DetailScore: React.FC = () => {
             <tbody>
               {sessions.map((session) => (
                 <tr key={session.id} className="text-center font-medium">
-                  <td className="p-8 border-b-2 border-gray-200 text-left">
+                  <td className="md:p-8 p-4 md:text-base text-xs border-b-2 border-gray-200 text-left">
                     {session.title}
                   </td>
-                  <td className="p-8 border">{session.module_score}</td>
-                  <td className="p-8 border">{session.quiz_score}</td>
-                  <td className="p-8 border">{session.assignment_score}</td>
-                  <td className="p-8 border">{session.average_score}</td>
-                  <td className="p-8 border">{session.average_score_letter}</td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.module_score}</td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.quiz_score}</td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.assignment_score}</td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.average_score}</td>
+                  <td className="md:p-8 p-4 md:text-base text-xs border">{session.average_score_letter}</td>
                 </tr>
               ))}
             </tbody>
