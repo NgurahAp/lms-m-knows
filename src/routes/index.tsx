@@ -15,9 +15,6 @@ import { Login } from "../pages/auth/login";
 import { Quiz } from "../pages/pelatihanku/quiz";
 import { DetailQuiz } from "../pages/pelatihanku/quiz/DetailQuiz";
 import { QuizAttempt } from "../pages/pelatihanku/quiz/QuizAttempt";
-import { RoleplayAsses } from "../pages/roleplay-asses";
-import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
-import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 import { Assignment } from "../pages/pelatihanku/assignments";
 import { DetailAssignment } from "../pages/pelatihanku/assignments/DetailAssignment";
 import { Reflection } from "../pages/pelatihanku/reflection";
@@ -28,8 +25,16 @@ import { AttemptAssesment } from "../pages/pelatihanku/assesment/AttemptAssesmen
 import { Discussion } from "../pages/pelatihanku/discussion";
 import { Score } from "../pages/score";
 import { DetailScore } from "../pages/score/DetailScore";
-import { Roleplay } from "../pages/roleplay";
-import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
+import { RoleplayAsses } from "../pages/roleplay-asses";
+import { PilihRoleplay } from "../pages/roleplay-asses/pilih-roleplay";
+import { DaftarRoleplay } from "../pages/roleplay-asses/daftar-roleplay";
+import { KonfirRoleplay } from "../pages/roleplay-asses/konfir-roleplay";
+import { NilaiRoleplay } from "../pages/roleplay-asses/nilai-roleplay";
+import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
+import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
+import { KonfirAses } from "../pages/roleplay-asses/konfir-ases";
+import { NilaiAses } from "../pages/roleplay-asses/nilai-ases";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -213,30 +218,6 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/roleplay"
-            element={
-              <ProtectedRoute>
-                <Roleplay />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/listRoleplay"
-            element={
-              <ProtectedRoute>
-                <ListRoleplay />
-              </ProtectedRoute>
-            }
-          />
-          {/* <Route
-            path="/pelatihan-keterampilan"
-            element={
-              <ProtectedRoute>
-                <PelatihanKet />
-              </ProtectedRoute>
-            }
-          /> */}
-          <Route
             path="/roleplay-asses"
             element={
               <ProtectedRoute>
@@ -253,6 +234,38 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
+            path="/daftar-roleplay"
+            element={
+              <ProtectedRoute>
+                <DaftarRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/konfir-roleplay"
+            element={
+              <ProtectedRoute>
+                <KonfirRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nilai-roleplay"
+            element={
+              <ProtectedRoute>
+                <NilaiRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/submit-roleplay"
+            element={
+              <ProtectedRoute>
+                <SubmitRoleplay />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/pilih-ases"
             element={
               <ProtectedRoute>
@@ -260,6 +273,54 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/konfir-ases"
+            element={
+              <ProtectedRoute>
+                <KonfirAses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nilai-ases"
+            element={
+              <ProtectedRoute>
+                <NilaiAses />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route
+            path="/pelatihan-keterampilan"
+            element={
+              <ProtectedRoute>
+                <PelatihanKet />
+              </ProtectedRoute>
+            }
+          /> */}
+          {/* <Route
+            path="/roleplay-asses"
+            element={
+              <ProtectedRoute>
+                <RoleplayAsses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pilih-roleplay"
+            element={
+              <ProtectedRoute>
+                <PilihRoleplay />
+              </ProtectedRoute>
+            }
+          /> */}
+          {/* <Route
+            path="/pilih-ases"
+            element={
+              <ProtectedRoute>
+                <PilihAses />
+              </ProtectedRoute>
+            }
+          /> */}
         </Routes>
       </MainLayout>
     </Router>

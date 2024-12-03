@@ -32,7 +32,7 @@ export const RoleplayAsses: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+    <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 md:pb-4 px-8 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <Link to="/dashboard" className="flex items-center">
           <img
@@ -72,7 +72,7 @@ export const RoleplayAsses: React.FC = () => {
             <div className="flex-1 bg-white p-4 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
                 <img
-                  src="/roleplay/video-conference.png"
+                  src="/roleplay/roleplay.png"
                   alt="Roleplay Icon"
                   className="w-10 h-10 mr-3"
                 />
@@ -97,7 +97,7 @@ export const RoleplayAsses: React.FC = () => {
             <div className="flex-1 bg-white p-4 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
                 <img
-                  src="/roleplay/discussion.png"
+                  src="/roleplay/asesment.png"
                   alt="Assessment Icon"
                   className="w-10 h-10 mr-3"
                 />
