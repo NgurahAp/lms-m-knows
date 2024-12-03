@@ -164,7 +164,7 @@ export const PelatihankuDetail: React.FC = () => {
           </span>
           {getStatusIcon("REFLECTION", session.progress)}
         </li>
-        <li
+        {/* <li
           onClick={() =>
             handleItemClick("ASSESSMENT", session.progress, () => {
               navigate(
@@ -184,7 +184,7 @@ export const PelatihankuDetail: React.FC = () => {
             Kualitas Pengajar & Materi Ajar
           </span>
           {getStatusIcon("ASSESSMENT", session.progress)}
-        </li>
+        </li> */}
         <li className="flex h-14 items-center px-4 py-2 hover:bg-gray-100 border-b-2 border-gray-200 cursor-pointer">
           <img src="/pelatihanku/diskusi.png" className="mr-2 " alt="" />
           <Link
