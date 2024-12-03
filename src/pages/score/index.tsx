@@ -92,24 +92,6 @@ export const Score: React.FC = () => {
 
         {/* Content */}
         <div className="px-6 pb-8">
-          {activeTab === "nilai" && (
-            <>
-              {subjects.length === 0 ? (
-                <EmptyState message="Tidak ada data nilai yang tersedia" />
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                  {subjects.map((subject) => (
-                    <div
-                      key={subject.id}
-                    >
-                      <h3 className="text-xl font-bold mb-4 line-clamp-2">
-                        {subject.name}
-                      </h3>
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">
-                            Status Perkuliahan
-                          </span>
           {/* Content */}
           <div className="md:px-6 px-2 pb-8">
             {activeTab === "nilai" && (
@@ -221,6 +203,7 @@ export const Score: React.FC = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
