@@ -92,6 +92,8 @@ export const Score: React.FC = () => {
             </div>
           </div>
 
+        {/* Content */}
+        <div className="px-6 pb-8">
           {/* Content */}
           <div className="md:px-6 px-2 pb-8">
             {activeTab === "nilai" && (
@@ -203,6 +205,7 @@ export const Score: React.FC = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
