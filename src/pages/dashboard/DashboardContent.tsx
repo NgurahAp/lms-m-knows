@@ -23,23 +23,32 @@ const DashboardContent: React.FC<DashboardContentProps> = ({
     return () => clearInterval(interval);
   }, [filteredBannerData.length]);
 
-  // console.log(dashboardBannerdata);
-
   return (
     <div className="md:w-[70%] w-full bg-gray-100 md:pl-6 pl-0 md:py-6">
       <div className="relative overflow-hidden h-72 rounded-3xl hidden md:block">
-        {filteredBannerData.map((banner, index) => (
-          <img
-            key={banner.id}
-            src={banner.url}
-            className={`absolute w-full h-full object-cover transition-transform duration-500 ease-in-out ${
-              index === currentImageIndex ? "translate-x-0" : "translate-x-full"
-            }`}
-            style={{
-              transform: `translateX(${(index - currentImageIndex) * 100}%)`,
-            }}
-          />
-        ))}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {filteredBannerData.map((banner, index) => (
+            <img
+              key={banner.id}
+              src={banner.url}
+              alt={`Banner ${index + 1}`}
+              className={`
+                absolute max-w-full max-h-full object-contain 
+                transition-all duration-300 ease-in-out 
+                will-change-transform 
+                transform-gpu 
+                ${
+                  index === currentImageIndex
+                    ? "opacity-100 visible"
+                    : "opacity-0 invisible"
+                }
+                hover:brightness-110 hover:contrast-110
+              `}
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
       </div>
       <SubjectProgress subjectProgressData={dashboardData.subject_progress} />
       <Calendar calendarData={dashboardData.calendar} />

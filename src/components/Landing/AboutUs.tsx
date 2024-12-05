@@ -1,6 +1,6 @@
 export const AboutUs = () => {
   return (
-    <section className="bg-blue-700 text-white md:py-12  md:px-12">
+    <section className="bg-[#106FA4] text-white md:py-12  md:px-12">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col justify-center md:m-10 mx-5 mt-5">
           <h1 className="text-2xl md:text-5xl font-bold md:pb-10 pb-5">
