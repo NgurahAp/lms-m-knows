@@ -60,7 +60,7 @@ export const Score: React.FC = () => {
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 md:pb-4">
       <Breadcrumb items={breadcrumbItems} />
       {/* <PageInfo title="Nilai dan Sertifikat" className="text-sm" /> */}
-      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
+      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl">
         <h1 className=" md:text-lg text-sm font-semibold">Nilai dan Sertifikat</h1>
       </div>
       {/* Main Content Card */}
@@ -92,6 +92,8 @@ export const Score: React.FC = () => {
             </div>
           </div>
 
+        {/* Content */}
+        <div className="px-6 pb-8">
           {/* Content */}
           <div className="md:px-6 px-2 pb-8">
             {activeTab === "nilai" && (
@@ -203,6 +205,7 @@ export const Score: React.FC = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
