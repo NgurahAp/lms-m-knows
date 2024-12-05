@@ -12,7 +12,7 @@ export const Hero = () => {
             Pelatihan
           </h1>
           <h1 className="md:text-6xl text-2xl font-bold pb-3">
-            Professional Debt Collection Skills <br /> PUEBI
+            Professional Debt Collection Skills 
           </h1>
           <h1 className="md:text-2xl text-sm font-medium">
             9 - 10 Devember 2024 - Gama Tower, Jakarta
