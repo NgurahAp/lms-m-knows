@@ -37,10 +37,9 @@ const ProfileBox: React.FC<FeatureBoxProps> = ({ offset, onClose }) => {
       </div>
       <div className="w-full border-t border-gray-300 mb-2" />
       <Link
-        to="/dashboard"
+        to="/"
         onClick={() => {
           onClose();
-          handleLogout();
         }}
         className="flex p-4 items-center"
       >
