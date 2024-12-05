@@ -20,12 +20,12 @@ export const Hero = () => {
           <div className=" flex md:justify-start gap-5 justify-center">
             <img
               src="/landing/logo.png"
-              className="md:h-20 h-36  rounded text-center md:my-10 my-5"
+              className="md:h-20 h-36  rounded text-center md:my-7 my-5"
               alt=""
             />
             <img
               src="/logo-cemindo.png"
-              className="md:h-20 h-36  rounded text-center md:my-10 my-5"
+              className="md:h-20 h-36  rounded text-center md:my-7 my-5"
               alt=""
             />
           </div>
