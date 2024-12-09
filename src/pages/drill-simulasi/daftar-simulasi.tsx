@@ -26,14 +26,12 @@ const teamsData = [
   },
 ];
 
-export const DaftarRoleplay: React.FC = () => {
-const [teams, setTeams] = useState(teamsData);
+export const DaftarSimulasi: React.FC = () => {
+  const [teams, setTeams] = useState(teamsData);
 
   const handleNotesChange = (id: number, value: string) => {
     setTeams((prev) =>
-      prev.map((team) =>
-        team.id === id ? { ...team, notes: value } : team
-      )
+      prev.map((team) => (team.id === id ? { ...team, notes: value } : team))
     );
   };
 
@@ -47,12 +45,12 @@ const [teams, setTeams] = useState(teamsData);
       path: "/roleplay-asses",
     },
     {
-      label: "Pilih Roleplay",
-      path: "/pilih-roleplay",
+      label: "Roleplay dan Assessmen",
+      path: "/dashboard",
     },
     {
-      label: "Roleplay Kewirausahaan",
-      
+      label: "Roleplay dan Assessmen",
+      path: "/dashboard",
     },
   ];
 
@@ -62,23 +60,27 @@ const [teams, setTeams] = useState(teamsData);
       <Breadcrumb items={breadcrumbItems} />
 
       {/* Header */}
-      <div className="bg-white w-full h-72 items-center justify-between p-9 mt-5 rounded-xl mb-4">
+      <div className="bg-white w-full h-96 items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className="md:text-lg text-sm font-semibold">
-          Roleplay Kewirausahaan
+          Simulasi Bisnis Start-Up
         </h1>
         <div className="mt-5">
-          <p className="text-lg mt-2">
-            Mata Kuliah : Pendidikan Kewarganegaraan
-          </p>
+          <p className="text-lg mt-2">Dosen : Rizki Pratama, S.H., M.Hum.,</p>
+          <p className="text-lg mt-2">Pelatihan : Bisnis Start-Up</p>
           <p className="text-lg mt-2">
             Peran : Peran Satu, Peran Dua, Peran Tiga
           </p>
-          <p className="text-lg mt-2">Kode Roleplay : 12AFS5</p>
+          <p className="text-lg mt-2">Kode Simulasi : 12AFS5</p>
           <p className="text-lg mt-2">
-            Deskirpsi : Resolusi Konflik di Tempat Kerja Dalam tim kerja Anda,
-            terjadi konflik antara dua anggota tim, yaitu Alex dan Dana. Alex
-            merasa bahwa Dana tidak memberikan kontribusi yang cukup dan merasa
-            frustrasi.
+            Target output Minimal: Produk terjual minimal mencapai 43 lusin
+          </p>
+          <p className="text-lg mt-2">
+            Deskripsi : Simulasi ini membutuhkan minimal 2 team dengan anggota 3
+            orang atau lebih. Simulasi ini akan melatih kemampuan individual
+            sebagai leader dan follower. Resolusi Konflik di Tempat Kerja Dalam
+            tim kerja Anda, terjadi konflik antara dua anggota tim, yaitu Alex
+            dan Dana. Alex merasa bahwa Dana tidak memberikan kontribusi yang
+            cukup dan merasa frustrasi.
           </p>
         </div>
       </div>
@@ -86,7 +88,7 @@ const [teams, setTeams] = useState(teamsData);
       {/* Main Content */}
       <div className="bg-white rounded-lg shadow-lg w-full md:pb-10 flex flex-col items-center p-6">
         <h1 className="text-2xl font-semibold mb-6 mt-6">
-          Pilih Rekan Roleplay
+          Pilih Rekan Simulasi
         </h1>
         <div className="w-full max-w-5xl space-y-6">
           {teams.map((team) => (
@@ -163,7 +165,7 @@ const [teams, setTeams] = useState(teamsData);
                     onChange={(e) => handleNotesChange(team.id, e.target.value)}
                   />
                   <a
-                    href={team.isFull ? "#" : "/konfir-roleplay"}
+                    href={team.isFull ? "#" : "/konfir-simulasi"}
                     className={`w-full px-4 py-2 rounded-lg text-white text-center block ${
                       team.isFull
                         ? "bg-gray-400 cursor-not-allowed"

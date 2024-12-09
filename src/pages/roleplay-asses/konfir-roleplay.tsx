@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import { useRoleplayData } from "../../services/RoleplayService"; // Import the new service
 import { useState } from "react";
+import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
 export const KonfirRoleplay: React.FC = () => {
   const { isLoading: isRoleplayLoading, isError: isRoleplayError } =
@@ -33,37 +33,20 @@ export const KonfirRoleplay: React.FC = () => {
     );
   }
 
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Roleplay dan Assessmen",
+    },
+  ];
+
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:pb-4 md:px-36 px-8 bg-gray-100">
       {/* Breadcrumb */}
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1 "
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Roleplay
-        </span>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Pilih Roleplay
-        </span>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Roleplay Kewirausahaan
-        </span>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Detail Roleplay
-        </span>
-      </div>
+      <Breadcrumb items={breadcrumbItems} />
 
       {/* Header */}
       <div className="bg-white w-full h-6 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">

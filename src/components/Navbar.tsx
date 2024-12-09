@@ -37,6 +37,7 @@ const Navbar: React.FC = () => {
     { name: "Penugasan", path: "/penugasan" },
     { name: "Nilai & Sertifikat", path: "/score" },
     { name: "Roleplay & Asesmen", path: "/roleplay-asses" },
+    { name: "Sekilas Ilmu", path: "sekilas-ilmu" },
   ];
 
   // Get current page name based on location

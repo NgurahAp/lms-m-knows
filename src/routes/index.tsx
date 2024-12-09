@@ -34,6 +34,12 @@ import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
 import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 import { KonfirAses } from "../pages/roleplay-asses/konfir-ases";
 import { NilaiAses } from "../pages/roleplay-asses/nilai-ases";
+import { DrillSimulasi } from "../pages/drill-simulasi";
+import { PilihDrill } from "../pages/drill-simulasi/pilih-drill";
+import { DaftarDrill } from "../pages/drill-simulasi/daftar-drill";
+import { PilihSimulasi } from "../pages/drill-simulasi/pilih-simulasi";
+import { DaftarSimulasi } from "../pages/drill-simulasi/daftar-simulasi";
+import { KonfirSimulasi } from "../pages/drill-simulasi/konfir-simulasi";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -286,6 +292,54 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <NilaiAses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/drill-simulasi"
+            element={
+              <ProtectedRoute>
+                <DrillSimulasi />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/pilih-drill"
+            element={
+              <ProtectedRoute>
+                <PilihDrill />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/daftar-drill"
+            element={
+              <ProtectedRoute>
+                <DaftarDrill />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/pilih-simulasi"
+            element={
+              <ProtectedRoute>
+                <PilihSimulasi />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/daftar-simulasi"
+            element={
+              <ProtectedRoute>
+                <DaftarSimulasi />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/konfir-simulasi"
+            element={
+              <ProtectedRoute>
+                <KonfirSimulasi />
               </ProtectedRoute>
             }
           />

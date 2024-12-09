@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
 import { FaTag } from "react-icons/fa";
 import { FaDollarSign } from "react-icons/fa";
-import { useRoleplayData } from "../../services/RoleplayService";
+import { useAssessmentsData } from "../../services/AsesmenService";
+import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
 export const PilihAses: React.FC = () => {
   const {
-    data: roleplayData,
-    isLoading: isRoleplayLoading,
-    isError: isRoleplayError,
-  } = useRoleplayData();
+    data: assessmentsData,
+    isLoading: isAssessmentsLoading,
+    isError: isAssessmentsError,
+  } = useAssessmentsData();
 
-  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "selesai">("daftar");
+  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "penilaian" | "selesai">("daftar");
   const [isModalOpen, setModalOpen] = useState(false); // State for the first modal
 
   const [selectedOption, setSelectedOption] = useState<"self" | "others" | null>(null); // State for selection
   const [isConfirmationOpen, setConfirmationOpen] = useState(false); // State for confirmation modal
   const [isConfirmationOpen2, setConfirmationOpen2] = useState(false); // State for confirmation modal
 
-  if (isRoleplayLoading) {
+  if (isAssessmentsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         Loading...
@@ -27,46 +27,37 @@ export const PilihAses: React.FC = () => {
     );
   }
 
-  if (isRoleplayError) {
+  if (isAssessmentsError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Error fetching roleplay data.
+        Error fetching assessments data.
       </div>
     );
   }
 
-  const roleplays = roleplayData?.roleplays ?? [];
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Nilai & Sertifikat",
+    },
+  ];
+
+  const assessmentss = assessmentsData?.assessments ?? [];
 
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:pb-4 md:px-36 px-8 bg-gray-100">
       {/* Breadcrumb */}
-      <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
-        <Link to="/dashboard" className="flex items-center">
-          <img
-            src="/pelatihanku/home.png"
-            className="md:w-6 w-5 -mt-1 "
-            alt="Home"
-          />
-          <span className="md:pl-5 pl-3 text-blue-500 md:text-base text-sm font-semibold">
-            Beranda
-          </span>
-        </Link>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Asesmen
-        </span>
-        <FaChevronRight className="text-gray-300 mx-4" />
-        <span className="text-[#9CA3AF] md:text-base text-sm font-semibold">
-          Pilih Asesmen
-        </span>
-      </div>
+      <Breadcrumb items={breadcrumbItems} />
 
       {/* Main Content */}
-      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10">
+      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10 mt-5">
         <div className="p-6">
           {/* Tabs */}
           <div className="flex flex-wrap border-b border-white">
-            {["daftar", "terjadwal", "selesai"].map((tab) => (
+            {["daftar", "terjadwal", "penilaian", "selesai"].map((tab) => (
               <button
                 key={tab}
                 className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
@@ -86,24 +77,24 @@ export const PilihAses: React.FC = () => {
         <div className="px-6">
           {activeTab === "daftar" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {roleplays.map((roleplay) => (
+              {assessmentss.map((assessments) => (
                 <div
-                  key={roleplay.id}
+                  key={assessments.id}
                   className="bg-white rounded-lg shadow-md p-4"
                 >
                   <img
-                    src={roleplay.subject_thumbnail || "/default-image.jpg"}
-                    alt="Roleplay Image"
+                    src={assessments.thumbnail || "/default-image.jpg"}
+                    alt="assessments Image"
                     className="w-full h-40 object-cover rounded-lg"
                     onError={(e) =>
                       (e.currentTarget.src = "/default-image.jpg")
                     }
                   />
                   <h3 className="text-lg font-semibold mt-2">
-                    {roleplay.topic}
+                    {assessments.topic}
                   </h3>
                   <p className="text-gray-500 text-sm mt-2">
-                    {roleplay.subject_name}
+                    {assessments.subject_name}
                   </p>
                   <div className="flex justify-center mt-4">
                     <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
@@ -125,20 +116,46 @@ export const PilihAses: React.FC = () => {
 
           {activeTab === "terjadwal" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {roleplays.map((roleplay) => (
+              {assessmentss.map((assessments) => (
                 <div
-                  key={roleplay.id}
+                  key={assessments.id}
                   className="bg-white border rounded-md p-4 shadow-md"
                 >
                   <h3 className="text-gray-800 font-medium">
-                    {roleplay.topic}
+                    {assessments.topic}
                   </h3>
-                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <p className="text-sm text-gray-500">
+                    {assessments.start_at}
+                  </p>
                   <a
                     href="#"
                     className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Detail Asesmen
+                    Lihat Detail Assessments
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === "penilaian" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {assessmentss.map((assessments) => (
+                <div
+                  key={assessments.id}
+                  className="bg-white border rounded-md p-4 shadow-md"
+                >
+                  <h3 className="text-gray-800 font-medium">
+                    {assessments.topic}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    {assessments.start_at}
+                  </p>
+                  <a
+                    href="#"
+                    className="block mt-4 text-blue-500 hover:underline text-sm"
+                  >
+                    Lihat Detail Assessments
                   </a>
                 </div>
               ))}
@@ -147,20 +164,22 @@ export const PilihAses: React.FC = () => {
 
           {activeTab === "selesai" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {roleplays.map((roleplay) => (
+              {assessmentss.map((assessments) => (
                 <div
-                  key={roleplay.id}
+                  key={assessments.id}
                   className="bg-white border rounded-md p-4 shadow-md"
                 >
                   <h3 className="text-gray-800 font-medium">
-                    {roleplay.topic}
+                    {assessments.topic}
                   </h3>
-                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <p className="text-sm text-gray-500">
+                    {assessments.start_at}
+                  </p>
                   <a
                     href="#"
                     className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Detail Asesmen
+                    Lihat Detail Assessments
                   </a>
                 </div>
               ))}
@@ -223,7 +242,7 @@ export const PilihAses: React.FC = () => {
           <div className="bg-white rounded-lg shadow-lg p-6 w-96">
             <h2 className="text-lg font-bold mb-4">Konfirmasi</h2>
             <p className="mb-4 text-sm text-gray-500">
-              Apakah Anda yakin ingin melakukan asesmen{" "}
+              Apakah Anda yakin ingin melakukan assessments{" "}
               {selectedOption === "self" ? "diri sendiri" : "orang lain"}? Nilai
               akan keluar berdasarkan{" "}
               {selectedOption === "self"

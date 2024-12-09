@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { useRoleplayData } from "../../services/RoleplayService"; // Import the new service
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
-export const PilihRoleplay: React.FC = () => {
+export const PilihSimulasi: React.FC = () => {
   const {
     data: roleplayData,
     isLoading: isRoleplayLoading,
     isError: isRoleplayError,
   } = useRoleplayData(); // Use the custom hook to fetch roleplay data
 
-  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "selesai">("daftar");
+  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "penilaian" | "selesai">("daftar");
 
   if (isRoleplayLoading) {
     return (
@@ -34,11 +34,11 @@ export const PilihRoleplay: React.FC = () => {
        path: "/dashboard",
      },
      {
-       label: "Roleplay dan Assessmen",
-       path: "/roleplay-asses",
+       label: "Simulasi",
+       path: "/drill-simulasi",
      },
      {
-       label: "Pilih Roleplay",
+       label: "Pilih Simulasi",
      },
    ];
 
@@ -51,7 +51,7 @@ export const PilihRoleplay: React.FC = () => {
 
       {/* Header */}
       <div className="bg-white w-full h-6 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className="md:text-lg text-sm font-semibold">Roleplay</h1>
+        <h1 className="md:text-lg text-sm font-semibold">Simulasi</h1>
       </div>
 
       {/* Main Content */}
@@ -59,7 +59,7 @@ export const PilihRoleplay: React.FC = () => {
         {/* Tabs */}
         <div className="p-6">
           <div className="flex flex-wrap border-b border-white">
-            {["daftar", "terjadwal", "selesai"].map((tab) => (
+            {["daftar", "terjadwal", "penilaian", "selesai"].map((tab) => (
               <button
                 key={tab}
                 className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
@@ -103,7 +103,7 @@ export const PilihRoleplay: React.FC = () => {
                       Lihat Detail
                     </button>
                     <Link
-                      to="/daftar-roleplay"
+                      to="/daftar-simulasi"
                       className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg"
                     >
                       Daftar
@@ -129,7 +129,29 @@ export const PilihRoleplay: React.FC = () => {
                     href="#"
                     className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Rekan Roleplay
+                    Lihat Rekaman Simulasi
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === "penilaian" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {roleplays.map((roleplay) => (
+                <div
+                  key={roleplay.id}
+                  className="bg-white border rounded-md p-4 shadow-md"
+                >
+                  <h3 className="text-gray-800 font-medium">
+                    {roleplay.topic}
+                  </h3>
+                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <a
+                    href="#"
+                    className="block mt-4 text-blue-500 hover:underline text-sm"
+                  >
+                    Lihat Rekaman Simulasi
                   </a>
                 </div>
               ))}
@@ -151,7 +173,7 @@ export const PilihRoleplay: React.FC = () => {
                     href="#"
                     className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Rekan Roleplay
+                    Lihat Rekaman Simulasi
                   </a>
                 </div>
               ))}
