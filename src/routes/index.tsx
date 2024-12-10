@@ -34,6 +34,8 @@ import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
 import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
 import { KonfirAses } from "../pages/roleplay-asses/konfir-ases";
 import { NilaiAses } from "../pages/roleplay-asses/nilai-ases";
+import { SekilasIlmu } from "../pages/sekilas-ilmu";
+import { ArticleDetail } from "../pages/sekilas-ilmu/article";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -286,6 +288,22 @@ const AppRoutes: React.FC = () => {
             element={
               <ProtectedRoute>
                 <NilaiAses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sekilas-ilmu"
+            element={
+              <ProtectedRoute>
+                <SekilasIlmu />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sekilas-ilmu/article/:articleId"
+            element={
+              <ProtectedRoute>
+                <ArticleDetail />
               </ProtectedRoute>
             }
           />

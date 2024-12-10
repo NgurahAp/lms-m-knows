@@ -12,7 +12,7 @@ export const PilihAses: React.FC = () => {
     isError: isRoleplayError,
   } = useRoleplayData();
 
-  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "selesai">("daftar");
+  c
   const [isModalOpen, setModalOpen] = useState(false); // State for the first modal
 
   const [selectedOption, setSelectedOption] = useState<"self" | "others" | null>(null); // State for selection
