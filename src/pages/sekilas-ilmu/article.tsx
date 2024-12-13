@@ -11,9 +11,9 @@ export const ArticleDetail: React.FC = () => {
     error: articleError,
   } = useArticle(slug || "");
   const {
-    data: articleData,
-    isLoading: isArticleDataLoading,
-    error: articleDataError,
+    data: relatedArticles,
+    isLoading: isRelatedLoading,
+    error: relatedError,
   } = useArticleData(article?.id || "");
 
   if (!slug) {
@@ -50,7 +50,7 @@ export const ArticleDetail: React.FC = () => {
     },
   ];
 
-  const renderArticleContent = () => (
+   const renderTraining = (traini: MyStudyData[]) => {
     <div className="flex flex-col lg:flex-row">
       {/* Main Article Content */}
       <div className="lg:w-2/3">
@@ -69,30 +69,28 @@ export const ArticleDetail: React.FC = () => {
           <h3 className="font-semibold text-lg mb-3">
             Lainnya dari Sekilas Ilmu
           </h3>
-          {isArticleDataLoading ? (
+          {isRelatedLoading ? (
             <p>Loading artikel terkait...</p>
-          ) : articleDataError ? (
-            <p className="text-red-500 text-sm">
-              Gagal memuat artikel terkait.
-            </p>
+          ) : relatedError ? (
+            <p className="text-red-500 text-sm">Gagal memuat artikel terkait.</p>
           ) : (
             <ul className="space-y-3">
-              {articleData?.map((article) => (
+              {relatedArticles?.map((relatedArticle) => (
                 <li
-                  key={articleData.id}
+                  key={relatedArticle.id}
                   className="flex items-start space-x-3"
                 >
                   <img
-                    src={articleData.thumbnail}
-                    alt={articleData.title}
+                    src={relatedArticle.thumbnail}
+                    alt={relatedArticle.title}
                     className="w-16 h-16 rounded-md object-cover"
                   />
                   <div>
                     <h4 className="text-sm font-semibold leading-snug">
-                      {articleData.title}
+                      {relatedArticle.title}
                     </h4>
                     <p className="text-xs text-gray-500">
-                      {articleData.author?.full_name}
+                      {relatedArticle.author?.full_name}
                     </p>
                   </div>
                 </li>
@@ -102,7 +100,7 @@ export const ArticleDetail: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+   };
 
   return (
     <div className="bg-gray-50 min-h-screen p-6 lg:p-12">
