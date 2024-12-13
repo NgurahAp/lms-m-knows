@@ -1,53 +1,117 @@
 import { useParams } from "react-router-dom";
-import { useIlmuData } from "../../services/IlmuService";
-import { Article } from "../../types/ilmu";
+import { useArticle, useArticleData } from "../../services/ArticleService";
+import LoadingSpinner from "../../components/reusable/LoadingSpinner";
+import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
 
-export const ArticleDetail = () => {
-  const { id } = useParams<{ id: string }>();
-  const { data, isLoading, error } = useIlmuData();
+export const ArticleDetail: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const {
+    data: article,
+    isLoading: isArticleLoading,
+    error: articleError,
+  } = useArticle(slug || "");
+  const {
+    data: articleData,
+    isLoading: isArticleDataLoading,
+    error: articleDataError,
+  } = useArticleData(article?.id || "");
 
-  // Mencari artikel berdasarkan ID yang cocok
-  const article: Article | undefined = data?.data.find(
-    (item) => item.id === id
-  );
+  if (!slug) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Judul Artikel tidak ditemukan
+      </div>
+    );
+  }
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!article) return <p>Artikel tidak ditemukan</p>;
+  if (isArticleLoading) {
+    return <LoadingSpinner text="Loading artikel..." />;
+  }
 
-  return (
-    <div className="p-6 bg-gray-50 rounded-lg shadow mt-6">
-      <img
-        src={article.thumbnail}
-        alt={article.title}
-        className="w-full h-64 object-cover rounded"
-      />
-      <h1 className="text-3xl font-bold mt-4">{article.title}</h1>
+  if (articleError) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        {articleError.message}
+      </div>
+    );
+  }
 
-      <p className="text-gray-500 mt-2">Oleh: {article.author.full_name}</p>
-      <p className="text-gray-600 mt-1">
-        Tanggal dibuat: {article.created_at} | {article.views} Views
-      </p>
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Artikel",
+      path: "/artikel",
+    },
+    {
+      label: article?.slug,
+    },
+  ];
 
-      <div
-        className="mt-4 text-gray-700"
-        dangerouslySetInnerHTML={{ __html: article.content }}
-      ></div>
-
-      <div className="mt-4 flex gap-2">
-        {article.tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-blue-100 text-blue-700 text-sm font-medium px-2 py-1 rounded"
-          >
-            #{tag}
-          </span>
-        ))}
+  const renderArticleContent = () => (
+    <div className="flex flex-col lg:flex-row">
+      {/* Main Article Content */}
+      <div className="lg:w-2/3">
+        <div className="mb-6">
+          <img src={article?.thumbnail} alt="" className="w-full rounded-md" />
+        </div>
+        <h2 className="text-2xl font-bold mb-4">{article?.title}</h2>
+        <p className="text-gray-500 text-justify leading-relaxed">
+          {article?.content}
+        </p>
       </div>
 
-      <p className="mt-4 font-medium text-gray-600">
-        Category: {article.category}
-      </p>
+      {/* Sidebar */}
+      <div className="lg:w-1/3 lg:pl-8">
+        <div className="bg-gray-100 p-4 rounded-md">
+          <h3 className="font-semibold text-lg mb-3">
+            Lainnya dari Sekilas Ilmu
+          </h3>
+          {isArticleDataLoading ? (
+            <p>Loading artikel terkait...</p>
+          ) : articleDataError ? (
+            <p className="text-red-500 text-sm">
+              Gagal memuat artikel terkait.
+            </p>
+          ) : (
+            <ul className="space-y-3">
+              {articleData?.map((article) => (
+                <li
+                  key={articleData.id}
+                  className="flex items-start space-x-3"
+                >
+                  <img
+                    src={articleData.thumbnail}
+                    alt={articleData.title}
+                    className="w-16 h-16 rounded-md object-cover"
+                  />
+                  <div>
+                    <h4 className="text-sm font-semibold leading-snug">
+                      {articleData.title}
+                    </h4>
+                    <p className="text-xs text-gray-500">
+                      {articleData.author?.full_name}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="bg-gray-50 min-h-screen p-6 lg:p-12">
+      <Breadcrumb items={breadcrumbItems} />
+
+      <div className="bg-white p-6 shadow-lg rounded-lg">
+        <h1 className="text-2xl font-bold mb-6">Artikel</h1>
+        {renderArticleContent()}
+      </div>
     </div>
   );
 };

@@ -300,7 +300,7 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/sekilas-ilmu/article/:articleId"
+            path="/sekilas-ilmu/:slug"
             element={
               <ProtectedRoute>
                 <ArticleDetail />

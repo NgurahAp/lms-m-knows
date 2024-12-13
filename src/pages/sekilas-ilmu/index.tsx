@@ -69,7 +69,7 @@ export const SekilasIlmu = () => {
         </div>
 
         <Link
-          to={`/sekilas-ilmu/article/${article.id}`}
+          to={`/sekilas-ilmu/${article.slug}`}
           className="block no-underline text-inherit"
         >
           {/* Thumbnail artikel */}
