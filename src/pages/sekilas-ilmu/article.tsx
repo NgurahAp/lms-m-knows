@@ -51,11 +51,13 @@ export const ArticleDetail: React.FC = () => {
     },
   ];
 
-   const renderTraining = (trainings: ArticleData[]) => {
+  console.log("Related Articles:", relatedArticles);
+
+  const renderArticleContent = () => (
     <div className="flex flex-col lg:flex-row">
       {/* Main Article Content */}
       <div className="lg:w-2/3">
-        <div className="mb-6"> 
+        <div className="mb-6">
           <img src={article?.thumbnail} alt="" className="w-full rounded-md" />
         </div>
         <h2 className="text-2xl font-bold mb-4">{article?.title}</h2>
@@ -73,35 +75,38 @@ export const ArticleDetail: React.FC = () => {
           {isRelatedLoading ? (
             <p>Loading artikel terkait...</p>
           ) : relatedError ? (
-            <p className="text-red-500 text-sm">Gagal memuat artikel terkait.</p>
+            <p className="text-red-500 text-sm">
+              Gagal memuat artikel terkait.
+            </p>
           ) : (
             <ul className="space-y-3">
-              {trainings.map() => (
-                <li
-                  key={trainings.id}
-                  className="flex items-start space-x-3"
-                >
-                  <img
-                    src={trainings.thumbnail}
-                    alt={trainings.title}
-                    className="w-16 h-16 rounded-md object-cover"
-                  />
-                  <div>
-                    <h4 className="text-sm font-semibold leading-snug">
-                      {trainings.title}
-                    </h4>
-                    <p className="text-xs text-gray-500">
-                      {trainings.author?.full_name}
-                    </p>
-                  </div>
-                </li>
-              ))}
+              {Array.isArray(relatedArticles) &&
+                relatedArticles.map((relatedArticle: ArticleData) => (
+                  <li
+                    key={relatedArticle.id}
+                    className="flex items-start space-x-3"
+                  >
+                    <img
+                      src={relatedArticle.thumbnail}
+                      alt={relatedArticle.title}
+                      className="w-16 h-16 rounded-md object-cover"
+                    />
+                    <div>
+                      <h4 className="text-sm font-semibold leading-snug">
+                        {relatedArticle.title}
+                      </h4>
+                      <p className="text-xs text-gray-500">
+                        {relatedArticle.author?.full_name}
+                      </p>
+                    </div>
+                  </li>
+                ))}
             </ul>
           )}
         </div>
       </div>
     </div>
-   };
+  );
 
   return (
     <div className="bg-gray-50 min-h-screen p-6 lg:p-12">

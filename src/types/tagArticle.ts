@@ -1,4 +1,8 @@
+import { JSX } from "react/jsx-runtime";
+
 export interface ArticleData {
+  map(arg0: (related: any) => JSX.Element): import("react").ReactNode;
+  length: number;
   id: string;
   title: string;
   content: string;
