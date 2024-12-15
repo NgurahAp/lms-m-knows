@@ -35,10 +35,10 @@ export const useArticle = (slug: string): UseQueryResult<Article, Error> => {
 const fetchArticleData = async (
   articleId: string,
   limit = 10
-): Promise<ArticleData> => {
+): Promise<ArticleData[]> => {
   const token = Cookies.get("accessToken");
   const response = await axios.get<ArticleListResponse>(
-    `${API_BASE_URL}/article/related/${articleId}?limit=${limit}`,
+    `${API_BASE_URL}/api/v1/article/related/${articleId}?limit=${limit}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,14 +48,14 @@ const fetchArticleData = async (
   return response.data.data;
 };
 
-export const useArticleData = (id: string): UseQueryResult<ArticleData, Error> => {
+export const useArticleData = (
+  id: string
+): UseQueryResult<ArticleData[], Error> => {
   return useQuery({
     queryKey: ["relatedArticles", id],
     queryFn: () => {
       if (!id) throw new Error("ID is required");
-      return fetchArticleData(id).catch((error) => {
-        throw new Error(`Error fetching artikel data: ${error.message}`);
-      });
+      return fetchArticleData(id);
     },
     enabled: !!id,
   });
