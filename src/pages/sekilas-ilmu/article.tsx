@@ -128,16 +128,16 @@ export const ArticleDetail: React.FC = () => {
         </h1>
 
         <div className="mb-8">
-          <span>
+          <div className="flex flex-wrap gap-2">
             {article?.tags.map((tag, index) => (
               <span
                 key={index}
-                className="mr-2 bg-gray-200 text-gray-800 font-bold px-3 py-1 rounded-lg text-sm"
+                className="bg-gray-200 text-gray-800 font-bold px-3 py-1 rounded-lg text-sm"
               >
                 #{tag}
               </span>
             ))}
-          </span>
+          </div>
         </div>
 
         <div className="md:flex items-center text-sm text-gray-500 mb-6">
@@ -292,7 +292,7 @@ export const ArticleDetail: React.FC = () => {
 
       {isConfirmationOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-2/6 p-6 text-center shadow-lg border border-gray-200">
+          <div className="bg-white rounded-lg w-full max-w-md sm:w-2/6 p-6 text-center shadow-lg border border-gray-200 mx-4">
             {/* Ikon Checklist */}
             <div className="flex justify-center mb-4">
               <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
