@@ -5,6 +5,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import LoadingSpinner from "../../../components/reusable/LoadingSpinner";
 import { Breadcrumb } from "../../../components/reusable/BreadCrumbs";
 import { BackLink } from "../../../components/reusable/BackLink";
+import PageInfo from "../../../components/reusable/PageInfo";
 
 const formatTimestamp = (timestamp: string) => {
   if (!timestamp) {
@@ -43,36 +44,31 @@ export const Assignment = () => {
     );
   }
 
- const breadcrumbItems = [
-   {
-     label: "Beranda",
-     path: "/dashboard",
-   },
-   {
-     label: "Pelatihan-ku",
-     path: "/pelatihanku",
-   },
-   {
-     label: data?.data.detail.subject_name,
-     path: `/pelatihanku/${subjectId}`,
-   },
-   {
-     label: `Pertemuan ${data?.data.detail.session_no}`,
-   },
- ];
+  const breadcrumbItems = [
+    {
+      label: "Beranda",
+      path: "/dashboard",
+    },
+    {
+      label: "Pelatihan-ku",
+      path: "/pelatihanku",
+    },
+    {
+      label: data?.data.detail.subject_name,
+      path: `/pelatihanku/${subjectId}`,
+    },
+    {
+      label: `Pertemuan ${data?.data.detail.session_no}`,
+    },
+  ];
 
   return (
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
-      {/* Info */}
-      <div className="bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg">
-        <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
-          {data?.data.detail.subject_name}
-        </h1>
-        <p className="text-sm md:text-lg">
-          Pertemuan {data?.data.detail.session_no}
-        </p>
-      </div>
+      <PageInfo
+        title={data?.data.detail.subject_name}
+        subtitle={`Pertemuan ${data?.data.detail.session_no}`}
+      />
       {/* Content */}
       <div className="bg-white flex flex-col mt-5 w-full p-5 md:px-8 pb-4 h-full justify-center rounded-lg">
         <div className="my-2 md:my-6  w-full">
@@ -89,10 +85,11 @@ export const Assignment = () => {
                   </h2>
                   <p
                     className={` md:text-base text-xs
-                      ${assignment.progress.timestamp_submitted
-                        ? "text-gray-500"
-                        : "text-red-500"}`
-                    }
+                      ${
+                        assignment.progress.timestamp_submitted
+                          ? "text-gray-500"
+                          : "text-red-500"
+                      }`}
                   >
                     {formatTimestamp(assignment.progress.timestamp_submitted)}
                   </p>

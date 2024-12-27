@@ -125,7 +125,6 @@ export const AttemptAssesment = () => {
     <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-
       {/* Content */}
       <div className="my-8 py-8 md:py-16 md:px-8 px-4 bg-white flex flex-col items-center justify-center">
         {/* Question Preview Buttons */}

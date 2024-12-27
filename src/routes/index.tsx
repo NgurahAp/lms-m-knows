@@ -32,7 +32,12 @@ import { KonfirRoleplay } from "../pages/roleplay-asses/konfir-roleplay";
 import { NilaiRoleplay } from "../pages/roleplay-asses/nilai-roleplay";
 import { SubmitRoleplay } from "../pages/roleplay-asses/submit-roleplay";
 import { PilihAses } from "../pages/roleplay-asses/pilih-ases";
+
 // import { ListRoleplay } from "../pages/roleplay/ListRoleplay";
+
+import { KonfirAses } from "../pages/roleplay-asses/konfir-ases";
+import { NilaiAses } from "../pages/roleplay-asses/nilai-ases";
+
 
 const AppRoutes: React.FC = () => {
   return (
@@ -272,14 +277,22 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           />
-          {/* <Route
-            path="/listRoleplay"
+          <Route
+            path="/konfir-ases"
             element={
               <ProtectedRoute>
-                <ListRoleplay />
+                <KonfirAses />
               </ProtectedRoute>
             }
-          /> */}
+          />
+          <Route
+            path="/nilai-ases"
+            element={
+              <ProtectedRoute>
+                <NilaiAses />
+              </ProtectedRoute>
+            }
+          />
           {/* <Route
             path="/pelatihan-keterampilan"
             element={

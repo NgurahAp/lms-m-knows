@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useScoreResponse } from "../../services/ScoreService";
 import { FaChevronRight } from "react-icons/fa";
+import { FaTag } from "react-icons/fa";
+import { FaDollarSign } from "react-icons/fa";
+import { useRoleplayData } from "../../services/RoleplayService";
 
 export const PilihAses: React.FC = () => {
   const {
-    data: scoreResponse,
-    isLoading: isNilaiLoading,
-    isError: isNilaiError,
-  } = useScoreResponse();
+    data: roleplayData,
+    isLoading: isRoleplayLoading,
+    isError: isRoleplayError,
+  } = useRoleplayData();
 
-  const [activeTab, setActiveTab] = useState<
-    "daftar" | "terjadwal" | "penilaian" | "selesai"
-  >("daftar");
-  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<"daftar" | "terjadwal" | "selesai">("daftar");
+  const [isModalOpen, setModalOpen] = useState(false); // State for the first modal
 
-  // const handleDownload = () => {
-  //   alert("Certificate Downloaded!");
-  // };
+  const [selectedOption, setSelectedOption] = useState<"self" | "others" | null>(null); // State for selection
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false); // State for confirmation modal
+  const [isConfirmationOpen2, setConfirmationOpen2] = useState(false); // State for confirmation modal
 
-  if (isNilaiLoading) {
+  if (isRoleplayLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         Loading...
@@ -28,20 +27,19 @@ export const PilihAses: React.FC = () => {
     );
   }
 
-  if (isNilaiError) {
+  if (isRoleplayError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Error fetching nilai response.
+        Error fetching roleplay data.
       </div>
     );
   }
 
-  // Mengakses subjects dari dalam properti data
-  const subjects = scoreResponse?.data.subjects ?? [];
-  console.log(subjects);
+  const roleplays = roleplayData?.roleplays ?? [];
 
   return (
-    <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 md:pb-4 px-8 bg-gray-100">
+    <div className="w-screen flex flex-col md:pt-44 pt-24 md:pb-4 md:px-36 px-8 bg-gray-100">
+      {/* Breadcrumb */}
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <Link to="/dashboard" className="flex items-center">
           <img
@@ -63,99 +61,62 @@ export const PilihAses: React.FC = () => {
         </span>
       </div>
 
-      <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl mb-4">
-        <h1 className=" md:text-lg text-sm font-semibold">Asesmen</h1>
-      </div>
-
-      {/* Main Content Card */}
+      {/* Main Content */}
       <div className="bg-white rounded-lg shadow-lg w-full md:pb-10">
-        {/* Tabs */}
-        <div className="p-8">
+        <div className="p-6">
+          {/* Tabs */}
           <div className="flex flex-wrap border-b border-white">
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "daftar"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("daftar")}
-            >
-              Daftar
-            </button>
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "terjadwal"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("terjadwal")}
-            >
-              Terjadwal
-            </button>
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "penilaian"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("penilaian")}
-            >
-              Penilaian
-            </button>
-            <button
-              className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
-                activeTab === "selesai"
-                  ? "text-blue-500 border-b-4 border-blue-500"
-                  : "text-gray-500"
-              }`}
-              onClick={() => setActiveTab("selesai")}
-            >
-              Selesai
-            </button>
+            {["daftar", "terjadwal", "selesai"].map((tab) => (
+              <button
+                key={tab}
+                className={`py-4 px-10 md:text-xl text-lg font-semibold border-1 whitespace-nowrap ${
+                  activeTab === tab
+                    ? "text-blue-500 border-b-4 border-blue-500"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setActiveTab(tab as typeof activeTab)}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="px-6">
           {activeTab === "daftar" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {subjects.map((subject) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {roleplays.map((roleplay) => (
                 <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
+                  key={roleplay.id}
+                  className="bg-white rounded-lg shadow-md p-4"
                 >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
+                  <img
+                    src={roleplay.subject_thumbnail || "/default-image.jpg"}
+                    alt="Roleplay Image"
+                    className="w-full h-40 object-cover rounded-lg"
+                    onError={(e) =>
+                      (e.currentTarget.src = "/default-image.jpg")
+                    }
+                  />
+                  <h3 className="text-lg font-semibold mt-2">
+                    {roleplay.topic}
                   </h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">
-                        Status Perkuliahan
-                      </span>
-                      <span
-                        className={`text-sm font-medium ${
-                          subject.status === "BELUM SELESAI"
-                            ? "text-yellow-500"
-                            : "text-green-500"
-                        }`}
-                      >
-                        {subject.status}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Nilai</span>
-                      <span className="text-sm font-medium">
-                        {subject.score} ({subject.score_letter})
-                      </span>
-                    </div>
-                    <div className="pt-2">
-                      <Link
-                        to="/pelatihan-keterampilan"
-                        className="inline-block w-full text-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
-                      >
-                        Lihat Detail
-                      </Link>
-                    </div>
+                  <p className="text-gray-500 text-sm mt-2">
+                    {roleplay.subject_name}
+                  </p>
+                  <div className="flex justify-center mt-4">
+                    <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
+                      Lihat Detail
+                    </button>
+                    <button
+                      className="px-10 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-lg"
+                      onClick={() => {
+                        setModalOpen(true);
+                      }}
+                    >
+                      Daftar
+                    </button>
                   </div>
                 </div>
               ))}
@@ -164,79 +125,21 @@ export const PilihAses: React.FC = () => {
 
           {activeTab === "terjadwal" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {subjects.map((subject) => (
+              {roleplays.map((roleplay) => (
                 <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
+                  key={roleplay.id}
+                  className="bg-white border rounded-md p-4 shadow-md"
                 >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
+                  <h3 className="text-gray-800 font-medium">
+                    {roleplay.topic}
                   </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-600">Status</span>
-                    <span
-                      className={`text-sm font-medium ${
-                        subject.status === "BELUM SELESAI"
-                          ? "text-yellow-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {subject.status}
-                    </span>
-                  </div>
-                  <button
-                    className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
-                      subject.status === "BELUM SELESAI"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={
-                      () => subject.status !== "BELUM SELESAI" //&& setIsModalOpen(true)
-                    }
-                    disabled={subject.status === "BELUM SELESAI"}
+                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <a
+                    href="#"
+                    className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Sertifikat
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === "penilaian" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {subjects.map((subject) => (
-                <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
-                >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
-                  </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-600">Status</span>
-                    <span
-                      className={`text-sm font-medium ${
-                        subject.status === "BELUM SELESAI"
-                          ? "text-yellow-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {subject.status}
-                    </span>
-                  </div>
-                  <button
-                    className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
-                      subject.status === "BELUM SELESAI"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={
-                      () => subject.status !== "BELUM SELESAI" //&& setIsModalOpen(true)
-                    }
-                    disabled={subject.status === "BELUM SELESAI"}
-                  >
-                    Penilaian
-                  </button>
+                    Lihat Detail Asesmen
+                  </a>
                 </div>
               ))}
             </div>
@@ -244,45 +147,161 @@ export const PilihAses: React.FC = () => {
 
           {activeTab === "selesai" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {subjects.map((subject) => (
+              {roleplays.map((roleplay) => (
                 <div
-                  key={subject.id}
-                  className="bg-white border rounded-lg p-4 shadow-sm"
+                  key={roleplay.id}
+                  className="bg-white border rounded-md p-4 shadow-md"
                 >
-                  <h3 className="font-medium text-base mb-4 line-clamp-2">
-                    {subject.name}
+                  <h3 className="text-gray-800 font-medium">
+                    {roleplay.topic}
                   </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-600">Status</span>
-                    <span
-                      className={`text-sm font-medium ${
-                        subject.status === "BELUM SELESAI"
-                          ? "text-yellow-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {subject.status}
-                    </span>
-                  </div>
-                  <button
-                    className={`w-full px-4 py-2 rounded-lg text-white text-sm ${
-                      subject.status === "BELUM SELESAI"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    }`}
-                    onClick={
-                      () => subject.status !== "BELUM SELESAI" //&& setIsModalOpen(true)
-                    }
-                    disabled={subject.status === "BELUM SELESAI"}
+                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
+                  <a
+                    href="#"
+                    className="block mt-4 text-blue-500 hover:underline text-sm"
                   >
-                    Lihat Sertifikat
-                  </button>
+                    Lihat Detail Asesmen
+                  </a>
                 </div>
               ))}
             </div>
           )}
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4">Pilih Penilaian</h2>
+            <p className="mb-4 text-sm text-gray-500">
+              Atur jadwal konsultasi Anda dengan konselor
+            </p>
+            <div className="space-y-4">
+              <button
+                className={`w-full px-4 py-2 rounded-lg flex items-center ${
+                  selectedOption === "self" ? "bg-blue-100" : "bg-gray-100"
+                }`}
+                onClick={() => setSelectedOption("self")}
+              >
+                <FaTag className="text-lg text-green-700 mt-1 ml-2 mr-2" />
+                Menilai diri sendiri
+              </button>
+              <button
+                className={`w-full px-4 py-2 rounded-lg flex items-center ${
+                  selectedOption === "others" ? "bg-blue-100" : "bg-gray-100"
+                }`}
+                onClick={() => setSelectedOption("others")}
+              >
+                <FaDollarSign className="text-lg text-yellow-600 mt-1 ml-2 mr-2" />
+                Menilai orang lain
+              </button>
+            </div>
+            <button
+              className={`mt-6 w-full px-4 py-2 rounded-lg ${
+                selectedOption
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+              onClick={() => {
+                if (selectedOption) {
+                  setModalOpen(false);
+                  setConfirmationOpen(true);
+                }
+              }}
+              disabled={!selectedOption}
+            >
+              Lanjut
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation Modal */}
+      {isConfirmationOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4">Konfirmasi</h2>
+            <p className="mb-4 text-sm text-gray-500">
+              Apakah Anda yakin ingin melakukan asesmen{" "}
+              {selectedOption === "self" ? "diri sendiri" : "orang lain"}? Nilai
+              akan keluar berdasarkan{" "}
+              {selectedOption === "self"
+                ? "penilaian diri sendiri"
+                : "penilaian oleh asesor"}
+              .
+            </p>
+            <div className="flex justify-between">
+              <button
+                className="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg"
+                onClick={() => {
+                  setModalOpen(true);
+                  setConfirmationOpen(false);
+                }}
+              >
+                Kembali
+              </button>
+              <button
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                onClick={() => {
+                  setModalOpen(false);
+                  setConfirmationOpen(false);
+                  setConfirmationOpen2(true);
+                }}
+              >
+                Konfirmasi
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pop-up Baru */}
+      {isConfirmationOpen2 && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4">
+              Akuntansi dan Laporan Keuangan
+            </h2>
+            <p className="text-sm mb-4">Pilih Jadwal</p>
+            <div className="space-y-4">
+              <p className="text-sm text-gray-500">Tanggal</p>
+              <input
+                type="date"
+                placeholder="dd/mm/yyyy"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700"
+              />
+              <p className="text-sm text-gray-500">Waktu</p>
+              <input
+                type="time"
+                placeholder="--:--"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700"
+              />
+              <p className="text-sm text-gray-500">Pilih Pengajar</p>
+              <select className="w-full px-2 py-2 border rounded-lg text-gray-700">
+                <option value="Rizki Pratama">Rizki Pratama</option>
+              </select>
+            </div>
+            <div className="flex justify-between mt-6">
+              <button
+                className="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg"
+                onClick={() => {
+                  setModalOpen(false);
+                  setConfirmationOpen(true); // Kembali ke pop-up sebelumnya
+                }}
+              >
+                Kembali
+              </button>
+              <Link
+                to="/konfir-ases"
+                className="px-10 pt-2 text-sm text-white bg-blue-500 rounded-lg"
+              >
+                Konfirmasi
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
