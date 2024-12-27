@@ -18,16 +18,19 @@ export const fiturCards = [
     icon: "/landing/fitur/bootcamp.png",
     title: "Bootcamp",
     desc: "Fitur Bootcamp dirancang untuk mengembangkan keterampilan dan pengetahuan teknis sesuai dengan tuntutan dunia kerja.",
+    link: "/bootcamp",
   },
   {
     icon: "/landing/fitur/pelatihanku.png",
     title: "Pelatihan Ku",
     desc: "Fitur Pelatihan Ku pada website LMS M-Knows memungkinkan kamu untuk mengetahui informasi dan riwayat pembelajaran yang telah kamu ikuti.",
+    link: "/pelatihanku",
   },
   {
     icon: "/landing/fitur/penugasan.png",
     title: "Penugasan",
     desc: "Fitur Penugasan berisikan informasi dan instruksi, mengenai tugas atau aktivitas yang harus dan belum kamu kerjakan.",
+    link: "/penugasan",
   },
   {
     icon: "/landing/fitur/ruang-diskusi.png",
@@ -38,6 +41,7 @@ export const fiturCards = [
     icon: "/landing/fitur/roleplay.png",
     title: "Roleplay & Asesmen",
     desc: "Fitur Assessment & Uji Kompetensi memungkinkan evaluasi kemampuan siswa melalui berbagai metode tes, memberikan analisis mendetail atas standar kompetensi, menilai pemahaman dan keterampilan secara komprehensif. Assessment menggunakan standar kompetensi M-Knows Consulting, sementara Uji Kompetensi menggunakan standar kompetensi profesi BNSP.",
+    link: "/roleplay-asses",
   },
   {
     icon: "/landing/fitur/drill.png",
@@ -48,6 +52,7 @@ export const fiturCards = [
     icon: "/landing/fitur/nilai.png",
     title: "Nilai & Sertifikat",
     desc: "Fitur Nilai & sertifikat berisi informasi mengenai nilai dan sertifikat yang kamu peroleh setelah menyelesaikan pembelajaran di fitur StudiKu.",
+    link: "/score",
   },
   {
     icon: "/landing/fitur/analitik.png",

@@ -98,7 +98,7 @@ export const NilaiRoleplay: React.FC = () => {
       <Breadcrumb items={breadcrumbItems} />
 
       {/* Header */}
-      <div className="bg-white w-full h-72 items-center justify-between p-9 mt-5 rounded-xl mb-4">
+      <div className="bg-white w-full md:h-72 h-96 items-center justify-between p-9 mt-5 rounded-xl mb-4">
         <h1 className="md:text-lg text-sm font-semibold">
           Roleplay Kewirausahaan
         </h1>

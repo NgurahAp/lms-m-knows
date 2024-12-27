@@ -61,7 +61,7 @@ export const RoleplayAsses: React.FC = () => {
           </div>
           <div className="flex flex-wrap justify-between gap-4">
             {/* Roleplay Card */}
-            <div className="flex-1 bg-white p-4 rounded-lg shadow-md">
+            <div className="md:flex-1 bg-white p-4 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
                 <img
                   src="/roleplay/roleplay.png"
@@ -86,7 +86,7 @@ export const RoleplayAsses: React.FC = () => {
               </div>
             </div>
             {/* Assessment Card */}
-            <div className="flex-1 bg-white p-4 rounded-lg shadow-md">
+            <div className="md:flex-1 bg-white p-4 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
                 <img
                   src="/roleplay/asesment.png"

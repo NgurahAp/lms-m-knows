@@ -4,6 +4,7 @@ import { FaTag } from "react-icons/fa";
 import { FaDollarSign } from "react-icons/fa";
 import { useAssessmentsData } from "../../services/AsesmenService";
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
+import { EmptyState } from "../../components/reusable/EmptyState";
 
 export const PilihAses: React.FC = () => {
   const {
@@ -18,6 +19,7 @@ export const PilihAses: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<"self" | "others" | null>(null); // State for selection
   const [isConfirmationOpen, setConfirmationOpen] = useState(false); // State for confirmation modal
   const [isConfirmationOpen2, setConfirmationOpen2] = useState(false); // State for confirmation modal
+  const [selectedAssessmentId, setSelectedAssessmentId] = useState<string | null>(null);
 
   if (isAssessmentsLoading) {
     return (
@@ -46,6 +48,7 @@ export const PilihAses: React.FC = () => {
   ];
 
   const assessmentss = assessmentsData?.assessments ?? [];
+  console.log()
 
   return (
     <div className="w-screen flex flex-col md:pt-44 pt-24 md:pb-4 md:px-36 px-8 bg-gray-100">
@@ -80,34 +83,49 @@ export const PilihAses: React.FC = () => {
               {assessmentss.map((assessments) => (
                 <div
                   key={assessments.id}
-                  className="bg-white rounded-lg shadow-md p-4"
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
                 >
-                  <img
-                    src={assessments.thumbnail || "/default-image.jpg"}
-                    alt="assessments Image"
-                    className="w-full h-40 object-cover rounded-lg"
-                    onError={(e) =>
-                      (e.currentTarget.src = "/default-image.jpg")
-                    }
-                  />
-                  <h3 className="text-lg font-semibold mt-2">
-                    {assessments.topic}
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-2">
-                    {assessments.subject_name}
-                  </p>
-                  <div className="flex justify-center mt-4">
-                    <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
-                      Lihat Detail
-                    </button>
-                    <button
-                      className="px-10 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-lg"
-                      onClick={() => {
-                        setModalOpen(true);
-                      }}
-                    >
-                      Daftar
-                    </button>
+                  <div className="relative">
+                    {/* Gambar Thumbnail */}
+                    <img
+                      src={assessments.thumbnail || "/default-image.jpg"}
+                      alt="assessments Image"
+                      className="w-full h-48 object-cover"
+                      onError={(e) =>
+                        (e.currentTarget.src = "/default-image.jpg")
+                      }
+                    />
+                    {/* Badge */}
+                    <span className="absolute top-2 right-2 bg-lime-400 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      Asesmen
+                    </span>
+                  </div>
+
+                  {/* Konten */}
+                  <div className="p-4">
+                    {/* Judul */}
+                    <h3 className="text-base font-semibold text-gray-800 mb-1">
+                      {assessments.subject_name}
+                    </h3>
+                    {/* Subjudul */}
+                    <p className="text-gray-500 text-sm mb-4">
+                      {assessments.description}
+                    </p>
+                    {/* Tombol */}
+                    <div className="flex justify-center mt-4">
+                      <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
+                        Lihat Detail
+                      </button>
+                      <button
+                        className="px-10 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-lg"
+                        onClick={() => {
+                          setSelectedAssessmentId(assessments.id);
+                          setModalOpen(true);
+                        }}
+                      >
+                        Daftar
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -115,74 +133,20 @@ export const PilihAses: React.FC = () => {
           )}
 
           {activeTab === "terjadwal" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {assessmentss.map((assessments) => (
-                <div
-                  key={assessments.id}
-                  className="bg-white border rounded-md p-4 shadow-md"
-                >
-                  <h3 className="text-gray-800 font-medium">
-                    {assessments.topic}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    {assessments.start_at}
-                  </p>
-                  <a
-                    href="#"
-                    className="block mt-4 text-blue-500 hover:underline text-sm"
-                  >
-                    Lihat Detail Assessments
-                  </a>
-                </div>
-              ))}
+            <div className="flex justify-center">
+              <EmptyState message="Kosong" />
             </div>
           )}
 
           {activeTab === "penilaian" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {assessmentss.map((assessments) => (
-                <div
-                  key={assessments.id}
-                  className="bg-white border rounded-md p-4 shadow-md"
-                >
-                  <h3 className="text-gray-800 font-medium">
-                    {assessments.topic}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    {assessments.start_at}
-                  </p>
-                  <a
-                    href="#"
-                    className="block mt-4 text-blue-500 hover:underline text-sm"
-                  >
-                    Lihat Detail Assessments
-                  </a>
-                </div>
-              ))}
+            <div className="flex justify-center">
+              <EmptyState message="Kosong" />
             </div>
           )}
 
           {activeTab === "selesai" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {assessmentss.map((assessments) => (
-                <div
-                  key={assessments.id}
-                  className="bg-white border rounded-md p-4 shadow-md"
-                >
-                  <h3 className="text-gray-800 font-medium">
-                    {assessments.topic}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    {assessments.start_at}
-                  </p>
-                  <a
-                    href="#"
-                    className="block mt-4 text-blue-500 hover:underline text-sm"
-                  >
-                    Lihat Detail Assessments
-                  </a>
-                </div>
-              ))}
+            <div className="flex justify-center">
+              <EmptyState message="Kosong" />
             </div>
           )}
         </div>
@@ -312,7 +276,7 @@ export const PilihAses: React.FC = () => {
                 Kembali
               </button>
               <Link
-                to="/konfir-ases"
+                to={`/konfir-ases/${selectedAssessmentId}`}
                 className="px-10 pt-2 text-sm text-white bg-blue-500 rounded-lg"
               >
                 Konfirmasi

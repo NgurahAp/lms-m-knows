@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRoleplayData } from "../../services/RoleplayService"; // Import the new service
 import { Breadcrumb } from "../../components/reusable/BreadCrumbs";
+import { EmptyState } from "../../components/reusable/EmptyState";
 
 export const PilihRoleplay: React.FC = () => {
   const {
@@ -82,32 +83,46 @@ export const PilihRoleplay: React.FC = () => {
               {roleplays.map((roleplay) => (
                 <div
                   key={roleplay.id}
-                  className="bg-white rounded-lg shadow-md p-4"
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
                 >
-                  <img
-                    src={roleplay.subject_thumbnail || "/default-image.jpg"}
-                    alt="Roleplay Image"
-                    className="w-full h-40 object-cover rounded-lg"
-                    onError={(e) =>
-                      (e.currentTarget.src = "/default-image.jpg")
-                    }
-                  />
-                  <h3 className="text-lg font-semibold mt-2">
-                    {roleplay.topic}
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-2">
-                    {roleplay.subject_name}
-                  </p>
-                  <div className="flex justify-center mt-4">
-                    <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
-                      Lihat Detail
-                    </button>
-                    <Link
-                      to="/daftar-roleplay"
-                      className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg"
-                    >
-                      Daftar
-                    </Link>
+                  <div className="relative">
+                    {/* Gambar Thumbnail */}
+                    <img
+                      src={roleplay.subject_thumbnail || "/default-image.jpg"}
+                      alt="Roleplay Image"
+                      className="w-full h-48 object-cover"
+                      onError={(e) =>
+                        (e.currentTarget.src = "/default-image.jpg")
+                      }
+                    />
+                    {/* Badge */}
+                    <span className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      Roleplay
+                    </span>
+                  </div>
+
+                  {/* Konten */}
+                  <div className="p-4">
+                    {/* Judul */}
+                    <h3 className="text-base font-semibold text-gray-800 mb-1">
+                      {roleplay.subject_name}
+                    </h3>
+                    {/* Subjudul */}
+                    <p className="text-gray-500 text-sm mb-4">
+                      {roleplay.topic}
+                    </p>
+                    {/* Tombol */}
+                    <div className="flex justify-center mt-4">
+                      <button className="px-6 py-2 mr-6 text-sm text-gray-700 border border-gray-300 rounded-lg">
+                        Lihat Detail
+                      </button>
+                      <Link
+                        to={`/daftar-roleplay/${roleplay.id}`}
+                        className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg"
+                      >
+                        Daftar
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -115,46 +130,14 @@ export const PilihRoleplay: React.FC = () => {
           )}
 
           {activeTab === "terjadwal" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {roleplays.map((roleplay) => (
-                <div
-                  key={roleplay.id}
-                  className="bg-white border rounded-md p-4 shadow-md"
-                >
-                  <h3 className="text-gray-800 font-medium">
-                    {roleplay.topic}
-                  </h3>
-                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
-                  <a
-                    href="#"
-                    className="block mt-4 text-blue-500 hover:underline text-sm"
-                  >
-                    Lihat Rekan Roleplay
-                  </a>
-                </div>
-              ))}
+            <div className="flex justify-center">
+              <EmptyState message="Kosong" />
             </div>
           )}
 
           {activeTab === "selesai" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {roleplays.map((roleplay) => (
-                <div
-                  key={roleplay.id}
-                  className="bg-white border rounded-md p-4 shadow-md"
-                >
-                  <h3 className="text-gray-800 font-medium">
-                    {roleplay.topic}
-                  </h3>
-                  <p className="text-sm text-gray-500">{roleplay.start_at}</p>
-                  <a
-                    href="#"
-                    className="block mt-4 text-blue-500 hover:underline text-sm"
-                  >
-                    Lihat Rekan Roleplay
-                  </a>
-                </div>
-              ))}
+            <div className="flex justify-center">
+              <EmptyState message="Kosong" />
             </div>
           )}
         </div>

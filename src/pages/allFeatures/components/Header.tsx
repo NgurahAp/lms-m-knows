@@ -1,7 +1,7 @@
 export const Header: React.FC = () => {
   return (
-    <div className="bg-[#3498DB] w-full h-56 rounded-lg mt-6 flex flex-col justify-center text-white px-12">
-      <h1 className="text-2xl font-semibold">Fitur</h1>
+    <div className="bg-[#3498DB] w-full md:h-56 h-64 rounded-lg mt-6 flex flex-col justify-center text-white px-12">
+      <h1 className="text-2xl font-semibold md:pt-0 pt-6">Fitur</h1>
       <p className="py-2">
         Serangkaian fitur canggih untuk menciptakan pengalaman pembelajaran yang
         menarik dan personal:

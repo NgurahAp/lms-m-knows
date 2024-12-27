@@ -23,15 +23,19 @@ export const AllFeatures = () => {
         </span>
       </div>
       <Header />
-      <div className="flex flex-wrap gap-5 py-8">
+      <div className="md:flex md:flex-wrap gap-5 py-8">
         {fiturCards.map((card) => (
-          <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-start space-y-4 w-[24%]">
-            <img src={card.icon} alt="" />
+          <a
+            href={card.link} // Tambahkan properti link di fiturCards
+            key={card.title}
+            className="bg-white shadow-md md:mb-0 mb-6 rounded-lg p-6 flex flex-col items-start space-y-4 md:w-[24%] w-full hover:shadow-lg transition-shadow"
+          >
+            <img src={card.icon} alt={card.title} />
             <h2 className="text-lg font-semibold text-gray-800">
               {card.title}
             </h2>
             <p className="text-sm text-gray-600">{card.desc}</p>
-          </div>
+          </a>
         ))}
       </div>
     </div>

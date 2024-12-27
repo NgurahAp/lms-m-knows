@@ -43,13 +43,13 @@ export const SubmitRoleplay: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10 flex flex-col p-6">
+      <div className="bg-white rounded-lg shadow-lg w-full md:pb-10 flex flex-col md:p-6 p-2">
         <div className="mb-2">
           <h3 className="text-lg font-semibold mt-6 mb-6 ml-4">
             Status Penyerahan
           </h3>
         </div>
-        <table className="table-auto w-full border md:text-base text-xs border-gray-300 mx-2">
+        <table className="table-auto w-full border md:text-base text-xs border-gray-300 md:mx-2">
           <tbody>
             <tr className="border-b">
               <td className="p-4 font-medium border-r border-gray-300 w-1/2">
@@ -119,7 +119,7 @@ export const SubmitRoleplay: React.FC = () => {
           </tbody>
         </table>
 
-        <div className="mt-6 text-right">
+        <div className="mt-6 text-right md:mb-0 mb-4">
           <Link
             to="/pilih-roleplay"
             className="px-10 py-2 text-sm text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition"

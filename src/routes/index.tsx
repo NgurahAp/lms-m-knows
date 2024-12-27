@@ -240,7 +240,7 @@ const AppRoutes: React.FC = () => {
             }
           />
           <Route
-            path="/daftar-roleplay"
+            path="/daftar-roleplay/:roleplayId"
             element={
               <ProtectedRoute>
                 <DaftarRoleplay />

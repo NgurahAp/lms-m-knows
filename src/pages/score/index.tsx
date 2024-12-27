@@ -57,11 +57,13 @@ export const Score: React.FC = () => {
   const certificate = certificateData?.data.subjects ?? [];
 
   return (
-    <div className="w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 md:pb-4">
+    <div className="h-screen w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100 md:pb-4">
       <Breadcrumb items={breadcrumbItems} />
       {/* <PageInfo title="Nilai dan Sertifikat" className="text-sm" /> */}
       <div className="bg-white w-full h-14 flex items-center justify-between p-9 mt-5 rounded-xl">
-        <h1 className=" md:text-lg text-sm font-semibold">Nilai dan Sertifikat</h1>
+        <h1 className=" md:text-lg text-sm font-semibold">
+          Nilai dan Sertifikat
+        </h1>
       </div>
       {/* Main Content Card */}
       <div className="px-5 mt-5 bg-white rounded-lg shadow-lg w-full ">
@@ -99,11 +101,11 @@ export const Score: React.FC = () => {
                 {subjects.length === 0 ? (
                   <EmptyState message="Tidak ada data nilai yang tersedia" />
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:gap-36 gap-4">
                     {subjects.map((subject) => (
                       <div
                         key={subject.id}
-                        className="w-96 bg-white border rounded-lg md:p-6 p-4 shadow-sm"
+                        className="md:w-96 bg-white border rounded-lg md:p-6 p-4 shadow-sm"
                       >
                         <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4 line-clamp-2">
                           {subject.name}
@@ -152,7 +154,7 @@ export const Score: React.FC = () => {
                 {certificate.length === 0 ? (
                   <EmptyState
                     message="Tidak ada sertifikat yang tersedia"
-                    width="w-1/6"
+                    width="md:w-1/6 w-96"
                   />
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
