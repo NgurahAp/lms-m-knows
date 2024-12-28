@@ -17,7 +17,7 @@ export const Articles: React.FC<ArticlesProps> = ({ articlesData }) => {
     <div className="relative z-2 mt-6 p-6 w-full h-auto bg-white shadow-md rounded-lg">
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-3xl font-semibold">Sekilas Ilmu</h2>
-        <a href="#" className="text-blue-500">
+        <a href="/sekilas-ilmu" className="text-blue-500">
           Lihat Semua
         </a>
       </div>
