@@ -11,13 +11,13 @@ export const TrainingProgram = () => {
         <div className="container mx-auto">
           <div className="flex flex-wrap mx-auto justify-center gap-5">
             {programPelatihanCards.map((card) => (
-              <div className="md:w-96 md:mx-0 mx-5 bg-white border border-gray-200 rounded-lg shadow ">
+              <div className="md:w-72 md:mx-0 mx-5 bg-white border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img className="rounded-t-lg w-full" src={card.icon} alt="" />
                 </a>
-                <div className="px-5 md:py-10 py-5">
+                <div className="px-5 md:py-2 py-5">
                   <a href="#">
-                    <h5 className="mb-2 md:text-2xl font-bold tracking-tight text-gray-900 ">
+                    <h5 className="mb-2 md:text-xl font-bold tracking-tight text-gray-900 ">
                       {card.title}
                     </h5>
                   </a>
@@ -36,20 +36,20 @@ export const TrainingProgram = () => {
         <div className="container mx-auto">
           <div className="flex flex-wrap mx-auto justify-center gap-5">
             {inHouseCards.map((card) => (
-              <div className="md:w-96 md:mx-0 mx-5 bg-white border border-gray-200 rounded-lg shadow ">
+              <div className="md:w-72 md:mx-0 mx-5 bg-white border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
-                    className="rounded-t-lg w-full h-60"
+                    className="rounded-t-lg w-full h-48"
                     src={card.image}
                     alt=""
                   />
                 </a>
-                <div className="px-5 py-5 flex items-end ">
-                  <a href="#">
-                    <h5 className="mb-2 md:text-2xl font-bold  tracking-tight text-gray-900 ">
+                <div className="px-5 py-2 flex items-end ">
+                  <a href="#" className="flex flex-col justify-between h-full">
+                    <h5 className="mb-2 md:text-xl font-bold  tracking-tight text-gray-900 ">
                       {card.title}
                     </h5>
-                    <p className="md:text-lg text-sm">{card.pt}</p>
+                    <p className="md:text-base text-sm">{card.pt}</p>
                   </a>
                 </div>
               </div>
@@ -66,20 +66,20 @@ export const TrainingProgram = () => {
         <div className="container mx-auto">
           <div className="flex flex-wrap mx-auto justify-center gap-5">
             {pelatihanPubliCards.map((card) => (
-              <div className="md:w-96 md:mx-0 mx-5 bg-white border border-gray-200 rounded-lg shadow ">
+              <div className="md:w-72 md:mx-0 mx-5 bg-white border border-gray-200 rounded-lg shadow ">
                 <a href="#">
                   <img
-                    className="rounded-t-lg w-full h-60"
+                    className="rounded-t-lg w-full h-48"
                     src={card.image}
                     alt=""
                   />
                 </a>
-                <div className="px-5 py-3 md:py-5 flex items-end ">
-                  <a href="#">
-                    <h5 className="mb-1 md:mb-2 md:text-2xl font-bold  tracking-tight text-gray-900 ">
+                <div className="px-5 py-2 flex items-end ">
+                  <a href="#" className="flex flex-col justify-between">
+                    <h5 className="mb-2 md:text-xl font-bold  tracking-tight text-gray-900 ">
                       {card.title}
                     </h5>
-                    <p className="text-sm md:text-lg">{card.pt}</p>
+                    <p className="md:text-base text-sm flex items-end">{card.pt}</p>
                   </a>
                 </div>
               </div>

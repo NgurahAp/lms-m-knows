@@ -20,7 +20,7 @@ export const Breadcrumb = ({ items }: BreadcrumbProps) => {
               <div className="flex-shrink-0">
                 <img
                   src="/pelatihanku/home.png"
-                  className="md:w-6 w-4 -mt-1 md:block hidden"
+                  className="md:w-5 w-4 -mt-1 md:block hidden"
                   alt="Home"
                 />
               </div>
@@ -29,8 +29,8 @@ export const Breadcrumb = ({ items }: BreadcrumbProps) => {
               <Link to={item.path} className="flex items-center">
                 <span
                   className={`${
-                    index === 0 ? "md:px-5 px-0" : ""
-                  } text-blue-500 md:text-base text-xs  md:font-semibold`}
+                    index === 0 ? "md:px-2 px-0" : ""
+                  } text-blue-500 md:text-sm text-xs  md:font-semibold`}
                 >
                   {item.label}
                 </span>
@@ -38,14 +38,14 @@ export const Breadcrumb = ({ items }: BreadcrumbProps) => {
             ) : (
               <span
                 className={`${
-                  index === 0 ? "md:px-5 px-0" : ""
-                } text-gray-400 md:text-base text-xs  md:font-semibold`}
+                  index === 0 ? "md:px-2 px-0" : ""
+                } text-gray-400 md:text-sm text-xs  md:font-semibold`}
               >
                 {item.label}
               </span>
             )}
             {index < items.length - 1 && (
-              <FaChevronRight className="text-gray-300 md:mx-4 mx-2 text-xs flex-shrink-0" />
+              <FaChevronRight className="text-gray-300 md:mx-2 mx-2 text-xs flex-shrink-0" />
             )}
           </div>
         ))}

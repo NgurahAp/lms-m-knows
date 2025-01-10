@@ -21,12 +21,12 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
 
   return (
     <div className="mt-6 bg-white shadow-lg p-8 rounded-xl">
-      <h2 className="text-xl font-semibold md:pb-3">Terakhir Pengerjaan</h2>
+      <h2 className="text-xl font-semibold md:pb-1">Terakhir Pengerjaan</h2>
       <div className="md:flex justify-between items-center pb-5">
         <p className="text-lg">
           Semester {subjectProgressData.dataSubjects[0].subject_semester}
         </p>
-        <a href="" className="text-blue-500 font-medium md:text-lg">
+        <a href="" className="text-blue-500 font-medium md:text-base">
           Lihat Semua
         </a>
       </div>
@@ -47,10 +47,14 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
 
           {/* Konten Kursus */}
           <div className="md:w-2/4 w-full px-5 py-3 md:py-0">
-            <h2 className="font-semibold md:text-xl mb-1">{subject.name}</h2>
-            <p className="text-gray-500 text mb-3">{subject.teacher_name}</p>
+            <h2 className="font-semibold md:text-lg mb-1">
+              {subject.name.length > 25
+                ? `${subject.name.slice(0, 25)}...`
+                : subject.name}
+            </h2>
+            <p className="text-gray-500 text-sm mb-3">{subject.teacher_name}</p>
 
-            <p className="text-gray-500 text-end md:text-base text-sm">
+            <p className="text-gray-500 text-end  text-sm">
               {subject.current_session}/{subject.session_count} Pertemuan
             </p>
 
@@ -71,7 +75,7 @@ export const SubjectProgress: React.FC<SubjectProgressProps> = ({
                 subject.progress_percentage === 100
                   ? "bg-gray-200"
                   : "bg-blue-500 text-white"
-              } px-4 py-2 mr-5 rounded-lg md:text-base text-sm`}
+              } px-4 py-2 mr-5 rounded-lg md:text-sm text-sm`}
             >
               {subject.progress_percentage === 100
                 ? "Selesai"

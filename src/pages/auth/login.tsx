@@ -68,8 +68,6 @@ export const Login: React.FC = () => {
 
           {/* Title */}
           <h1 className="self-start font-bold text-4xl pb-3">Masuk</h1>
-          <h1 className="self-start pb-5 text-gray-500">Masukan Akun Anda</h1>
-
           {/* Form Login */}
           <form className="w-full relative" onSubmit={onSubmit}>
             <FormInput

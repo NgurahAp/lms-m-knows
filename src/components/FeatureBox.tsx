@@ -12,7 +12,7 @@ interface FeatureBoxProps {
 
 const FeatureBox: React.FC<FeatureBoxProps> = ({ offset, onClose }) => {
   return (
-    <div className={`absolute top-20 w-96 rounded-lg shadow-lg ${offset}`}>
+    <div className={`absolute top-[4.5rem] w-96 rounded-lg shadow-lg ${offset}`}>
       <div className="w-full h-28 bg-blue-300 rounded-t-lg flex items-center justify-center">
         <h1 className="font-bold text-2xl">Fitur</h1>
       </div>
