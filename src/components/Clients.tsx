@@ -27,7 +27,7 @@ const Clients: React.FC<ClientsProps> = () => {
         <span className="text-black">Mitra</span> Perusahaan Klien M-Knows
       </h2>
       <Marquee>
-        <div className="w-full md:h-24 h-16 overflow-x-auto flex space-x-12 p-3 md:my-5 my-2 scrollbar-hide">
+        <div className="w-full md:h-20 h-16 overflow-x-auto flex space-x-12 p-3 md:my-5 my-2 scrollbar-hide">
           {imagesRow1.map((src, index) => (
             <div key={index} className="flex-shrink-0 h-full">
               <img
@@ -40,7 +40,7 @@ const Clients: React.FC<ClientsProps> = () => {
         </div>
       </Marquee>
       <Marquee direction="right">
-        <div className="w-full h-16 md:h-24 overflow-x-auto flex space-x-12 p-3 md:my-5 my-2 scrollbar-hide">
+        <div className="w-full h-16 md:h-20 overflow-x-auto flex space-x-12 p-3 md:my-5 my-2 scrollbar-hide">
           {imagesRow2.map((src, index) => (
             <div key={index} className="flex-shrink-0 h-full">
               <img
@@ -53,7 +53,7 @@ const Clients: React.FC<ClientsProps> = () => {
         </div>
       </Marquee>
       <Marquee>
-        <div className="w-full h-16 md:h-24 lg:overflow-x-auto flex space-x-12 p-3 md:my-5 my-2 scrollbar-hide">
+        <div className="w-full h-16 md:h-20 lg:overflow-x-auto flex space-x-12 p-3 md:my-5 my-2 scrollbar-hide">
           {imagesRow3.map((src, index) => (
             <div key={index} className="flex-shrink-0 h-full">
               <img

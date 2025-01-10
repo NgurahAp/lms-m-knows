@@ -61,7 +61,7 @@ export default function Home() {
           <div className="flex items-center">
             <img
               src="/landing/logo.png"
-              className="md:w-56 w-32 bg-white bg-opacity-20 rounded"
+              className="md:w-40 w-32 bg-white bg-opacity-20 rounded"
               alt="Logo"
             />
           </div>
@@ -81,12 +81,12 @@ export default function Home() {
             <div className="flex gap-4">
               <button
                 onClick={toggleFeatures}
-                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center"
+                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium text-sm flex items-center"
               >
                 Semua Fitur
                 <img
                   src="/landing/semua-fitur.png"
-                  className="pl-2 w-7 h-auto"
+                  className="pl-2 w-6 h-auto"
                   alt=""
                 />
               </button>
@@ -99,7 +99,7 @@ export default function Home() {
               <button onClick={toggleProfileMenu}>
                 <img
                   src={dashboardData.profile.avatar}
-                  className="w-12 rounded-full"
+                  className="w-10 rounded-full"
                   alt=""
                 />
               </button>
@@ -114,12 +114,12 @@ export default function Home() {
             <div className="flex gap-4">
               <button
                 onClick={toggleFeatures}
-                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium flex items-center"
+                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg text-sm font-medium flex items-center"
               >
                 Semua Fitur
                 <img
                   src="/landing/semua-fitur.png"
-                  className="pl-2 w-7 h-auto"
+                  className="pl-2 w-5 h-auto"
                   alt=""
                 />
               </button>
@@ -130,7 +130,7 @@ export default function Home() {
                 />
               )}
               <Link to="/login">
-                <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
+                <button className="border border-[#106fa4] text-[#106fa4] px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-50">
                   Masuk
                 </button>
               </Link>
@@ -218,58 +218,58 @@ export default function Home() {
             <img
               src="/landing/footer/logo.png"
               alt="M-Knows Logo"
-              className="rounded-3xl w-auto h-16"
+              className="rounded-3xl w-auto h-12"
             />
             <div className="flex pt-6 pb-4 gap-x-7">
               <img
                 src="/landing/footer/fb.png"
                 alt="M-Knows Logo"
-                className="rounded-3xl w-auto h-6"
+                className="rounded-3xl w-auto h-4"
               />
               <img
                 src="/landing/footer/ig.png"
                 alt="M-Knows Logo"
-                className="rounded-3xl w-auto h-6"
+                className="rounded-3xl w-auto h-4"
               />
               <img
                 src="/landing/footer/twitter.png"
                 alt="M-Knows Logo"
-                className="rounded-3xl w-auto h-6"
+                className="rounded-3xl w-auto h-4"
               />
               <img
                 src="/landing/footer/linkedin.png"
                 alt="M-Knows Logo"
-                className="rounded-3xl w-auto h-6"
+                className="rounded-3xl w-auto h-4"
               />
             </div>
             <img
               src="/landing/footer/playStore.png"
               alt="M-Knows Logo"
-              className="rounded-3xl w-auto h-20"
+              className="rounded-3xl w-auto h-16"
             />
           </div>
           <div className="flex-1 p-4">
-            <h2 className="text-lg font-bold pb-4">Halaman</h2>
-            <p className="py-3 text-lg">Pelatihanku</p>
-            <p className="py-3 text-lg">Penugasan</p>
-            <p className="py-3 text-lg">Asesmen</p>
+            <h2 className=" font-bold pb-4">Halaman</h2>
+            <p className="py-3 ">Pelatihanku</p>
+            <p className="py-3 ">Penugasan</p>
+            <p className="py-3 ">Asesmen</p>
           </div>
           <div className="flex-1 p-4">
-            <h2 className="text-lg font-bold pb-4">Kontak</h2>
-            <p className="py-3 text-lg">+6285183004001</p>
-            <p className="py-3 text-lg">info@kampusgratis.com</p>
+            <h2 className=" font-bold pb-4">Kontak</h2>
+            <p className="py-3 ">+6285183004001</p>
+            <p className="py-3 ">info@kampusgratis.com</p>
           </div>
           <div className="flex-1 p-4">
-            <h2 className="text-lg font-bold pb-4">Alamat</h2>
-            <p className="text-lg">
+            <h2 className=" font-bold pb-4">Alamat</h2>
+            <p className="">
               <span className="font-semibold">Utama</span> : Jl. Radio IV No.8B
               Barito Kebayoran Baru, Jakarta Selatan 12130
             </p>
-            <p className="text-lg">
+            <p className="">
               <span className="font-semibold">Produksi</span> : Jl. Raya
               Cirendeu No.61, Tangerang Selatan 15419
             </p>
-            <p className="text-lg">
+            <p className="">
               <span className="font-semibold">Cabang</span> : Jl. Raya Darmo
               Permai III Surabaya. 60119
             </p>

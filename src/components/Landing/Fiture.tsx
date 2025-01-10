@@ -10,7 +10,7 @@ export const Fiture = () => {
         <div className="container mx-auto">
           <div className="flex flex-wrap mx-auto justify-center gap-9">
             {fiturCards.map((card) => (
-              <div className="bg-white flex-col justify-center w-72 h-32 p-4 rounded-lg shadow-md flex items-center">
+              <div className="bg-white flex-col justify-center w-64 h-32 p-4 rounded-lg shadow-md flex items-center">
                 <img src={card.icon} alt={card.title} className="w-12 h-12 " />
                 <div>
                   <h2 className="text-base pt-2 text-center font-bold">
