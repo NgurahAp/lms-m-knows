@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
     : [];
 
   return (
-    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-24 px-4 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <img
           src="/dashboard/home.png"

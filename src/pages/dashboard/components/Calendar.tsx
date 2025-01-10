@@ -46,7 +46,7 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
   return (
     <div className="mt-6 bg-white shadow-lg md:p-8 p-4 min-h-2/5">
       <div className="md:flex justify-between items-center mb-4">
-        <h2 className="md:text-2xl text-xl font-semibold">Kalender Saya</h2>
+        <h2 className="md:text-xl text-xl font-semibold">Kalender Saya</h2>
         <a
           href="#lihat-semua"
           className="text-blue-500 md:text-base text-sm hover:underline"
@@ -61,7 +61,7 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
           <button onClick={handlePrevWeek} className="text-gray-500">
             &lt;
           </button>
-          <h3 className="md:text-lg font-medium">
+          <h3 className="md:text-base font-medium">
             {weekDates[0].toLocaleDateString("id-ID", {
               month: "long",
               year: "numeric",
@@ -73,13 +73,13 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
         </div>
 
         {/* Grid Kalender */}
-        <div className="grid grid-cols-7 text-center md:text-lg text-sm mb-2">
+        <div className="grid grid-cols-7 text-center md:text-base text-sm mb-2">
           {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
             <span key={day}>{day}</span>
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-2 text-center md:text-lg text-sm text-gray-600">
+        <div className="grid grid-cols-7 gap-2 text-center md:text-base text-sm text-gray-600">
           {weekDates.map((date) => {
             const day = date.getDate();
             const isSelected = day.toString() === selectedDate;
@@ -142,15 +142,15 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
                     })}{" "}
                     WIB
                   </p>
-                  <h4 className="font-semibold md:py-3 pr-5 py-1 md:text-base text-sm">
+                  <h4 className="font-semibold md:py-3 pr-5 py-1  text-sm">
                     {event.summary}
                   </h4>
-                  <p className="text-gray-500 md:text-base md:pb-0 pb-2 text-sm">
+                  <p className="text-gray-500  md:pb-0 pb-2 text-sm">
                     {event.place}
                   </p>
                 </div>
               </div>
-              <button className="text-white md:px-5 px-3 rounded-lg md:py-2 py-1 hover:underline bg-blue-500 md:text-base text-sm">
+              <button className="text-white md:px-5 px-3 rounded-lg md:py-2 py-1 hover:underline bg-blue-500  text-sm">
                 Lihat
               </button>
             </div>
@@ -158,10 +158,10 @@ export const Calendar: React.FC<CalendarProps> = ({ calendarData }) => {
         ) : (
           <div className="flex flex-col items-center justify-center md:pt-10 pt-5 ">
             <img src="/dashboard/empty-state.png" className="w-1/3" alt="" />
-            <h1 className="text-gray-500 md:text-lg text-sm py-3">
+            <h1 className="text-gray-500 md:text-base text-sm py-3">
               Anda belum mengamil pelatihan{" "}
             </h1>
-            <button className="bg-blue-500  text-white md:text-base text-xs py-2 md:px-7 px-4 rounded-lg ">
+            <button className="bg-blue-500  text-white md:text-sm text-xs py-2 md:px-7 px-4 rounded-lg ">
               Ikuti Pelatihan
             </button>
           </div>

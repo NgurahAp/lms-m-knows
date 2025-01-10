@@ -13,17 +13,17 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
       <div className="relative w-full rounded-lg overflow-hidden flex flex-col">
         {/* Background divs */}
         <div className="absolute inset-0 z-0 rounded-lg flex flex-col">
-          <div className="flex-grow-0 flex-shrink-0 h-2/5 bg-sky-700 rounded-t-2xl"></div>
+          <div className="flex-grow-0 flex-shrink-0 h-[35%] bg-sky-700 rounded-t-2xl"></div>
           <div className="flex-grow bg-white rounded-b-2xl"></div>
         </div>
 
         {/* Content */}
         <div className="relative z-2 shadow-lg md:px-7 px-4 md:py-9 py-5 flex flex-col">
           <div>
-            <h2 className="font-semibold md:text-3xl text-2xl text-white md:pb-2">
+            <h2 className="font-semibold md:text-2xl text-2xl text-white md:pb-2">
               Hello, {dashboardData.profile.full_name}
             </h2>
-            <p className="md:text-lg text-base font-light text-white">
+            <p className=" text-base font-light text-white">
               Kamu mengambil {dashboardData.profile.current_subjects} pelatihan
             </p>
           </div>
@@ -57,8 +57,8 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
                 >
                   <img src={item.icon} className="w-9 pb-8" alt="" />
                   <div>
-                    <h1 className="md:text-3xl text-2xl font-bold pb-2">{item.value}</h1>
-                    <h1 className="md:text-xl text-lgtext-gray-500">{item.label}</h1>
+                    <h1 className="md:text-2xl text-2xl font-bold pb-2">{item.value}</h1>
+                    <h1 className="md:text-lg text-lgtext-gray-500">{item.label}</h1>
                   </div>
                 </li>
               ))}
