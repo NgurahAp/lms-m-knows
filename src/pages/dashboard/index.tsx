@@ -57,14 +57,14 @@ const Dashboard: React.FC = () => {
     : [];
 
   return (
-    <div className="h-full w-screen flex flex-col md:pt-44 pt-24 md:px-24 px-4 bg-gray-100">
+    <div className="h-full w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       <div className="bg-white w-full h-14 flex items-center pl-5 rounded-xl">
         <img
           src="/dashboard/home.png"
-          className="md:w-6 w-5 -mt-1"
+          className="md:w-5 w-5 -mt-1"
           alt="home icon"
         />
-        <h1 className="md:pl-5 pl-3 text-[#9CA3AF] md:text-base text-sm font-semibold">
+        <h1 className="md:pl-5 pl-3 text-[#9CA3AF] text-sm font-semibold">
           Beranda
         </h1>
       </div>
