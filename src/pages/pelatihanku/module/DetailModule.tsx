@@ -55,10 +55,10 @@ export const DetailModule = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-white flex flex-col items-center mt-5 md:px-8 px-4 md:py-20 py-10 justify-center rounded-lg">
+      <div className="bg-white flex flex-col items-center mt-5 md:px-8 px-4 md:py-14 py-10 justify-center rounded-lg">
         <h1 className="font-bold md:text-4xl text-xl md:mb-8 mb-4">
           {data?.module.title}
         </h1>

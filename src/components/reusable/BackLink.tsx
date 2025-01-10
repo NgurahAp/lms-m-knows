@@ -10,7 +10,7 @@ export const BackLink: React.FC<BackLinkProps> = ({ to }) => {
   return (
     <Link
       to={to}
-      className="flex items-center gap-2 md:p-5 p-2 underline justify-start md:text-base text-sm text-blue-500"
+      className="flex items-center gap-2 md:p-5 p-2 underline justify-start text-sm text-blue-500"
     >
       <FaArrowLeft />
       Kembali

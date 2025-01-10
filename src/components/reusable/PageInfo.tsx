@@ -15,10 +15,10 @@ const PageInfo: React.FC<PageInfoProps> = ({
     <div
       className={`bg-white flex flex-col mt-5 p-5 md:p-8 justify-center rounded-lg ${className}`}
     >
-      <h1 className="text-base md:text-3xl font-semibold pb-1 md:pb-3">
+      <h1 className="text-base md:text-2xl font-semibold pb-1 md:pb-3">
         {title}
       </h1>
-      {subtitle && <p className="text-sm md:text-lg">{subtitle}</p>}
+      {subtitle && <p className="text-sm md:text-base">{subtitle}</p>}
     </div>
   );
 };
