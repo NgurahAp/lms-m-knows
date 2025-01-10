@@ -33,9 +33,9 @@ const CarouselItem: React.FC<CarouselItemProps> = ({
   description,
 }) => (
   <div className="flex flex-col items-center justify-center h-full">
-    <img src={image} alt="Illustration" className="w-auto h-1/2 pb-10" />
-    <h1 className="text-4xl font-bold text-white pb-5">{title}</h1>
-    <p className="w-1/2 text-2xl text-white text-center">{description}</p>
+    <img src={image} alt="Illustration" className="w-auto h-[40%] pb-10" />
+    <h1 className="text-3xl font-bold text-white pb-5">{title}</h1>
+    <p className="w-1/2 text-lg text-white text-center">{description}</p>
   </div>
 );
 
@@ -67,7 +67,7 @@ export const AuthCarousel: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-28 left-0 right-0 flex justify-center">
+      <div className="absolute bottom-20 left-0 right-0 flex justify-center">
         {carouselData.map((_, index) => (
           <button
             key={index}
