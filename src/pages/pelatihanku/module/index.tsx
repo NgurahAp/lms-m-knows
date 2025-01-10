@@ -47,7 +47,7 @@ export const Module = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       <PageInfo
@@ -68,13 +68,13 @@ export const Module = () => {
                 }`}
               ></div>
               <div className="flex flex-col justify-center md:p-2 md:py-5 py-3 ">
-                <h1 className="font-light md:text-base text-sm pb-0 md:pb-1">
+                <h1 className="font-light text-sm pb-0 md:pb-1">
                   Modul {data.detail.session_no}
                 </h1>
-                <h1 className="md:text-lg text-base font-semibold pb-1">
+                <h1 className="text-base font-semibold pb-1">
                   {module.title}
                 </h1>
-                <div className="flex items-center md:text-base text-sm text-blue-500 ">
+                <div className="flex items-center text-sm text-blue-500 ">
                   <MdVideoLibrary className="mr-2" /> {module.total_videos}{" "}
                   Video
                   <IoDocumentTextOutline className="ml-4 mr-2 text-red-500" />
@@ -84,11 +84,11 @@ export const Module = () => {
                   </p>
                 </div>
                 {module.submitted === true ? (
-                  <div className="text-green-500 pt-2 md:text-base text-sm flex items-center">
+                  <div className="text-green-500 pt-2 text-sm flex items-center">
                     <FaCheckCircle className="mr-2" /> Modul Sudah Selesai
                   </div>
                 ) : (
-                  <div className="pt-2 text-gray-500 md:text-base text-sm flex items-center">
+                  <div className="pt-2 text-gray-500 text-sm flex items-center">
                     Modul belum dikerjakan.{" "}
                   </div>
                 )}
