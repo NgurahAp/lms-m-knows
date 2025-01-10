@@ -78,14 +78,14 @@ export const Pelatihanku = () => {
   };
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
       <section className="bg-white mt-5 rounded-xl">
         <SearchBar />
         <div className="p-6">
           <div className="flex space-x-8">
             <button
-              className={`md:py-2 md:px-4 px-2 md:text-lg text-base font-semibold ${
+              className={`md:py-2 md:px-4 px-2  text-base font-semibold ${
                 activeTab === "ongoing"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -95,7 +95,7 @@ export const Pelatihanku = () => {
               Sedang Berjalan
             </button>
             <button
-              className={`py-2 px-4 md:text-lg text-base font-semibold ${
+              className={`py-2 px-4 text-base font-semibold ${
                 activeTab === "completed"
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"

@@ -45,7 +45,7 @@ export const TrainingProgram = () => {
                   />
                 </a>
                 <div className="px-5 py-2 flex items-end ">
-                  <a href="#">
+                  <a href="#" className="flex flex-col justify-between h-full">
                     <h5 className="mb-2 md:text-xl font-bold  tracking-tight text-gray-900 ">
                       {card.title}
                     </h5>
@@ -75,11 +75,11 @@ export const TrainingProgram = () => {
                   />
                 </a>
                 <div className="px-5 py-2 flex items-end ">
-                  <a href="#">
+                  <a href="#" className="flex flex-col justify-between">
                     <h5 className="mb-2 md:text-xl font-bold  tracking-tight text-gray-900 ">
                       {card.title}
                     </h5>
-                    <p className="md:text-base text-sm">{card.pt}</p>
+                    <p className="md:text-base text-sm flex items-end">{card.pt}</p>
                   </a>
                 </div>
               </div>

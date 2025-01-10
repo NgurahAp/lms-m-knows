@@ -99,7 +99,7 @@ export default function Home() {
               <button onClick={toggleProfileMenu}>
                 <img
                   src={dashboardData.profile.avatar}
-                  className="w-10 rounded-full"
+                  className="w-10 h-10 rounded-full"
                   alt=""
                 />
               </button>
@@ -125,7 +125,7 @@ export default function Home() {
               </button>
               {showFeatures && (
                 <FeatureBox
-                  offset="md:right-32"
+                  offset="md:right-28"
                   onClose={handleCloseFeatures}
                 />
               )}

@@ -26,7 +26,7 @@ const ProfileBox: React.FC<FeatureBoxProps> = ({ offset, onClose }) => {
 
   return (
     <div
-      className={`absolute top-20 w-96 rounded-lg bg-[#f5f5f5] shadow-lg ${offset}`}
+      className={`absolute top-[4.5rem] w-96 rounded-lg bg-[#f5f5f5] shadow-lg ${offset}`}
     >
       <div className="flex p-4">
         <img src={profileData?.avatar} className="w-12 rounded-full" alt="" />

@@ -7,7 +7,11 @@ export const MyStudyCard: React.FC<{ training: MyStudyData }> = ({
   return (
     <Link to={`/pelatihanku/${training.id}`} className="block">
       <div className="border rounded-xl p-4 mb-4 shadow-md hover:shadow-lg transition-shadow">
-        <h3 className="font-semibold md:text-2xl text-base">{training.name}</h3>
+        <h3 className="font-semibold md:text-2xl text-base">
+          {training.name.length > 40
+            ? `${training.name.slice(0, 40)}...`
+            : training.name}
+        </h3>
         <p className="text-gray-500 md:py-2 py-1 md:text-base text-xs">
           {training.teacher_name}
         </p>
