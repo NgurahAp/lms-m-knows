@@ -17,7 +17,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     location.pathname === "/verification";
 
   // Add check for QuizAttempt page using regex to match the pattern
-  const isQuizAttemptPage = /^\/quizAttempt\/.*\/.*\/.*$/.test(
+  const isQuizAttemptPage = /^\/quizAttempt\/.*\/.*\/.*$/.test( 
     location.pathname
   );
 
