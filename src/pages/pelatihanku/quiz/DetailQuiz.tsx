@@ -91,7 +91,7 @@ export const DetailQuiz = () => {
           <QuizInfo quizData={quizData} />
           <div>
             <div>
-              <h1 className="text-base md:text-lg font-semibold pt-5 pb-2">
+              <h1 className="text-base md:text-lg font-semibold pt-3 pb-1">
                 Deskripsi
               </h1>
               <p className="text-gray-500 text-sm">
@@ -101,22 +101,22 @@ export const DetailQuiz = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-base md:text-lg font-semibold pt-7 pb-2">
+            <h1 className="text-base md:text-lg font-semibold pt-3 pb-1">
               Pengaturan Quiz
             </h1>
-            <div className="flex items-center text-sm gap-x-2 py-2">
+            <div className="flex items-center text-sm gap-x-2 py-1">
               <MdOutlineTaskAlt className="text-base text-blue-500" /> Kerjakan
               Dengan Jujur
             </div>
-            <div className="flex items-center text-sm gap-x-2 py-2">
+            <div className="flex items-center text-sm gap-x-2 py-1">
               <MdOutlineTaskAlt className="text-base text-blue-500" /> Dilarang
               Bekerja Sama
             </div>
-            <div className="flex items-center text-sm gap-x-2 py-2">
+            <div className="flex items-center text-sm gap-x-2 py-1">
               <MdOutlineTaskAlt className="text-base text-blue-500" /> Apabila
               Keluar dari App, Waktu Quiz Tetap Berjalan
             </div>
-            <div className="flex items-center text-sm gap-x-2 py-2">
+            <div className="flex items-center text-sm gap-x-2 py-1">
               <MdOutlineTaskAlt className="text-base text-blue-500" /> Percobaan
               Quiz Terakhir Merupakan Nilai Dipakai
             </div>

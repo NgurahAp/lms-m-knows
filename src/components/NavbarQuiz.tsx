@@ -82,11 +82,11 @@ export const NavbarQuiz = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-10 bg-white shadow-md">
-        <div className="flex justify-between px-4 md:px-36 h-20 items-center">
+        <div className="flex justify-between px-4 md:px-24 h-16 items-center">
           <div className="flex items-center space-x-2">
             <img
               src="/navbar/logo.png"
-              className="w-32 md:w-48 bg-white bg-opacity-20 rounded"
+              className="w-32 md:w-36 bg-white bg-opacity-20 rounded"
               alt="Logo"
             />
           </div>
@@ -95,16 +95,16 @@ export const NavbarQuiz = () => {
             {!isMobile && (
               <>
                 <button onClick={() => handleNavigation("/dashboard")}>
-                  <img src="/navbar/square.png" className="px-1 w-8" alt="" />
+                  <img src="/navbar/square.png" className="px-1 w-6" alt="" />
                 </button>
-                <img src="/navbar/moon.png" className="px-1 w-9" alt="" />
-                <img src="/navbar/bell.png" className="px-1 w-9" alt="" />
+                <img src="/navbar/moon.png" className="px-1 w-7" alt="" />
+                <img src="/navbar/bell.png" className="px-1 w-7" alt="" />
                 <img src="/navbar/separator.png" className="px-4" alt="" />
                 <button>
                   {profileData?.avatar ? (
                     <img
                       src={profileData.avatar}
-                      className="w-12 h-12 rounded-full object-cover"
+                      className="w-10 h-10 rounded-full object-cover"
                       alt="Profile"
                     />
                   ) : (
@@ -130,12 +130,12 @@ export const NavbarQuiz = () => {
         {/* Navbar items for desktop */}
         {!isMobile && (
           <div className="bg-sky-700">
-            <div className="flex h-20 items-center space-x-8 md:space-x-14 px-4 md:px-36">
+            <div className="flex h-16 items-center space-x-8 md:space-x-14 px-4 md:px-36">
               {navItems.map((item) => (
                 <button
                   key={item.path}
                   onClick={() => handleNavigation(item.path)}
-                  className={`font-semibold text-sm md:text-lg ${
+                  className={`font-semibold text-sm md:text-base ${
                     location.pathname.startsWith(item.path)
                       ? "text-green-300"
                       : "text-white"

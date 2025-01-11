@@ -7,8 +7,8 @@ export const QuizHistory = ({ historyData, quizData }: QuizProps) => {
 
   return (
     <>
-      <h1 className="text-xl font-semibold pb-5">Riwayat Quiz</h1>
-      <div className="border-[1px] rounded-md p-5">
+      <h1 className="text-xl font-semibold pb-3">Riwayat Quiz</h1>
+      <div className="border-[1px] rounded-md p-3">
         <div className="flex justify-between">
           <h2 className="text-xs font-semibold">
             Quiz Pertemuan {quizData?.data.session.session_no}
@@ -22,7 +22,7 @@ export const QuizHistory = ({ historyData, quizData }: QuizProps) => {
             - {new Date(history.timestamp_taken).toLocaleTimeString("id-ID")}
           </h2>
         </div>
-        <div className="flex md:flex-row flex-col my-5 gap-4 md:gap-1">
+        <div className="flex md:flex-row flex-col my-3 gap-4 md:gap-1">
           <div className="md:w-24 flex flex-col justify-center items-center gap-1">
             <h2 className="text-xs">Total Nilai</h2>
             <h1 className="text-xl font-semibold">
