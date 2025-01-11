@@ -16,27 +16,27 @@ export const MyStudyCard: React.FC<{ training: MyStudyData }> = ({
           {training.teacher_name}
         </p>
         <div className="flex  flex-col md:flex-row  items-center md:space-x-5 md:space-y-0 space-y-2 mt-2">
-          <div className="bg-blue-100 px-2 md:w-1/3 w-3/4 h-14 md:text-base text-xs md:h-14 rounded-lg py-1 flex items-center justify-center text-blue-700">
+          <div className="bg-blue-100 px-2 md:w-1/3 w-3/4 h-10 md:text-sm text-xs md:h-14 rounded-lg py-1 flex items-center justify-center text-blue-700">
             <img
               src="/pelatihanku/sks.png"
               alt="Icon SKS"
-              className="w-6 h-6 mr-2"
+              className="w-4 h-4 mr-2"
             />
             {training.credit} SKS
           </div>
-          <div className="bg-green-100 px-2 md:w-1/3 w-3/4 h-14 md:text-base text-xs md:h-14 rounded-lg py-1 flex items-center justify-center text-green-700">
+          <div className="bg-green-100 px-2 md:w-1/3 w-3/4 h-10 md:text-sm text-xs md:h-14 rounded-lg py-1 flex items-center justify-center text-green-700">
             <img
               src="/pelatihanku/video.png"
               alt="Icon Video"
-              className="w-6 h-6 mr-2"
+              className="w-4 h-4 mr-2"
             />
             {training.session_count} Video
           </div>
-          <div className="bg-purple-100 px-2 md:w-1/3 w-3/4 h-14 md:text-base text-xs md:h-14 rounded-lg py-1 flex items-center justify-center text-purple-700">
+          <div className="bg-purple-100 px-2 md:w-1/3 w-3/4 h-10 md:text-sm text-xs md:h-14 rounded-lg py-1 flex items-center justify-center text-purple-700">
             <img
               src="/pelatihanku/member.png"
               alt="Icon Peserta"
-              className="w-6 h-6 mr-2"
+              className="w-4 h-4 mr-2"
             />
             {training.student_count} Peserta
           </div>

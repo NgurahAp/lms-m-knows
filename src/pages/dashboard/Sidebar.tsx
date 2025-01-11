@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarContentProps> = ({ dashboardData }) => {
                 {
                   icon: "/dashboard/poin-avg.png",
                   value: dashboardData.profile.ipk,
-                  label: "Poin rata-rata",
+                  label: "Rata-rata",
                 },
                 {
                   icon: "/dashboard/poin-total.png",

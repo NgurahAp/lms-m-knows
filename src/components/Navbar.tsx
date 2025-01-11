@@ -164,7 +164,7 @@ const Navbar: React.FC = () => {
               </button>
               {showProfileMenu && (
                 <ProfileBox
-                  offset="right-[9rem]"
+                  offset="right-[5rem]"
                   onClose={handleCloseProfileMenu}
                 />
               )}
