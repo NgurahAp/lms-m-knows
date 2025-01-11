@@ -49,7 +49,7 @@ export const NavbarQuiz = () => {
     { name: "Pelatihan-ku", path: "/pelatihanku" },
     { name: "Penugasan", path: "/penugasan" },
     { name: "Nilai & Sertifikat", path: "/nilai-sertifikat" },
-    { name: "Roleplay & Asesmen", path: "/roleplay" },
+    // { name: "Roleplay & Asesmen", path: "/roleplay" },
   ];
 
   useEffect(() => {

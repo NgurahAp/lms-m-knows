@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
     { name: "Pelatihan-ku", path: "/pelatihanku" },
     { name: "Penugasan", path: "/penugasan" },
     { name: "Nilai & Sertifikat", path: "/score" },
-    { name: "Roleplay & Asesmen", path: "/roleplay-asses" },
+    // { name: "Roleplay & Asesmen", path: "/roleplay-asses" },
     { name: "Sekilas Ilmu", path: "/sekilas-ilmu" },
   ];
 
