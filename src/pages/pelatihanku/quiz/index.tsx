@@ -45,10 +45,10 @@ export const Quiz = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       <Breadcrumb items={breadcrumbItems} />
       <div className="bg-white flex flex-col mt-5 p-8 ">
-        <h1 className="font-bold md:text-4xl text-2xl mb-5 md:mb-8 flex justify-center">
+        <h1 className="font-bold md:text-3xl text-2xl mb-5 md:mb-8 flex justify-center">
           Quiz Pertemuan {data?.data.detail.session_no}
         </h1>
         <div className="flex flex-wrap w-full justify-center gap-x-20 gap-y-8">
@@ -79,7 +79,9 @@ export const Quiz = () => {
                   {quiz.title}
                 </h3>
                 <p className="text-xs md:text-sm text-gray-600">
-                  {data.data.detail.subject_name}
+                  {data.data.detail.subject_name.length > 70
+                    ? `${data.data.detail.subject_name.slice(0, 70)}...`
+                    : data.data.detail.subject_name}
                 </p>
               </div>
             </Link>
