@@ -81,8 +81,8 @@ export const Penugasan = () => {
   }
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
-      <section className="bg-white p-10 rounded-xl">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
+      <section className="bg-white p-8 rounded-xl">
         <div className="flex flex-wrap mb-4 md:space-x-8 md:justify-start justify-center">
           {[
             "Semua",
@@ -94,7 +94,7 @@ export const Penugasan = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`md:py-4 py-1 md:px-10 px-3 md:text-base text-sm  ${
+              className={`md:py-2 py-1 md:px-10 px-3 text-sm  ${
                 activeTab === tab
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -117,27 +117,27 @@ export const Penugasan = () => {
                     getStatusDisplay(assignment).line
                   }`}
                 ></div>
-                <div className="pt-10 md:pb-10 pb-0 md:px-8 px-2">
-                  <h2 className="font-bold text-xl">
+                <div className="pt-7 md:pb-7 pb-0 md:px-8 px-2">
+                  <h2 className="font-bold text-lg">
                     {assignment.assignment_title}
                   </h2>
-                  <p className="text-gray-500 py-2  text-sm md:text-lg">
+                  <p className="text-gray-500 py-2  text-sm md:text-base">
                     {assignment.subject_name}
                   </p>
-                  <p className="text-gray-400 md:text-base text-xs">
+                  <p className="text-gray-400 md:text-sm text-xs">
                     Tenggat:{" "}
                     {new Date(assignment.progress_deadline).toLocaleString()}
                   </p>
                 </div>
               </div>
-              <div className=" flex flex-col md:w-48 items-center justify-center md:pr-8 md:pb-0 py-8">
+              <div className=" flex flex-col md:w-48 items-center justify-center md:pr-8 md:pb-0 py-0">
                 <img
                   src={`${getStatusDisplay(assignment).img}`}
-                  className="md:w-11 w-8 pb-2"
+                  className="md:w-8 w-8 pb-2"
                   alt=""
                 />
                 <span
-                  className={` rounded text-sm md:text-lg ${
+                  className={` rounded text-sm  ${
                     getStatusDisplay(assignment).textStyle
                   }`}
                 >

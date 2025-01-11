@@ -15,23 +15,23 @@ export const QuizInfo = ({ quizData }: QuizInfoProps) => {
   return (
     <div>
       <div>
-        <h1 className="text-base md:text-xl font-semibold pt-5 pb-2">
+        <h1 className="text-base md:text-lg font-semibold pt-5">
           Detail Quiz
         </h1>
-        <div className="flex items-center md:text-base text-sm gap-x-2 py-2">
-          <GoListOrdered className="text-base md:text-lg text-blue-500" />{" "}
+        <div className="flex items-center text-sm gap-x-2 py-1">
+          <GoListOrdered className="text-base  text-blue-500" />{" "}
           {quizData?.data.quiz.total_questions} Soal
         </div>
-        <div className="flex items-center md:text-base text-sm gap-x-2 py-2">
-          <MdAccessAlarm className="text-base md:text-lg text-blue-500" /> Durasi{" "}
+        <div className="flex items-center text-sm gap-x-2 py-1">
+          <MdAccessAlarm className="text-base  text-blue-500" /> Durasi{" "}
           {durationInMinutes} Menit
         </div>
-        <div className="flex items-center md:text-base text-sm gap-x-2 py-2">
-          <PiExam className="text-base md:text-lg text-blue-500" /> Nilai
+        <div className="flex items-center text-sm gap-x-2 py-1">
+          <PiExam className="text-base  text-blue-500" /> Nilai
           Kelulusan minimal 80
         </div>
-        <div className="flex items-center md:text-base text-sm gap-x-2 py-2">
-          <FaHistory className="text-base md:text-lg text-blue-500" /> Max. 3x
+        <div className="flex items-center text-sm gap-x-2 py-1">
+          <FaHistory className="text-base  text-blue-500" /> Max. 3x
           Pengulangan
         </div>
       </div>

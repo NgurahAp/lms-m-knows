@@ -7,13 +7,13 @@ export const QuizHistory = ({ historyData, quizData }: QuizProps) => {
 
   return (
     <>
-      <h1 className="text-xl font-semibold pb-5">Riwayat Quiz</h1>
-      <div className="border-[1px] rounded-md p-5">
+      <h1 className="text-xl font-semibold pb-3">Riwayat Quiz</h1>
+      <div className="border-[1px] rounded-md p-3">
         <div className="flex justify-between">
-          <h2 className="text-xs md:text-sm font-semibold">
+          <h2 className="text-xs font-semibold">
             Quiz Pertemuan {quizData?.data.session.session_no}
           </h2>
-          <h2 className="text-[#4B5565] text-xs md:text-sm">
+          <h2 className="text-[#4B5565] text-xs">
             {new Date(history.timestamp_taken).toLocaleDateString("id-ID", {
               day: "numeric",
               month: "long",
@@ -22,33 +22,33 @@ export const QuizHistory = ({ historyData, quizData }: QuizProps) => {
             - {new Date(history.timestamp_taken).toLocaleTimeString("id-ID")}
           </h2>
         </div>
-        <div className="flex md:flex-row flex-col my-5 gap-4 md:gap-1">
-          <div className="md:w-24 flex md:flex-col flex-col-reverse justify-center items-center gap-1">
+        <div className="flex md:flex-row flex-col my-3 gap-4 md:gap-1">
+          <div className="md:w-24 flex flex-col justify-center items-center gap-1">
             <h2 className="text-xs">Total Nilai</h2>
-            <h1 className="text-2xl md:text-3xl font-semibold">
+            <h1 className="text-xl font-semibold">
               {historyData.data.history_data[0].score}
             </h1>
           </div>
           <div className="md:w-52 py-3 flex bg-[#DBF2EB] rounded-lg flex-col justify-center items-center gap-y-1">
-            <h1 className="text-2xl md:text-3xl font-semibold">
+            <h1 className="text-xl font-semibold">
               {historyData.data.history_data[0].correct}
             </h1>
             <h2 className="text-xs">Jawaban Benar</h2>
           </div>
           <div className="md:w-52 py-3 flex bg-[#F6DCDB] rounded-lg flex-col justify-center items-center gap-y-1">
-            <h1 className="text-2xl md:text-3xl font-semibold">
+            <h1 className="text-xl font-semibold">
               {historyData.data.history_data[0].wrong}
             </h1>
             <h2 className="text-xs">Jawaban Salah</h2>
           </div>
           <div className="md:w-52 py-3 flex bg-[#ECFDBF] rounded-lg flex-col justify-center items-center gap-y-1">
-            <h1 className="text-2xl md:text-3xl font-semibold">
+            <h1 className="text-xl font-semibold">
               {historyData.data.history_data[0].total_question}
             </h1>
             <h2 className="text-xs">Soal</h2>
           </div>
         </div>
-        <p className="text-xs md:text-sm">
+        <p className="text-xs">
           Waktu Selesai{" "}
           {(() => {
             const timeInSeconds = history.time_elapsed;

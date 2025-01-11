@@ -45,7 +45,7 @@ export const Reflection = () => {
   ];
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       <PageInfo
@@ -59,8 +59,8 @@ export const Reflection = () => {
             <img src="/pelatihanku/quiz-left.png" alt="" />
           </div>
           <div className="md:w-1/2 flex flex-col justify-center md:pr-10">
-            <h1 className="text-lg md:text-2xl font-semibold">Deskripsi</h1>
-            <p className="text-sm md:text-lg text-justify py-4 text-gray-500">
+            <h1 className="text-lg md:text-xl font-semibold">Deskripsi</h1>
+            <p className="text-sm md:text-base text-justify py-4 text-gray-500">
               Refleksi Eksplorasi dilakukan dengan tujuan untuk meningkatkan
               pemahaman diri, memperkuat koneksi antara teori dan praktik, serta
               merancang strategi perbaikan atau pengembangan diri ke depannya.
@@ -69,7 +69,7 @@ export const Reflection = () => {
               pembelajaran yang lebih efektif dan memastikan pertumbuhan yang
               berkelanjutan.
             </p>
-            <div className="flex gap-8 pt-4 w-full text-xs md:text-base">
+            <div className="flex gap-8 pt-4 w-full text-xs md:text-sm">
               <Link
                 to={`/historyReflection/${subjectId}/${sessionId}`}
                 className="border text-center rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white py-3 w-full"

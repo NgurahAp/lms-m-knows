@@ -106,14 +106,14 @@ export const QuizAttempt = () => {
   return (
     <>
       <NavbarQuiz />
-      <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-8 bg-gray-100">
+      <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-8 bg-gray-100">
         {/* Quiz Info */}
         <div className="bg-white flex flex-col mt-5 px-4 md:px-8 md:h-36 md:py-0 py-4 justify-center rounded-lg">
-          <h1 className="text-xl md:text-3xl font-semibold pb-3">
+          <h1 className="text-xl md:text-2xl font-semibold pb-3">
             {questionData.data.title}
           </h1>
-          <p className="text-sm md:text-lg">Tipe: {questionData.data.type}</p>
-          <p className="text-sm md:text-lg">
+          <p className="text-sm md:text-base">Tipe: {questionData.data.type}</p>
+          <p className="text-sm md:text-base">
             Durasi: {Math.floor(questionData.data.duration / 60)} menit
           </p>
         </div>
@@ -126,7 +126,7 @@ export const QuizAttempt = () => {
               <button
                 key={index}
                 onClick={() => navigateToQuestion(index)}
-                className={`w-8 h-8 text-sm md:text-base flex items-center justify-center border rounded ${
+                className={`w-8 h-8 text-sm flex items-center justify-center border rounded ${
                   index === currentQuestionIndex
                     ? "bg-blue-500 text-white"
                     : selectedAnswers[index]
@@ -142,31 +142,31 @@ export const QuizAttempt = () => {
 
         {/* Quiz Question */}
         <div className="bg-white p-6 mt-5 rounded-lg shadow-lg">
-          <h1 className="text-end text-red-500 font-bold text-xs md:text-sm pb-3">
+          <h1 className="text-end text-red-500 font-bold text-xs  pb-3">
             Sisa waktu:{" "}
             <CountdownTimer
               initialDuration={questionData.data.duration}
               onTimeUp={handleTimesUp}
             />
           </h1>
-          <h2 className="text-base md:text-lg font-semibold mb-4">
+          <h2 className="text-lg  font-semibold ">
             {currentQuestion.question}
           </h2>
-          <p className="md:pt-2 pb-4 md:pb-7 text-sm text-gray-500">
+          <p className="md:pt-2 pb-4 md:pb-7 text-xs text-gray-500">
             *Pilih satu
           </p>
-          <div className="space-y-4 md:space-y-7">
+          <div className="space-y-4 md:space-y-5">
             {currentQuestion.answers.map((answer) => (
-              <label key={answer.id} className="block p-5 border rounded">
+              <label key={answer.id} className="block p-3 border rounded">
                 <input
                   type="radio"
                   name="answer"
                   value={answer.id}
                   checked={selectedAnswers[currentQuestionIndex] === answer.id}
                   onChange={() => handleAnswerSelect(answer.id)}
-                  className="mr-2 md:text-base text-sm"
+                  className="mr-2 text-sm"
                 />
-                {answer.answer}
+                <span className="text-sm">{answer.answer}</span>
               </label>
             ))}
           </div>
@@ -176,7 +176,7 @@ export const QuizAttempt = () => {
               className={`px-6 py-2 rounded-lg ${
                 isFirstQuestion
                   ? "hidden"
-                  : "bg-white border-blue-500 border md:text-base text-sm text-blue-500 hover:bg-blue-500 hover:text-white"
+                  : "bg-white border-blue-500 border text-sm text-blue-500 hover:bg-blue-500 hover:text-white"
               }`}
             >
               Sebelumnya
@@ -184,14 +184,14 @@ export const QuizAttempt = () => {
             {isLastQuestion ? (
               <button
                 onClick={() => setDialogOpen(true)}
-                className="bg-green-500 px-6 py-2 md:text-base text-sm rounded-lg text-white hover:bg-green-600"
+                className="bg-green-500 px-6 py-2 text-sm rounded-lg text-white hover:bg-green-600"
               >
                 Selesai
               </button>
             ) : (
               <button
                 onClick={handleNext}
-                className="bg-blue-500 px-6 py-2 md:text-base text-sm rounded-lg text-white hover:bg-blue-600"
+                className="bg-blue-500 px-6 py-2 text-sm rounded-lg text-white hover:bg-blue-600"
               >
                 Selanjutnya
               </button>

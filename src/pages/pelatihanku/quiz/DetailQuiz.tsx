@@ -72,7 +72,7 @@ export const DetailQuiz = () => {
     },
   ];
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       <PageInfo
@@ -81,7 +81,7 @@ export const DetailQuiz = () => {
       />
       {/* Quiz Content */}
       <div className="bg-white flex md:flex-row flex-col mt-5 w-full px-4 md:px-8 h-full justify-center rounded-lg">
-        <div className="w-1/2  md:block hidden items-center justify-center">
+        <div className="w-1/2 md:flex hidden items-center justify-center">
           <img src="/pelatihanku/quiz-left.png" alt="" />
         </div>
         <div className="md:w-1/2 py-5 md:py-10">
@@ -91,44 +91,44 @@ export const DetailQuiz = () => {
           <QuizInfo quizData={quizData} />
           <div>
             <div>
-              <h1 className="text-base md:text-xl font-semibold pt-5 pb-2">
+              <h1 className="text-base md:text-lg font-semibold pt-3 pb-1">
                 Deskripsi
               </h1>
-              <p className="text-gray-500 md:text-base text-sm">
+              <p className="text-gray-500 text-sm">
                 Quiz ini bertujuan untuk menguji pengetahuan Anda tentang materi
                 yang telah dipelajari di pertemuan ini.
               </p>
             </div>
           </div>
           <div>
-            <h1 className="text-base md:text-xl font-semibold pt-7 pb-2">
+            <h1 className="text-base md:text-lg font-semibold pt-3 pb-1">
               Pengaturan Quiz
             </h1>
-            <div className="flex items-center text-sm gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
-              Kerjakan Dengan Jujur
+            <div className="flex items-center text-sm gap-x-2 py-1">
+              <MdOutlineTaskAlt className="text-base text-blue-500" /> Kerjakan
+              Dengan Jujur
             </div>
-            <div className="flex items-center text-sm gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
-              Dilarang Bekerja Sama
+            <div className="flex items-center text-sm gap-x-2 py-1">
+              <MdOutlineTaskAlt className="text-base text-blue-500" /> Dilarang
+              Bekerja Sama
             </div>
-            <div className="flex items-center text-sm gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
-              Apabila Keluar dari App, Waktu Quiz Tetap Berjalan
+            <div className="flex items-center text-sm gap-x-2 py-1">
+              <MdOutlineTaskAlt className="text-base text-blue-500" /> Apabila
+              Keluar dari App, Waktu Quiz Tetap Berjalan
             </div>
-            <div className="flex items-center text-sm gap-x-2 py-2">
-              <MdOutlineTaskAlt className="text-base md:text-lg text-blue-500" />{" "}
-              Percobaan Quiz Terakhir Merupakan Nilai Dipakai
+            <div className="flex items-center text-sm gap-x-2 py-1">
+              <MdOutlineTaskAlt className="text-base text-blue-500" /> Percobaan
+              Quiz Terakhir Merupakan Nilai Dipakai
             </div>
           </div>
-          <h1 className="py-3 md:text-base text-base text-blue-500 font-medium">
+          <h1 className="py-3 text-sm text-blue-500 font-medium">
             Kesempatan mengerjakan tersisa :{" "}
             {historyData?.data.remaining_attempt ?? 3} kali
           </h1>
           {/* Button Mulai Quiz */}
           <button
             onClick={() => setDialogOpen(true)}
-            className={`flex w-full items-center md:text-base text-sm py-4 rounded-xl justify-center mt-5 ${
+            className={`flex w-full items-center text-sm py-4 rounded-xl justify-center mt-5 ${
               historyData?.data.remaining_attempt === 0
                 ? "bg-gray-400 text-white cursor-not-allowed"
                 : "bg-blue-500 text-white"
