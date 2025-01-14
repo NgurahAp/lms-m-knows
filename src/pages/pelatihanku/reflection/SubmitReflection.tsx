@@ -78,7 +78,7 @@ export const SubmitReflection = () => {
   const isButtonDisabled = summary.length < 52 || isPending;
 
   return (
-    <div className="min-h-[85vh] w-screen flex flex-col md:pt-44 pt-24 md:px-36 px-4 bg-gray-100">
+    <div className="min-h-[85vh] w-screen flex flex-col md:pt-36 pt-24 md:px-24 px-4 bg-gray-100">
       {/* Breadcrumb */}
       <Breadcrumb items={breadcrumbItems} />
       <PageInfo
